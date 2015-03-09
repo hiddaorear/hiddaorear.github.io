@@ -1,0 +1,34 @@
+permalink: /:year/:month/:day/:title.html
+markdown: kramdown
+pygments: true
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: hiddaorear
+  email: hiddaorear@yahoo.com
+  link: null
+  weibo: null
+  github: http://github.com/hiddaorear
+
+# 站点信息
+title: hiddaorear
+description: hiddaorear
+url: http://hiddaorear.github.io/blog
+rss_url: /pages/atom.xml
+baseurl: /blog
+
+# avatar头像及Favicon
+avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
+favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+
+# google analytics 设置
+ga:
+  id: UA-54767140-1
+  url: hiddaorear.github.io
+
+# disqus 设置
+disqus:
+  shortname: hiddaorear
