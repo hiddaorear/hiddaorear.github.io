@@ -10,12 +10,13 @@ description:
 ## CSS3 filter 笔记
 
 ### filter作用
+
 >　filter用在DOM元素上，实现一些类似PS中的图片处理特效。主要用在图片上，也可以用在video上。
 
-###　filter语法
+### filter语法
 
 ```css
-ele {
+element {
   filter: none | <filter-function> [filter-function]*
 }
 ```
