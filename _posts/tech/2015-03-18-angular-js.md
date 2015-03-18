@@ -13,7 +13,7 @@ description:
 
 今天下午公司技术总监突然来找我谈话，午休刚醒，人还是迷迷糊糊的。接着就调到一个新部门，不得不感叹，世事有千变，只是变的太快了。leader待我很好，leader来那儿，就把我带到那儿，结果去年跟这leader转了4个部分。今年公司变动很大，今天又调到一个新部门，屈指数来，一只手刚好。
 
-新项目使用了[Clip Two](http://themeforest.net/item/cliptwo-bootstrap-admin-template-with-angularjs/10290688)，这个框架可以用一句话概括：Clip-Two - Bootstrap Admin Template with AngularJS。涉及Angular.js和SASS的使用，以前用过Bootstrap，Angular.js一直都有关注，去年是没有时间来玩这些的。另外：Bootstrap使用了Sass，以前由于项目的习惯，使用是LESS，也要补补课了。
+新项目使用了[Clip Two](http://themeforest.net/item/cliptwo-bootstrap-admin-template-with-angularjs/10290688)，这个框架可以用一句话概括：Clip-Two - Bootstrap Admin Template with AngularJS。涉及Angular.js和Sass的使用，以前用过Bootstrap，Angular.js一直都有关注，去年是没有时间来玩这些的。另外：Bootstrap使用了Sass，以前由于项目的习惯，使用是LESS，也要补补课了。
 
 ### Sass
 
