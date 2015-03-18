@@ -60,6 +60,12 @@ _options是一个数组，数组元素是对象。
 - hook              是对应的选择器，支持类名（.前缀），ID（#前缀），标签名，目前只能支持单独的选择器，不能通过类似".a .b"之类的选择器来获取元素；
 - parent            相应DOM元素的父元素；
 - superpostion      是否需要在前一个CSS3属性的基础累加delay延迟时间。若为false，则不累加。为true则累加，累加会自动加上上一个元素的“animation-delay”和“animation-duration”属性的值。如果“animation-duration”值较大，可能不符合预期，故提供“adjust”属性，见下；
+- ansynchronization 动画是否异步执行，设置为true则异步执行，反之，则要等上一个动画执行完了才执行该动画；一般用在这样的场合，前面动画使用了superpostion参数，叠加动画的延迟和周期得到了animation-delay的值，而接着的动画，需要这个animation-delay的值，但该动画需要与上一个动画同步执行；
+- name              这是参数是所有参数里面设置稍复杂一点的参数，传参类似于jQuery的extend方法；
+                    1）当动画元素是单一的元素的时候，“name”设置为CSS3动画名字即可；
+                    2）当动画元素是一组元素时，参数应该设置为一个数组，数组的第一参数为“0”时，且“name”数组元素除去首个参数之外，能与DOM一一对应，表明数组元素与DOM元素一一对应；当不能一一对应时，“name”数组中元素会循环使用；
+                    3）还有一种特殊情况，就是DOM元素有多个，但“name”只有一个，这个情况下，所有的DOM的动画都设置为“name”对应的动画；
+                    4）当首个参数不等于“0”时，假设为“N”，这以“N”为步长，循环给DOM元素设置动画名；
 - adjust            支持调节“animation-delay”的值；
 - animation-delay   设置动画的延迟；
 - animation-duration设置动画的周期
