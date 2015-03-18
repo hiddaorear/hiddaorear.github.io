@@ -39,6 +39,8 @@ description:
 
 [使用AngularJS构建大型Web应用](http://www.infoq.com/cn/news/2013/02/angular-web-app)
 
+[七步从Angular.JS菜鸟到专家](http://blog.jobbole.com/46779/)
+
 以前就注意AngularJS框架了，只是没有想到回发展到今天，今年给我感觉是AngularJS会跟jQuery一样，成为前端必备的框架。移动端的崛起，导致了以后单页面程序的流行。双向绑定，几乎可以去掉对DOM的操作。去年看到AngularJS2.0版本相关消息，依稀记得去除了所有DOM相关代码，官方解释说是原生的JavaScript足以应对DOM操作。确实，我觉得query系列的方法功能确实很强大。
 
 从今天开始，要学习Angular.js，希望能接合Node.js一起，能做一些有意思的事情。
