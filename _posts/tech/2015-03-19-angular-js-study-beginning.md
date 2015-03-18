@@ -24,3 +24,8 @@ description:
 [AngularJS教程](http://www.w3cschool.cc/angularjs/angularjs-tutorial.html)
 
 [AngularJS学习笔记](http://www.zouyesheng.com/angular.html)
+
+
+月影大神的JavaScript学习感悟，文章和评论都值得用心读一读。
+
+[如何学好JavaScript？](http://www.w3ctech.com/topic/852)
