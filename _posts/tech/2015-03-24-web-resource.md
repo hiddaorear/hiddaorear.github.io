@@ -7,7 +7,7 @@ keywords: JavaScript
 description: 
 ---
 
-### 过去一年积累收藏夹
+### 过去一年积累的收藏夹
 
 
 [程序员博客墙](http://blogwall.us/)
@@ -47,5 +47,13 @@ description:
 [100个直接可以拿来用的JavaScript实用功能代码片段](http://www.cnblogs.com/wxydigua/p/3314274.html)
 
 [Javascript中的单线程以及定时机制](http://www.benben.cc/blog/?p=327)
+
+[关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
+
+[Javascript：this用法整理](https://software.intel.com/zh-cn/blogs/2013/10/09/javascript-this)
+
+
+hid say: 陆陆续续收集了很多资料，但几乎没有深入阅读。那些在项目中用了资料还好，没有用过的几乎都是浅阅读。其实深阅读可以解决很多事情，可以节省很多时间，但是浮躁是知识之大敌，致使时间就这么白白流失了，多么可惜呀！
+
 
 2015/03/24
