@@ -104,21 +104,23 @@ a {
   width: 100px;
   height: 100px;
   margin: 55px auto 35px;
-  background: url(/assets/img/avatar.png);
+  /*background: url(/assets/img/avatar.png);*/
+  background-size: cover;
   border-radius: 50%;
   /*box-shadow: 0 0 0px 4px white, 0 0 4px 4px #eee;*/
   border: 1px solid #fff;
   overflow: hidden;
   display: block; }
   #avatar:hover {
-    -webkit-animation: spin .35s linear infinite;
+    box-shadow: 0 0 0px 4px white, 0 0 4px 4px #eee;
+    /*-webkit-animation: spin .35s linear infinite;
     -moz-animation: spin .35s linear infinite;
     -ms-animation: spin .35s linear infinite;
     -o-animation: spin .35s linear infinite;
-    animation: spin .35s linear infinite; }
+    animation: spin .35s linear infinite;*/ }
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     #avatar {
-      background: url(/assets/img/avatar@2X.png);
+      /* background: url(/assets/img/avatar@2X.png);*/
       -webkit-background-size: 100px 100px;
       -moz-background-size: 100px 100px;
       background-size: 100px 100px; } }
@@ -196,7 +198,7 @@ a {
     content: "\e802"; }
 
 .tags-btn {
-  color: #A6A6A7;
+  color: #fff;
   -webkit-transition: color .3s, background .3s;
   -moz-transition: color .3s, background .3s;
   -ms-transition: color .3s, background .3s;
