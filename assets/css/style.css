@@ -106,7 +106,8 @@ a {
   margin: 55px auto 35px;
   background: url(/assets/img/avatar.png);
   border-radius: 50%;
-  box-shadow: 0 0 0px 4px white, 0 0 4px 4px #eee;
+  /*box-shadow: 0 0 0px 4px white, 0 0 4px 4px #eee;*/
+  border: 1px solid #fff;
   overflow: hidden;
   display: block; }
   #avatar:hover {
