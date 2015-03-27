@@ -35,7 +35,8 @@ html, body {
   font: 100 16px/1.5 Avenir, sans-serif;
   -webkit-font-smoothing: subpixel-antialiased;
   -webkit-text-size-adjust: none;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #F5F5D5; }
 
 a {
   color: inherit;
