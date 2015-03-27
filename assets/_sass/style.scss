@@ -22,7 +22,7 @@ $border:          #e5e8ec;
 $tags-fg:         #A6A6A7;
 $tags-hover-fg:   #F7F7F7;
 $tags-active-fg:  $black;
-$tags-bg:         #474D57;
+$tags-bg:         #1ABC9C;
 
 $pl-bg:           #fafafa; // pl: posts-list
 
@@ -185,7 +185,7 @@ a {
   height: 100%;
   background: $tags-bg;
   border-right: 1px solid darken($tags-bg, 5%);
-  box-shadow: inset -15px 0 15px -15px #222;
+  /*box-shadow: inset -15px 0 15px -15px #222;*/
   float: left;
   position: relative;
   -webkit-user-select: none;
@@ -206,7 +206,8 @@ a {
   margin: 55px auto 35px;
   background: url(/assets/img/avatar.png);
   border-radius: 50%;
-  box-shadow: 0 0 0px 4px white, 0 0 4px 4px #eee;
+  /*box-shadow: 0 0 0px 4px white, 0 0 4px 4px #eee;*/
+  border: 1px solid #fff;
   overflow: hidden;
   display: block;
   &:hover {
