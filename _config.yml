@@ -26,7 +26,6 @@ favicon: http://hiddaorear.github.io/assets/img/github.ico
 
 # google analytics 设置
 ga:
-  id: UA-54767140-1
   url: hiddaorear.github.io
 
 # disqus 设置
