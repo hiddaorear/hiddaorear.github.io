@@ -8,7 +8,7 @@ kramdown:
 # 作者信息
 author: 
   name: hiddaorear
-  email: hiddaorear@yahoo.com
+  email: hiddaorear@outlook.com
   link: null
   weibo: null
   github: http://github.com/hiddaorear
@@ -21,12 +21,12 @@ rss_url: /pages/atom.xml
 baseurl: /blog
 
 # avatar头像及Favicon
-avatar: http://hiddaorear.github.io/assets/img/me.jpg
-favicon: http://hiddaorear.github.io/assets/img/github.ico
+avatar: http://hiddaorear.gitcafe.io/assets/img/me.jpg
+favicon: http://hiddaorear.gitcafe.io/assets/img/github.ico
 
 # google analytics 设置
 ga:
-  url: hiddaorear.github.io
+  url: hiddaorear.gitcafe.io
 
 # disqus 设置
 disqus:
