@@ -11,7 +11,8 @@ title: Welcome
   ,"gender": "male"
   ,"age": "26"
   ,"email": "hiddaorear#outlook.com"
-  ,"blog": "http://hiddaorear.github.io/index.html"
+  ,"github_blog": "http://hiddaorear.github.io/index.html"
+  ,"gitcafe_blog": "http://hiddaorear.gitcafe.io/index.html"
   ,"hobby": "reading"
 }
 ````
