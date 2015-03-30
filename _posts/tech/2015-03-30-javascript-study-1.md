@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  JavaScript
+title:  JavaScript concept and practice (1)
 category: 技术
 tags: [JavaScript]
 keywords: javascript
