@@ -9,7 +9,7 @@ description:
 
 ##### Monday,30 March 2015
 
-###读《JavaScript核心概念和实践》(一)
+### 读《JavaScript核心概念和实践》(一)
 
 1.JavaScript是一门动态的,弱类型的,基于原型的脚本语言.
 
