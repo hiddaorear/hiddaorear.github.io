@@ -21,8 +21,8 @@ rss_url: /pages/atom.xml
 baseurl: /blog
 
 # avatar头像及Favicon
-avatar: http://hiddaorear.gitcafe.io/assets/img/me.jpg
-favicon: http://hiddaorear.gicafe.io/assets/img/github.ico
+avatar: http://hiddaorear.github.io/assets/img/me.jpg
+favicon: http://hiddaorear.github.io/assets/img/github.ico
 
 # google analytics 设置
 ga:
