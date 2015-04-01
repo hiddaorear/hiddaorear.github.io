@@ -9,7 +9,7 @@ keywords: 阅读,2015
 
 ###### Sunday,31 March 2015
 
-[红荷春晓](/../../assets/img/book/2015/painting_and_calligraphy_xiezhiliu.jpg)
+![红荷春晓](/../../assets/img/book/2015/painting_and_calligraphy_xiezhiliu.jpg)
 
 > 石如飞白木如籀，写竹还应八分通.若还有人能会此，须知书画本来同。
                                                        -- 趙孟頫·枯木竹石图
