@@ -17,6 +17,8 @@ description:
 
 ### JavaScript是动态的,弱类型,基于原型的脚本语言.
 
+### Closure
+
 > A closure is a combination of a code block(in ECMAScript this is a function) and statically/lexically saved all parent scopes. Thus, via these saved scopes a function may easily refer free variables.
 
 > 闭包是一个代码块(在ECMAScript是一个函数)和以静态方式/词法方式进行存储的所有父作用域的一个集合体.所以,通过这些存储的作用域,函数可以很容易的找到自由变量.
@@ -93,6 +95,8 @@ JavaScript一切皆可以看作对象.而所有的对象都可以通过原型链
 
 把JavaScript的对象看作节点,对象之间的原型链看作链接,那么JavaScripe的实现就类似于一棵树,树的根是'null'对象,第二层是全局对象,接着是其他层级的对象.JavaScript的静态作用域决定了,解析树的时候需要记录相连接的节点的变量,以确定标识符的值.JavaScript中函数作为一等公民,且可以看作对象,而对象是原型链上的对象,决定了函数执行的时候要解决,函数上下文因执行完毕已释放,函数需要建立相关节点联系.节点之间的联系导致闭包的出现.
 
+### this
+
 > In a usual function call, 'this' is provided by the caller which activates the code of the context,i.e. the parent context which calls the function. And the vaule of 'this' is determined by the form of a call expression(in other words by the form how syntactically the function is called).
 
 > It is necessary to understand and remember this important point in order to be able to determine 'this' value in any context without any problems. Exactly the form of a call expression, i.e. the way of calling the function, influences 'this' value of a called context and nothing else.
@@ -151,7 +155,6 @@ Array.prototype.silce.call(arguments);
 以上歪理邪说,录之,日后作喷饭之资.
 
 ### 参考资料
-
 [ECMA-262](http://dmitrysoshnikov.com/)
 [JavaScript核心](http://weizhifeng.net/javascript-the-core.html#closures)
 [「深入ECMA-262-3」第一章、执行上下文](http://weizhifeng.net/chapter-1-execution-contexts.html)
