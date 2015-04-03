@@ -91,6 +91,65 @@ JavaScript一切皆可以看作对象.而所有的对象都可以通过原型链
 
 可见执行上下文同样也不是孤立的存在,通过作用域链(Scope chain)与其他上下文联系起来.
 
+把JavaScript的对象看作节点,对象之间的原型链看作链接,那么JavaScripe的实现就类似于一棵树,树的根是'null'对象,第二层是全局对象,接着是其他层级的对象.JavaScript的静态作用域决定了,解析树的时候需要记录相连接的节点的变量,以确定标识符的值.JavaScript中函数作为一等公民,且可以看作对象,而对象是原型链上的对象,决定了函数执行的时候要解决,函数上下文因执行完毕已释放,函数需要建立相关节点联系.节点之间的联系导致闭包的出现.
+
+> In a usual function call, 'this' is provided by the caller which activates the code of the context,i.e. the parent context which calls the function. And the vaule of 'this' is determined by the form of a call expression(in other words by the form how syntactically the function is called).
+
+> It is necessary to understand and remember this important point in order to be able to determine 'this' value in any context without any problems. Exactly the form of a call expression, i.e. the way of calling the function, influences 'this' value of a called context and nothing else.
+
+> (as we can see in some articles and even books on JavaScipte which claim that "'this' value depends on how function is defined; if it is global function then 'this' value is set to global object, if function is a method of an object 'this' value is always set to this object"-- what is mistaken description). Moving forward, we see that even normal global functions can be activated with different forms of a call expression which influence a different 'this' value;
+
+````javascript
+function foo() {
+  alert(this);
+}
+
+foo(); //global
+
+alert(foo === foo.prototype.construnctor); //true
+
+//but with another form of the call expression
+//of the same function, this value is different
+
+foo.prototype.constructor(); //foo.prototype
+````
+
+> It is similarly possible to call the function defined as a method of some object, but 'this' value will not be set to this object;
+
+````javascript
+var foo = {
+  bar: function() {
+    alert(this);
+    alert(this === foo);
+  }
+  
+  foo.bar(); //foo, true
+  
+  var exampleFunc = foo.bar;
+  alert(exampleFunc === foo.bar); // true
+  
+  // again with another form of the call expression
+  //of the same function, we have different this value
+  
+  exampleFunc(); // global, false
+}
+
+````
+
+综上,'this'的值是由调用表达式(call expression)的形式(换句话说是函数调用的语法形式)所决定的.在普通的函数调用中,'this'的值是由激活了上下文代码的调用者所提供,也就是调用这个函数的父作用域.
+
+this指针是执行上下文的一个属性,而不是变量对象的属性.在一般的函数调用中,'this'是在节点树中指向父节点的指针.当改变'this'的指向的时候,就可以让节点在节点树移动,可以灵活访问其他节点.具体的实现就是call和apply方法,两者都是用来改变'this'的值.
+
+典型的应用:
+
+````javascript
+Array.prototype.silce.call(arguments);
+````
+
+闭包和'this'皆是因为JavaScript是一门基于原型的脚本语言,为了访问上下文节点和在节点树之中移动,闭包和this指针是必须的概念.
+
+以上歪理邪说,录之,日后作喷饭之资.
+
 ### 参考资料
 
 [ECMA-262](http://dmitrysoshnikov.com/)
