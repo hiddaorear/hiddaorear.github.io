@@ -11,7 +11,7 @@ description:
 
 ### 读《JavaScript核心概念和实践》(三)
 
-#### 对闭包和this的自我理解
+#### ----对闭包和this的自我理解
 
 ![夏达](/../../assets/img/tech/2015/xiada_0.jpg)
 
