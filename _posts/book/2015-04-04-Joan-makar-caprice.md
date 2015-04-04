@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 读《程序员成长的烦恼》
+title: 读《琼美卡随想录》
 category: 读书
 keywords: 阅读,2015
 ---
