@@ -7,7 +7,7 @@ keywords: 阅读,2015
 
 ### 读《琼美卡随想录》
 
-###### Thursday, 04 April 2015
+###### Friday, 04 April 2015
 
 ![雪舟](/../../assets/img/book/2015/SesshuToyo.jpg)
 
