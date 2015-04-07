@@ -45,6 +45,8 @@ description:
 
 ![正则指引](/../../assets/img/tech/2015/RegularExpression_0.png)
 
+### 细节补充
+
 1.字符组
 
 2.普通字符组
