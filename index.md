@@ -18,6 +18,7 @@ title: Welcome
   ,"hobby": "reading"
 }
 ````
-[github](https://github.com/hiddaorear)
 
-[gitcafe](https://gitcafe.com/hiddaorear)
+## Stay hungry, stay foolish:
+### [github](https://github.com/hiddaorear)
+### [gitcafe](https://gitcafe.com/hiddaorear)
