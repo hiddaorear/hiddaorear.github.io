@@ -7,7 +7,7 @@ keywords: Regulaer expression
 description: 
 ---
 
-##### Friday, 10 April 2015
+##### Staturday, 11 April 2015
 
 ### 读《精通正则表达式》(五)
 
@@ -52,6 +52,8 @@ var pattern_0 = /['"][^'"]*\1/; // \1表示第一个分组
 var pattren_1 = /['"][^\1]*\1/;
 ````
 
+### `lastIndex`属性
+
 `RegExp`变量有一组属性，其中最重要也是唯一的可写属性为`lastIndex`。如果使用`RegExp`的`exec()`和`test()`函数，并且设定了g参数，也就是在全局模式下，正则表达式的匹配会从`lastIndex`的位置开始，并且每次匹配成功之后会重新设定`lastIndex`。
 
 这样是为了解决`g`参数带来偏移量记录问题。当我们没有使用`g`参数时，默认只匹配到第一个字符串。使用`g`参数时，需要找出整个字符串中匹配的字符串。当匹配了第一个字符串时，正则引擎需要寻找下一个可以匹配的字符串，应该接着匹配的地方继续往后寻找，因此在此种情况下，需要记录第一次匹配到的位置，接着寻找的时候无须重复查找第一次匹配的状态，直接使用`lastIndex`记录的偏移量接着寻找匹配。
@@ -59,6 +61,8 @@ var pattren_1 = /['"][^\1]*\1/;
 那么，这样子的设计带来一个副作用。在不同的字符串调用同一个`RegExp`的`exec()`或`test()`方法，如果前面有匹配成功的字符串，那么`lastIndex`会记录其偏移量，当重新匹配新的字符串时，会从这个偏移量开始匹配，而不是我们所想的从字符串的开始匹配，就带来了意料之外的结果。所以在使用同一个正则表达式时，应该显式的将`RegExp`的`lastIndex`设定为0.
 
 当然在使用`RegExp.test()`的很多情况下，更好的选择是`string.search(RegExp)`，判断返回值是否为0.
+
+### String的方法与RegExp的方法区别
 
 JavaScript中有一些正则操作是通过String的方法实现的。但与RegExp的方法有一些区别。
 1.`string.match(RegExp)`，在指定了全局模式的情况下，返回各次成功的匹配文本；而`RegExp.exec()`总返回单次匹配的结果，不管是否指定了全局模式。但`string.match(RegExp)`不包含其他信息，也不包含捕获分组的信息。
@@ -75,8 +79,9 @@ var pattern.test("6789"); // false
 "6789".search(/^\d+$/g) == 0; //true
 ````
 
-正则表达式有四大用处：
-1.验证
+### 正则表达式有四大用处：
+
+#### 1.验证
 
 ````javascript
 
@@ -87,7 +92,7 @@ var regexp = /^\d{4}-\d{2}-\d{2}$/;
 regexp.test("2015-04-11"); //true 不可以使用全局模式；
 ````
 
-2.提取
+#### 2.提取
 
 简单提取
 
@@ -103,7 +108,8 @@ for (var i = 0, l = marchArray.length; i < l ; i++) {
 //2015-04-11
 ````
 
-分组提取
+#### 分组提取
+
 要捕获分组匹配的文本，则必须使用RegExp.exec(str)，且需要设定全局g模式。
 
 ````javascript
@@ -124,7 +130,7 @@ while ((matchArray = pattern.exec(str)) != null)) {
 //11
 ````
 
-3.替换
+#### 3.替换
 
 ````javascript
 
@@ -136,7 +142,7 @@ document.write("2015-04-11".replace(regexp, replacement));
 // 04/11/2015
 ````
 
-4.切分
+#### 4.切分
 
 ````javascript
 
