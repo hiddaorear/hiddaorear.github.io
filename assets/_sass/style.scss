@@ -439,6 +439,15 @@ a {
     font-size: 15px;
     top: 50px;
   }
+  .pl__title {
+    width: 68%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+    word-break: keep-all;
+  }
 }
 
 //------- {{ pl__all }} -------//
