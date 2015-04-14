@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Data Structures and Algorithm Analysis(0)
+title:  Data Structures and Algorithm Analysis(1)
 category: 技术
 tags: [structures algorithm]
 keywords: structures algorithm 
