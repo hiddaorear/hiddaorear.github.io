@@ -7,7 +7,7 @@ keywords: structures algorithm
 description: 
 ---
 
-##### Monday, 13 April 2015
+##### Monday, 14 April 2015
 
 ### 读《数据结构与算法分析》(三)
 
