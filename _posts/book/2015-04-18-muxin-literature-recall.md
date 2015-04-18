@@ -7,7 +7,7 @@ keywords: 阅读,2015
 
 ### 读《文学回忆录》及《日本读书论》
 
-###### Friday, 17 April 2015
+###### Saturday, 18 April 2015
 
 ![wind](/../../assets/img/book/2015/wind.jpeg)
 
