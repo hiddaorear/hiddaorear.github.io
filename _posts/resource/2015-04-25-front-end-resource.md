@@ -43,10 +43,30 @@ description:
 19. progress显示JavaScript耗费的函数进程；
 
 新增input元素类型
+
 - email E-mail文本输入框；
 - url 输入URL地址；
 - number 输入数值的文本输入框；
 - ranges 表示必须输入一定范围内的数字值的文本输入框；
+
+### 2. 前端性能优化
+
+### 性能优化是一个工程问题。
+
+1. 请求数量，合并脚本和样式表，CSS Sprites，拆分初始化加载，划分主域；
+2. 请求带宽，开启Gzip,精简JavaScript，移除重复脚本，图像优化；
+3. 缓存利用，使用CDN，使用外部JavaScript和CSS，添加Expires头，减少DNS查找，配置ETag，使Ajax可缓存；
+4. 页面结构，将样式表放在顶部，将脚本放在底部，尽早刷性文档输出；
+5. 代码校验，避免CSS表达式，避免重定向；
+
+### 3. 图片优化
+
+1. 去掉无意义的修饰；
+2. 不用图片，直接使用CSS替代；
+3. 使用矢量图；
+4. 使用恰当的图片格式；
+
+
 
 
 
@@ -198,5 +218,8 @@ XMLHttpRequest对象常用方法与属性：
 [CSS3 主要知识点复习总结+HTML5 新增标签 | 英特尔® 开发人员专区](https://software.intel.com/zh-cn/blogs/2014/05/23/css3-html5#)
 [AJAX笔试面试题汇总_Web开发笔试面试题](http://mianshiti.diandian.com/post/2013-05-01/40050873257)
 [深入理解CSS盒子模型](http://www.cnblogs.com/hh54188/archive/2010/12/28/1919078.html)
+[前端工程与性能优化 - Div.IO](http://div.io/topic/371)
+[前端开发中，对图片的优化技巧有哪些？ - 知乎](http://www.zhihu.com/question/21815101)
+[移动H5前端性能优化指南-腾讯ISUX](http://isux.tencent.com/h5-performance.html)
 
 hid say:人过了30岁，估计记忆力直降。好记性不如写博客，遇到有意思的知识，录之，不亦乐乎？
