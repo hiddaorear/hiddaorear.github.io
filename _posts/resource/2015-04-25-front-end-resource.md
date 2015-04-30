@@ -232,24 +232,34 @@ XMLHttpRequest对象常用方法与属性：
 6. responseXML
 7. status
 
-### 4.JavaScript变量解析过程
+### 4 .JavaScript变量解析过程
 
-### 5.get请求与服务器握手次数与过程
+### 5 .get请求与服务器握手次数与过程
 
-### 6.JavaScript性能优化
+### 6 .JavaScript性能优化
 
-### 7.前端安全问题
+### 7 .前端安全问题
 
-### 8.跨域请求的实现
+### 8 .跨域请求的实现
 
-### 9.http3.0
+### 9 .http3.0
 
-### 10.Ajax的API，原生以及jQuary实现
+### 10 .Ajax的API，原生以及jQuary实现
 
-### 11.事件
+### 11. 事件
 
-### 12.DOM操作API
+### 12. DOM操作API
 
+
+### 13. cookie
+
+### 14. cookie与section的区别
+
+### 15. 改变元素的位置方法
+
+### 16. 插入兄弟节点方法
+
+ 
 
 
 ## 参考资料：
