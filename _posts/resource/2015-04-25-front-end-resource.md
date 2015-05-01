@@ -68,7 +68,26 @@ description:
 
 ### 4. DOCTYPE标签作用
 
-### 5. HTML5概念
+1. 对文档的有效性验证。告诉用户代理和校验器文档的DTD类型。
+
+2. 决定浏览器的渲染模式
+
+- 标准模式
+- 怪异模式
+- 准标准模式
+
+因为web标准的演进，浏览器在实现新的标准的时候需要兼容旧的标准，DOCTYPE就起到了一个兼容作用。而目前HTML5因为不再是SGML的语言，不需要在DTD中定义标签和属性，只起到一个激活模式的作用。
+
+### 5. HTML5特性
+
+1. Semantio (语义)
+2. Offline & storage (本地存储：APP cache，Indexed DB)
+3. device access (设备兼容特性：与浏览器内部数据相连，摄像头)
+4. connectivity (连接特性：Server-Sent Eent & WebSockkets)
+5. multimedia (网页多媒体：Audio,Video)
+6. 3D, Graphics & Effects (三维、图形及特效：SVG,Canvas,WedGL,CSS3)
+7. Performance & Integration (性能与集成特性：XMLHttpRequest2)
+8. CSS3(更强的效果)
 
 ### 6. Web标准的理解
 
@@ -76,7 +95,7 @@ description:
 
 ### 8. 浏览器输入url会发生什么
 
-### 9.iframe标签的使用以及缺点
+### 9. iframe标签的使用以及缺点
 
 
 ## CSS
@@ -119,21 +138,21 @@ transition与ainmation区别：
 3. 浮动元素包含浮动元素，那么宽度会被自动延伸填充为父元素宽度；
 
 
-### 4.居中的实现
+### 4. 居中的实现
 
-### 5.典型的CSS兼容性问题
+### 5. 典型的CSS兼容性问题
 
-### 6.响应式的实现
+### 6. 响应式的实现
 
-### 7.逐帧动画的实现
+### 7. 逐帧动画的实现
 
-### 8.使用CSS实现抛物线动画
+### 8. 使用CSS实现抛物线动画
 
-### 9.圆周运动
+### 9. 圆周运动
 
-### 10.典型的动画实现方案
+### 10. 典型的动画实现方案
 
-### 11.重绘
+### 11. 重绘
 
 
 
@@ -210,7 +229,7 @@ etTimeout()只是将事件插入了"任务队列"，必须等到当前代码（�
 
 setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在"任务队列"的尾部添加一个事件，因此要等到同步任务和"任务队列"现有的事件都处理完，才会得到执行。
 
-### 3.Ajax优缺点
+### 3. Ajax优缺点
 
 优点：
 1. 最大优点，页面无刷新即可与服务器通信，用户体验好；
@@ -232,19 +251,19 @@ XMLHttpRequest对象常用方法与属性：
 6. responseXML
 7. status
 
-### 4 .JavaScript变量解析过程
+### 4. JavaScript变量解析过程
 
-### 5 .get请求与服务器握手次数与过程
+### 5. get请求与服务器握手次数与过程
 
-### 6 .JavaScript性能优化
+### 6. JavaScript性能优化
 
-### 7 .前端安全问题
+### 7. 前端安全问题
 
-### 8 .跨域请求的实现
+### 8. 跨域请求的实现
 
-### 9 .http3.0
+### 9. http3.0
 
-### 10 .Ajax的API，原生以及jQuary实现
+### 10. Ajax的API，原生以及jQuary实现
 
 ### 11. 事件
 
@@ -276,5 +295,11 @@ XMLHttpRequest对象常用方法与属性：
 [前端工程与性能优化 - Div.IO](http://div.io/topic/371)
 [前端开发中，对图片的优化技巧有哪些？ - 知乎](http://www.zhihu.com/question/21815101)
 [移动H5前端性能优化指南-腾讯ISUX](http://isux.tencent.com/h5-performance.html)
+[前端工作面试HTML相关问题](http://www.html-js.com/article/Problems-related-to-frontend-development-interview-questions-a-large-set-ofAvi-front-end-job-interview-HTML)
+[编码规范 by @mdo](http://codeguide.bootcss.com/)
+[Witcher42 - doctype（文档类型）的作用是什么](http://witcher42.github.io/2014/05/28/doctype/)
+[html的DOCTYPE标签的作用 | FEX Notes](http://www.fexnotes.com/2014/01/09/2014-01-09-html-doctype.html)
+[DOCTYPE的作用及说明 ](http://bbs.blueidea.com/home.php?mod=space&uid=590876&do=blog&id=27461)
+[HTML <!DOCTYPE> 标签](http://www.w3school.com.cn/tags/tag_doctype.asp)
 
 hid say:人过了30岁，估计记忆力直降。好记性不如写博客，遇到有意思的知识，录之，不亦乐乎？
