@@ -426,6 +426,78 @@ $('span').insertAfter('div');
 1. `html()`;
 2. `text()`;
  
+18. 浮点数精度问题
+
+````javascript
+
+var a = 0.1;
+var b = 0.2;
+var c = 0.3;
+
+[b - a == 0, c - b == a ]; // => false, false;
+
+````
+
+JavaScript中的小数采用双精度(64位)表示，由三部分组成：符号+阶码+尾数。因为浮点数只有52位，从53位开始就舍入，造成了浮点数精度损失。
+
+解决方案：
+
+1. 设定精度范围：
+
+````javascript
+
+var a = 0.2;
+var b = 0.3;
+var equal = (Math.abs(b -a) < 0.00001);
+
+````
+
+2. `toPrecision()` | `toFixed()`，注意两方法返回的是字符串，故其目的在于显示。
+
+````javascript
+
+(0.1 + 0.2).toPrecision(10) == 0.3; // => true
+
+(0.1 + 0.2).toFixed(10); // => true
+
+````
+
+19. var赋值问题
+
+````javascript
+
+(function(){
+    var a = b = 3;
+})();
+
+console.log(typeof a);//"undefined"
+console.log(b);//3
+
+````
+
+> The issue here is that most developers understand the statement var a = b = 3; to be shorthand for:
+
+````javascript
+var b = 3;
+var a = b;
+````
+
+> But in fact, var a = b = 3; is actually shorthand for:
+
+````javascript
+b = 3;
+var a = b;
+````
+
+> Therefore, b ends up being a global variable (since it is not preceded by the var keyword) and is still in scope even outside of the enclosing function.
+
+> The reason a is undefined is that a is a local variable to that self-executing anonymous function
+
+````javascript
+(function(){
+    var a = b = 3;
+})();
+````
 
 
 ## 参考资料：
@@ -453,5 +525,13 @@ $('span').insertAfter('div');
 [javascript操作DOM元素 - 吕大豹](http://www.cnblogs.com/lvdabao/p/3493356.html)
 [cookie 和session 的区别详解](http://www.cnblogs.com/shiyangxt/articles/1305506.html)
 [build-web-application-with-golang/06.1.md at master · astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/06.1.md)
+[JavaScript的设计缺陷?浮点运算](http://ourjs.com/detail/54695381bc3f9b154e000046)
+[每一个JavaScript开发者应该了解的浮点知识](http://yanhaijing.com/javascript/2014/03/14/what-every-javascript-developer-should-know-about-floating-points/)
+[What Every Computer Scientist Should Know About Floating-Point Arithmetic](http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
+[Python 的浮点数损失精度问题](http://my.oschina.net/lionets/blog/186575)
+[代码之谜（五）- 浮点数（谁偷了你的精度？）](http://my.oschina.net/justjavac/blog/88823)
+[js浮点类型计算偏差原因](http://bbs.csdn.net/topics/380247520)
+[javascript - Why a is undefined while b is 3 in var a=b=3? - Stack Overflow](http://stackoverflow.com/questions/27329444/why-a-is-undefined-while-b-is-3-in-var-a-b-3)
+
 
 hid say:人过了30岁，估计记忆力直降。好记性不如写博客，遇到有意思的知识，录之，不亦乐乎？
