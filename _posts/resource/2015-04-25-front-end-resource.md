@@ -269,15 +269,162 @@ XMLHttpRequest对象常用方法与属性：
 
 ### 12. DOM操作API
 
+- 创建新元素
+
+````javascript
+
+var node = document.createElement('div');
+var text = document.createTextNode('hi');
+
+````
+
+- 添加新元素
+
+````javascript
+
+var node = document.createElement('div');
+node.innerHTML = 'new';
+document.body.appendChild('node');  //追加在尾部
+
+var list = document.getElementById('list');
+var item1 = document.getElementById('item1');
+list.insertBefore(node, item1); // 添加第二个参数之前，若无此参数，默认添加在最后。
+
+````
+
+其他API
+1. `innerHTML()`;
+2. `outerHTML()`;
+3. `textContent()`;
+4. `innerText()`;
+5. `outerText()`;
+6. `insertAdjacentHTML()`;
+
+- 移动元素
+
+使用添加元素的API完成
+
+````javascript
+
+var item1 = document.getElementById('item1');
+var item2 = document.getElementById('item2');
+list.insertBefore(item2, item1);
+
+````
+
+
+- 复制元素
+
+````javascript
+
+var node = document.getElementById('node');
+var clone = node.cloneNode(true);
+
+````
+
+
+- 删除元素
+
+````javascript
+
+var list = document.getElementById('list');
+var item1 = document.getElementById('item1');
+list.removeChild(item1);
+
+````
+
+
+- 查找元素
+
+````javascript
+
+// 属性
+
+parentNode;
+childNode;
+previousSibling;
+nextSibling;
+firstChild;
+lastChild;
+
+````
+
 
 ### 13. cookie
 
 ### 14. cookie与section的区别
 
+二者都是为了克服HTTP无状态的方案。
+
+1. cookie数据存放在浏览器，而session存放在服务器；
+2. cookie不安全，session相对安全；
+3. session消耗服务器性能，cookie不会；
+4. 单个cookie数据不能超过4k，一般浏览器cookie不超过20个；
+
+PS： session id机制：
+1. cookie保存；
+2. URL重写；
+3. 表单隐藏字段；
+
 ### 15. 改变元素的位置方法
 
 ### 16. 插入兄弟节点方法
 
+### 17. DOM操作
+
+1. jQuery
+
+- 创建元素
+`$('<span>new</span>');`
+
+- 插入元素
+1. `insertBefore`&`before`,指定元素外部，前面；
+2. `insertAfter`&`after`,指定元素外部，后面；
+3. `prependTo`&`prepend`,指定元素内部，前面；
+4. `appendTo`&`append`,指定元素内部，后面；
+
+````javascript
+
+$('<span>new</span>').prependTo('div');
+
+$('div').prepend('<span>new</span>');
+
+````
+
+- 移动元素
+使用插入的API即可。
+
+````javascript
+
+// <div><span>new</span>>wrapper</div>
+
+$('span').insertAfter('div');
+
+//<div>wrapper</div><span>new</span>
+
+````
+
+- 包裹元素
+
+1.` wrap`;
+2. `wrapAll`;
+
+- 克隆元素
+
+`clone() | clone(ture)`
+
+- 删除元素
+1. `remove()`;
+2. `empty()`;
+
+- 替换节点
+
+1. `replaceAll()`;
+2. `replaceWith()`;
+
+- 设置DOM
+1. `html()`;
+2. `text()`;
  
 
 
@@ -301,5 +448,10 @@ XMLHttpRequest对象常用方法与属性：
 [html的DOCTYPE标签的作用 | FEX Notes](http://www.fexnotes.com/2014/01/09/2014-01-09-html-doctype.html)
 [DOCTYPE的作用及说明 ](http://bbs.blueidea.com/home.php?mod=space&uid=590876&do=blog&id=27461)
 [HTML <!DOCTYPE> 标签](http://www.w3school.com.cn/tags/tag_doctype.asp)
+[HTML5 到底是什么？ - 知乎](http://www.zhihu.com/question/19812140)
+[移动平台上的HTML5技术是否华而不实](http://www.infoq.com/cn/news/2013/03/mobile-html5)
+[javascript操作DOM元素 - 吕大豹](http://www.cnblogs.com/lvdabao/p/3493356.html)
+[cookie 和session 的区别详解](http://www.cnblogs.com/shiyangxt/articles/1305506.html)
+[build-web-application-with-golang/06.1.md at master · astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/06.1.md)
 
 hid say:人过了30岁，估计记忆力直降。好记性不如写博客，遇到有意思的知识，录之，不亦乐乎？
