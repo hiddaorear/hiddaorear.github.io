@@ -456,7 +456,7 @@ var equal = (Math.abs(b -a) < 0.00001);
 
 ````
 
-2. `toPrecision()` | `toFixed()`，注意两方法返回的是字符串，故其目的在于显示。
+2. `toPrecision()`  `toFixed()`，注意两方法返回的是字符串，故其目的在于显示。
 
 ````javascript
 
