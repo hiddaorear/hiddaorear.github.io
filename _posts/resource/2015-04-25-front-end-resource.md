@@ -547,6 +547,38 @@ PS：
 资料：
 [JavaScript欲速则不达—关于变量以及“预解析”对变量的影响](http://www.html5jscss.com/js-var.html)
 
+### 22. jQuery.each(object, [callback])
+
+> 通用例遍方法，可用于例遍对象和数组。
+不同于例遍 jQuery 对象的 $().each() 方法，此方法可用于例遍任何对象。回调函数拥有两个参数：第一个为对象的成员或数组的索引，第二个为对应变量或内容。如果需要退出 each 循环可使回调函数返回 false，其它返回值将被忽略。
+
+````javascript
+
+$.each([ 52, 97 ], function( index, value ) {
+  console.log( index + ": " + value );
+});
+// 0: 52 
+// 1: 97 
+
+var obj = {
+  p1: "hello",
+  p2: "world"
+};
+$.each( obj, function( key, value ) {
+  console.log( key + ": " + value );
+});
+// p1: hello
+// p2: world
+
+````
+
+资料：
+[jQuery工具方法 -- JavaScript 标准参考教程](http://javascript.ruanyifeng.com/jquery/utility.html#toc0)
+[jquery each函数 break和continue功能 - 吕神的自我修养](http://www.lrxin.com/archives-777.html)
+[jQuery1.4 API中文参考指南 >> jQuery.each(object, [callback]) >> 张鑫旭-鑫空间-鑫生活](http://www.zhangxinxu.com/jq/api14/jQuery.each_object_callback.php)
+[jquery的each()详细介绍 - 萧萧的技术博客空间 - 博客园](http://www.cnblogs.com/xiaojinhe2/archive/2011/10/12/2208740.html)
+
+
 ## 参考资料：
 [阿里一行之大神面对面 - 叶小钗](http://www.cnblogs.com/yexiaochai/p/3158443.html)
 [B和strong以及i和em的区别](http://www.cnblogs.com/lpfuture/archive/2013/03/04/2942613.html)
