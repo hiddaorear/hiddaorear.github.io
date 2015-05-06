@@ -352,6 +352,10 @@ lastChild;
 
 ### 13. cookie
 
+cookie是存储在访问者计算机中的变量，每当同一台计算机通过浏览器请求某个页面时，就会发送这个cookie。可以使用JavaScript来创建和取回cookie的值。
+
+每个cookie都有过期时间，当电脑的时间过了给定的过期时间，这个cookie就会失效。JavaScript无法直接删除cookie的值，但是可以通过设置失效日期来让此cookie无法工作。
+
 ### 14. cookie与section的区别
 
 二者都是为了克服HTTP无状态的方案。
@@ -426,7 +430,7 @@ $('span').insertAfter('div');
 1. `html()`;
 2. `text()`;
  
-18. 浮点数精度问题
+### 18. 浮点数精度问题
 
 ````javascript
 
@@ -462,7 +466,7 @@ var equal = (Math.abs(b -a) < 0.00001);
 
 ````
 
-19. var赋值问题
+### 19. var赋值问题
 
 ````javascript
 
@@ -499,6 +503,49 @@ var a = b;
 })();
 ````
 
+### 20. javascript 连等赋值问题
+
+````javascript
+
+var a = {n:1};
+var b = a;
+a.x = a = {n:2};
+alert(a.x);
+alert(b.x);
+
+````
+
+JavaScript求值运算符优先级高于赋值运算符。求值过程是从左至右，赋值过程是从右至左。
+
+1. 首先找`a`与`a.x`的指针。如有已经存在，则不变。若不存在，那么创建并指向undefind；
+`a`有指针，指向`{n:1}`；`a.x`没有指针，故创建，并指向undedind；
+2. 然后把找到的指针都指向最右边的值，即`{n:2}`;
+
+资料：
+[javascript 连等赋值问题 - SegmentFault](http://segmentfault.com/q/1010000002637728)
+[javascript笔记:javascript里面不同function定义的区别](http://www.cnblogs.com/sharpxiajun/archive/2011/09/16/2179010.html)
+[写了 10 年 Javascript 未必全了解的连续赋值运算 - justjavac(迷渡)](http://justjavac.com/javascript/2012/04/05/javascript-continuous-assignment-operator.html)
+[高性能JavaScript模板引擎原理解析 – 腾讯CDC:](http://cdc.tencent.com/?p=5723)
+[You-Dont-Know-JS - 词法作用域 - SegmentFault](http://segmentfault.com/a/1190000002532217)
+
+### 21. 变量的预解析
+
+````javascript
+
+if (!(a in window)) {
+  var a = 1;
+}
+alert(a); // => undefined
+
+````
+
+预解析时变量`a`已经添加到`window`上，因此`!(a in window)`为`false`，导致运行时`a`没有赋值，所以`a`的值是`undefined`。
+
+PS：
+隐式全局变量并不是真正的全局变量，真正的变量在预解析阶段就已经明确是一个变量的属性，而没有使用`var`定义的变量，则要在运行的时候去处理，所以他们是对象的属性。
+
+资料：
+[JavaScript欲速则不达—关于变量以及“预解析”对变量的影响](http://www.html5jscss.com/js-var.html)
 
 ## 参考资料：
 [阿里一行之大神面对面 - 叶小钗](http://www.cnblogs.com/yexiaochai/p/3158443.html)
@@ -532,6 +579,8 @@ var a = b;
 [代码之谜（五）- 浮点数（谁偷了你的精度？）](http://my.oschina.net/justjavac/blog/88823)
 [js浮点类型计算偏差原因](http://bbs.csdn.net/topics/380247520)
 [javascript - Why a is undefined while b is 3 in var a=b=3? - Stack Overflow](http://stackoverflow.com/questions/27329444/why-a-is-undefined-while-b-is-3-in-var-a-b-3)
-
+[JavaScript Cookies](http://www.w3school.com.cn/js/js_cookies.asp)
+[Javascript如何操作（创建/读取/删除）cookie](http://www.niumowang.org/javascript/javascript-cookie/)
+[Cookie安全漫谈](http://www.infoq.com/cn/articles/cookie-security)
 
 hid say:人过了30岁，估计记忆力直降。好记性不如写博客，遇到有意思的知识，录之，不亦乐乎？
