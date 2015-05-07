@@ -97,6 +97,25 @@ description:
 
 ### 9. iframe标签的使用以及缺点
 
+### 10. SVG
+
+特点：
+- Scalable Vector Graphics，可伸缩矢量图
+- 使用XML格式定义图形
+- 放大等改变图片尺寸的情况下图形的质量不会损失
+
+优势：
+- 比JPEG&GIF图片要小，压缩性更强
+- 可伸缩
+- 在任何分辨率下可高质量打印
+- 质量不下降的情况下放大
+- 图像中文本可选，可被搜索，适合制作地图
+- 文件是纯粹的XML
+
+资料：
+[SVG 简介](http://www.w3school.com.cn/svg/svg_intro.asp)
+[SVG特征、支持以及一些实际使用问题 « 张鑫旭](http://www.zhangxinxu.com/wordpress/2012/08/svg-feature-support-bugs/)
+
 
 ## CSS
 
