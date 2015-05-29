@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  Project summary
+title:  Project summary(1)
 category: 资源
 tags: [seaJS jQuery Less git grunt project]
 keywords: seaJS jQuery Less git grunt
 description: 
 ---
 
-### Project summary
+### Project summary(1)
 
-#### Wendnesday, 27 May 2015
+#### Wednesday, 27 May 2015
 
 ![吴昌硕](/../../assets/img/resource/2015/qibaishi_8.jpg)
 
