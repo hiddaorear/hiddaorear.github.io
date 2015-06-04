@@ -53,7 +53,22 @@ description:
 3. 利用JavaScript来切换图片的`src`
 
 ````javascript
-  
+  //判断是否手机
+  window.op = window.op || {};
+	op.isMobile = navigator.userAgent.toLowerCase().match(/Mobile/i)!==null;
+	
+	op.isIE8 = (!-[1,]);
+	
+	var $img = $('img');
+	var srcPC = img.attr('src');
+	if (op.isMobile && srcPC.length ) {
+	  var srcString = srcPC.toString();
+	  var _index = srcString.lastIndexOf('.');
+	  var _src = srcString.substr(0, _index);
+	  var imgFormat = srcString.substr(++_index);
+	  var mobileSrc = _src + '_mobile.'+ imgFormat;
+	  $img.attr('src', mobileSrc);
+	}
 ````
 
 
