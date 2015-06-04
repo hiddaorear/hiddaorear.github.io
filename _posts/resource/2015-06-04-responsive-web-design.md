@@ -13,6 +13,48 @@ description:
 
 ![齐白石](/../../assets/img/resource/2015/qibaishi_10.jpg)
 
+> 手机就像黑洞，在吸收一切。
+
+### 响应式图片
+1. 图片依赖宽度成比例缩放
+利用CSS盒子模型的特性，在百分比为尺寸单位的情况下，`padding || margin`的值由`width`确定。而`padding`内可以显示背景，因此利用这两个特性，我们可以实现宽高比固定点的图片样式。
+
+````css
+//实现了宽高比为1:2
+  .img-wrap {
+    height: 0;
+    width: 50%;
+    padding-top: 50%; // 或者padding-bottom: 50%;
+    background-image: url(hello.png);
+    background-repeat： no-repeat;
+  }
+````
+
+2. 使用CSS3特性
+
+````html
+<img src="image.jpg" data-src-600px="image-600px.jpg" data-src-800px="image-800px.jpg" alt="text">
+````
+````css
+@media (min-width: 600px) {
+  img[data-src-600px] {
+    content: attr(data-src-600px, url);
+  }
+}
+
+@media (min-width: 800px) {
+  img[data-src-800px] {
+    content: attr(data-src-800px, url);
+  }
+}
+
+````
+
+3. 利用JavaScript来切换图片的`src`
+
+````javascript
+
+````
 
 
 ### 参考资料：
