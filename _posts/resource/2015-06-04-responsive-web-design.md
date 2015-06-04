@@ -152,4 +152,4 @@ html {
 [怎么还有那么多妹子搞不清镜头和脸的关系](http://www.douban.com/group/topic/75945912/)
 [响应式网页设计-腾讯ISUX – 社交用户体验设计 – Better Experience Through Design](http://isux.tencent.com/responsive-web-design.html)
 
-hid say:
+hid say:响应式不仅仅是写CSS的人概念，写安卓同样也需要考虑响应式，面对不同的设备，都有这个需求。响应式把不同设备代码一起写了，看似不需要开发多套代码，方便维护。但仍需看项目的级别，重量级网站目前都是分两套，轻量级的可以考虑响应式。而响应式不仅仅是通过媒体查询来实现，还有后端的响应式，识别设备加载不同模块。同样对于前端，也要模块化，工程化，是前端工程化的催化剂。
