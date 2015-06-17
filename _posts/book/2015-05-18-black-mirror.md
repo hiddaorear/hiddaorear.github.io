@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 黑镜
-category: 电影
+category: [movie]
 keywords: 电影,2015
 ---
 
