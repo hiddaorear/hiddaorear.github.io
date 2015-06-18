@@ -3,7 +3,7 @@ layout: post
 title:  AngularJS(1)
 category: 资源
 tags: [JavaScript AngularJS]
-keywords:AngularJS 
+keywords: AngularJS 
 description: 
 ---
 
