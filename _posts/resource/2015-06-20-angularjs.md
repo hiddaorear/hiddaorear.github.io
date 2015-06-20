@@ -154,7 +154,6 @@ $scope.$digest();
 [AngularJS: 使用Scope时的6个陷阱 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2000)
 [AngularJS 数据双向绑定揭秘 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2145)
 [使用超动感HTML & JS开发WEB应用! | AngularJS中文社区](http://www.angularjs.cn/A00x)
-[]()
 [[AngularJS] 仿照Angular Bootstrap TimePicker创建一个分钟数-秒数的输入控件](http://blog.csdn.net/dm_vincent/article/details/42612189)
 [有jQuery背景，该如何用AngularJS编程思想？ - 博客 - 伯乐在线](http://blog.jobbole.com/46589/)
 [七步从Angular.JS菜鸟到专家（1）：如何开始 - 博客 - 伯乐在线](http://blog.jobbole.com/46779/)
