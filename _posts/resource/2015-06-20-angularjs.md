@@ -146,9 +146,112 @@ $scope.$watch(function() {
 $scope.$digest();
 
 ````
+### `ng-repeat`
 
+API:
+`$index`当前索引
+`$first`是否为头元素
+`middle`是否为非头元素
+`$last`是否为尾元素
+
+````javascript
+var TestCtrl = function($scope) {
+  $scope.obj_list = [1, 2, 3, 4];
+};
+
+<div ng-controller="TestCtrl">
+  <ul ng-repeat="member in obj_list">
+    <li>{{member}}</li>
+  </ul>
+</div>
+````
+`ng-repeat`遍历对象时，并非是按照我们定义key的排序的。因为JavaScript Obejct本身就不保证key之间的排序。
+
+> ECMAScript 3 An object is a member of the type Obejct, it is an unordered collection of which contains a primitive value, object of function.
+
+但在`for in`中有一定的顺序：
+1. 对于类型是number或者可以转换为整数的number的string类型的key，会按照number大小顺排序，类似数组。
+2. 对于alphanumerical string类型的key，`for in`会按照定义object时的key排序。
+
+故，对于`ng-repeat`,AngularJS可能有内部的排序，依靠object key排序是不可靠的，若有需要，最好用数组。
+
+### scope of `ng-repeat`
+
+实现单选框，可以从`$scope.SelectValue`中获取选中的value。
+
+````javascript
+blue:<input type="radio" value="1" ng-model="SelectValue">
+
+red:<input type="radio" value="2" ng-model="SelectValue">
+
+yellow:<input type="radio" value="3" ng-model="SelectValue">
+````
+
+`ng-repeat`的实现
+
+````javascript
+<ul ng-repeat="row in collections">
+  <li>
+    {{row.name}}:<input type="radio" value="{{row.value}}" ng-model="SelectValue"
+  </li>
+</ul>
+
+````
+
+点击对话框，`$scope.SelectValue`中值并没有保存对应单选框的值。
+因为`ng-repeat`会创建自己的子scope，对全局的`$scope`是不可见的。所以如果要引用全局`$scope`里的成员，可以使用`$parent`来引用全局的`$scope`。
+
+````javascript
+<ul ng-repeat="row in collections">
+  <li>
+    {{row.name}}:<input type="radio" value="{{row.value}}" ng-model="$parent.SelectValue"
+  </li>
+</ul>
+
+````
+
+### AngularJS 视图模型的层次
+如果有视图的包含关系，内层视图对应的作用域可以共享外层作用域的数据。
+
+````javascript
+var app = angular.module('test', [])
+.controller('OuterCtrl', function($scope) {
+    $scope.a = 1;
+  })
+.controller('InnerCtrl', function($scope) {
+    $scope.b = 2;
+  });
+<body ng-app="test">
+  <div ng-controller="OuterCtrl">
+    <span ng-bing="a"></span>
+    <div ng-controller="InnerCtrl">
+      <span ng-bind="a"></span>
+      <span ng-bind="b"></span>
+    </div>
+  </div>
+</body>
+
+````
+
+因为在AngularJS内部，InnerCtrl的实例的原型会被设置为OuterCtrl的实例。所以内层改变外层变量的值，不会影响到外层。
 
 ### 参考资料：
+
+### ng-repeat
+[AngularJS源码阅读之ngRepeat](http://loveky.github.io/2014/04/02/angularjsngrepeat/)
+[AngularJS中如何去掉 ng-repeat的自动排序？](http://www.zhihu.com/question/28707241)
+[Angular新手容易碰到的坑，随时更新，欢迎订阅 - AngularJS Nice Things](http://www.ngnice.com/posts/2c8208220edb94)
+[angular controller as syntax vs scope - 破狼 - 博客园](http://www.cnblogs.com/whitewolf/p/3493362.html)
+[AngularJS ng-repeat下使用ng-model 转 - 叶知秋红 - 博客园](http://www.cnblogs.com/zifeiyu/p/3765864.html)
+[AngularJS沉思录（二） 视图模型的层次 - Div.IO](http://div.io/topic/583)
+[AngularJS最佳实践: 请小心使用 ng-repeat 中的 $index - renfufei的专栏 - 博客频道 ](http://blog.csdn.net/renfufei/article/details/43061877)
+[translation/ng_repeat_$index.md at master · cncounter/translation](https://github.com/cncounter/translation/blob/master/tiemao_2015/04_ng_repeat_%24index/ng_repeat_%24index.md)
+[AngularJS性能优化心得 · Issue #5 · atian25/blog](https://github.com/atian25/blog/issues/5)
+[使用超动感HTML & JS开发WEB应用! | AngularJS中文社区](http://angularjs.cn/A0lr)
+
+
+### AnguarlarJS introduction
+[AngularJS学习笔记 - 进出自由,我的分享](http://www.zouyesheng.com/angular.html)
 [How AngularJS implements dirty checking and how to replicate it ourselves](http://ryanclark.me/how-angularjs-implements-dirty-checking/)
 [彻底弄懂AngularJS中的transclusion - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/Using-Angular-to-develop-web-application-completely-understand-AngularJS-transclusion)
 [AngularJS: 使用Scope时的6个陷阱 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2000)
@@ -176,3 +279,4 @@ if ( !-[1,] ) {
 
 
 ````
+因为
