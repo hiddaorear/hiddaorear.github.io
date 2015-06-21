@@ -146,7 +146,8 @@ $scope.$watch(function() {
 $scope.$digest();
 
 ````
-### `ng-repeat`
+
+###  `ng-repeat`
 
 API:
 `$index`当前索引
