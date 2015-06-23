@@ -253,7 +253,7 @@ var app = angular.module('test', [])
 
 ### AnguarlarJS introduction
 [AngularJS学习笔记 - 进出自由,我的分享](http://www.zouyesheng.com/angular.html)
-[How AngularJS implements dirty checking and how to replicate it ourselves](http://ryanclark.me/how-angularjs-implements-dirty-checking/)
+[How AngularJS implements dirty checking ](http://ryanclark.me/how-angularjs-implements-dirty-checking)
 [彻底弄懂AngularJS中的transclusion - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/Using-Angular-to-develop-web-application-completely-understand-AngularJS-transclusion)
 [AngularJS: 使用Scope时的6个陷阱 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2000)
 [AngularJS 数据双向绑定揭秘 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2145)
