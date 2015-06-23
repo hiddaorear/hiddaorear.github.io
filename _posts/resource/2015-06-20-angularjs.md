@@ -246,7 +246,7 @@ var app = angular.module('test', [])
 [AngularJS ng-repeat下使用ng-model 转 - 叶知秋红 - 博客园](http://www.cnblogs.com/zifeiyu/p/3765864.html)
 [AngularJS沉思录（二） 视图模型的层次 - Div.IO](http://div.io/topic/583)
 [AngularJS最佳实践: 请小心使用 ng-repeat 中的 $index - renfufei的专栏 - 博客频道 ](http://blog.csdn.net/renfufei/article/details/43061877)
-[translation/ng_repeat_$index.md at master · cncounter/translation](https://github.com/cncounter/translation/blob/master/tiemao_2015/04_ng_repeat_%24index/ng_repeat_%24index.md)
+[translation/ng_repeat_$index.md at master cncounter/translation](https://github.com/cncounter/translation/blob/master/tiemao_2015/04_ng_repeat_%24index/ng_repeat_%24index.md)
 [AngularJS性能优化心得 · Issue #5 · atian25/blog](https://github.com/atian25/blog/issues/5)
 [使用超动感HTML & JS开发WEB应用! | AngularJS中文社区](http://angularjs.cn/A0lr)
 
