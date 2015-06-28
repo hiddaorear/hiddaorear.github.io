@@ -236,6 +236,75 @@ var app = angular.module('test', [])
 
 因为在AngularJS内部，InnerCtrl的实例的原型会被设置为OuterCtrl的实例。所以内层改变外层变量的值，不会影响到外层。
 
+### `ng-controller`
+
+`$scope`对象的职责是继承DOM中指令所共享的操作和模型。
+1. 操作是指`$scope`上的标准的JavaScript方法；
+2. 模型是指`$scope`上保存的包含瞬时状态数据的JavaScript对象。持久化状态的数据应该保存到服务中，服务的作用是处理模型的持久化；
+3. 处于技术和架构方面的原因，绝对不要直接将控制器中的`$scope`赋值为值类型对象（字符串，布尔值或数字）。DOM中应该始终通过点操作符`.`来访问数据。以避免不可预期的麻烦；
+4. 控制器应该尽可能简单。虽然可以用控制器来组织所有的功能，但是将业务逻辑移到服务和指令中是非常好的注意。
+
+### 内置指令`ng-contoller`的作用是为嵌套在其中的指令创建一个子作用域，避免将所有操作和模型都定义在`$rootScope`上。用于在DOM放置控制器。
+
+### 子`$scope`只是一个JavaScript对象，其中含有从父级`$scope`通过原型继承得到的方法和属性，包含`#rootScope`。
+### 嵌套在`ng-controller`中的指令有访问子`$scope`的权限。由于原型继承的关系，修改父级对象中的值会修改子对像中的值，反之则不行。
+
+### JavaScript对象要么是值复制要么是引用复制。字符串，数字，布尔值是值复制，而数组，对象和函数表达式则是引用复制。
+
+### 如果将模型对象的中属性设置为字符串，他会通过引用进行共享，在子`$scope`修改也会修改`$scope`的属性。
+
+````javascript
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Angular Tab </title>
+    <style type="text/css">
+    </style>
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="ControllerApp">
+  <div id="tabs" ng-controller="ParentCtrl">
+   {{someModel.someValue}}
+   <button ng-click="someAction()">parent</button>
+   <div ng-controller="ChildrenCtrl">
+    {{someModel.someValue}}
+    <button ng-click="childAction()">chlid</button>
+   </div>
+  </div>
+
+  <script type="text/javascript">
+  angular.module('ControllerApp', [])
+  .controller('ParentCtrl', ['$scope', function($scope) {
+    $scope.someModel = {
+      someValue: 'hello computer'
+    };
+    $scope.someAction = function() {
+      $scope.someModel.someValue = 'hello human, from parent.';
+    };
+  }])
+  .controller('ChildrenCtrl', ['$scope', function($scope) {
+    $scope.childAction = function() {
+      $scope.someModel.someValue = 'hello human, from child.';
+    };
+  }])
+  </script>
+ </body>
+</html>
+
+````
+
+
+
 ### 参考资料：
 
 ### ng-repeat
@@ -252,6 +321,8 @@ var app = angular.module('test', [])
 
 
 ### AnguarlarJS introduction
+[AngularJS 应用身份认证的技巧 - Coding 博客](https://blog.coding.net/blog/techniques-for-authentication-in-angular-js-applications)
+[七步从Angular.JS菜鸟到专家（2）：Scopes - 博客 - 伯乐在线](http://blog.jobbole.com/48593/)
 [AngularJS学习笔记 - 进出自由,我的分享](http://www.zouyesheng.com/angular.html)
 [How AngularJS implements dirty checking ](http://ryanclark.me/how-angularjs-implements-dirty-checking)
 [彻底弄懂AngularJS中的transclusion - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/Using-Angular-to-develop-web-application-completely-understand-AngularJS-transclusion)
@@ -280,4 +351,3 @@ if ( !-[1,] ) {
 
 
 ````
-因为
