@@ -53,7 +53,7 @@ description:
 [Feenans Blog- 译 深入理解ng里的scope-程序人生](http://www.ifeenan.com/angularjs/2014-08-19-%5B%E8%AF%91%5D%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3NG%E9%87%8C%E7%9A%84scope/)
 
 
-#### usred
+#### use
 [【译】《精通使用AngularJS开发Web App》（一）](https://github.com/dolymood/AngularLearing)
 
 ### CSS3
