@@ -18,6 +18,19 @@ description:
 7. [亚巴逊首页分类导航菜单触发区域控制原理窥视](http://www.cnblogs.com/mcmurphy/p/3338669.html)
 8. [关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
 
+## λ
+[类型系統](https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1)
+[FunctionalProgrammingForTheRestOfUs](https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn/blob/master/FunctionalProgrammingForTheRestOfUs.cn.md)
+[函数式编程](http://coolshell.cn/articles/10822.html)
+[函数式编程（Functional Programming）相比面向对象编程（Object-oriented Programming）有哪些优缺点？](http://www.zhihu.com/question/19732025)
+[JavaScript小特性(6)——函数式编程](http://rolfzhang.com/articles/793.html)
+[Underscore ](http://www.bootcss.com/p/underscore/)
+
+## Compute
+[程序员必读书单 1.0](http://lucida.me/blog/developer-reading-list/)
+[Taxonomy of Programming Errors](http://zh.lucida.me/blog/on-programming-errors-1/)
+[逃出你的肖申克（六）：看不见的牢笼（下）：柏拉图的洞穴](http://mindhacks.cn/2015/01/27/escape-from-your-shawshank-part5-2-platos-cave/)
+
 ### JavaScript
 [JS能力测评经典题_牛客网](http://www.nowcoder.com/ta/js-assessment)
 [Javascript 中两种向下取整方法执行时间比较 - Programming](http://blog.oglen.net/?action=post&mask=c9c4d7c4)
