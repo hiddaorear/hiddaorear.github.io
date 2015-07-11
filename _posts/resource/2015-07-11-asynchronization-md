@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  asynchronization(1)
+title:  Behavior tree(1)
 category: 资源
-tags: [JavaScript ansychronization]
-keywords: asynchronization(1)
+tags: [AI]
+keywords: behavior tree 
 description: 
 ---
 
