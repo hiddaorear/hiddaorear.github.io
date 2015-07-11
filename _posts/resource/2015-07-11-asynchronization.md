@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  Behavior tree(1)
+title:  Monad(1)
 category: 资源
-tags: [AI]
-keywords: behavior tree 
+tags: [monad, group]
+keywords: monad 
 description: 
 ---
 
-###  asynchronization(1)
+###  Monad(1)
 
 #### Saturday, 11 July 2015
 
