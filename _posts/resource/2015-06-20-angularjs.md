@@ -336,6 +336,16 @@ var app = angular.module('test', [])
 [表单控件 | AngularJS学习笔记](http://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter7/7-5.html)
 [如何在AngularJS指令中创建controller与ngModel进行交互 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/Using-Angular-to-develop-web-application-to-AngularJS-instruction-to-create-controller-interacts-with-ngModel)
 
+
+### AngularJS优化
+[AngularJS性能优化心得 · Issue #5 · atian25/blog](https://github.com/atian25/blog/issues/5)
+
+### AngularJS Parse
+[MVVM大比拼之vue.js源码精析 - 侯振宇 - 博客园](http://www.cnblogs.com/sskyy/p/3695003.html)
+[MVVM大比拼之AngularJS源码精析 - 侯振宇 - 博客园](http://www.cnblogs.com/sskyy/p/3709649.html)
+[angularjs - "Computed Properties" in Angular.js - Stack Overflow](http://stackoverflow.com/questions/11216651/computed-properties-in-angular-js)
+
+
 hid say: 后端的思维。
 
 Tips:

@@ -27,7 +27,24 @@ G为非空集合，如果在G上定义了二元运算*,满足
 如果仅满足Closure和Associativity，则称G是一个半群(Semigroup);
 如果Semigroup有Identity，则称G是一个Monoid(幺半群);
 
+### 异步
+异步函数调用与普通函数调用的本质区别是，异步函数调用将函数的执行分为两个阶段：
+1. 未执行完；
+2. 执行完；
+因此，只要能实现这两种状态转换时的函数调用，本质上等价于异步函数调用。
 
+异步实现的五种形式:
+1. Callback;
+2. Event;
+3. Observer Pattern;
+4. Promise;
+5. Generator;
+
+Callback以函数栈，实现当前函数执行完毕，立即执行回调函数；
+事件与观察者模式，以信号传递区分了事件发生前与事件发生后，两个状态，并监听事件执行下一个状态的函数；
+Promise,通过简单的状态机（两种状态，成功与失败），将横向的回调形式，变换为竖向的形式；
+Generator将函数的状态增加，函数原只有两个状态，调用与执行完毕。而Generator的yiel可以暂停函数的执行，并转移控制权；
+由于Generator的迭代器可以返回值与传值，非常方便错误的处理与函数间的传值，天生就适合来处理异步。
 
 ### 参考资料
 
@@ -63,5 +80,18 @@ G为非空集合，如果在G上定义了二元运算*,满足
 
 ### Coroutine
 [协程的好处是什么？ - 知乎](http://www.zhihu.com/question/20511233)
+
+
+### Generator
+[Generator与异步编程](http://www.infoq.com/cn/articles/generator-and-asynchronous-programming)
+[Generator 函数的含义与用法 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2015/04/generator.html)
+[Thunk 函数的含义和用法 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2015/05/thunk.html)
+[Functional JavaScript Mini Book](http://blog.oyanglul.us/javascript/functional-javascript.html#sec-2-2)
+[Iterator和for...of循环 - ECMAScript 6入门](http://es6.ruanyifeng.com/#docs/iterator)
+[异步编程之Generator（1）：领略魅力 - FED社区](http://frontenddev.org/link/asynchronous-programming-of-the-generator-1-enjoy-charm.html)
+[异步编程之Generator（2）：剖析特性 - FED社区](http://frontenddev.org/link/the-generator-of-asynchronous-programming-2-analyze-the-characteristics.html)
+[异步编程之co：源码分析 - FED社区](http://frontenddev.org/link/co-of-asynchronous-programming-source-code-analysis.html)
+[Javascript Generator - 函数式编程 - Javascript核心 - SegmentFault](http://segmentfault.com/a/1190000000515173)
+
 
 hid say: 寻本溯源
