@@ -25,6 +25,7 @@ description:
 [函数式编程（Functional Programming）相比面向对象编程（Object-oriented Programming）有哪些优缺点？](http://www.zhihu.com/question/19732025)
 [JavaScript小特性(6)——函数式编程](http://rolfzhang.com/articles/793.html)
 [Underscore ](http://www.bootcss.com/p/underscore/)
+[另一本魔法书: EOPL](http://cyukang.com/2014/03/29/eopl.html)
 
 ## Compute
 [程序员必读书单 1.0](http://lucida.me/blog/developer-reading-list/)
