@@ -37,6 +37,9 @@ description:
 [Javascript 中两种向下取整方法执行时间比较 - Programming](http://blog.oglen.net/?action=post&mask=c9c4d7c4)
 [JavaScript 位操作符 - PandaCafe](http://pandacafe.net/blog/694)
 
+### JavaScript list
+[好JSER](http://hao.jser.com/)
+
 ### Array
 [JavaScript-在javascript中关于数组和对象深拷贝和浅拷贝最优的方法都有那些？ - 德问:编程社交问答](http://www.dewen.io/q/8695/%E5%9C%A8javascript%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%9C%80%E4%BC%98%E7%9A%84%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F)
 
@@ -66,6 +69,9 @@ description:
 [理解AngularJS的作用域Scope | AngularJS中文社区](http://www.angularjs.cn/A09C)
 [Feenans Blog- 译 深入理解ng里的scope-程序人生](http://www.ifeenan.com/angularjs/2014-08-19-%5B%E8%AF%91%5D%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3NG%E9%87%8C%E7%9A%84scope/)
 
+### input
+[angularjs学习笔记—指令input](http://segmentfault.com/a/1190000002632671)
+[走进AngularJs(二) ng模板中常用指令的使用方式](http://www.cnblogs.com/lvdabao/p/3379659.html)
 
 #### use
 [【译】《精通使用AngularJS开发Web App》（一）](https://github.com/dolymood/AngularLearing)
@@ -75,6 +81,9 @@ description:
 [CSS遮罩——如何在CSS中使用遮罩 | css3教程-css3实例-css3动画 | W3CPlus](http://www.w3cplus.com/css3/css-masking.html)
 [CSS3那些不为人知的高级属性 - radom - 博客园](http://www.cnblogs.com/radom/archive/2012/04/19/2457356.html)
 [用 -webkit-mask-image 解决 border-radius 元素对应用了 transform 的子元素 overflow:hidden 失败的 BUG (WebKit). - mc-zone - 前端乱炖:](http://www.cnblogs.com/radom/archive/2012/04/19/2457356.html)
+
+### HTML5
+[H5fullscreenpage.js](http://lvming6816077.github.io/H5FullscreenPage/)
 
 ### web
 [windows下的host文件在哪里，有什么作用? - 上善若水，水善利万物而不争](http://blog.csdn.net/xifeijian/article/details/15660185)
