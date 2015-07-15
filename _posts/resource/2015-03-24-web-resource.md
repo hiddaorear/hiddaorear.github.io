@@ -36,9 +36,11 @@ description:
 [JS能力测评经典题_牛客网](http://www.nowcoder.com/ta/js-assessment)
 [Javascript 中两种向下取整方法执行时间比较 - Programming](http://blog.oglen.net/?action=post&mask=c9c4d7c4)
 [JavaScript 位操作符 - PandaCafe](http://pandacafe.net/blog/694)
+[JavaScript语句后应该加分号么？](http://hax.iteye.com/blog/1563585)
 
 ### JavaScript list
 [好JSER](http://hao.jser.com/)
+
 
 ### Array
 [JavaScript-在javascript中关于数组和对象深拷贝和浅拷贝最优的方法都有那些？ - 德问:编程社交问答](http://www.dewen.io/q/8695/%E5%9C%A8javascript%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%9C%80%E4%BC%98%E7%9A%84%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F)
@@ -72,9 +74,11 @@ description:
 ### input
 [angularjs学习笔记—指令input](http://segmentfault.com/a/1190000002632671)
 [走进AngularJs(二) ng模板中常用指令的使用方式](http://www.cnblogs.com/lvdabao/p/3379659.html)
+[AngularJS 1.3改进了HTML表单](http://www.infoq.com/cn/news/2014/09/angular-13-html-forms)
 
 #### use
 [【译】《精通使用AngularJS开发Web App》（一）](https://github.com/dolymood/AngularLearing)
+[存储浏览记录实现返回操作](http://www.w3cscript.com/Angular/2014-11-26/12.html)
 
 ### CSS3
 [太棒了！mask 轻松构建炫酷CSS探照特效！ | 前端实例-css3实例-jquery实例 | W3CPlus](http://www.w3cplus.com/demo/681.html)
