@@ -11,7 +11,7 @@ description:
 
 #### Saturday, 11 July 2015
 
-![齐白石](/../../assets/img/resource/2015/qibaishi_21.jpg)
+![齐白石](/../../assets/img/resource/2015/qibaishi_22.jpg)
 
 > Monad不就是自函子范畴上的幺半群，这有什么难理解的。
   --Phillip Wadler
