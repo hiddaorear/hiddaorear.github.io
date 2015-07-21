@@ -18,6 +18,10 @@ description:
 7. [亚巴逊首页分类导航菜单触发区域控制原理窥视](http://www.cnblogs.com/mcmurphy/p/3338669.html)
 8. [关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
 
+### Feed mind
+[The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
+
+
 ## λ
 [类型系統](https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1)
 [FunctionalProgrammingForTheRestOfUs](https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn/blob/master/FunctionalProgrammingForTheRestOfUs.cn.md)
