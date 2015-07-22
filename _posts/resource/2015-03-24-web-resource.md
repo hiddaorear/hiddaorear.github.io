@@ -128,8 +128,13 @@ description:
 [所谓正则表达式的技巧](http://tao.logdown.com/posts/244260-tips-for-so-called-regular-expressions)
 [正则表达式解题经验谈](http://www.luanxiang.org/blog/archives/984.html)
 
+[NFA引擎匹配原理](http://blog.csdn.net/lxcnn/article/details/4304651)
+[环视(Lookaround)](http://blog.csdn.net/lxcnn/article/details/4304754)
+[正则基础之——小数点](http://blog.csdn.net/lxcnn/article/details/4284817)
+[正则表达式学习参考](http://blog.csdn.net/lxcnn/article/details/4268033)
 
-### CSS
+
+### icon
 [iconfont](http://www.iconfont.cn/)
 [icomoon](https://icomoon.io/)
 [fontello](http://fontello.com/)
