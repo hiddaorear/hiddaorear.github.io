@@ -46,6 +46,7 @@ description:
 ### JavaScript list
 [好JSER](http://hao.jser.com/)
 [四种常见的 POST 提交数据方式 | JerryQu 的小站](http://imququ.com/post/four-ways-to-post-data-in-http.html)
+[完全理解jQuery源代码，在前端方面算什么水平？](http://www.zhihu.com/question/20521802)
 
 ### Array
 [JavaScript-在javascript中关于数组和对象深拷贝和浅拷贝最优的方法都有那些？ - 德问:编程社交问答](http://www.dewen.io/q/8695/%E5%9C%A8javascript%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%9C%80%E4%BC%98%E7%9A%84%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F)
@@ -118,6 +119,10 @@ description:
 
 ### C
 [Linux C编程一站式学习](http://akaedu.github.io/book/index.html)
+
+### 正则
+[正则表达式（四）：正则表达式的与或非](http://www.infoq.com/cn/news/2011/04/regular-expressions-4)
+[javascript正则表达式](http://www.cnblogs.com/rubylouvre/archive/2010/03/09/1681222.html)
 
 hid say: 陆陆续续收集了很多资料，但几乎没有深入阅读。那些在项目中用了资料还好，没有用过的几乎都是浅阅读。其实深阅读可以解决很多事情，可以节省很多时间，但是浮躁是知识之大敌，致使时间就这么白白流失了，多么可惜呀！
 
