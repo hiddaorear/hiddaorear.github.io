@@ -58,6 +58,23 @@ description:
 
 NAF的匹配过程的要义在于回溯，特别是在有匹配量词的情况下，匹配过程中匹配不成功，会回溯以前的备用状态。想起了BackTrack Linux，“The quieter you become, the more you are able to hear...”
 
+### 匹配的方向
+
+贪婪匹配：
+表示方法： 简单量词都是贪婪匹配。(`?, *, +`)
+描述：贪婪模式是先匹配整个字符串，相当于从右到左的匹配。匹配原则类似在正则表达式末尾加上`$`，如果匹配失败，则去掉末尾，回溯，直到匹配成功。如果是全局匹配，匹配成功之后可以在此基础上继续进行匹配操作。
+
+`/.*reg/`会匹配aa之前的所有字符，而不仅仅是reg之前第一个，`/.*?reg/`则只匹配reg之前第一个。
+贪婪模式开启全局与不开启全局，结果以i杨，以为非贪婪模式就是贪婪到底，与全局匹配要匹配多次一样。
+而惰性模式则不一样。
+
+`'abcdefg'.replace(/[a-z]+?/g, '0')` => '0000000'
+`'abcdefg'.replace(/[a-z]+?/, '0')` => '0bcdefg'
+
+惰性匹配：
+表示方法： 在量词后面添加`?`, `??, *?, +?`
+描述：惰性匹配与贪婪匹配相反，是从左到右的匹配。先匹配第一字符，如果匹配失败，则增加一个字符，直到匹配成功。
+
 
 ![正则指引](/../../assets/img/tech/2015/RegularExpression_0.png)
 
@@ -169,6 +186,7 @@ var FormatNum = function(num) {
 
 ### 参考资料
 
+[js中贪婪和惰性匹配](http://www.cnblogs.com/zera/archive/2013/01/14/2860121.html)
 [正则基础之——环视](http://blog.csdn.net/lxcnn/article/details/4304754)
 [正则表达式 - 维基百科，自由的百科全书](http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F)
 [领域专用语言(DSL)迷思](http://www.infoq.com/cn/articles/dsl-discussion)
