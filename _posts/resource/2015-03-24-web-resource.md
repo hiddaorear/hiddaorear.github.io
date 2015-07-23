@@ -18,6 +18,13 @@ description:
 7. [亚巴逊首页分类导航菜单触发区域控制原理窥视](http://www.cnblogs.com/mcmurphy/p/3338669.html)
 8. [关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
 
+
+### Blog
+[K.I.S.S](https://bigeagle.me/)
+[Rei](http://chloerei.com/)
+
+
+
 ### Feed mind
 [The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
 
