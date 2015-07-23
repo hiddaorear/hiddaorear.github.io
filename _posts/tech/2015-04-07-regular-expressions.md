@@ -83,7 +83,7 @@ description:
 //逗号分隔整数位，小数不够两位的自动补齐。
 
 //不考虑小数点
-'12345678'.replace(/(\d{1})(?=(\d{3})+$)/, function(s) {
+'12345678'.replace(/(\d{1})(?=(\d{3})+(\.|$))/, function(s) {
   return s + ','
 })
 
@@ -95,7 +95,7 @@ description:
 ````javascript
 
 var FormatNum = function(num) {
-  var _reg = /(\d)(?=(\d{3}+(?!\d)))/g
+  var _reg = /(\d)(?=(\d{3}+(\.|$)))/g
   if ((num typeof num) && (num.indexOf('.') === -1)) {
     num = num.replace(_reg, ',') + '.00'
   } else {
@@ -152,6 +152,8 @@ var FormatNum = function(num) {
 
 
 ### 参考资料
+
+[正则基础之——环视](http://blog.csdn.net/lxcnn/article/details/4304754)
 [正则表达式 - 维基百科，自由的百科全书](http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F)
 [领域专用语言(DSL)迷思](http://www.infoq.com/cn/articles/dsl-discussion)
 
