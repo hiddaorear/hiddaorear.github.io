@@ -113,6 +113,43 @@ var formatNum = function(num) {
 
 ````
 
+循环实现：
+
+````javascript
+
+var FormatNum = function(num) {
+  var _num = ''
+      ,i = 0
+      ,l = 0
+      ;
+  
+  if (num.indexOf('.') === -1) {
+    l = num.length
+    i = l
+    for (; i > 0; i--) {
+      if (i !== 0 && i % 3 === 0) {
+        _num = num[i] + ',' + _num
+      } else {
+        _num = num[i] + _num
+      }
+    }
+    return _num + '.00'
+  } else {
+    l = num.indexOf('.') -1
+    i = l
+    for (; i > 0; i--) {
+      if (i !== 0 && i % 3 === 0) {
+        _num = num[i] + ',' + _num
+      } else {
+        _num = num[i] + _num
+      }
+    }
+    return _num + (num + '00').substr(num.indexOf('.'), 2)
+  }
+} 
+
+````
+
 
 ### 参考资料
 [正则表达式 - 维基百科，自由的百科全书](http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F)
