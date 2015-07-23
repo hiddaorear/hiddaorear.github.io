@@ -74,7 +74,7 @@ description:
 
 ### 正则实战(1)
 
-[将一般的数值转换为金额格式（分隔千分位和自动增加小数点）](http://www.cnblogs.com/mofish/p/3188203.html)
+参考：[将一般的数值转换为金额格式（分隔千分位和自动增加小数点）](http://www.cnblogs.com/mofish/p/3188203.html)
 有改动，简化程序。
 
 ````javascript
@@ -89,6 +89,30 @@ description:
 
 // => 12,345,678
 ````
+
+考虑小数情况，使用正则实现：
+
+````javascript
+
+var formatNum = function(num) {
+  var _reg = /(\d)(?=(\d{3}+(?!\d)))/g
+  if ((num typeof num) && (num.indexOf('.') === -1)) {
+    num = num.replace(_reg, ',') + '.00'
+  } else {
+     var _num_array = num.split('.')
+     var _num_int = _num_array[0].repalce(_reg, ',')
+     
+     if (_num_array[1].length === 1) {
+      return _num_int + '.' + _num_array[1] + '0'
+     } else if (_num_array[1].length > 1) {
+      var _decimals = _num_array[1].substr(0, 2)
+      return  _num_int + '.' + _decimals
+     }
+  }
+}
+
+````
+
 
 ### 参考资料
 [正则表达式 - 维基百科，自由的百科全书](http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F)
