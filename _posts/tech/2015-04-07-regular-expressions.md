@@ -94,7 +94,7 @@ description:
 
 ````javascript
 
-var formatNum = function(num) {
+var FormatNum = function(num) {
   var _reg = /(\d)(?=(\d{3}+(?!\d)))/g
   if ((num typeof num) && (num.indexOf('.') === -1)) {
     num = num.replace(_reg, ',') + '.00'
