@@ -20,12 +20,24 @@ description:
 
 
 ### Blog
+
+[当然我在扯淡](http://www.yinwang.org/)
+[Chun Tian (binghe) - 冰河 - 网易博客](http://tianchunbinghe.blog.163.com/)
+乱象，印迹](http://www.luanxiang.org/blog/)
+[4G spaces](http://blog.youxu.info/)
+[backup](http://yinwang0.lofter.com/)
 [K.I.S.S](https://bigeagle.me/)
 [Rei](http://chloerei.com/)
+[陈钢的博客 » 脊髓型颈椎病手术实历](http://blog.yikuyiku.com/?p=3780)
+[JerryQu 的小站](http://imququ.com/)
 
 ### 社区
-[Campo](http://codecampo.com/)
 
+[Campo](http://codecampo.com/)
+[Hacker News](https://news.ycombinator.com/news)
+[所有专栏文章 - Div.IO](http://div.io/pro/index)
+[首页 - w3ctech - 中国最大的前端技术社区](http://www.w3ctech.com/)
+[SaltTiger | 每天一本编程书，每天进步一点点](http://www.salttiger.com/)
 
 ### Feed mind
 [The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
