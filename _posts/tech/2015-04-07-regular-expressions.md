@@ -186,6 +186,7 @@ var FormatNum = function(num) {
 
 ### 参考资料
 
+[JS正则](https://www.gitbook.com/book/longze/javascript-regexp/details)
 [js中贪婪和惰性匹配](http://www.cnblogs.com/zera/archive/2013/01/14/2860121.html)
 [正则基础之——环视](http://blog.csdn.net/lxcnn/article/details/4304754)
 [正则表达式 - 维基百科，自由的百科全书](http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F)
