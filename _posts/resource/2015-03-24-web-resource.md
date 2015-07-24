@@ -30,6 +30,7 @@ description:
 [Rei](http://chloerei.com/)
 [陈钢的博客 » 脊髓型颈椎病手术实历](http://blog.yikuyiku.com/?p=3780)
 [JerryQu 的小站](http://imququ.com/)
+[负暄琐话 - 博客频道 - CSDN.NET](http://blog.csdn.net/g9yuayon)
 
 ### 社区
 
@@ -43,6 +44,13 @@ description:
 ### Feed mind
 [The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
 
+### 安全
+[EVILCOS | 以黑客那种邪气看待世界 By 余弦](http://evilcos.me/)
+[那些曾经大名鼎鼎的黑客现在都在干什么？ ](http://www.zhihu.com/question/31425611)
+
+
+### Python
+[量化分析师的Python日记【第1天：谁来给我讲讲Python？](https://uqer.io/community/share/54c89443f9f06c276f651a52)
 
 ## λ
 [类型系統](https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1)
@@ -64,6 +72,12 @@ description:
 [JavaScript 位操作符 - PandaCafe](http://pandacafe.net/blog/694)
 [JavaScript语句后应该加分号么？](http://hax.iteye.com/blog/1563585)
 [HTML5设计原理_知识库_博客园](http://kb.cnblogs.com/page/79308/)
+
+### JavaScript 深入
+[JavaScript核心](http://weizhifeng.net/javascript-the-core.html)
+[JavaScript对象模型-执行模型 - riccc - 博客园](http://www.cnblogs.com/RicCC/archive/2008/02/15/JavaScript-Object-Model-Execution-Model.html)
+[理解Javascript_13_执行模型详解 - 笨蛋的座右铭 - 博客园](http://www.cnblogs.com/fool/archive/2010/10/19/1855266.html)
+
 
 ### JavaScript list
 [好JSER](http://hao.jser.com/)
