@@ -23,7 +23,7 @@ description:
 
 [当然我在扯淡](http://www.yinwang.org/)
 [Chun Tian (binghe) - 冰河 - 网易博客](http://tianchunbinghe.blog.163.com/)
-乱象，印迹](http://www.luanxiang.org/blog/)
+[乱象，印迹](http://www.luanxiang.org/blog/)
 [4G spaces](http://blog.youxu.info/)
 [backup](http://yinwang0.lofter.com/)
 [K.I.S.S](https://bigeagle.me/)
