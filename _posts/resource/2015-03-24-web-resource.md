@@ -50,7 +50,7 @@ description:
 
 
 ### Python
-[量化分析师的Python日记【第1天：谁来给我讲讲Python？](https://uqer.io/community/share/54c89443f9f06c276f651a52)
+[量化分析师的Python日记 第1天：谁来给我讲讲Python？](https://uqer.io/community/share/54c89443f9f06c276f651a52)
 
 ## λ
 [类型系統](https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1)
