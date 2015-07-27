@@ -47,7 +47,7 @@ description:
 ### 安全
 [EVILCOS | 以黑客那种邪气看待世界 By 余弦](http://evilcos.me/)
 [那些曾经大名鼎鼎的黑客现在都在干什么？ ](http://www.zhihu.com/question/31425611)
-
+[最严肃的安全原创平台](http://drops.wooyun.org/)
 
 ### Python
 [量化分析师的Python日记 第1天：谁来给我讲讲Python？](https://uqer.io/community/share/54c89443f9f06c276f651a52)
