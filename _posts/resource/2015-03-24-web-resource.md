@@ -77,7 +77,7 @@ description:
 [JavaScript核心](http://weizhifeng.net/javascript-the-core.html)
 [JavaScript对象模型-执行模型 - riccc - 博客园](http://www.cnblogs.com/RicCC/archive/2008/02/15/JavaScript-Object-Model-Execution-Model.html)
 [理解Javascript_13_执行模型详解 - 笨蛋的座右铭 - 博客园](http://www.cnblogs.com/fool/archive/2010/10/19/1855266.html)
-
+[关于闭包及变量回收问题](http://otakustay.com/about-closure-and-gc/)
 
 ### JavaScript list
 [好JSER](http://hao.jser.com/)
