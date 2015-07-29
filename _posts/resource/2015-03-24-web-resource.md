@@ -126,6 +126,11 @@ description:
 [【译】《精通使用AngularJS开发Web App》（一）](https://github.com/dolymood/AngularLearing)
 [存储浏览记录实现返回操作](http://www.w3cscript.com/Angular/2014-11-26/12.html)
 
+### 前端优化
+[关于大型网站技术演进的思考（二十一）--网站静态化处理—web前端优化—下【终篇】（13）](http://www.cnblogs.com/sharpxiajun/p/4319444.html)
+[探真无阻塞加载javascript脚本技术，我们会发现很多意想不到的秘密](http://www.cnblogs.com/sharpxiajun/p/4072396.html)
+[为什么很多网站的静态资源会使用独立的域名](http://www.zhihu.com/question/20534662)
+
 ### CSS3
 [太棒了！mask 轻松构建炫酷CSS探照特效！ | 前端实例-css3实例-jquery实例 | W3CPlus](http://www.w3cplus.com/demo/681.html)
 [CSS遮罩——如何在CSS中使用遮罩 | css3教程-css3实例-css3动画 | W3CPlus](http://www.w3cplus.com/css3/css-masking.html)
