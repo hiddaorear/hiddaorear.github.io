@@ -7,17 +7,6 @@ keywords: JavaScript
 description: 
 ---
 
-### 2013
-
-1. [程序员博客墙](http://blogwall.us/)
-2. [JavaScript动画漫谈](https://www.imququ.com/post/js-animation.html)
-3. [使用面向对象的技术创建高级 Web 应用程序](https://msdn.microsoft.com/zh-cn/magazine/cc163419.aspx)
-4. [CodePen](http://codepen.io/)
-5. [通过javascript操作CSS3属性实现动画](http://www.cnblogs.com/rubylouvre/archive/2011/09/07/2169159.html)
-6. [亚马逊左侧菜单延迟z三角 jquery插件jquery.menu-aim.js源码解读](http://www.cnblogs.com/qianlegeqian/p/4100164.html)
-7. [亚巴逊首页分类导航菜单触发区域控制原理窥视](http://www.cnblogs.com/mcmurphy/p/3338669.html)
-8. [关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
-
 
 ### Blog
 
@@ -31,6 +20,10 @@ description:
 [陈钢的博客 » 脊髓型颈椎病手术实历](http://blog.yikuyiku.com/?p=3780)
 [JerryQu 的小站](http://imququ.com/)
 [负暄琐话 - 博客频道 - CSDN.NET](http://blog.csdn.net/g9yuayon)
+[咀嚼之味](http://jerryzou.com/)
+[学无止境@一点一滴 | 一切思考，都将在此记录](http://www.gtdstudy.com/)
+
+[程序员博客墙](http://blogwall.us/)
 
 ### 社区
 
@@ -68,6 +61,7 @@ description:
 [程序员必读书单 1.0](http://lucida.me/blog/developer-reading-list/)
 [Taxonomy of Programming Errors](http://zh.lucida.me/blog/on-programming-errors-1/)
 [逃出你的肖申克（六）：看不见的牢笼（下）：柏拉图的洞穴](http://mindhacks.cn/2015/01/27/escape-from-your-shawshank-part5-2-platos-cave/)
+[关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
 
 ### JavaScript
 [JS能力测评经典题_牛客网](http://www.nowcoder.com/ta/js-assessment)
@@ -81,7 +75,8 @@ description:
 [JavaScript对象模型-执行模型 - riccc - 博客园](http://www.cnblogs.com/RicCC/archive/2008/02/15/JavaScript-Object-Model-Execution-Model.html)
 [理解Javascript_13_执行模型详解 - 笨蛋的座右铭 - 博客园](http://www.cnblogs.com/fool/archive/2010/10/19/1855266.html)
 [关于闭包及变量回收问题](http://otakustay.com/about-closure-and-gc/)
-
+ [使用面向对象的技术创建高级 Web 应用程序](https://msdn.microsoft.com/zh-cn/magazine/cc163419.aspx)
+ 
 ### JavaScript list
 [好JSER](http://hao.jser.com/)
 [四种常见的 POST 提交数据方式 | JerryQu 的小站](http://imququ.com/post/four-ways-to-post-data-in-http.html)
@@ -90,6 +85,12 @@ description:
 [javascript 操作流——回调的回调](http://www.cnblogs.com/rubylouvre/archive/2011/11/22/2258230.html)
 [node.js 一个简单的页面输出](http://www.cnblogs.com/rubylouvre/archive/2011/11/20/2255083.html)
 [原生nodejs 学习笔记1](http://www.cnblogs.com/rubylouvre/p/4344301.html)
+[JavaScript动画漫谈](https://www.imququ.com/post/js-animation.html)
+
+[CodePen](http://codepen.io/)
+[通过javascript操作CSS3属性实现动画](http://www.cnblogs.com/rubylouvre/archive/2011/09/07/2169159.html)
+[亚马逊左侧菜单延迟z三角 jquery插件jquery.menu-aim.js源码解读](http://www.cnblogs.com/qianlegeqian/p/4100164.html)
+[亚巴逊首页分类导航菜单触发区域控制原理窥视](http://www.cnblogs.com/mcmurphy/p/3338669.html)
 
 ### Array
 [JavaScript-在javascript中关于数组和对象深拷贝和浅拷贝最优的方法都有那些？ - 德问:编程社交问答](http://www.dewen.io/q/8695/%E5%9C%A8javascript%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%95%B0%E7%BB%84%E5%92%8C%E5%AF%B9%E8%B1%A1%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E6%9C%80%E4%BC%98%E7%9A%84%E6%96%B9%E6%B3%95%E9%83%BD%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F)
@@ -153,6 +154,7 @@ description:
 ### web
 [windows下的host文件在哪里，有什么作用? - 上善若水，水善利万物而不争](http://blog.csdn.net/xifeijian/article/details/15660185)
 
+
 ### performance
 [奇趣百科性能优化(Chrome DevTools 中的 Timeline Profils 等工具使用介绍) ](https://xinranliu.me/2015-05-22-qiqu-performance/)
 
@@ -167,10 +169,6 @@ description:
 
 ### Vim
 [分类 Vim 下的文章 - 無標題文檔](http://www.gracecode.com/category/Vim/)
-
-### Blog
-[学无止境@一点一滴 | 一切思考，都将在此记录](http://www.gtdstudy.com/)
-
 
 ### C
 [Linux C编程一站式学习](http://akaedu.github.io/book/index.html)
