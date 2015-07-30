@@ -44,6 +44,9 @@ description:
 ### Feed mind
 [The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
 
+### Linux
+[CS Slayer](https://www.csslayer.info/wordpress/)
+
 ### 安全
 [EVILCOS | 以黑客那种邪气看待世界 By 余弦](http://evilcos.me/)
 [那些曾经大名鼎鼎的黑客现在都在干什么？ ](http://www.zhihu.com/question/31425611)
