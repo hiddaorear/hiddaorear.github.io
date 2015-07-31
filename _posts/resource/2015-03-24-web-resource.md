@@ -76,6 +76,11 @@ description:
 [理解Javascript_13_执行模型详解 - 笨蛋的座右铭 - 博客园](http://www.cnblogs.com/fool/archive/2010/10/19/1855266.html)
 [关于闭包及变量回收问题](http://otakustay.com/about-closure-and-gc/)
  [使用面向对象的技术创建高级 Web 应用程序](https://msdn.microsoft.com/zh-cn/magazine/cc163419.aspx)
+ [Generator 函数的含义与用法](http://www.ruanyifeng.com/blog/2015/04/generator.html)
+ [有意思的Io语言](http://tchen.me/posts/2013-01-06-io-lang.html)
+ [JavaScript 中的一些坑](http://roshanca.com/2012/traps-in-javascript-part-I/)
+ [js函数式编程风格](https://www.zybuluo.com/llqintel/note/52059)
+ [傻瓜函数式编程](https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn/blob/master/FunctionalProgrammingForTheRestOfUs.cn.md)
  
 ### JavaScript list
 [好JSER](http://hao.jser.com/)
@@ -190,6 +195,9 @@ description:
 [iconfont](http://www.iconfont.cn/)
 [icomoon](https://icomoon.io/)
 [fontello](http://fontello.com/)
+
+### 工作
+[程序员如何要薪水以及为什么前端程序员应该拿高薪](http://www.douban.com/note/498091227/)
 
 hid say: 陆陆续续收集了很多资料，但几乎没有深入阅读。那些在项目中用了资料还好，没有用过的几乎都是浅阅读。其实深阅读可以解决很多事情，可以节省很多时间，但是浮躁是知识之大敌，致使时间就这么白白流失了，多么可惜呀！
 
