@@ -143,6 +143,19 @@ description:
 ### 前端小技巧
 [JS打开新窗口防止被浏览器阻止的方法](http://www.raybus.com/bbs/redirect.php?fid=95&tid=9426&goto=nextoldset)
 
+### JavaScript异步
+[JavaScript可否多线程? 深入理解JavaScript定时机制](http://www.phpv.net/html/1700.html)
+[JavaScript 工作线程实现方式](http://www.ibm.com/developerworks/cn/web/1105_chengfu_jsworker/)
+[深入理解node.js异步编程：基础篇](https://cnodejs.org/topic/533d6edbc2621e680800e0ea)
+[JavaScript 异步编程](http://blog.inching.org/2014/05/27/javascript-asynchronous/)
+[Javascript中的单线程以及定时机制](http://www.benben.cc/blog/?p=327)
+[Understanding node.js](http://debuggable.com/posts/understanding-node-js:4bd98440-45e4-4a9a-8ef7-0f7ecbdd56cb)
+
+### 调试技巧
+[chrome developer tool 调试技巧](http://ued.taobao.org/blog/2012/06/debug-with-chrome-dev-tool/)
+[有哪些 JS 调试技巧？](http://www.zhihu.com/question/20260762)
+
+
 ### NoSQL
 [The MongoDB 3.0 Manual](http://docs.mongodb.org/manual/)
 [nosqlfan](http://blog.nosqlfan.com/html/3548.html)
