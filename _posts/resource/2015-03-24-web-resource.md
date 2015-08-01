@@ -151,6 +151,16 @@ description:
 [Javascript中的单线程以及定时机制](http://www.benben.cc/blog/?p=327)
 [Understanding node.js](http://debuggable.com/posts/understanding-node-js:4bd98440-45e4-4a9a-8ef7-0f7ecbdd56cb)
 
+### 安全
+[安全工具箱](https://info.securityinabox.org/zh)
+[同源策略——浏览器的安全卫士](http://www.jianshu.com/p/4e17445d66e2)
+[http://div.io/topic/1014](打造双剑合璧的 XSS 前端防火墙)
+[浏览器安全策略说之内容安全策略CSP](http://drops.wooyun.org/tips/1439)
+[window.open为何会被浏览器拦截](http://www.520ued.com/article/5417ef368d31c11e3b0003ff)
+[window.open() 与浏览器阻止弹出窗口](http://www.html-js.com/article/2410)
+[window.open被浏览器拦截的解决方案](http://itindex.net/detail/52877-window.open-%E6%B5%8F%E8%A7%88%E5%99%A8)
+[Eraseme后门分析](http://blog.topsec.com.cn/ad_lab/eraseme%E5%90%8E%E9%97%A8%E5%88%86%E6%9E%90/)
+
 ### 调试技巧
 [chrome developer tool 调试技巧](http://ued.taobao.org/blog/2012/06/debug-with-chrome-dev-tool/)
 [有哪些 JS 调试技巧？](http://www.zhihu.com/question/20260762)
