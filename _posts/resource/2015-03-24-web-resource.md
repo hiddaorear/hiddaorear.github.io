@@ -140,6 +140,9 @@ description:
 [探真无阻塞加载javascript脚本技术，我们会发现很多意想不到的秘密](http://www.cnblogs.com/sharpxiajun/p/4072396.html)
 [为什么很多网站的静态资源会使用独立的域名](http://www.zhihu.com/question/20534662)
 
+### 前端小技巧
+[JS打开新窗口防止被浏览器阻止的方法](http://www.raybus.com/bbs/redirect.php?fid=95&tid=9426&goto=nextoldset)
+
 ### NoSQL
 [The MongoDB 3.0 Manual](http://docs.mongodb.org/manual/)
 [nosqlfan](http://blog.nosqlfan.com/html/3548.html)
