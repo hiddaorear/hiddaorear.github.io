@@ -13,6 +13,24 @@ description:
 
 ![the_garden_of_world_38](/../../assets/img/resource/2015/the_garden_of_world_38.PNG)
 
+### Node
+
+### 1. Node update
+
+You can upgrade your local Node.js with NPM:
+
+````shell
+
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+````
+The n package represents a Node helper, and running the last command upgrades node to the latset stable version. Instead of using "stable", you could specify a desired version: `sudo n 0.8.21`, 
+Once your install is complete, you can confirm you version with another command: `node -v`
+
+[Upgrade Node.js via NPM](http://davidwalsh.name/upgrade-nodejs)
+
 ## HTML
 
 ### 1. HTML5新增标签
