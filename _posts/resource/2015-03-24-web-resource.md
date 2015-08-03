@@ -23,6 +23,8 @@ description:
 [咀嚼之味](http://jerryzou.com/)
 [学无止境@一点一滴 | 一切思考，都将在此记录](http://www.gtdstudy.com/)
 
+[阿里核心系统团队博客](http://csrd.aliapp.com/)
+[美团技术](http://tech.meituan.com/)
 [程序员博客墙](http://blogwall.us/)
 
 ### 社区
