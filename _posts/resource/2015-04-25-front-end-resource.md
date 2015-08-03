@@ -29,7 +29,20 @@ sudo n stable
 The n package represents a Node helper, and running the last command upgrades node to the latset stable version. Instead of using "stable", you could specify a desired version: `sudo n 0.8.21`, 
 Once your install is complete, you can confirm you version with another command: `node -v`
 
+参考资料：
 [Upgrade Node.js via NPM](http://davidwalsh.name/upgrade-nodejs)
+
+### express 
+express4以后不支持命令行，需要安装额外的express-generator。否则`node express project`会报错。且4+的用法是`express project`，去掉了node。
+
+````shell
+
+sudo npm install -g express
+sudo npm install -g express-generator
+
+express -V #大写的V
+
+````
 
 ## HTML
 
