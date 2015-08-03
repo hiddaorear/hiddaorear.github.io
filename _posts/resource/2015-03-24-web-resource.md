@@ -63,6 +63,14 @@ description:
 [逃出你的肖申克（六）：看不见的牢笼（下）：柏拉图的洞穴](http://mindhacks.cn/2015/01/27/escape-from-your-shawshank-part5-2-platos-cave/)
 [关于编程错误的思考](http://zh.lucida.me/blog/on-programming-errors-1/)
 
+### node
+[Node.js知识学习整理](http://mba811.gitbooks.io/node-js-study/content/)
+[原生nodejs 学习笔记1](http://www.cnblogs.com/rubylouvre/p/4344301.html)
+[Node入门](http://nodebeginner.org/index-zh-cn.html)
+[Node.js 究竟是什么？](http://www.ibm.com/developerworks/cn/opensource/os-nodejs/index.html?ca=drs#ibm-pcon)
+[七天学会NodeJS](http://nqdeng.github.io/7-days-nodejs/)
+[N-blog](https://github.com/nswbmw/N-blog/wiki/_pages)
+
 ### JavaScript
 [JS能力测评经典题_牛客网](http://www.nowcoder.com/ta/js-assessment)
 [Javascript 中两种向下取整方法执行时间比较 - Programming](http://blog.oglen.net/?action=post&mask=c9c4d7c4)
