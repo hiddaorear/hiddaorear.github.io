@@ -44,6 +44,11 @@ express -V #大写的V
 
 ````
 
+### node and mongodb
+[A Sample App with Node.js, Express and MongoDB – Part 1](http://blog.ijasoneverett.com/2013/03/a-sample-app-with-node-js-express-and-mongodb-part-1/)
+[NODE.JS TUTORIAL: USING MONGODB](http://blog.modulus.io/mongodb-tutorial)
+[Creating RESTful APIs With NodeJS and MongoDB Tutorial (Part II)](http://adrianmejia.com/blog/2014/10/01/creating-a-restful-api-tutorial-with-nodejs-and-mongodb/)
+
 ## HTML
 
 ### 1. HTML5新增标签
