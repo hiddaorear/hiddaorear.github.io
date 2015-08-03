@@ -83,12 +83,19 @@ description:
 [七天学会NodeJS](http://nqdeng.github.io/7-days-nodejs/)
 [N-blog](https://github.com/nswbmw/N-blog/wiki/_pages)
 
+### node and mongodb
+[Blog rolling with mongoDB, express and Node.js](http://howtonode.org/express-mongodb)
+[Easily Develop Node.js and MongoDB Apps with Mongoose ](https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications)
+[MongoDB的应用 ](http://javascript.ruanyifeng.com/nodejs/mongodb.html)
+
+
 ### JavaScript
 [JS能力测评经典题_牛客网](http://www.nowcoder.com/ta/js-assessment)
 [Javascript 中两种向下取整方法执行时间比较 - Programming](http://blog.oglen.net/?action=post&mask=c9c4d7c4)
 [JavaScript 位操作符 - PandaCafe](http://pandacafe.net/blog/694)
 [JavaScript语句后应该加分号么？](http://hax.iteye.com/blog/1563585)
 [HTML5设计原理_知识库_博客园](http://kb.cnblogs.com/page/79308/)
+[45个实用的JavaScript技巧 ](http://xuyuan923.github.io/2015/01/07/45-useful-javascript-tips/)
 
 ### JavaScript 深入
 [JavaScript核心](http://weizhifeng.net/javascript-the-core.html)
