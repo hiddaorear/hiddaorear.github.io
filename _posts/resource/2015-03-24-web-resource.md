@@ -39,6 +39,10 @@ description:
 ### Feed mind
 [The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
 
+### 人物
+[詹宏志谈学习与阅读](http://www.douban.com/note/348246095/)
+[过早退出是一切失败的根源](http://zhuanlan.zhihu.com/yeka52/20035192)
+
 ### Linux
 [CS Slayer](https://www.csslayer.info/wordpress/)
 
