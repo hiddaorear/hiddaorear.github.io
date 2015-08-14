@@ -46,6 +46,13 @@ description:
 ### Linux
 [CS Slayer](https://www.csslayer.info/wordpress/)
 
+### Python
+[Python教程,廖雪峰](http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
+[华蟒教程.工程](http://wiki.woodpecker.org.cn/moin/March_Liu/PyTutorial)
+[Python 3.3.6 documentation](https://docs.python.org/3.3/index.html)
+[深入 Python :Dive Into Python 中文版](http://woodpecker.org.cn/diveintopython/)
+[Python 3 文档(简体中文) 3.2.2 documentation](http://docspy3zh.readthedocs.org/en/latest/tutorial/appetite.html)
+
 ### 安全
 [EVILCOS | 以黑客那种邪气看待世界 By 余弦](http://evilcos.me/)
 [那些曾经大名鼎鼎的黑客现在都在干什么？ ](http://www.zhihu.com/question/31425611)
