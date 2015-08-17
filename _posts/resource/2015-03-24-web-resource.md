@@ -44,6 +44,7 @@ description:
 ### 人物
 [詹宏志谈学习与阅读](http://www.douban.com/note/348246095/)
 [过早退出是一切失败的根源](http://zhuanlan.zhihu.com/yeka52/20035192)
+[Julian Schwinger的八卦](http://www.douban.com/group/topic/6519949/)
 
 ### Linux
 [CS Slayer](https://www.csslayer.info/wordpress/)
