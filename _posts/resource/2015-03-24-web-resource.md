@@ -45,6 +45,9 @@ description:
 [SaltTiger | 每天一本编程书，每天进步一点点](http://www.salttiger.com/)
 [KDE](http://www.ikde.org/)
 
+### 聚合类站点
+[好东西](http://memect.com/)
+
 ### Feed mind
 [The Case for Slow Programming](https://ventrellathing.wordpress.com/2013/06/18/the-case-for-slow-programming/)
 
