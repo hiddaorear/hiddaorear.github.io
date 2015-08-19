@@ -22,6 +22,7 @@ description:
 [负暄琐话 - 博客频道 - CSDN.NET](http://blog.csdn.net/g9yuayon)
 [咀嚼之味](http://jerryzou.com/)
 [学无止境@一点一滴 | 一切思考，都将在此记录](http://www.gtdstudy.com/)
+[Axb的自我修养](http://blog.2baxb.me/)
 
 [Free Mind](http://blog.pluskid.org/)
 [卢昌海个人主页](http://www.changhai.org/)
@@ -36,6 +37,7 @@ description:
 [justjavac](http://justjavac.com/)
 [风影博客](http://www.chenjunxyf.me/javascriptqi-ji-yin-qiao/)
 
+###
 ### 社区
 
 [Campo](http://codecampo.com/)
@@ -66,6 +68,9 @@ description:
 [Python 3.3.6 documentation](https://docs.python.org/3.3/index.html)
 [深入 Python :Dive Into Python 中文版](http://woodpecker.org.cn/diveintopython/)
 [Python 3 文档(简体中文) 3.2.2 documentation](http://docspy3zh.readthedocs.org/en/latest/tutorial/appetite.html)
+
+### 机器学习
+[机器学习中的相似性度量](http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html)
 
 ### 安全
 [EVILCOS | 以黑客那种邪气看待世界 By 余弦](http://evilcos.me/)
