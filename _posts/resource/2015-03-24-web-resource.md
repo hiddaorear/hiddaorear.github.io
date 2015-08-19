@@ -60,6 +60,7 @@ description:
 [CS Slayer](https://www.csslayer.info/wordpress/)
 
 ### Python
+[深入 Python 3](http://woodpecker.org.cn/diveintopython3/index.html)
 [Python教程,廖雪峰](http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 [华蟒教程.工程](http://wiki.woodpecker.org.cn/moin/March_Liu/PyTutorial)
 [Python 3.3.6 documentation](https://docs.python.org/3.3/index.html)
