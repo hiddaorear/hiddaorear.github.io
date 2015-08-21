@@ -71,6 +71,7 @@ description:
 
 ### 机器学习
 [机器学习中的相似性度量](http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html)
+[我爱自然语言处理](http://www.52nlp.cn/)
 
 ### 安全
 [EVILCOS | 以黑客那种邪气看待世界 By 余弦](http://evilcos.me/)
