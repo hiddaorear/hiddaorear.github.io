@@ -47,6 +47,8 @@ description:
 [SaltTiger | 每天一本编程书，每天进步一点点](http://www.salttiger.com/)
 [KDE](http://www.ikde.org/)
 
+[超理论坛 ](http://chaoli.club/index.php/)
+
 ### 聚合类站点
 [好东西](http://memect.com/)
 
