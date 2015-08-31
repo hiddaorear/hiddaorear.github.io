@@ -72,6 +72,11 @@ description:
 [深入 Python :Dive Into Python 中文版](http://woodpecker.org.cn/diveintopython/)
 [Python 3 文档(简体中文) 3.2.2 documentation](http://docspy3zh.readthedocs.org/en/latest/tutorial/appetite.html)
 
+### Flask
+[欢迎使用 Flask](http://docs.jinkan.org/docs/flask/)
+[Flask大型教程项目](http://www.pythondoc.com/flask-mega-tutorial/index.html)
+[Flask 教程](http://www.oschina.net/translate/the-flask-mega-tutorial-part-i-hello-world)
+
 ### 机器学习
 [机器学习中的相似性度量](http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html)
 [我爱自然语言处理](http://www.52nlp.cn/)
