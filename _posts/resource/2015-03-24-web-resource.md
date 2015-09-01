@@ -23,6 +23,8 @@ description:
 [咀嚼之味](http://jerryzou.com/)
 [学无止境@一点一滴 | 一切思考，都将在此记录](http://www.gtdstudy.com/)
 [Axb的自我修养](http://blog.2baxb.me/)
+[大厨的日常](http://yanyiwu.com/)
+[雷钦的博客](http://blog.leiqin.info/)
 
 [Free Mind](http://blog.pluskid.org/)
 [卢昌海个人主页](http://www.changhai.org/)
