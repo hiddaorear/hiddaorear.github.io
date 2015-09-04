@@ -39,7 +39,7 @@ description:
 [囧克斯这里是勾三股四的新家](http://jiongks.name/)
 [justjavac](http://justjavac.com/)
 [风影博客](http://www.chenjunxyf.me/javascriptqi-ji-yin-qiao/)
-
+[安记](http://annn.me/)
 
 ### 社区
 
@@ -73,6 +73,7 @@ description:
 [Python 3.3.6 documentation](https://docs.python.org/3.3/index.html)
 [深入 Python :Dive Into Python 中文版](http://woodpecker.org.cn/diveintopython/)
 [Python 3 文档(简体中文) 3.2.2 documentation](http://docspy3zh.readthedocs.org/en/latest/tutorial/appetite.html)
+[臭蛋python](http://www.choudan.net/archives.html)
 
 ### Flask
 [欢迎使用 Flask](http://docs.jinkan.org/docs/flask/)
