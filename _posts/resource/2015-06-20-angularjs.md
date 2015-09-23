@@ -15,6 +15,36 @@ description:
 
 AngularJS学习笔记，所参考的原程序有误，均已修正。
 
+### Promise and Http
+
+````javascript
+function getJson(url, params) {
+    var _deferred = $q.defer()
+    $http
+      .get(url, params)
+      .success(function(d) {
+        if (d.ret) {
+          _deferred.resolve(d)
+        } else {
+          _deferred.reject(d)
+        }
+      })
+      .error(function(e) {
+        _deferred.reject(e)
+      })
+      return _deferred.promise
+  }
+
+  getJson(_url, _params)
+    .then(function(d){
+      console.log(d)
+    }
+    , function(e) {
+      console.error(e)
+    })
+
+````
+
 ### Hello Wrold
 
 ````html
