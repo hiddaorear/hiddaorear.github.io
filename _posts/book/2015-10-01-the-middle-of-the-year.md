@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  年中反省
-category: 年中反省
+category: 读书
 tags: [文化]
 keywords:  年中反省
 description: 
