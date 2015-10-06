@@ -13,6 +13,16 @@ description:
 
 ![轻音](/../../assets/img/book/2015/wangxizhi_1.jpg)
 
+> 高手往往都是有很强的系统的基础知识的，表面的东西永远是肤浅的。
+--陈皓
+
+又一次重回C语言，前段时间把Python过了一遍，没有留下什么，当然也没有用来做东西。过了这么这段时间，留下了，对其简洁的惊叹。用Python写的《集体智慧编程》，读着读着，就读不下去了。此外，本来想用Python来写一个完整的网站，或者爬虫，或者界面之类，也没有写成。至此，感觉跟没学差不多。
+
+读C语言，只是想回到计算机的根，看看底层的原理。现在的技术多而杂，特别我所在的领域，真是一年一变，太快了。然而，刨根问底起来，其关键性的想法，都很多年前的旧东西。百川归海，还得到海里去看看，于是该回到C语言了。
+
+C语言中，函数传值只有一种方式，那就传值，而数组这些数据结构，其表现是传址，实质还是传值，不过是指针变量罢了。函数作为计算过程的较为基本的封装，其传值如此，势必是C语言的内存管理的设计原则所决定。对内存的访问，直观而简便的办法，也就是通过地址了。所以作为左值的地址，其重要性不言而喻。
+
+
 > 岳不群课徒极严，众弟子练拳使剑，举手提足间只要稍离了尺寸法度，他便立加纠正，每一个招式总要练得十全十美，没半点错误。
 
 > 那老者道：“唉，蠢才，蠢才！无怪你是岳不群的弟子，拘泥不化，不知变通。剑术之道，讲究如行云流水，任意所至。你使完那招‘白虹贯日’，剑尖向上，难道不会顺势拖下来吗？剑招中虽没这等姿式，难道你不会别出心裁，随手配合么？”
@@ -25,6 +35,11 @@ description:
 
 ### 参考资料
 《Pointers on C》
-
+[如何学好C语言](http://coolshell.cn/articles/4102.html)
+[Cuckoo Filter：设计与实现](http://coolshell.cn/articles/17225.html)
+[Linus：利用二级指针删除单向链表](http://coolshell.cn/articles/8990.html)
+[深入理解C语言](http://coolshell.cn/articles/5761.html)
+[C语言的谜题](http://coolshell.cn/articles/945.html)
+[How do I strengthen my knowledge of data structures and algorithms?](https://www.quora.com/How-do-I-strengthen-my-knowledge-of-data-structures-and-algorithms/answer/Robert-Love-1)
 
 hid say: 编程中的《独孤九剑》。
