@@ -101,7 +101,8 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
 
 [完整例子](http://plnkr.co/edit/gmtcE2?p=preview)
 
-### ui-routes要义
+###  ui-routes要义
+
 $stateProvider是通过“状态”（state）来管理路由。
 - 状态对应页面的ui-view；
 - 状态通过controller,template,view等属性，描述对页面的视图展示和行为；
