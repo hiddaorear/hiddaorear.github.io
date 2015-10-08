@@ -13,6 +13,37 @@ description:
 
 ![齐白石](/../../assets/img/resource/2015/qibaishi_16.jpg)
 
+### ng-options
+
+
+````javascript
+
+app.controller('ExampleCtrl', function($scope) {
+    $scope.items = [
+        {id: 1, name: 'Foo'}
+        ,{id: 2, name: 'Bar'}
+    ]
+    
+    $scope.selectItem = null
+})
+
+````
+
+
+````html
+
+<div ng-controller="ExampleCtrl">
+    <select ng-model="selectedItem" ng-init="selectedItem=1"  ng-options="item.id as item.name for item in items"></select>
+    {{selectedItme | json}}
+</div>
+
+````
+
+ng-options: [value] as [text] for [item] in [items]
+ng-init: selectItme=value
+
+这样，select的`value`,`label`都有值。初始化，设置`value`的值即可。
+
 ### ui-router
 
 ````javascript
