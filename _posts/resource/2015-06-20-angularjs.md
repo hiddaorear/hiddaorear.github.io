@@ -69,6 +69,13 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
 - `data`属性，为所有的子状态或者事件提供自动一数据
 - `onEnter onExit`函数，页面加载或退出是执行
 
+#### $stateparams
+`$stateparams`服务，其作用是解析url中带的参数，可以直接当作对象，访问属性。
+要通过url来传递参数，`state`需要把如此写：`you_ulr/:params_1/:params_2`；
+而页面上，`ui-sref=myapp.you_state({params_1: value_1, paramse_2: value_2})`
+`$stateparms.params_1`即可以获取对应的值。
+
+
 
 AngularJS学习笔记，所参考的原程序有误，均已修正。
 
