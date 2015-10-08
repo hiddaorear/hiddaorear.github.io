@@ -13,6 +13,63 @@ description:
 
 ![齐白石](/../../assets/img/resource/2015/qibaishi_16.jpg)
 
+### ui-router
+
+````javascript
+
+var myapp = angular.module('myapp', ["ui.router"])
+
+myapp.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('', '/contacts/list')
+    $urlRouterProvider.when('/', '/contacts/list')
+    
+    $urlRouterProvider.otherwise('/contacts/list')
+    
+    $stataProvider
+        .state('contacts', {
+            absolute: true
+            ,url: '/contacts'
+            ,templateUrl: 'contacts.html'
+            ,controller: function($scope) {
+                $scope.contacts = [{id: 0, anme: 'Alice'}, {id: 1, name: 'Bod'}]
+            }
+            ,onEnter: function() {
+                console.log('enter contacts')
+            }
+        })
+        .state('contacts.list', {
+            url: '/list'
+            ,templateUrl: 'contacts.list.html'
+            ,onEnter: function() {
+                console.log('enter contacts.list')
+            }
+        })
+        .state('contacts.detail', {
+            url: '/:id'
+            ,templaterUrl: 'contacts.detail.html'
+            ,controller: function($scope, $stateparams) {
+                $scope.person = $scope.contacts[$sateParams.id]
+            }
+            ,onEnter: function() {
+                console.log('enter contacts.detail')
+            }
+        })
+})
+
+
+````
+
+[完整例子](http://plnkr.co/edit/gmtcE2?p=preview)
+
+#### Abstract States使用
+
+- 为所有的子状态提供一个基url
+- 必须设置`templateUrl`属性，子状态对应的模板将插入到父模版中的`ui-view`中
+- `resolve`属性，可以为所有子状态解决依赖项
+- `data`属性，为所有的子状态或者事件提供自动一数据
+- `onEnter onExit`函数，页面加载或退出是执行
+
+
 AngularJS学习笔记，所参考的原程序有误，均已修正。
 
 ### Promise and Http
@@ -337,6 +394,10 @@ var app = angular.module('test', [])
 
 
 ### 参考资料：
+
+### ng-router
+[学习 ui-router - 状态嵌套和视图嵌套](http://bubkoo.com/2014/01/01/angular/ui-router/guide/nested-states%20&%20nested-views/)
+
 
 ### ng-repeat
 [AngularJS源码阅读之ngRepeat](http://loveky.github.io/2014/04/02/angularjsngrepeat/)
