@@ -44,6 +44,15 @@ ng-init: selectItme=value
 
 这样，select的`value`,`label`都有值。初始化，设置`value`的值即可。
 
+AngularJS文档描述：
+- select as label for value in array
+
+ng-options=person.lastName as getPersonFullName(person) for person in peopleArray
+
+this means "user peopleArray as data source, for each item put its value in the person variable, user the result of the getPersonFullName function(with the person parameter) as label in the options of the drop-down list, but set the value of the lastName property of person in the model variable whenever an item is selected in the drop-down list"
+
+[angularjshub-select](http://www.angularjshub.com/examples/forms/select/)
+
 ### ui-router
 
 ````javascript
