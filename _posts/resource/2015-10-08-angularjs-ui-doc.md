@@ -427,6 +427,8 @@ angular.module('app', [])
 
 ### 参考资料：
 
+[前端工程——基础篇](https://github.com/fouber/blog/blob/master/201508/01.md)
+
 [AngularJS Routing Using UI-Router](https://scotch.io/tutorials/angular-routing-using-ui-router)
 [AngularJS Multi-Step Form Using UI Router](https://scotch.io/tutorials/angularjs-multi-step-form-using-ui-router)
 
