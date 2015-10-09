@@ -315,7 +315,38 @@ $stateProvider.state('mystate', {
 
 服务作为全局的单例对象，不止可以用来作为函数，封装业务逻辑，而且可以用来作为全局变量使用。
 
+### $state data
+可以给`$state`提供定义数据，建议使用`data`属性，防止冲突。
 
+````javascript
+
+var contacts = {
+    name: 'contacts'
+    ,templateUrl: 'contacts.html'
+    ,data: {
+        customData1: 5
+        ,customData2: 'blue'
+    }
+}
+var list = {
+    name: 'contacts.list'
+    ,templaterUrl: 'contacts.list.html'
+    ,data: {
+        customData1: 44,
+        ,customData2: 'red'
+    }
+}
+
+$stateProvider.state(contacts).state(list)
+
+
+function Ctrl($state) {
+    $state.current.data.customData1 // 5
+    $state.current.data.customData2 // 'blue'
+    
+}
+
+````
 
 
 ### 参考资料：
