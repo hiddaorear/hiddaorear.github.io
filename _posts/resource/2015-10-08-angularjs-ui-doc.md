@@ -134,6 +134,7 @@ $stateProvider.state('contacts', {
 
 
 ####　激活状态的三种办法：
+
 - Call `$state.go()`. High-level convenience method.
 - Click a link containing the `ui-self` directive.
 - Navigate to the `url` associated with the state.
@@ -241,7 +242,7 @@ app.config(function($locationProvider, $stateProvider) {
 #### $stateparams
 `$stateparams`服务，其作用是解析url中带的参数，可以直接当作对象，访问属性。
 要通过url来传递参数，`state`需要把如此写：`you_ulr/:params_1/:params_2`；
-而页面上，`ui-sref=myapp.you_state({params_1: value_1, paramse_2: value_2})`
+而页面上，`ui-sref = myapp.you_state({params_1: value_1, paramse_2: value_2})`
 `$stateparms.params_1`即可以获取对应的值。
 
 
@@ -355,6 +356,9 @@ function Ctrl($state) {
 [学习 ui-router - 状态嵌套和视图嵌套](http://bubkoo.com/2014/01/01/angular/ui-router/guide/nested-states%20&%20nested-views/)
 [AngularJS 使用 UI Router 实现表单向导](http://www.oschina.net/translate/angularjs-multi-step-form-using-ui-router)
 
+[]()
+[]()
+[]()
 
 
 hid say：知识的运用，不在于其寻根问底，而在于其实用。知识的融汇才在于知根知底。学于难处学，用于易处用。
