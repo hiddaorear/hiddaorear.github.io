@@ -245,6 +245,76 @@ app.config(function($locationProvider, $stateProvider) {
 `$stateparms.params_1`即可以获取对应的值。
 
 
+### ui-router resolve
+
+`resolve`为控制器提供依赖注入项。
+`resolve`为Object
+
+- `key-{string}`:注入控制器依赖项名称；
+- `factory-{String | function}`：
+-- string：服务的别名；
+-- function：函数的返回值将作为依赖注入项。如果函数是一个耗时操作，那么控制器也必须等待函数执行完成才会被实力化。
+
+````javascript
+
+$stateProvider.state('mystate', {
+    resolve: {
+    
+    // Example using function with simple return value.
+    // Since it's ont a promise, it resolves immediately
+        simpleObj: function() {
+            return {value: 'simple'}
+        }
+        
+    // Example using function with returned promise.
+        ,promiseObj: function($http) {
+            return $http({method: 'GET', url: '/someUrl'})
+        }
+        ,promiseObj2: function($http) {
+            return $http({method: 'GET', url: '/someUrl'})
+                .then(function(data) {
+                    return doSomeStuffFirst(date)
+                })
+        }
+        ,translations: 'translations'
+        ,translations2: function(translations, $stateParams) {
+            translations.getlang($stateParams.lang)
+        }
+        ,greeting: function($q, $timeout) {
+            var deferred = $q.defer()
+            $timeout(function() {
+                deferred.resolve('Hello')
+            }, 1000)
+            return deferred.promise
+        }
+    }
+    ,controller: function($scope, simpleObj, simpleObj2, promiseObj, promiseObj2, translations, translations2, greeting) {
+        $scope.simple = simpleObj.value
+        $scope.items = PromiseObj.items
+        $scope.itmes = PromiseObj2.items
+        
+        $scope.title = translations.getLang('english').title
+        $scope.title = translations.title
+        
+        $scope.greeting = greeting
+        
+    }
+})
+
+````
+
+需要改变页面的状态，且需要获取数据的时候，这种保证在状态之前执行的程序，很有用处。
+
+甚至是jQuery的页面做的难以做到的事。例如：如果提交表单成功之后，跳转到对应的页面。看起来很简单的功能，其实不容易实现。因为浏览器的安全策略，JavaScript是不能自己触发跳转，但有用户的点击事件之后，是可以的。在这个场景里面，有用户点击事件，但是点击之后不能立即跳转，Chrome等浏览器，能容易在一定时间之后跳转，但IE等就不能支持，即使有这个功能，这个时间很短暂，而数据从服务器返回的时间是不定的，有可能很耗时，所以这样不能实现此功能。
+
+唯一的办法是，点击之后就跳转到一个空页面，给与提示信息，等数据返回之后重新渲染。
+
+而这个功能在AngularJS中，很容易实现，因为其为单页面的缘故。而且，利用state的嵌套功能，可以实现局部刷新。
+
+然而，`resolve`虽然有在状态改变之前，实现数据注入的能力，但细想一下，这个功能不容易利用。因为去服务器请求数据，一般要用到页面中数据，如何在`resolve`中使用其他状态中的数据，要么是把数据放在顶层的$scope中，要么使用服务。这也不失为一种好的方案。
+
+服务作为全局的单例对象，不止可以用来作为函数，封装业务逻辑，而且可以用来作为全局变量使用。
+
 
 
 
