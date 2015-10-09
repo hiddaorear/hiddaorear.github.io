@@ -356,9 +356,16 @@ function Ctrl($state) {
 [学习 ui-router - 状态嵌套和视图嵌套](http://bubkoo.com/2014/01/01/angular/ui-router/guide/nested-states%20&%20nested-views/)
 [AngularJS 使用 UI Router 实现表单向导](http://www.oschina.net/translate/angularjs-multi-step-form-using-ui-router)
 
-[]()
-[]()
-[]()
+[Interceptors in AngularJS and Useful Examples](http://www.webdeveasy.com/interceptors-in-angularjs-and-useful-examples/)
+[AngularJS 拦截器和好棒例子](http://my.oschina.net/ilivebox/blog/290881)
+[Winning with HTTP Interceptors in AngularJS](http://onehungrymind.com/winning-http-interceptors-angularjs/)
+[Techniques for authentication in AngularJS applications](https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec)
+[Cookies vs Tokens. Getting auth right with Angular.JS](https://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token/)
+
+[Injecting $state (ui-router) into $http interceptor causes circular dependency](http://stackoverflow.com/questions/20230691/injecting-state-ui-router-into-http-interceptor-causes-circular-dependency)
+[AngularJS 应用身份认证的技巧](https://blog.coding.net/blog/techniques-for-authentication-in-angular-js-applications)
+[Difference between Service, Factory and Provider in AngularJS](https://gist.github.com/Mithrandir0x/3639232)
+[Testing Angular Services](http://jsbin.com/xolom/2/edit?html,js,output)
 
 
 hid say：知识的运用，不在于其寻根问底，而在于其实用。知识的融汇才在于知根知底。学于难处学，用于易处用。
