@@ -249,6 +249,12 @@ app.config(function($locationProvider, $stateProvider) {
 
 
 ### 参考资料：
+[流浪猫の窝之AngularJS](http://www.cnblogs.com/liulangmao/tag/angular/)
+[ui.router源码解析](http://www.html-js.com/article/Front-end-source-code-analysis-original-uirouter-source-code-analysis)
+[学习 ui-router - 状态嵌套和视图嵌套](http://bubkoo.com/2014/01/01/angular/ui-router/guide/nested-states%20&%20nested-views/)
+[AngularJS 使用 UI Router 实现表单向导](http://www.oschina.net/translate/angularjs-multi-step-form-using-ui-router)
+
+
 
 hid say：知识的运用，不在于其寻根问底，而在于其实用。知识的融汇才在于知根知底。学于难处学，用于易处用。
 
