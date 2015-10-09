@@ -176,7 +176,7 @@ Some example:
 
 ````javascript
 
-var app = angular.module('app', ['ui.router])
+var app = angular.module('app', ['ui.router'])
 
 app.config(function($stateProvider) {
     $stateProvider.state('contacts', {
