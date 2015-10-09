@@ -133,7 +133,7 @@ $stateProvider.state('contacts', {
 - 如果一个状态是abstract，即抽象状态，其拥有自己的子状态，但本能激活自身，只能当子状态激活时，隐式激活。因为，如果子状态被激活其父状态必被激活，对于abstract状态也如此。
 
 
-####　激活状态的三种办法：
+#### 激活状态的三种办法：
 
 - Call `$state.go()`. High-level convenience method.
 - Click a link containing the `ui-self` directive.
@@ -349,8 +349,20 @@ function Ctrl($state) {
 
 ````
 
+路由中的自定义数据，较好的用处，是作为权限管理。
+
+### Interceptor
+
+The `$httpProvider`
+
+
+
 
 ### 参考资料：
+
+[AngularJS Routing Using UI-Router](https://scotch.io/tutorials/angular-routing-using-ui-router)
+[AngularJS Multi-Step Form Using UI Router](https://scotch.io/tutorials/angularjs-multi-step-form-using-ui-router)
+
 [流浪猫の窝之AngularJS](http://www.cnblogs.com/liulangmao/tag/angular/)
 [ui.router源码解析](http://www.html-js.com/article/Front-end-source-code-analysis-original-uirouter-source-code-analysis)
 [学习 ui-router - 状态嵌套和视图嵌套](http://bubkoo.com/2014/01/01/angular/ui-router/guide/nested-states%20&%20nested-views/)
