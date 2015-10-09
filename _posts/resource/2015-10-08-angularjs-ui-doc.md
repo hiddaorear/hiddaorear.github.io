@@ -353,7 +353,74 @@ function Ctrl($state) {
 
 ### Interceptor
 
-The `$httpProvider`
+The `$httpProvider` provider contains an array of interceptors. An interceptor is simply a regular service factory that is registered to that array. 
+
+````javascript
+
+module.factory('intercepor', ['$log', function($log) {
+    $log.debug('$log is here to show you that this is a regular factory with injection')
+    
+    var myInterceptor = {
+        ...
+    }
+    return myInterceptor
+}])
+
+
+````
+
+And then add it by it's name to `$httpProvider.interceptors` array:
+
+````javascript
+
+module.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('myIntercepror')
+}])
+
+````
+
+### Difference between Service, Factory and Provider in AngularJS
+服务本身是一个任意单例的对象，AngularJS通过依赖注入机制提供服务。而准入机制调用一个`provider`的`$get()`方法，把得到的东西作为参数进行相关调用。所以，对于使用服务而言，服务仅指`$get`方法返回的东西。而作为提供服务的依赖注入机制，服务又要提供了`$get()`方法的整个对象。
+
+[AngularJS深入(5)——provider](http://div.io/topic/1169)
+[angularjs-providers服务详解](http://www.boiajs.com/2015/07/02/angularjs-providers-explained)
+[AngularJS系列(4) 那伤不起的provider们啊](http://hellobug.github.io/blog/angularjs-providers/)
+[ 自定义模块和服务](https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter14/chapter14.html)
+
+````javascript
+angular.module('app', [])
+    .service('myService', function() {
+        this.name = 'Service man'
+    })
+    .factory('myFactory', function() {
+        return {
+            name: 'Factory man'
+        }
+    })
+    .provider('configurableProvider', function() {
+        var privateName = 'Default man'
+        return {
+            setName: function(name) {
+                privateName = name
+            }
+            ,$get: function() {
+                return {
+                    name: privateName
+                }
+            }
+        }
+    })
+        .config(function (configurableProvider) {
+            configurableProvider.setName('New man')
+        })
+            .controller('Ctrl', function($scope, myServie, myFactory, configurable) {
+                $scope.serviceNaem = myService.name
+                $scope.factoryName = myFactory.name
+                $scope.providerName = configurable.name
+            })
+
+
+````
 
 
 
