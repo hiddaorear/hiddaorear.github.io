@@ -9,7 +9,7 @@ description:
 
 ### AngularJS UI
 
-#### AngularJS UI
+#### AngularJS UI 之 $state $q
 
 #### Thursday, 08 October 2015
 
@@ -531,18 +531,21 @@ HttpREST.controller('promise', function($q, $http) {
 ````
 
 `$q`的使用：
+
 - 通过`$q`得到一个`defer`实例；
 - 通过`derfer`的`promise`属性得到一个`promise`对象；
 - `promise`对象负责定义回调函数；
 - `defer`实例负责触发回调函数。
 
 `$q`有四个方法：
+
 - `$q.all()`合并多个promise为一个promise；
 - `$q.defer()`返回一个defer对象；
 - `$q.reject()`包装一个错误，使回调能正确的处理下去；
 - `$q.when()`返回一个promise对象。
 
 `defer`有两个方法一个属性：
+
 - `promise`返回一个promise对象；
 - `resolve()`成功回调；
 - `reject()`失败回调。
