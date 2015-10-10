@@ -500,6 +500,55 @@ app.provider('greeting', function() {
 
 ````
 
+### $q
+
+回调三要素：
+- 什么时候执行回调
+- 执行什么回调
+- 执行回调的时候传递什么参数
+
+````javascript
+
+var HttpREST = angular.module('Async', [])
+
+HttpREST.controller('promise', function($q, $http) {
+    var defer = $q.defer()
+    
+    var promise = defer.promise
+    
+    promise.then(function(data) {
+        console.log('成功')
+    }, function(data) {
+        console.log('失败')
+    })
+    
+    defer.resolve('success')
+    //1、 执行defer.resolve，此时执行回调函数
+    //2、调用使用resolve表示执行成功的回调
+    //3、resolve的参数是执行的时候需要参入的参数
+})
+
+````
+
+`$q`的使用：
+- 通过`$q`得到一个`defer`实例；
+- 通过`derfer`的`promise`属性得到一个`promise`对象；
+- `promise`对象负责定义回调函数；
+- `defer`实例负责触发回调函数。
+
+`$q`有四个方法：
+- `$q.all()`合并多个promise为一个promise；
+- `$q.defer()`返回一个defer对象；
+- `$q.reject()`包装一个错误，使回调能正确的处理下去；
+- `$q.when()`返回一个promise对象。
+
+`defer`有两个方法一个属性：
+- `promise`返回一个promise对象；
+- `resolve()`成功回调；
+- `reject()`失败回调。
+
+
+`promise`只有一个`then()`方法，注册成功的回调函数和失败回调函数，再返回一个`promise`对象，用于链式调用。
 
 
 ### 参考资料：
