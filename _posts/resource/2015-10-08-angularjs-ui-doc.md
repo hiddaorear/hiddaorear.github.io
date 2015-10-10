@@ -382,10 +382,6 @@ module.config(['$httpProvider', function($httpProvider) {
 ### Difference between Service, Factory and Provider in AngularJS
 服务本身是一个任意单例的对象，AngularJS通过依赖注入机制提供服务。而准入机制调用一个`provider`的`$get()`方法，把得到的东西作为参数进行相关调用。所以，对于使用服务而言，服务仅指`$get`方法返回的东西。而作为提供服务的依赖注入机制，服务又要提供了`$get()`方法的整个对象。
 
-[AngularJS深入(5)——provider](http://div.io/topic/1169)
-[angularjs-providers服务详解](http://www.boiajs.com/2015/07/02/angularjs-providers-explained)
-[AngularJS系列(4) 那伤不起的provider们啊](http://hellobug.github.io/blog/angularjs-providers/)
-[ 自定义模块和服务](https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter14/chapter14.html)
 
 ````javascript
 angular.module('app', [])
@@ -422,6 +418,87 @@ angular.module('app', [])
 
 ````
 
+`provider | service | factory `。三者的共性是：都是单例对象。粗略总结一下三者的区别：
+
+- `provider`是最基本的方法，是其服务是用此方法实现的。正式其原始，故其使用灵活，可以被`config`，同时也最复杂，必须实现`$get`方法；
+- `factory`是`provider`的语法糖，隐式的把`factory`的返回值给`$get`。`factory(name, fn, boolean)`，第三个参数是否需要返回值，慎用；
+- `service`是`factory`的语法糖，不需要返回，即可使用。
+
+### provider的实现
+
+````javascript
+
+function provider(name, provider_) {
+    if (isFunction(Provider_)) {
+        provider_ = providerInjector.instantiate(provider_)
+    }
+    if (!provider_.$get) {
+        throw Error('Provider ' + name + 'must define $get factory method.')
+    }
+    
+    return providerCache[name + providerSuffix] = provider_
+}
+
+function factory(name, factoryFn) {
+    return provider(name, {$get: factoryFn})
+}
+
+function service(name, constructor) {
+    return factory(name, ['$injector', function($injector) {
+        return $injector.instantiate(constructor)
+    }])
+}
+
+function value(name, value) {
+    return factory(name, valueFn(value))
+}
+
+function constant(name, value) {
+    providerCache[name] = value
+    instanceCache[name] = value
+}
+
+function decoractor(serviceName, decorFn) {
+    var origProvider = providerInjector.get(serviceName + providerSuffix)
+    orig$get = origProvider.$get
+    
+    origProvider.$get = function() {
+        var origInstanct = instanceInjector.invoke(orig$get, origProvider)
+        return instanceInjector.invoke(decorFn, null, {$delegatt: origInstance})
+    }
+}
+
+
+````
+
+`provider`的`config`使用，很诡异，需要在`provider`名之后加上`Provider`字符串：
+
+````javascript
+
+app.provider('greeting', function() {
+    var name = 'world'
+    
+    thie.$get = function() {
+        return {
+            sayHello: function() {
+                console.log('hello' + name)
+            }
+        }
+    }
+    
+    this.setName = function(newName) {
+        name = newName
+    }
+})
+.config(function(greetingProvider) {  //注意此处的provider的名字，添加了Provider字符串
+    greetingProvider.setName('alex')
+})
+.controller('Ctrl', function(greeting) {
+    greeting.sayHello(); // hello alex
+})
+
+
+````
 
 
 
@@ -447,6 +524,21 @@ angular.module('app', [])
 [AngularJS 应用身份认证的技巧](https://blog.coding.net/blog/techniques-for-authentication-in-angular-js-applications)
 [Difference between Service, Factory and Provider in AngularJS](https://gist.github.com/Mithrandir0x/3639232)
 [Testing Angular Services](http://jsbin.com/xolom/2/edit?html,js,output)
+
+### provider
+[AngularJS深入(5)——provider](http://div.io/topic/1169)
+[angularjs-providers服务详解](http://www.boiajs.com/2015/07/02/angularjs-providers-explained)
+[AngularJS系列(4) 那伤不起的provider们啊](http://hellobug.github.io/blog/angularjs-providers/)
+[ 自定义模块和服务](https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter14/chapter14.html)
+
+
+### Angularjs2
+
+[Creating a Super Simple Todo app Using Angular 2 —Tutorial](http://www.htmlxprs.com/post/54/creating-a-super-simple-todo-app-using-angular-2-tutorial?utm_source=devmag.io)
+[使用Angular2构建一个简单的Todo应用](http://www.html-js.com/article/2816)
+[前端之Angular2实战：依赖注入详解与应用](http://segmentfault.com/a/1190000003781566)
+[]()
+[TypeScript 学习](http://www.cnblogs.com/h82258652/p/4584662.html)
 
 
 hid say：知识的运用，不在于其寻根问底，而在于其实用。知识的融汇才在于知根知底。学于难处学，用于易处用。
