@@ -41,15 +41,16 @@ app.controller('ExampleCtrl', function($scope) {
 
 ````
 
-ng-options: [value] as [text] for [item] in [items]
-ng-init: selectItme=value
+`ng-options: [value] as [text] for [item] in [items]`
+`ng-init: selectItme=value`
 
 这样，select的`value`,`label`都有值。初始化，设置`value`的值即可。
 
 AngularJS文档描述：
+
 - select as label for value in array
 
-ng-options=person.lastName as getPersonFullName(person) for person in peopleArray
+`ng-options=person.lastName as getPersonFullName(person) for person in peopleArray`
 
 this means "user peopleArray as data source, for each item put its value in the person variable, user the result of the getPersonFullName function(with the person parameter) as label in the options of the drop-down list, but set the value of the lastName property of person in the model variable whenever an item is selected in the drop-down list"
 
@@ -106,6 +107,7 @@ myapp.config(function($stateProvider, $urlRouterProvider) {
 ###  ui-routes要义
 
 $stateProvider是通过“状态”（state）来管理路由。
+
 - 状态对应页面的ui-view；
 - 状态通过controller,template,view等属性，描述对页面的视图展示和行为；
 - 状体之间的层级结构，最好的模式是用状态继承，有名状态嵌套（父/子状态）。
