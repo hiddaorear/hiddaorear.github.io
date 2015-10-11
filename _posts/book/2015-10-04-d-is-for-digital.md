@@ -20,15 +20,12 @@ description:
 -- Brian W. Kernighan 《D is for Digital》
 
 > 无论今天的技术多么千变万化，人是不变的。无论从那个方面看，现代的人类与几千年前的人类并没有太多区别。抚今追昔，历史上干好事的人有多大比例，今天也差不多；历史上干坏事的人有多大比例，今天同样也差不多。
-
 -- Brian W. Kernighan 《D is for Digital》
 
 > I belive that it is improtant that people everywhere, no matter what their background understand this amazing pervasive technology.
-
 -- Brian W. Kernighan 《D is for Digitale》 Forword to the Chinese Translation of D is for Digital
 
 > Occasionally we get disturbing hints about the myriad systems that quietly collect, share and sometimes misuse personal data about us.
-
 -- Brian W. Kernighan 《D is for Digitale》 Forword to the Chinese Translation of D is for Digital
 
 这是一本用心良苦的书。因为作者的本意不再于计算机技术，而在于技术所带来的问题，主要隐私问题。
