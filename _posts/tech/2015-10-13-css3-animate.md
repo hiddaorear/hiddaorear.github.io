@@ -45,17 +45,18 @@ JavaScript对图片的处理，最基本的部分，就是如此了。即使用`
 
 var load_image(url, cb, error_cb) ｛
   var img = new Image()
-  
-  img.onrror = function() {
-    img.onerror = null
-    error_cb && error_cb()
-  }
-  
+
   if (img.complete) {
     cb && cb(img)
     return;
   }
-  
+   
+  img.onrror = function() {
+    error_cb && error_cb()
+    img = img.onload = img.onload = null
+    return;
+  }
+
   img.onload = function() {
     img.onload = null
     cb && cb(img)
@@ -190,6 +191,66 @@ var imgReady = (function () {
 })();
 
 ````
+
+改进版：
+
+````javascript
+
+function ImageReady(error, url, ready, load) {
+
+  var img = new Image()
+    , onready = {end: false, setSrc: null, getSize: null}
+    , width
+    , height
+    , new_width
+    , new_height
+    ;
+
+  if (!url) return;
+
+  if (img.complete) {
+    ready && ready(img)
+    load && load(img)
+    return img;
+  }
+  
+  img.onerror = function() {
+    error && error(img)
+    onready.end = true
+    img = img.onload = img.onerror = null
+    return false;
+  }
+
+  onready.setSrc = function() {
+    img.src = url || ''
+    width  = img.width
+    height = img.height
+    return true;
+  }()
+  
+  onready.getSize = function() {
+    if (!onread.setSrc) return false;
+
+    new_width  = img.width
+    new_height = img.height
+    if (new_width != width || new_height != height || new_width*new_height > 0) {
+      ready && ready(img)
+      onready.end = true
+    }
+  }
+  onready.getSize()
+
+
+  img.onload = function() {
+    !onready.end && onready.getSize()
+    ready && ready(img)
+    img = img.onload = img.onerror = null
+  }
+}
+
+````
+
+去掉多余的逻辑，只做好一件事情，就是做好单张的图片加载，多张的逻辑交由其他逻辑处理。
 
 
 
