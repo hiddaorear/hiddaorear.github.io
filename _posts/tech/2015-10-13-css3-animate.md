@@ -43,13 +43,24 @@ JavaScript对图片的处理，最基本的部分，就是如此了。即使用`
 
 ````javascript
 
-var load_image(url, cb) {
+var load_image(url, cb, error_cb) ｛
   var img = new Image()
+  
+  if (img.complete) {
+    cb && cb(img)
+    return;
+  }
+  
   img.onload = function() {
     img.onload = null
     cb && cb(img)
   }
   img.src = url
+  
+  img.onrror = function() {
+    img.onerror = null
+    error_cb && error_cb()
+  }
 }
 
 ````
@@ -59,6 +70,9 @@ var load_image(url, cb) {
 - `img.onload`绑定了匿名函数，并内部引用了图片，形成闭包，循环引用，容易导致内存泄漏。所以触发`onload`事件之后，立即就释放了`img.onload`。
 - 同时，如果是gif图片，有可能多次触发onload，这么处理正好避免了这个问题。
 - 为什么`src`的赋值是在`onload`之后呢？因为在IE，Opera下，对缓存图片的初始状态，与Firefox，Safari，Chrome是不一样的。IE与Opear对于缓存的图片，不会触发`onload`事件，而Firefox，Safari，Chrome会触发。根本原因是：`img`的`src`复制与`onload`事件的绑定，顺序不对。IE和Opear下，先赋值`src`，再触发`onload`，由于是缓存图片，`src`已存在，故错过`onload`。所以，为了绑定`onload`事件，后赋值`src`。
+
+
+以下原来有问题的代码：
 
 ````javascript
 
