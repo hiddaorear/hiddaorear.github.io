@@ -271,7 +271,11 @@ function ImageReady(error, url, ready, load) {
 [Fex Notes](http://fexnotes.com/)
 [xss零碎指南](http://segmentfault.com/a/1190000000497596)
 
-
+### SVG
+[Mozilla SVG教程](https://developer.mozilla.org/zh-TW/docs/Web/SVG/Tutorial)
+[SVG应用指南](https://svgontheweb.com/zh/)
+[Web 设计新趋势: 使用 SVG 代替 Web Icon Font](http://io-meter.com/2014/07/20/replace-icon-fonts-with-svg/)
+[W3School SVG 教程](http://www.w3school.com.cn/svg/)
 
 hid say: 玩一玩新技术。
 
