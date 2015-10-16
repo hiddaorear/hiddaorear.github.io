@@ -271,6 +271,10 @@ function ImageReady(error, url, ready, load) {
 [Fex Notes](http://fexnotes.com/)
 [xss零碎指南](http://segmentfault.com/a/1190000000497596)
 
+### Time function
+[浅谈 Underscore.js 中 _.throttle 和 _.debounce 的差异](https://blog.coding.net/blog/the-difference-between-throttle-and-debounce-in-underscorejs)
+[谈谈Javascript中的throttle and debounce](http://www.zuojj.com/archives/1036.html)
+
 ### SVG
 [Mozilla SVG教程](https://developer.mozilla.org/zh-TW/docs/Web/SVG/Tutorial)
 [SVG应用指南](https://svgontheweb.com/zh/)
