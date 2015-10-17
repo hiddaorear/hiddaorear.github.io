@@ -330,6 +330,89 @@ function debounce(fn, wait, immediate) {
 
 ````
 
+这是看了underscore的debounce函数之后，自己写的。相对原来的函数，有改进的地方。
+
+````javascript
+
+ // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  _.debounce = function(func, wait, immediate) {
+    var timeout, args, context, timestamp, result;
+
+    var later = function() {
+      var last = _.now() - timestamp;
+
+      if (last < wait && last >= 0) {
+        timeout = setTimeout(later, wait - last);
+      } else {
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        }
+      }
+    };
+
+    return function() {
+      context = this;
+      args = arguments;
+      timestamp = _.now();
+      // 每次执行回调函数都会更新这个时间戳的值，导致有可能wait的时间到了
+      //  var last = _.now() - timestamp;这个表达式的值小于wait的值
+      var callNow = immediate && !timeout;
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+
+      return result;
+    };
+  };
+
+
+````
+不得不说这个函数写得很巧妙。`later`函数用递归调用来实现时间差没有达到预定的时间的情况。
+然而，对于`setTimeout`函数的特性来说，这种时间差小于`wait`的情况是不可能的，所以原函数实现上有缺陷，`timestamp = _.now();`这个语句应该检查`timestamp`的是否有值，并且在执行回调之后设置为`null`，以预备下一个回调。
+
+改正之后的版本：
+
+````javascript
+_.debounce = function(func, wait, immediate) {
+    var timeout, args, context, timestamp, result;
+
+    var later = function() {
+      var last = _.now() - timestamp;
+
+        timeout = null;
+        if (!immediate) {
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        }
+      
+    };
+
+    return function() {
+      context = this;
+      args = arguments;
+      !timestamp && (timestamp = _.now());
+      var callNow = immediate && !timeout;
+      if (!timeout) timeout = setTimeout(later, wait);
+      if (callNow) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+      return result;
+    };
+  };
+
+````
+
+没想到看这么一个广泛使用的函数库的代码，居然发现一个实现上的缺陷。以前也照这个函数实现了debounce函数，由于没有用自己想法去实现，没有发现这个问题，这次自己直接动手写，对比之下，发现问题。
+
+也算不上问题，只不过原本的实现会导致有些情况回调不会按期执行，会有延迟。不过，发现这个问题，依然值得高兴。
 
 
 
