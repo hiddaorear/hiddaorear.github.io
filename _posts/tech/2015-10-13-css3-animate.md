@@ -414,6 +414,59 @@ _.debounce = function(func, wait, immediate) {
 
 也算不上问题，只不过原本的实现会导致有些情况回调不会按期执行，会有延迟。不过，发现这个问题，依然值得高兴。
 
+后来读Underscore相关文章发现，其实`debounce`的实现，本应如此。是我理解有误。`debounce`的策略本就是，如果新的回调触发了，重新计时，重新过了`wait`才执行回调。以上修改也留着，不失为一种理解的思路。
+
+重新实现一下自己写的`debounct`。
+
+````javascript
+
+function debounce(fn, wait, immediate) {
+  var timeout = null
+    , args = arguments
+    , result = null
+    , later = null
+    , timestamp = null
+    , context = this
+    ;
+    
+  later = function() {
+    var last = now() - timestamp
+
+    if (last > 0 && last < wait) {
+    	timeout = setTimeout(later, wait - last)
+    } else {
+    	if(!immediate) {
+    	  result = fn.call(context, args)
+    	  timeout = timestamp =args = context = null
+    	}
+    }
+    
+    return result
+  }
+  
+  
+  return function() {
+    timestamp = now()
+    var lock = false
+      , start = null
+      ;
+    
+    lock = immediate && !timeout
+    if (lock) {
+      result = fn.call(this, args)
+      args = lock = context = null
+    }
+    
+    !timeout && (timeout = setTimeout(later, wait))
+    return result
+  }
+}
+
+````
+
+这个实现与Underscore一样，用自己的习惯重新实现一遍而已。这么已折腾，发现Underscore这函数的实现，真精练，实在也找不出大的优化的地方。以前的误解，回想一下，其实恰好是throttle的实现，因为不让重新设置时间戳，导致回调函数会在wait时间之后执行。
+
+这函数的实现，对闭包的功能使用，很典型，对内存的管理也很典型。JavaScript一般不用去操心内存管理，但在这样的情况，对内存的管理影响到功能的实现，是要谨慎考虑的。包括前面的图片加载的实现，对内存的处理都是很谨慎，也很有必要。
 
 
 ### 参考资料:
