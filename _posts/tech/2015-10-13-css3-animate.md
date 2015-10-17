@@ -290,9 +290,9 @@ var now = Date.now || function() {
   return new Data.getTime()
 }
 
-function dedounce(fn, wait, immediate) {
+function debounce(fn, wait, immediate) {
   var timeout = null
-    , arg = arguments
+    , args = arguments
     , result = null
     , later = null
     , timestamp = 0
@@ -301,25 +301,26 @@ function dedounce(fn, wait, immediate) {
     
   later = function() {
     var last = now() - timestamp
-    
+
     if (!immediate) {
-      result = fn.call(context, arg)
-      timeout = arg = context = null
+      result = fn.call(context, args)
+      timeout = timestamp =args = context = null
     }
     return result
   }
   
   
   return function() {
-    timestamp = now()
+
+    timestamp && (timestamp = now())
     var lock = false
       , start = null
       ;
     
     lock = immediate && !timeout
     if (lock) {
-      result = fn.call(this, arg)
-      arg = lock = context = null
+      result = fn.call(this, args)
+      args = lock = context = null
     }
     
     !timeout && (timeout = setTimeout(later, wait))
