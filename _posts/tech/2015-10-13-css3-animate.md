@@ -252,6 +252,82 @@ function ImageReady(error, url, ready, load) {
 
 去掉多余的逻辑，只做好一件事情，就是做好单张的图片加载，多张的逻辑交由其他逻辑处理。
 
+### debounce
+
+如果一个函数频繁的触发，消耗浏览器的性能，并有可能导致浏览器崩溃。解决这种难过情形的方案有两种：
+
+- debounce 防抖，一个callback执行完了，过了一定时间才再次执行callback；
+- throttle 每隔一段时间执行callback；
+
+举例：
+
+````javascript
+
+var $win = $(window);
+
+function setSize() {
+  var win_width = $win.width()
+  var win_height = $win.height()
+  
+  $('#wrapper').css({
+    width: win_width
+    ,height: win_height
+  }) 
+}
+
+$win.on('resize', function(event) {
+  setTimeout(setSzie, 1000)
+})
+
+
+````
+通过使用`setTimout`，来避免过于频繁触发回调。但是这里的实现有一个问题，`setTimeout`计数器并没有清除，而且每遇到这种情形，都要重复写相同的逻辑。我们试着把这个逻辑抽象出来。
+
+````javascript
+
+// for timestamp
+var now = Date.now || function() {
+  return new Data.getTime()
+}
+
+function dedounce(fn, wait, immediate) {
+  var timeout = null
+    , arg = arguments
+    , result = null
+    , later = null
+    , timestamp = 0
+    , context = this
+    ;
+    
+  later = function() {
+    var last = now() - timestamp
+    
+    if (!immediate) {
+      result = fn.call(context, arg)
+      timeout = arg = context = null
+    }
+    return result
+  }
+  
+  
+  return function() {
+    timestamp = now()
+    var lock = false
+      , start = null
+      ;
+    
+    lock = immediate && !timeout
+    if (lock) {
+      result = fn.call(this, arg)
+      arg = lock = context = null
+    }
+    
+    !timeout && (timeout = setTimeout(later, wait))
+    return result
+  }
+}
+
+````
 
 
 
