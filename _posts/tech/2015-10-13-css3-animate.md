@@ -437,6 +437,7 @@ function debounce(fn, wait, immediate) {
     } else {
     	if(!immediate) {
     	  result = fn.call(context, args)
+    	  clearTimeout(timeout)
     	  timeout = timestamp =args = context = null
     	}
     }
@@ -464,7 +465,7 @@ function debounce(fn, wait, immediate) {
 
 ````
 
-这个实现与Underscore一样，用自己的习惯重新实现一遍而已。这么已折腾，发现Underscore这函数的实现，真精练，实在也找不出大的优化的地方。以前的误解，回想一下，其实恰好是throttle的实现，因为不让重新设置时间戳，导致回调函数会在wait时间之后执行。
+这个实现与Underscore一样，用自己的习惯重新实现一遍而已。这么已折腾，发现Underscore这函数的实现，真精练，实在也找不出大的优化的地方，只想到用`clearTimeout`来释放一下`setTimeout`，原实现只把其`id` `timeout`变为空，失去原本`id`的意义。以前的误解，回想一下，其实恰好是`throttle`的实现，因为不让重新设置时间戳，导致回调函数会在wait时间之后执行。
 
 这函数的实现，对闭包的功能使用，很典型，对内存的管理也很典型。JavaScript一般不用去操心内存管理，但在这样的情况，对内存的管理影响到功能的实现，是要谨慎考虑的。包括前面的图片加载的实现，对内存的处理都是很谨慎，也很有必要。
 
