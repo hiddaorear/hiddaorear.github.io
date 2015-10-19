@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  Docker and OpenStack
+title:  Docker , OpenStack and PostgreSQL
 category: 资源
-tags: [Docker OpenStack]
-keywords: Docker OpenStack
+tags: [Docker OpenStack PostgreSQL]
+keywords: Docker OpenStack PostgreSQL
 description: 
 ---
 
-### Docker and OpenStack
+### Docker , OpenStack and PostgreSQL
 
-#### Docker and OpenStack
+#### Docker , OpenStack and PostgreSQL
 
 #### Sunday, 18 October 2015
 
@@ -36,5 +36,10 @@ hiddaorear摘录
 
 ### OpenStack
 [陈沙克日志 OpenStack](http://www.chenshake.com/tag/openstack/)
+
+### PostgreSQL
+[PostgreSQL wiki](https://wiki.postgresql.org/wiki/9.1%E7%AC%AC%E4%B8%80%E7%AB%A0)
+[PostgreSQL新手入门](http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html)
+[使用PostgreSQL数据库](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/05.4.md)
 
 hid say：了解业界新技术。
