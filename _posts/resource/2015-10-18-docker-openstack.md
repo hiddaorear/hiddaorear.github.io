@@ -43,4 +43,9 @@ hiddaorear摘录
 [PostgreSQL新手入门](http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html)
 [使用PostgreSQL数据库](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/05.4.md)
 
+### C
+[Linus：利用二级指针删除单向链表](http://coolshell.cn/articles/8990.html)
+[Alan Cox：单向链表中prev指针的妙用](http://coolshell.cn/articles/9859.html)
+["Linus Torvalds...is a terrible engineer" - Alan Cox](http://apolyton.net/showthread.php/130212-Linus-Torvalds-is-a-terrible-engineer-Alan-Cox)
+
 hid say：了解业界新技术。
