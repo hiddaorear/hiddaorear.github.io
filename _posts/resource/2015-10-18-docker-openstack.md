@@ -25,6 +25,7 @@ hiddaorear摘录
 ### 参考资料：
 
 ### Docker
+[Docker基础技术](http://coolshell.cn/tag/docker)
 [Docker —— 从入门到实践](http://dockerpool.com/static/books/docker_practice/introduction/README.html)
 [Docker：利用Linux容器实现可移植的应用部署](http://www.infoq.com/cn/articles/docker-containers)
 [Docker 介绍以及其相关术语、底层原理和技术](https://ruby-china.org/topics/22004)
