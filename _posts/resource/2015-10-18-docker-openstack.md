@@ -16,7 +16,7 @@ description:
 ![docker](/../../assets/img/resource/2015/docker.jpg)
 
 > 道不欲多，多则杂，杂则扰，扰则意乱神迷。
-hiddaorear
+hiddaorear摘录
 
 > 要以主干求生死，不向旁流分浊清。
 hiddaorear摘录
