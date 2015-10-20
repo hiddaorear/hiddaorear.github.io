@@ -500,6 +500,12 @@ function debounce(fn, wait, immediate) {
 [CSS3动画那么强，requestAnimationFrame还有毛线用？](http://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-%E5%8A%A8%E7%94%BB%E7%AE%97%E6%B3%95/)
 [使用requestAnimationFrame更好的实现javascript动画(转)](http://www.cnblogs.com/rubylouvre/archive/2011/08/22/2148793.html)
 [Leaner, Meaner, Faster Animations with requestAnimationFrame](http://www.html5rocks.com/en/tutorials/speed/animations/)
+[Learning from Twitter](http://ejohn.org/blog/learning-from-twitter/)
+
+### DOM API
+[CSSOM视图模式(CSSOM View Module)相关整理](http://www.zhangxinxu.com/wordpress/2011/09/cssom%E8%A7%86%E5%9B%BE%E6%A8%A1%E5%BC%8Fcssom-view-module%E7%9B%B8%E5%85%B3%E6%95%B4%E7%90%86%E4%B8%8E%E4%BB%8B%E7%BB%8D/)
+[Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
+[浏览器 窗口 scrollTop 的兼容性问题](http://www.cnblogs.com/----1/archive/2011/12/16/2290193.html)
 
 hid say: 玩一玩新技术。
 
