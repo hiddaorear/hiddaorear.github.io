@@ -507,6 +507,9 @@ function debounce(fn, wait, immediate) {
 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
 [浏览器 窗口 scrollTop 的兼容性问题](http://www.cnblogs.com/----1/archive/2011/12/16/2290193.html)
 
+### CSS
+[纯CSS实现易拉罐3D滚动效果](http://www.zhangxinxu.com/wordpress/2010/03/%E7%BA%AFcss%E5%AE%9E%E7%8E%B0%E6%98%93%E6%8B%89%E7%BD%903d%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/)
+
 hid say: 玩一玩新技术。
 
 
