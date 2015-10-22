@@ -15,6 +15,50 @@ description:
 
 ### CSS3 SVG Animation and DOM
 
+### SVG
+SVG描边动画重点，与两个属性有关。
+
+- stroke-dasharray   设置虚线的长度和间距
+- stroke-dashoffset  虚线的起始偏移
+
+动态的改变这两个属性，就出现了描边的动画效果。
+
+````xml
+
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <line fill="none" stroke="orange" stroke-width="5" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="round" x1="0" y1="90" x2="400" y2="90"/>
+ </g>
+</svg>
+
+````
+
+````css
+
+line {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  -webkit-animation: dash 5s linear infinite;
+  animation: dash 5s linear infinite;
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+````
+
+[demo](http://jsfiddle.net/laiqs2011/3ysrtmn5/1/)
+
+其要义是以CSS3动画属性控制svg的属性。
+
 ### 图片的预加载与延迟加载
 
 ````javascript
