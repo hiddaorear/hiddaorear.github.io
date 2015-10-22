@@ -494,6 +494,8 @@ function debounce(fn, wait, immediate) {
 [SVG应用指南](https://svgontheweb.com/zh/)
 [Web 设计新趋势: 使用 SVG 代替 Web Icon Font](http://io-meter.com/2014/07/20/replace-icon-fonts-with-svg/)
 [W3School SVG 教程](http://www.w3school.com.cn/svg/)
+[A Primer to Front-end SVG Hacking](http://dbushell.com/2013/02/04/a-primer-to-front-end-svg-hacking/)
+[Using SVG](https://css-tricks.com/using-svg/)
 
 ### requestAnimationFrame
 [Javascript高性能动画与页面渲染](http://www.infoq.com/cn/articles/javascript-high-performance-animation-and-page-rendering)
@@ -507,10 +509,13 @@ function debounce(fn, wait, immediate) {
 [Element.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)
 [浏览器 窗口 scrollTop 的兼容性问题](http://www.cnblogs.com/----1/archive/2011/12/16/2290193.html)
 
+[Detect, Undo And Redo DOM Changes With Mutation Observers](http://addyosmani.com/blog/mutation-observers/)
+[在线文本编辑器的基本实现原理](http://io-meter.com/2014/09/01/contenteditable-and-selection/)
+
 ### CSS
 [纯CSS实现易拉罐3D滚动效果](http://www.zhangxinxu.com/wordpress/2010/03/%E7%BA%AFcss%E5%AE%9E%E7%8E%B0%E6%98%93%E6%8B%89%E7%BD%903d%E6%BB%9A%E5%8A%A8%E6%95%88%E6%9E%9C/)
 
-hid say: 玩一玩新技术。
+hid say: 玩一玩新技术。๑•́ ₃ •̀๑
 
 
 
