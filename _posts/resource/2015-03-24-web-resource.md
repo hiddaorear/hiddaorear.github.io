@@ -101,6 +101,24 @@ description:
 [window.open被浏览器拦截的解决方案](http://itindex.net/detail/52877-window.open-%E6%B5%8F%E8%A7%88%E5%99%A8)
 [Eraseme后门分析](http://blog.topsec.com.cn/ad_lab/eraseme%E5%90%8E%E9%97%A8%E5%88%86%E6%9E%90/)
 
+### web性能
+[渲染性能](https://developers.google.com/web/fundamentals/performance/rendering/)
+[javascript性能优化](http://my.oschina.net/u/1401419/blog/191199)
+[【译】编写高性能JavaScript](http://www.alloyteam.com/2012/11/performance-writing-efficient-javascript/)
+[7 天打造前端性能监控系统](http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
+[CSS3硬件加速也有坑！！！](http://div.io/topic/1348)
+[闲扯 background-position 的单位属性值](http://div.io/topic/1344)
+[Vue.js 和 Webpack ](http://div.io/topic/1343)
+[[译] JavaScript 性能优化杀手](http://div.io/topic/1269)
+[移动时代的前端加密](http://div.io/topic/1220)
+[chrome的debug工具Profiles使用方法](http://div.io/topic/1391)
+[Web性能优化与HTTP/2 ](http://div.io/topic/1382)
+[译】使用requestIdleCallback ](http://div.io/topic/1370)
+[Why BPG will replace GIFs and not only.](https://eek.ro/why-bpg-will-replace-gifs-and-not-only/)
+[BPG examples with alpha channel](http://bellard.org/bpg/gallery2.html)
+[webrebuild 2014 图片优化](http://webrebuild.org/2014/ppt/webrebuild_ppt_05.pdf)
+
+
 ### Python
 [量化分析师的Python日记 第1天：谁来给我讲讲Python？](https://uqer.io/community/share/54c89443f9f06c276f651a52)
 
