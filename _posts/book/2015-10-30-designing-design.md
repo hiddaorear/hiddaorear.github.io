@@ -11,7 +11,7 @@ description:
 
 ### 设计设计
 
-![satrun](/../../assets/img/book/2015/satrun.jpg)
+![satrun](/../../assets/img/book/2015/saturn.jpg)
 
 ### 参考资料
 
