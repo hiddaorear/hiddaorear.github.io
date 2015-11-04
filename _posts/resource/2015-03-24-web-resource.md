@@ -17,7 +17,7 @@ description:
 [backup](http://yinwang0.lofter.com/)
 [K.I.S.S](https://bigeagle.me/)
 [Rei](http://chloerei.com/)
-[陈钢的博客 » 脊髓型颈椎病手术实历](http://blog.yikuyiku.com/?p=3780)
+
 [JerryQu 的小站](http://imququ.com/)
 [负暄琐话 - 博客频道 - CSDN.NET](http://blog.csdn.net/g9yuayon)
 [咀嚼之味](http://jerryzou.com/)
