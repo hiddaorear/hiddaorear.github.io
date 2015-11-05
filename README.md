@@ -1,5 +1,5 @@
+
 ### 有朋自远方来，不亦乐乎？
 
-#### http://hiddaorear.github.io/
+#### [blog](http://hiddaorear.github.io/)
 
-#### or http://hiddaorear.gitcafe.io/
