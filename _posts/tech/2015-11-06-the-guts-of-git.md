@@ -72,9 +72,14 @@ Linux这样的大型项目，由Linus等维护。而且是开源的项目，更�
 
 思路至此，也就是直接处理整体的改变即可。如何得到整体的改变？我们在Linux下最常用的对比文件是否改变的办法，就是用md5sum来对比文件的指纹。因此，判断文件是否改变，对比指纹即可，由此可以得到设计commit id的思路。
 
-文件的改变，本质还是在于文件。文件系统无疑是最好的参照，而Ext4、Btrfx、ReiserFS，其对文件index的处理非常高效。引用Archlinxu的文档：
+文件的改变，本质还是在于文件。文件系统无疑是最好的参照，而Ext4、Btrfx、ReiserFS，对其log的处理非常高效；而文件系统的可靠性，非常重要，log的校验和处理，也是重中之重。引用Archlinxu的文档：
 
 > Btrfs - 也被称作"Better FS", 是一种具备与Sun/Oracle的ZFS相近特性的新文件系统。特性包括快照，多磁盘条带化，多盘镜像（不需要mdadm即可组成软RAID），数据校验，增量备份，以及能同时提升性能并节省空间的透明压缩功能（目前支持zlib和LZO）。截止2014年4月，Btrfs虽然已经合并到主干内核中，但仍被标记为实验性质。Btrfs被认为是 GNU/Linux 文件系统的未来，并被所有主流发行版的安装程序设置为root分区文件系统选项。
+
+wiki的Ext4文档：
+
+> 日志校验和
+Ext4使用校验和特性来提高文件系统可靠性，因为日志是磁盘上被读取最频繁的部分之一。这个特性还有一个好处就是可以安全地避免日志处理时磁盘I/O的等待，而稍微提高一些性能。日志校验和的技术源于威斯康辛大学的一篇名为IRON File Systems的研究论文（见第六节transaction checksums校验和处理）[7]
 
 可见snapshoot，在文件处理已有相应的技术。而这些文件系统，对文件恢复都有高效办法。从版本管理的角度，文件系统本身就是一个版本管理系统。由此，就自然有了Git的snapshoot的实现。
 
@@ -93,6 +98,7 @@ Linux这样的大型项目，由Linus等维护。而且是开源的项目，更�
 [写出好的 commit message](https://ruby-china.org/topics/15737)
 [Git的思想和基本工作原理](http://www.nowamagic.net/academy/detail/48160210)
 [File systems ](https://wiki.archlinux.org/index.php/File_systems_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+[wiki Ext4](https://zh.wikipedia.org/wiki/Ext4)
 
 hid say: 如果没有熟悉事物的结构与缘由，那么即使你对事物的每个细节都非常熟悉了，也不能把握事物的实质。
 
