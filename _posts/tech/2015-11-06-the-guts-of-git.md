@@ -32,6 +32,7 @@ Git对象，其用Git用blob对象来存储文件，用tree对象存储目录里
 
 从使用上来看：
 `git commit -a`
+
 > Tell the command to automatically stage files  that hava been modified and deleted, but new files you have not told git about are not affected.
 即新增加的文件不能通过`git commit -a`命令添加到暂存区域，需要使用`git add`/命令。
 
