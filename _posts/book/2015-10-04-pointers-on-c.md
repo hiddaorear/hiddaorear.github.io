@@ -115,13 +115,13 @@ main()
   braces = 0;
 
   while( (ch = getchar()) != EOF ) {
-    if (ch == '{')
+    if ( ch == '{' )
       braces += 1;
     
-    if ( ch == '{') {
+    if ( ch == '{' ) {
       if (braces == 0)
         printf("Extra closing brace!\n");
-      ele
+      else
         braces -= 1;
     }
   }
