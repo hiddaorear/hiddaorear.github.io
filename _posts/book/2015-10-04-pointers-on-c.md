@@ -32,7 +32,118 @@ C语言中，函数传值只有一种方式，那就传值，而数组这些数�
 
 摘录并分析一些优雅的代码：
 
+校验大括号是否成对的C代码：
 
+````c
+
+/*
+ * 检查花括号对
+ * hiddaorear
+ * study Pointers on C
+ * 2015/11/05
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main()
+{
+  int ch;
+  int braces;
+  int closing_braces;
+  int opening_braces;
+
+  braces = 1;
+  closing_braces = 0;
+  opening_braces = 0;
+
+  while( (ch = getchar()) != EOF ) {
+    if (ch == '{')
+      ++opening_braces;
+    
+    if ( opening_braces > 0) {
+      if (ch == '}')
+        ++closing_braces;
+    }
+    else {
+      braces = 0;
+      printf("The order is wrong!\n");
+      break;
+    }
+
+    if ( ch != '{' && ch != '}')
+      break;
+  }
+
+  if ( closing_braces - opening_braces > 0 && braces == 1 ) {
+    printf("%d unmatched opening brace(s)!\n", closing_braces - opening_braces );
+  }
+  else if ( closing_braces - opening_braces < 0 && braces == 1 ){
+    printf("%d unmatched closing brace(s)!\n", closing_braces - opening_braces );
+  }
+  else if ( closing_braces - opening_braces == 0 && braces == 1 ) {
+    printf("Success!\n");
+  }
+
+  return EXIT_SUCCESS;
+}
+
+
+````
+
+可以看到，一个简单的功能用了四个变量，虽然实现功能，却有冗余逻辑，因为要求是校验，并没有要求要给出有几个括号没有配对。
+
+我们来看看源码的方案：
+
+
+````c
+
+/*
+ * Pointers on C
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main()
+{
+  int ch;
+  int braces;
+
+  braces = 0;
+
+  while( (ch = getchar()) != EOF ) {
+    if (ch == '{')
+      braces += 1;
+    
+    if ( ch == '{') {
+      if (braces == 0)
+        printf("Extra closing brace!\n");
+      ele
+        braces -= 1;
+    }
+  }
+
+  if ( braces > 0 )
+    printf("%d unmatched opening brace(s)!\n", braces);
+
+  return EXIT_SUCCESS;
+}
+
+
+````
+
+只需要两个变量，而且处理反括号出现在前的情况，其方案非常巧妙，简洁而明快。这种单一if语句不写括号的习惯，也值得借鉴。虽然改动时可能会出错，但此时应该都注意到，此种情况可以避免。不写括号使得程序非常简短，明了。
+
+这段程序虽然简单，但为了得不能匹配的括号个数，这段简单的程序花了我很多时间。出现了几个典型的错误：
+
+- 单词拼写错误，根本原因是英语不熟悉，和对程序变量没有形成在大脑映射的习惯；
+- 不写分号，这是写习惯了JavaScript造成的，看来编程习惯有强大的迁移能力，一门语言真能影响一个人的思维习惯；
+- 修改程序需要反复调试，这是写学要学习的新程序的老毛病，病在不思考，不检查程序，因为没有能力去这么做，然而更根本的是，没有这习惯；
+
+雄关漫道真如铁，如今迈步从头越。底层实践，从此开始，望汝耐得烦，慢慢来。
 
 摘录《笑傲江湖》风清扬教令狐冲的话：
 
