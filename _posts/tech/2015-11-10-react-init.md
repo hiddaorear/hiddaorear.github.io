@@ -25,11 +25,14 @@ description:
 
 ### 参考资料:
 [React Native: Bringing modern web techniques to mobile](https://code.facebook.com/posts/1014532261909640/react-native-bringing-modern-web-techniques-to-mobile/)
-[从HTML Components的衰落看Web Components的危机](http://blog.jobbole.com/77837/)
-[我对 React Native 的理解和看法](http://div.io/topic/851?page=1#3453)
 [React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
-[React入门学习实例](http://www.w3ctech.com/topic/758)
-[React-Native学习指南](https://github.com/ele828/react-native-guide)
+
+[React 中文索引](http://nav.react-china.org/)
+[一个关于JavaScript解构](http://jimliu.net/2015/06/09/trap-in-es6-destructuring-syntax/)
+[使用JavaScript实现“真·函数式编程”](http://jimliu.net/2015/10/21/real-functional-programming-in-javascript-1/)
+[React源码剖析系列 － 生命周期的管理艺术](http://zhuanlan.zhihu.com/purerender/20312691)
+[reactjs源码分析-上篇（首次渲染实现原理）](http://purplebamboo.github.io/2015/09/15/reactjs_source_analyze_part_one/)
+[解构ReactJS的Flux](http://segmentfault.com/a/1190000002886608)
 
 
 hid say: 玩玩看。
