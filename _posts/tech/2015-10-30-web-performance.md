@@ -49,14 +49,12 @@ else {
     var resources = window.performance.getEntriedByType('resource')
     
     for (var obj in resources) {
-      var list = ''
       for (var properties in resources[obj]) {
         console.info(resources[obj][properties])
       }
     }
   })
 }
-
 
 ````
 
