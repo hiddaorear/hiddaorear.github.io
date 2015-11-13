@@ -58,6 +58,43 @@ else {
 
 ````
 
+## performance API
+
+### requestAnimationFrame 
+
+定时循环操作接口，主要用于按帧重绘页面。充分利用显示器的刷新机制，显示器有固定的刷新频率（60Hz或70Hz），也就是每秒最多能重绘60次或70次。
+
+`requestAnimationFrame`在主线程上完成，如果主线程繁忙，动画效果会不佳。
+
+回收内存，`cancelAnimationFram(requestID)`
+
+例子：
+
+````javascript
+
+var ele = document.getElementById('anim')
+  , startTime = null
+  ;
+  
+function render() {
+  var time = null;
+  time || (time = Date.now())
+  ;startTime || (startTime = time)
+  
+  ele.style.left = (time - startTime)/10 + 'px'
+}
+
+ele.addEventListener('click', function() {
+  (function animationLoop() {
+    render()
+    requestAnimationFrame(animationLoop)
+  })()
+})
+
+````
+
+
+
 ### 参考资料:
 
 [7 天打造前端性能监控系统](http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
