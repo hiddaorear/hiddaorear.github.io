@@ -19,9 +19,13 @@ description:
 
 > I don't have faith in tools, I have faith in people. --Steve Jobs
 
-> No technology can turn a bad stroy to a good story. --Steve Jobs
+> No technology can turn a bad story to a good story. --Steve Jobs
 
 > I do not belive it is a problem that has a technological answer, I believe it is a problem that has a human answer.  --Steve Jobs
+
+> 解释古事、批评古人，也不是绝对不可以，不过要谨慎，限于可能的范围以内罢了。谨守着个范围，我们能说的话，实在很少。然而在这些话中，却多少见得一点事实的真相，其意义，要比演义等假设之以满足人的感悟的深长得多。  --吕思勉
+
+
 
 ## 编程技巧
 
@@ -90,10 +94,32 @@ for(int i = 0; i < sizeof(actMap)/sizeof(actMap[0]); i++)
 
 ## Thinking
 
+算法思想的背后，隐隐约约藏着数学归纳法。
+> 数学归纳原理：设P(n)是关于自然数的一个性质。假设P(0)是真的，并假设只要P(n)是真的，则P(n++)也是真的，那么对于每个自然数n，P(n)都是真的。
+一个逻辑学注释：由于这个公理不仅说及变量，同时也说及性质，与其他公理具有不同的本质。在技术上与其叫公理，不如叫作公理框架(axiom schema)，他是一个产生无限多个公理的模板。
+《Analysis》--陶哲轩
+
 ### 数据结构与算法
 
 数据结构是算法的基本工具，采用什么样的数据结构由算法的数学模型决定，但是各不相同的数据结构自身的一些特点也会影响数学模型的选择。
 
+### 设计思想之贪婪(greedy algorithm)
+选取当前状况下最有利的选择，不考虑整体情况。
+
+### 设计思想之分治(divide and conquere)
+将大问题分解成一系列的规模较小的相同问题，然后逐步解决。
+
+### 设计思想之动态规划(dynamic programming)
+将复杂问题沿决策阶段划分子问题，子问题有关联，求解小问题然后反推原问题的结果。
+
+动态规划通过将问题细分为一系列子问题，从而隐含地探查了所有可行解的空间，于是我们可以在某种程度上把动态规划看作接近暴力搜索边缘的危险操作。所以，动态规划不是一种多项式时间的方法，而是一种穷举。
+
+### 设计思想之穷举
+在有限的解空间，按照一定策略进行查找。
+
+### 妖怪与和尚过河问题
+
+避免出现过多的if语句技巧（动作列表）
 
 
 ### 参考资料:

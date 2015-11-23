@@ -74,6 +74,11 @@ description:
 ### C
 [Linux C编程一站式学习](http://akaedu.github.io/book/index.html)
 
+### 算法
+[算法的乐趣](http://blog.csdn.net/orbit/article/list/5)
+[算法的乐趣源码](http://www.ituring.com.cn/book/1605)
+
+
 ### icon
 [iconfont](http://www.iconfont.cn/)
 [icomoon](https://icomoon.io/)
