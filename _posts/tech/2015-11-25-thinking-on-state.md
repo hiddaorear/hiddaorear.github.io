@@ -11,7 +11,7 @@ description:
 
 ### Thinking in state
 
-![the gargen of world](/../../assets/img/tech/2015/the_gargen_of_world_59.PNG)
+![the gargen of world](/../../assets/img/tech/2015/the_garden_of_world_59.PNG)
 
 > 所谓显然的事情通常并非真的那么显然，使用“显然”这个词往往意味着缺乏逻辑论证。 -- Errol Morris
 
