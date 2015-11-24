@@ -17,6 +17,44 @@ description:
 
 > 再多的天赋也战胜不了对细节的偏执。  --俗语
 
+## Curry
+
+### 实现封装
+
+JavaScript常见的DOM插入与删除。
+普通写法：
+
+````javascript
+
+var append = function(parent, child) {
+  parent.appendChild(child)
+}
+
+var remote = function(dom) {
+  dom.remove()
+}
+
+append(parent, child)
+remove(child)
+````
+变量都在函数外部，不能保证每个remove都正确。
+
+curry办法：
+
+````javascript
+
+var append = function(parent, child) {
+  parent.appendChild(child)
+  return function() {
+    child.remove()
+  }
+}
+
+var remove = append(parent, child)
+remove()
+
+````
+
 
 ### 参考资料:
 
