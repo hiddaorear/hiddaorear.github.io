@@ -65,6 +65,9 @@ remove()
 [JavaScript 中的有限状态机，第 1 部分: 设计一个小部件](http://www.uml.org.cn/UMLApplication/200811172.asp)
 [富交互性的动态用户界面 ](http://reactjs.cn/react/docs/interactivity-and-dynamic-uis.html)
 
+[JS设计模式笔记(状态模式)](http://blog.xinshangshangxin.com/2015/07/03/JS%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0-%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/)
+[js状态机与setTimeout的特殊应用 ](http://pleasureswx123.github.io/2015/02/12/js%E7%8A%B6%E6%80%81%E6%9C%BA%E4%B8%8EsetTimeout%E7%9A%84%E7%89%B9%E6%AE%8A%E5%BA%94%E7%94%A8/)
+[ 深入理解JavaScript系列（43）：设计模式之状态模式](http://www.cnblogs.com/tomxu/archive/2012/04/18/2437099.html)
 
 hid say: 深思。
 
