@@ -57,6 +57,14 @@ remove()
 
 
 ### 参考资料:
+[JavaScript与有限状态机](http://www.ruanyifeng.com/blog/2013/09/finite-state_machine_for_javascript.html)
+[基于有限状态机的交互组件设计与实现 ](http://ued.taobao.org/blog/2012/10/fsm/)
+[有限状态自动机的javascript实现](http://yiminghe.iteye.com/blog/407443)
+[jakesgordon/javascript-state-machine ](https://github.com/jakesgordon/javascript-state-machine)
+[状态机——Javascript词法扫描示例 - 随机 - 博客园](http://www.html-js.com/article/1430)
+[JavaScript 中的有限状态机，第 1 部分: 设计一个小部件](http://www.uml.org.cn/UMLApplication/200811172.asp)
+[富交互性的动态用户界面 ](http://reactjs.cn/react/docs/interactivity-and-dynamic-uis.html)
+
 
 hid say: 深思。
 
