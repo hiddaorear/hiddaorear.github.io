@@ -134,6 +134,87 @@ var light = new Light()
 
 核心思想是，调用同一个对象，其状态指针随状态的转变而变。通过改变指针的指向，实现了每次状态转变只调用同一个对象，而不是通过if判断来调用不同的对象。以不变应万变，而对象自身随变化而变。
 
+以上代码中，有重复的地方，通过JavaScript的原型继承，将其抽象出来：
+
+````javascript
+
+
+var StateFactory = function(global) {
+  var State = function(global) { this.gloabl = global }
+  State.prototype.buttonWasPressed = function() {
+    throw new Error('父类中的buttonWasPressed方法必需被重写')
+  }
+
+  return function(param) {
+    var F = function(_default) {
+      this._default = _default
+    }
+    F.prototype = new State()
+    
+    for (var i in param) {
+      F.prototype[i] = param[i];
+    }
+    return F
+  }
+}
+
+var Light = function() {}
+
+Light.prototype.setState = function(newState) {
+  this.currState = newState;
+}
+
+Light.prototype.init = function() {
+  var button = document.createElement('button')
+    , self = this
+    ;
+
+  this.button = document.body.appendChild(button)
+  this.button.innerHTML = '开关'
+
+  this.currState = this.OffLightState;
+
+  this.button.onclick = function() {
+    self.currState.buttonWasPressed();
+  }
+}
+
+var light = new Light()
+
+var OffLightState = StateFactory(light)({
+  buttonWasPressed: function() {
+    console.info('弱光')
+    light.setState(light.WeakLightState)
+  }
+})
+
+light.OffLightState    = new OffLightState(light)
+
+var WeakLightState = StateFactory(light)({
+  buttonWasPressed: function() {
+    console.info('强光')
+    light.setState(light.StrongLightState)
+  }
+})
+
+light.WeakLightState   = new WeakLightState(light)
+
+var StrongLightState = StateFactory(light)({
+  buttonWasPressed: function() {
+    console.info('关灯')
+    light.setState(light.OffLightState)
+  }
+})
+
+light.StrongLightState = new StrongLightState(light)
+
+light.init()
+
+````
+
+使用工厂函数，将重复的代码抽象。curry的直接连续调用，看起来不错，虽然有点怪。`fn()()`这样的调用，不常见。
+
+
 ### 参考资料:
 《JavaScript设计模式与开发实践》 曾探
 [JavaScript与有限状态机](http://www.ruanyifeng.com/blog/2013/09/finite-state_machine_for_javascript.html)
