@@ -214,6 +214,67 @@ light.init()
 
 使用工厂函数，将重复的代码抽象。curry的直接连续调用，看起来不错，虽然有点怪。`fn()()`这样的调用，不常见。
 
+### 函数委托的使用`call | apply`
+共用函数，我们直觉会想到面向对象的继承，很少能想到使用函数委托。实际上，函数委托是更为简洁的办法。
+
+````javascript
+function Delegate(context, delegate, to_delegate) {
+
+  if (delegate.to_delegate) {
+    throw new Error('to_delegate undefined')
+    return false
+  }
+  
+  var return_obj = {}
+  return_obj[to_delegate] = function() {
+      return delegate[to_delegate].apply(context, arguments)
+  }
+    
+  return return_obj
+}
+
+var FSM = {
+  off: {
+    buttonWasPressed: function() {
+      console.log('off')
+      this.button.innerHTML = 'next on'
+      this.currState = this.onState
+    }
+  }
+  ,on: {
+    buttonWasPressed: function() {
+      console.log('on')
+      this.button.innerHTML = 'next off'
+      this.currState = this.offState
+    }
+  }
+}
+
+var Light = function() {
+  this.offState = Delegate(this, FSM.off, 'buttonWasPressed')
+  this.onState = Delegate(this, FSM.on, 'buttonWasPressed')
+  this.currState = this.offState;
+  this.button = null
+}
+
+Light.prototype.init = function() {
+  var button = document.createElement('button')
+  , self = this
+  ;
+  button.innerHTML = 'off'
+  this.button = document.body.appendChild(button)
+  this.button.onclick = function() {
+    self.currState.buttonWasPressed()
+  }
+}
+
+var light = new Light()
+light.init()
+
+````
+
+需要要注意的是，被委托函数的this的使用。需要想到被委托对象的属性，这种预判的思维方式，估计是这个函数委托的思维挑战。
+然而，这个办法的简明与高效，值得注意。
 
 ### 参考资料:
 《JavaScript设计模式与开发实践》 曾探
