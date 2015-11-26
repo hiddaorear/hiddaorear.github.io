@@ -55,8 +55,87 @@ remove()
 
 ````
 
+从状态机的角度，每次执行curry化的函数之后，相当于重写了函数，可以作为状态转变的标记，而且没有用到标记变量。但用curry化来做状态转变，是一次性的，不可逆；另，只能处理简单的状态转变，复杂的状态转变也可以，但是returne不同的函数来说，得不偿失。
+
+### 简单的状态模式
+来自《JavaScript设计模式与开发实践》 的例子
+
+````javascript
+
+var State = function() {}
+State.prototype.buttonWasPressed = function() {
+  throw new Error('父类中的buttonWasPressed方法必需被重写')
+}
+
+var OffLightState = function(light) {
+  this.light = light
+}
+
+OffLightState.prototype = new State()
+
+OffLightState.prototype.buttonWasPressed = function() {
+  console.info('弱光')
+  this.light.setState(this.light.WeakLightState)
+}
+
+var WeakLightState = function(light) {
+  this.light = light
+}
+
+WeakLightState.prototype = new State()
+
+WeakLightState.prototype.buttonWasPressed = function() {
+  console.info('强光')
+  this.light.setState(this.light.StrongLightState)
+}
+
+var StrongLightState = function(light) {
+  this.light = light
+}
+
+StrongLightState.prototype = new State()
+
+StrongLightState.prototype.buttonWasPressed = function() {
+  console.info('关灯')
+  this.light.setState(this.light.OffLightState)
+}
+
+
+var Light = function() {
+  this.OffLightState    = new OffLightState(this)
+  this.WeakLightState   = new WeakLightState(this)
+  this.StrongLightState = new StrongLightState(this)
+  this.button = null
+}
+
+Light.prototype.setState = function(newState) {
+  this.currState = newState;
+}
+
+Light.prototype.init = function() {
+  var button = document.createElement('button')
+    , self = this
+    ;
+
+  this.button = document.body.appendChild(button)
+  this.button.innerHTML = '开关'
+
+  this.currState = this.OffLightState;
+
+  this.button.onclick = function() {
+    self.currState.buttonWasPressed();
+  }
+}
+
+var light = new Light()
+  light.init()
+
+````
+
+核心思想是，调用同一个对象，其状态指针随状态的转变而变。通过改变指针的指向，实现了每次状态转变只调用同一个对象，而不是通过if判断来调用不同的对象。以不变应万变，而对象自身随变化而变。
 
 ### 参考资料:
+《JavaScript设计模式与开发实践》 曾探
 [JavaScript与有限状态机](http://www.ruanyifeng.com/blog/2013/09/finite-state_machine_for_javascript.html)
 [基于有限状态机的交互组件设计与实现 ](http://ued.taobao.org/blog/2012/10/fsm/)
 [有限状态自动机的javascript实现](http://yiminghe.iteye.com/blog/407443)
