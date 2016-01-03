@@ -11,7 +11,7 @@ description:
 
 ### AngularJS笔记
 
-![Jobs](/../../assets/img/tech/2015/jobs_4.jpg)
+![Jobs](/../../assets/img/tech/2016/jobs_4.jpg)
 
 
 ### 参考资料:
