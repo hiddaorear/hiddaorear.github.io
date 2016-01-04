@@ -34,6 +34,7 @@ description:
 
 [Campo](http://codecampo.com/)
 [Hacker News](https://news.ycombinator.com/news)
+[JavaScript Weekly](http://javascriptweekly.com)
 [所有专栏文章 - Div.IO](http://div.io/pro/index)
 [首页 - w3ctech - 中国最大的前端技术社区](http://www.w3ctech.com/)
 
