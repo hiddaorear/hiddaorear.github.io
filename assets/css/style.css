@@ -642,8 +642,8 @@ iframe {
 #js-fullscreen {
   margin: 0;
   padding: 0;
-  color: #7D8B99;
-  background: rgba(229, 232, 236, 0.5);
+  color: #1ABC9C;
+  background: #EB0028;
   border-radius: 50%;
   border: none;
   box-shadow: 0 0 10px 10px transparent;
@@ -662,7 +662,7 @@ iframe {
   -o-appearance: none;
   appearance: none; }
   #js-fullscreen:hover {
-    color: #2EB695;
+    color: #fff;
     box-shadow: 0 0 0 3px rgba(125, 139, 153, 0.15); }
   @media screen and (max-width: 585px) {
     #js-fullscreen {
