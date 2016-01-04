@@ -25,6 +25,7 @@ description:
 
 ### 技术文章聚合
 [调试的艺术](http://www.w3ctech.com/topic/1654)
+[教科书里面的setTimeout](http://div.io/topic/1459)
 
 ### 有意思的人
 [羡辙杂俎](http://zhangwenli.com/)
