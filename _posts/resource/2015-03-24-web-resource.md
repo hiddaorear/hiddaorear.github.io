@@ -89,6 +89,10 @@ description:
 [icomoon](https://icomoon.io/)
 [fontello](http://fontello.com/)
 
+### 英语
+[Urban Dictionary](http://www.urbandictionary.com/)
+
+
 hid say: 陆陆续续收集了很多资料，但几乎没有深入阅读。那些在项目中用了资料还好，没有用过的几乎都是浅阅读。其实深阅读可以解决很多事情，可以节省很多时间，但是浮躁是知识之大敌，致使时间就这么白白流失了，多么可惜呀！
 
 
