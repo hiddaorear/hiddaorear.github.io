@@ -98,28 +98,28 @@ angular
   
   function logger() {}
   function Dashboard() {}
-  ````
-  
-  ### controllerAs with vm
+````
+
+### controllerAs with vm
   
   使用`controllerAs`语法时把`this`赋值给一个可捕获的变量，选择一个有代表性的名字，例如`vm`代表ViewModel。避免`this`在不同地方有不同的语义。
   
-  ````javascript
+````javascript
   // avoid
   function Customer() {
     this.name = {}
     this.sendMessage = function() {}
   }
-  ````
-  
-  ````javascript
+````
+
+````javascript
   // recommended
   function Customer() {
     var vm = this
     vm.name = {}
     vm.sendMessage = function() {}
   }
-  ````
+````
   
 ### 置顶绑定成员
 
