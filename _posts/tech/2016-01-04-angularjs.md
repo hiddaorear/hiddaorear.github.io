@@ -305,6 +305,7 @@ function outer() {
   }
 }
 ````
+
 ### 参考资料:
 [后Angular时代二三事](https://github.com/xufei/blog/issues/21)
 [Angular规范](https://github.com/johnpapa/angular-styleguide/blob/master/i18n/zh-CN.md#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3)
