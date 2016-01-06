@@ -242,6 +242,69 @@ angular
   }
 ````
 
+### 手动添加依赖
+使用`$inject`手动添加Angular组建所需的依赖。对代码压缩安全，避免内嵌依赖，同时，依赖数组前面的是一系列的字符串，而最后一个却是组件function，令人困惑。
+
+````javascript
+// avoid
+
+angular
+  .module('app')
+  .controller('Dashboard',
+  ['$location', '$routeParams', 'common', 'dataservice',
+    function Dashboard($location, $routeParamas, common, dataservice) {
+    
+    }])
+````
+
+````javascript
+// recommend
+angular
+  .module('app')
+  .controller('Dashboard', Dashboard);
+  
+  Dashboard.$inject = ['$location', '$routeParams', 'common', 'dataservice'];
+  
+  function Dashboard($location, $routeParams, common, dataservice) {
+  
+  }
+````
+
+注意：但函数位于return语句后面，那么`$inject`是无法访问的（常见于directive中），可以通过把Controller移动到directive外面来解决。
+
+````javascript
+// avoid
+
+function outer() {
+  var ddo = {
+    controller: DashboardPanelController,
+    controllerAs: 'vm'
+  };
+  return dddo;
+  
+  DashboardPanelController.$inject = ['logger'];
+  function DashboardPanelController(logger) {
+  
+  }
+}
+````
+
+````javascript
+// recommended
+
+function outer() {
+  var ddo = {
+    controller: DashboardPanelController,
+    controllerAs: 'vm'
+  };
+  return ddo;
+  
+  DashboardPanelController.$inject = ['logger'];
+  function DashboardPanelController(logger) {
+  
+  }
+}
+````
 ### 参考资料:
 [后Angular时代二三事](https://github.com/xufei/blog/issues/21)
 [Angular规范](https://github.com/johnpapa/angular-styleguide/blob/master/i18n/zh-CN.md#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3)
