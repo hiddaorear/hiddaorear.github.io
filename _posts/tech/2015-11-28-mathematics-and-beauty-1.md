@@ -16,6 +16,7 @@ description:
 > 从前的愚民政策是不许人民受教育，现代愚民政策是只许人民受某一种教育。不受教育的人，因为不识字，上人的当，受教育的人，因为识了字，上印刷品的当。--钱钟书
 
 ### 傅立叶变换原理
+函数在三角函数空间的投影。
 
 ### 不确定性原理
 
@@ -24,6 +25,50 @@ description:
 ### FFT算法实现关键
 
 ### FFT具体实现
+
+````c++
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+const int N = 1024;
+const float PI = 3.1416;
+
+inline void swap (float &a, float &b)
+{
+  float t;
+  t = a;
+  a = b;
+  b =t ;
+}
+
+void bitrp (float xreal [], float ximag [], int n)
+{
+  int i, j, a, b, p;
+  
+  for (i = 1, p = 0; i < n; i *= 2) {
+    p++;
+  }
+  
+  for (i = 0; i < n; i++) {
+    a = i;
+    b = 0;
+    for (j = 0; j < p; j++) 
+      {
+        b = (b << 1) + (a & 1);  // b = b * 2 + a%2;
+        a >>= 1; // a = a/2;
+      }
+      
+      if (b > i)
+        {
+          swap(xreal[i], xreal[b]);
+          swap(ximag[i], ximag[b]);
+        }
+  }
+}
+
+
+````
 
 
 
