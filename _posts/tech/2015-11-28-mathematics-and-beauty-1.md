@@ -28,47 +28,6 @@ description:
 
 ````c
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-const int N = 1024;
-const float PI = 3.1416;
-
-inline void swap (float &a, float &b)
-{
-  float t;
-  t = a;
-  a = b;
-  b =t ;
-}
-
-void bitrp (float xreal [], float ximag [], int n)
-{
-  int i, j, a, b, p;
-  
-  for (i = 1, p = 0; i < n; i *= 2) {
-    p++;
-  }
-  
-  for (i = 0; i < n; i++) {
-    a = i;
-    b = 0;
-    for (j = 0; j < p; j++) 
-      {
-        b = (b << 1) + (a & 1);  // b = b * 2 + a%2;
-        a >>= 1; // a = a/2;
-      }
-      
-      if (b > i)
-        {
-          swap(xreal[i], xreal[b]);
-          swap(ximag[i], ximag[b]);
-        }
-  }
-}
-
-
 ````
 
 
@@ -77,19 +36,17 @@ void bitrp (float xreal [], float ximag [], int n)
 《算法的乐趣》王晓华
 《Principles and Practice Using C++》 Bjarne Stroustrup
 [傅里叶变换：MP3、JPEG和Siri背后的数学](http://blog.jobbole.com/51301/)
-[理解快速傅里叶变换（FFT）算法](http://blog.jobbole.com/58246/)
-[学三角多项式逼近和快速傅立叶变换(一）](http://blog.sciencenet.cn/blog-797552-880849.html)
 [快速傅里叶变换](http://open.163.com/movie/2008/2/A/L/M7Q4BLENR_M7QDNTVAL.html)
 [复数矩阵和快速傅里叶变换](http://open.163.com/movie/2010/11/7/7/M6V0BQC4M_M6V2B4U77.html)
 
 [dft](http://docs.opencv.org/2.4/modules/core/doc/operations_on_arrays.html#dft)
 [OpenCV实现基于傅里叶变换的旋转文本校正](http://johnhany.net/2013/11/dft-based-text-rotation-correction/)
-[离散傅立叶变换](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/core/discrete_fourier_transform/discrete_fourier_transform.html)
-[几种快速傅里叶变换(FFT)的C++实现](http://www.cnblogs.com/huaping-audio/archive/2008/07/15/1243699.html)
 [The Discrete Fourier Transform](http://arachnoid.com/signal_processing/dft.html)
-[快速傅立叶变换（FFT）的C++实现与Matlab实验](http://blog.csdn.net/rappy/article/details/1700829)
-[十五、多项式乘法与快速傅里叶变换](http://blog.csdn.net/v_july_v/article/details/6684636)
 [快速傅里叶变换](https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2)
+
+[快速傅里叶变换 易懂版](https://www.zybuluo.com/397915842/note/37965)
+[Fast Fourier Transform ](http://picks.logdown.com/posts/177631-fast-fourier-transform)
+[从多项式乘法到快速傅里叶变换](http://blog.miskcoo.com/2015/04/polynomial-multiplication-and-fast-fourier-transform)
 
 hid say: 简化。
 
