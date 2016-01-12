@@ -26,7 +26,8 @@ description:
 
 ### FFT具体实现
 
-````c++
+````c
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
