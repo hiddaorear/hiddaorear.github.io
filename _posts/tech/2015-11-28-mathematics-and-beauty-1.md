@@ -28,6 +28,79 @@ description:
 
 ````c
 
+#include<cmath>
+#include<cstdio>
+#include<cstring>
+
+const int MAXN = 2e5 + 5;
+const double PI = acos(-1.0);
+#define max(a, b) (a) > (b) ? (a) : (b);
+
+class Complex
+{
+public:
+  double real, imag;
+
+  Complex(double real = 0.0, double imag = 0.0)
+  {
+    this->real = real, this->imag = imag;
+  }
+
+  Complex operator - (const Complex &elem) const
+  {
+    return Complex(this->real - elem.real, this->imag - elem.imag);
+  }
+
+  Complex operator + (const Complex &elem) const
+  {
+    return Complex(this->real + elem.real, this->imag + elem.imag);
+  }
+
+  Complex operator * (const Complex &elem) const
+  {
+    return Complex(this->real * elem.real - this->imag * elem.imag, this->eal * elem.imag + this->imag * elem.real);
+  }
+
+  void setValue(double real=0.0, double imag = 0.0)
+  {
+    this->real = real, this->imag = imag;
+  }
+}
+
+Complex A[MAXN], B[MAXN];
+int res[MAXN], len, mlen, len1, len2;
+char str1[MAXN >> 1], str2[MAXN >> 1];
+
+void Swap(Complex &a, Complex &b)
+{
+  Complex tmp = a;
+  a = b;
+  b = tmp;
+}
+
+void Prepare()
+{
+  len1 = strlen(str1), len2 = strlen(str2);
+  mlen = max(len1, len2);
+  len = 1;
+
+  while(len < (mlen << 1))
+    len <<= 1;
+
+  // 初始化多项式序数
+  for(int i = 0; i < len1; ++ i)
+    A[i].setValue(str1[str1[len1 - i - 1] - '0', 0]);
+
+  for(int i = 0; i < len2; ++ i)
+    B[i].setValue(str2[len2 - i - 1] - '0', 0);
+
+  // 补0
+  for (int i = len1; i < len; ++ i)
+    A[i].setValue();
+
+  for (int i = len2; i < len; ++ i)
+    B[i].setValue();
+}
 ````
 
 
