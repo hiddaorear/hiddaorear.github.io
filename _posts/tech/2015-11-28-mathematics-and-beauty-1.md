@@ -28,192 +28,114 @@ description:
 
 ````c
 
-#include<cmath>
-#include<cstdio>
-#include<cstring>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <iostream>
+#include <algorithm>
+using namespace std;
 
-const int MAXN = 2e5 + 5;
-const double PI = acos(-1.0);
-#define max(a, b) (a) > (b) ? (a) : (b);
-
-class Complex
-{
-public:
-  double real, imag;
-
-  Complex(double real = 0.0, double imag = 0.0)
-  {
-    this->real = real, this->imag = imag;
-  }
-
-  Complex operator - (const Complex &elem) const
-  {
-    return Complex(this->real - elem.real, this->imag - elem.imag);
-  }
-
-  Complex operator + (const Complex &elem) const
-  {
-    return Complex(this->real + elem.real, this->imag + elem.imag);
-  }
-
-  Complex operator * (const Complex &elem) const
-  {
-    return Complex(this->real * elem.real - this->imag * elem.imag, this->eal * elem.imag + this->imag * elem.real);
-  }
-
-  void setValue(double real=0.0, double imag = 0.0)
-  {
-    this->real = real, this->imag = imag;
-  }
-}
-
-Complex A[MAXN], B[MAXN];
-int res[MAXN], len, mlen, len1, len2;
-char str1[MAXN >> 1], str2[MAXN >> 1];
-
-void Swap(Complex &a, Complex &b)
-{
-  Complex tmp = a;
-  a = b;
-  b = tmp;
-}
-
-void Prepare()
-{
-  len1 = strlen(str1), len2 = strlen(str2);
-  mlen = max(len1, len2);
-  len = 1;
-
-  while(len < (mlen << 1))
-    len <<= 1;
-
-  // 初始化多项式序数
-  for(int i = 0; i < len1; ++ i)
-    A[i].setValue(str1[str1[len1 - i - 1] - '0', 0]);
-
-  for(int i = 0; i < len2; ++ i)
-    B[i].setValue(str2[len2 - i - 1] - '0', 0);
-
-  // 补0
-  for (int i = len1; i < len; ++ i)
-    A[i].setValue();
-
-  for (int i = len2; i < len; ++ i)
-    B[i].setValue();
-}
-
-// 雷德算法，位逆序置换
-void Rader(Complex y[])
-{
-  for(int i = 1, j = len >> 1, k; i < len -1; ++i)
-  {
-    if(i < j)
-      Swap(y[i], y[j])
-      
-      k = len >> 1;
-
-      while(j >= k)
-      {
-        j -= k;
-        k >>= 1;
-      }
-
-      if(j < k)
-        j += k;
-  }
-}
-
-// DFT: op == 1
-// IDFT: op == -1
-void FFT(Complex y[], int op)
-{
-  // 先位逆序置换
-  Rader(y);
-
-  // h 为每次要处理的长度， h = 1时不需要处理
-  for(int h = 2; h <= len; h <<= 1)
-  {
-    // Wn = e^(2 * PI / n), 如果是插值，那么Wn = e^(-2 * PI / n)
-    Complex Wn(cos(op * 2 * PI / h), sin(op * 2 * PI / h));
-
-    for(int i = 0; i < len; i += h)
-    {
-      // 旋转因子， 初始化为e^0
-      Complex W(1, 0);
-
-      for(int j = i; j < i + h / 2; ++j)
-      {
-        Complex u = y[j];
-        Complex t = W * y[j + h / 2];
-
-        // 蝴蝶操作
-        y[j] = u + t;
-        y[j + h / 2] = u - t;
-
-        // 每次更新旋转因子
-        W = W * Wn;
-      }
+struct C {
+    double r, i;
+    C() {}
+    C(double _r, double _i) : r(_r), i(_i) {}
+    inline C operator + (const C & a) const {
+        return C(r + a.r, i + a.i);
     }
-  }
+    inline C operator - (const C & a) const {
+        return C(r - a.r, i - a.i);
+    }
+    inline C operator * (const C & a) const {
+        return C(r*a.r - i*a.i, r*a.i + i*a.r);
+    }
+};
 
-  // 插值的时候要除以len
-  if(op == -1)
-    for(int i = 0; i < len; ++i)
-      y[i].real /= len;
+typedef long long LL;
+const double pi = acos(-1.0);
+const int N = 50005;
+C a[N<<2], b[N<<2];
+char num1[N], num2[N];
+LL ret[N<<2];
+
+void brc(C *y, int L) {
+    int i, j, k;
+    for (i=1,j=L>>1; i<L-1; ++i) { // 二进制平摊反转置换 O(NlogN)
+        if (i < j) swap(y[i], y[j]);
+        k = L>>1;
+        while (j >= k) {
+            j -= k;
+            k >>= 1;
+        }
+        j += k;
+    }
 }
 
-// DFT 后将 A 和 B 相应点值相乘，将结果放到res里面
-void Convolution(Complex *A, Complex *B)
-{
-  // evaluation
-  FFT(A, 1), FFT(B, 1);
-
-  for(int i = 0; i < len; ++i)
-    A[i] = A[i] * B[i];
-
-  // interpolation
-  FFT(A, -1)
-
-  for(int i = 0; i < len; ++i)
-    res[i] = (int)(A[i].real + 0.5);
+void FFT(C *y, int L, int dir) {
+    brc(y, L);
+    for (int h = 2; h <= L; h <<= 1) { // 枚举所需计算的点数 
+        C wn(cos(dir*2*pi/h), sin(dir*2*pi/h)); // h次单位复根 
+        for (int j = 0; j < L; j += h) { // 原序列被分成了L/h段h长序列 
+            C w(1, 0); // 旋转因子 
+            for (int k = j; k < j+h/2; ++k) { // 因为折半定理，只需要计算枚举一半的长度即可 
+                C u = y[k];
+                C t = w*y[k+h/2];
+                y[k] = u + t;
+                y[k+h/2] = u - t;
+                w = w * wn; // 更新旋转因子 
+            }
+        }
+    }
+    if (dir == 1) {
+        for (int i = 0; i < L; ++i) {
+            y[i] = y[i] * C(1.0/L, 0);
+        }
+    }
 }
 
-void Adjustment(int *arr)
-{
-  // 次数界为len，所以不用担心进位不会进到第len位
-  for(int i = 0; i < len; ++i)
-  {
-    res[i + 1] += res[i] / 10;
-    res[i] %= 10;
-  }
-
-  // 去除多余的0
-  while(-- len && res[len] == 0);
-}
-
-void Display(int *arr)
-{
-  for(int i = len; i >= 0; --i)
-    putchar(arr[i] + '0')
-
-  putchar('\n');
-}
-
-int main()
-{
-  while(gets(str1) && gets(str2))
-  {
-    Prepare();
-    Convolution(A, B);
-    Adjustment(res);
-    Display(res);
-  }
-
-  return 0;
-}
-
+int main() {
+    while (scanf("%s %s", num1, num2) != EOF) {
+        memset(ret, 0, sizeof (ret));
+        int len1 = strlen(num1), len2 = strlen(num2);
+        int ML = len1+len2-1, L = 1;
+        while (L < ML) L <<= 1;
+        for (int i = len1-1, j = 0; i >= 0; --i, ++j) {
+            a[j] = C(num1[i]-'0', 0);
+        }
+        for (int i = len2-1, j = 0; i >= 0; --i, ++j) {
+            b[j] = C(num2[i]-'0', 0);
+        }
+        for (int i = len1; i < L; ++i) a[i] = C(0, 0);
+        for (int i = len2; i < L; ++i) b[i] = C(0, 0);
+        FFT(a, L, -1), FFT(b, L, -1);
+        for (int i = 0; i < L; ++i) {
+            a[i] = a[i] * b[i];
+        }
+        FFT(a, L, 1);
+        for (int i = 0; i < L; ++i) {
+            ret[i] = (LL)floor(a[i].r + 0.5);
+        }
+        for (int i = 0; i < L; ++i) {
+            ret[i+1] += ret[i] / 10;
+            ret[i] %= 10;
+        }
+        int p = L;
+        while (!ret[p] && p) --p;
+        while (p >= 0) printf("%d", (int)ret[p--]);
+        puts("");
+    }
+    return 0;
+} 
 ````
 
+
+### `C++`编译
+
+````shell
+
+g++ -o my_program my_program.cpp
+
+````
 
 
 ### 参考资料:
@@ -231,6 +153,9 @@ int main()
 [快速傅里叶变换 易懂版](https://www.zybuluo.com/397915842/note/37965)
 [Fast Fourier Transform ](http://picks.logdown.com/posts/177631-fast-fourier-transform)
 [从多项式乘法到快速傅里叶变换](http://blog.miskcoo.com/2015/04/polynomial-multiplication-and-fast-fourier-transform)
+
+[FFT-快速傅立叶变换](http://www.cnblogs.com/Lyush/p/3219605.html)
+[A * B Problem Plus](http://acm.hdu.edu.cn/showproblem.php?pid=1402)
 
 hid say: 简化。
 
