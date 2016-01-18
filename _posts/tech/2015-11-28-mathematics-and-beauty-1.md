@@ -16,7 +16,8 @@ description:
 > 从前的愚民政策是不许人民受教育，现代愚民政策是只许人民受某一种教育。不受教育的人，因为不识字，上人的当，受教育的人，因为识了字，上印刷品的当。--钱钟书
 
 ### 傅立叶变换原理
-函数在三角函数空间的投影。
+
+
 
 ### 不确定性原理
 
@@ -139,6 +140,8 @@ g++ -o my_program my_program.cpp
 
 
 ### 参考资料:
+
+《算法导论》
 《算法的乐趣》王晓华
 《Principles and Practice Using C++》 Bjarne Stroustrup
 [傅里叶变换：MP3、JPEG和Siri背后的数学](http://blog.jobbole.com/51301/)
