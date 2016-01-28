@@ -28,6 +28,7 @@ description:
 [教科书里面的setTimeout](http://div.io/topic/1459)
 
 ### 有意思的人
+[Harttle Land](http://harttle.com/archive.html)
 [羡辙杂俎](http://zhangwenli.com/)
 [三尺微命，一介书生](http://liyaos.com/blog/)
 [非人磨墨墨磨人](http://zhu.tianhua.me/)
