@@ -114,6 +114,16 @@ description:
 > Any problem in compute scienct can be solved with another level of indirction.
 --Lampson
 
+### 杂项
+
+1. Money comes and money goes, bug people don't.
+2. 我们做人，只说真话，不说假话。但真话只说一半。
+3. We judge ourselves by what we feel capable of doing. Others judge us by what we've already done.
+4. Press on. Nothing in the world can take the place of persistence. Talent will not: nothing is more common than unsuccessful men with talent. Genius will not: unrewarded genius is almost a proverb. Education alone will not: the world is full of educated derelicts. Persistence and determination alone are omnipontent.
+5. The true measure of a person can be determined by watching him closely and observing how he treats people who can do him absolutely no good.
+6. Start with what is right rather than what is acceptable.
+7. Start Before You Feel Ready: If you're working on something important, then you'll never feel ready. A side effect of doing challenging work is that you're pulled by excitement and pushed by confusion at the same time.
+8. There is no substitute for living a life you love, Start now...it will only get harder to change.
 
 
 ## 参考资料：
