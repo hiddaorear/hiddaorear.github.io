@@ -55,6 +55,11 @@ description:
 
 没有可怕的深度，就没有美丽的水面。
 
+谁终将声震人间，必久深自缄默。谁终将点燃闪电，必久如云漂泊。
+
+每一个不曾起舞的日子，都是对生命的辜负。
+
+对生命你不妨大胆冒险些，因为好歹你要失去他，何必总陷于一片泥土。
 
 ### 俳句
 
@@ -124,6 +129,20 @@ description:
 6. Start with what is right rather than what is acceptable.
 7. Start Before You Feel Ready: If you're working on something important, then you'll never feel ready. A side effect of doing challenging work is that you're pulled by excitement and pushed by confusion at the same time.
 8. There is no substitute for living a life you love, Start now...it will only get harder to change.
+
+### 围棋
+
+围棋十诀：
+1. 不得贪胜
+2. 入界宜缓
+3. 攻彼顾我
+4. 弃子争先
+5. 舍小就大
+6. 逢危须弃
+7. 慎勿轻速
+8. 动须相应
+9. 彼强自保
+10. 势孤取和
 
 
 ## 参考资料：
