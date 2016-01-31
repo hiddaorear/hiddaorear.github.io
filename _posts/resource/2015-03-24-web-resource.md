@@ -22,6 +22,7 @@ description:
 
 ### 前端blog
 [囧克斯这里是勾三股四的新家](http://jiongks.name/)
+[醉牛前端](http://f2er.club/)
 
 ### 技术文章聚合
 [调试的艺术](http://www.w3ctech.com/topic/1654)
