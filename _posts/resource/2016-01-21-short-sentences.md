@@ -116,7 +116,7 @@ description:
 
 ### 计算机
 
-> Any problem in compute scienct can be solved with another level of indirction.
+> Any problem in compute science can be solved with another level of indirction.
 --Lampson
 
 ### 杂项
@@ -187,6 +187,25 @@ description:
 凡作一事，无论大小难易，宜有始有终。有恒，则断无不成之事。
 
 每日有常，自由进境，万不可厌常喜新，此书未完，忽换彼书尔。
+
+### 唐诗
+
+酌酒与君君自宽，人情翻覆似波澜。
+白首相知犹按剑，朱门先达笑弹冠。
+草色全经细雨湿，花枝欲动春风寒。
+世事浮云何足问，不如高卧且加餐。
+--王维-浊酒与裴迪
+
+### 清代诗
+
+晓觉茅檐片月底，依稀乡国梦中迷。
+世间何物催人老，半是鸡声半马蹄。
+--王九龄-题旅店
+
+枕中云气千峰近，床底松声万壑哀。
+要看银山拍天浪，开窗放入大江来。
+--曾公亮-宿甘露寺僧舍
+
 
 
 ## 参考资料：
