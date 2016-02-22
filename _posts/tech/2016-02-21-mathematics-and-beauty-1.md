@@ -1,31 +1,24 @@
 ---
 layout: post
-title:  Functional JavaScript 
+title:  发票组合问题
 category: 资源
-tags: [Functional JavaScript ]
-keywords: Functional JavaScript 
+tags: [算法]
+keywords: 算法 
 description: 
 ---
 
 ### 发票组合问题
 
-#### Functional JavaScript 
+#### 小用算法 
 
-#### Sunday, 24 Jan 2016
+#### Monday, 22 Jan 2016
 
 ![老树画画](/../../assets/img/tech/2016/LaoShuHuaHua_5.jpeg)
 
 
 ## 参考资料：
 
-[函数式编程](http://coolshell.cn/articles/10822.html)
+[手上大概有发票1000张，单张面值都是小于660元的，公司报餐费需要660元发票，怎么搭配660元 ?](https://www.zhihu.com/question/37896761)
 
-[Functional JavaScript Mini Book](https://blog.oyanglul.us/javascript/functional-javascript.html)
 
-[JS函数式编程指南](https://www.gitbook.com/book/llh911001/mostly-adequate-guide-chinese/details)
-
-[使用JavaScript实现“真·函数式编程”](http://jimliu.net/2015/10/21/real-functional-programming-in-javascript-1/)
-
-[函数式JavaScript（2）：如何打造“函数式”编程语言？](http://blog.jobbole.com/77078/)
-
-Hid say：Functional JavaScript 。
+Hid say：小用算法 。
