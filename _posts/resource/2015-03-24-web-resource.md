@@ -24,6 +24,9 @@ description:
 
 [卢昌海个人主页](http://www.changhai.org/)
 
+### 视频
+[好多视频](http://haoduoshipin.com/all)
+
 ### 前端blog
 [囧克斯这里是勾三股四的新家](http://jiongks.name/)
 
