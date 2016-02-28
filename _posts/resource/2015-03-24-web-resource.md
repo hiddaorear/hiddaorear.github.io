@@ -41,6 +41,13 @@ description:
 
 [Anotherhome](https://www.anotherhome.net/)
 
+### Gulp
+[gulp详细入门教程](http://www.ydcss.com/archives/18)
+[了不起的任务运行器Gulp基础教程](http://www.html-js.com/article/1742)
+[gulp-book](https://github.com/nimojs/gulp-book/blob/master/chapter1.md)
+[gulp 中文文档](http://www.gulpjs.com.cn/docs/)
+[Gulp：任务自动管理工具](http://javascript.ruanyifeng.com/tool/gulp.html)
+
 ### 技术文章聚合
 [调试的艺术](http://www.w3ctech.com/topic/1654)
 
