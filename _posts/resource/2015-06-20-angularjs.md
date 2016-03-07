@@ -16,6 +16,32 @@ description:
 
 AngularJS学习笔记，所参考的原程序有误，均已修正。
 
+### `angular.bootstrap`
+
+使用此函数手动启动angular应用。防止应用中有多个Angular实例一同试图工作在DOM上而发生奇怪的现象。
+
+````javascript
+
+<!doctype html>
+<html>
+<body>
+<div ng-controller="WelcomeController">
+  {{greeting}}
+</div>
+
+<script src="angular.js"></script>
+<script>
+  var app = angular.module('demo', [])
+  .controller('WelcomeController', function($scope) {
+      $scope.greeting = 'Welcome!';
+  });
+  angular.bootstrap(document, ['demo']);
+</script>
+</body>
+</html>
+
+````
+
 ### Promise and Http
 
 ````javascript
@@ -345,30 +371,52 @@ var app = angular.module('test', [])
 
 ### ng-repeat
 [AngularJS源码阅读之ngRepeat](http://loveky.github.io/2014/04/02/angularjsngrepeat/)
+
 [AngularJS中如何去掉 ng-repeat的自动排序？](http://www.zhihu.com/question/28707241)
+
 [Angular新手容易碰到的坑，随时更新，欢迎订阅 - AngularJS Nice Things](http://www.ngnice.com/posts/2c8208220edb94)
+
 [angular controller as syntax vs scope - 破狼 - 博客园](http://www.cnblogs.com/whitewolf/p/3493362.html)
+
 [AngularJS ng-repeat下使用ng-model 转 - 叶知秋红 - 博客园](http://www.cnblogs.com/zifeiyu/p/3765864.html)
+
 [AngularJS沉思录（二） 视图模型的层次 - Div.IO](http://div.io/topic/583)
-[AngularJS最佳实践: 请小心使用 ng-repeat 中的 $index - renfufei的专栏 - 博客频道 ](http://blog.csdn.net/renfufei/article/details/43061877)
+
+[AngularJS最佳实践: 请小心使用 ng-repeat 中的 $index - renfufei的专栏 - 博客频道
+](http://blog.csdn.net/renfufei/article/details/43061877)
+
 [AngularJS最佳实践: 请小心使用 ng-repeat 中的 $index](https://github.com/cncounter/translation/blob/master/tiemao_2015/04_ng_repeat_%24index/ng_repeat_%24index.md)
+
 [AngularJS性能优化心得 · Issue #5 · atian25/blog](https://github.com/atian25/blog/issues/5)
+
 [使用超动感HTML & JS开发WEB应用! | AngularJS中文社区](http://angularjs.cn/A0lr)
 
 
 ### AnguarlarJS introduction
 [AngularJS 应用身份认证的技巧 - Coding 博客](https://blog.coding.net/blog/techniques-for-authentication-in-angular-js-applications)
+
 [七步从Angular.JS菜鸟到专家（2）：Scopes - 博客 - 伯乐在线](http://blog.jobbole.com/48593/)
+
 [AngularJS学习笔记 - 进出自由,我的分享](http://www.zouyesheng.com/angular.html)
+
 [How AngularJS implements dirty checking ](http://ryanclark.me/how-angularjs-implements-dirty-checking)
+
 [彻底弄懂AngularJS中的transclusion - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/Using-Angular-to-develop-web-application-completely-understand-AngularJS-transclusion)
+
 [AngularJS: 使用Scope时的6个陷阱 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2000)
+
 [AngularJS 数据双向绑定揭秘 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/2145)
+
 [使用超动感HTML & JS开发WEB应用! | AngularJS中文社区](http://www.angularjs.cn/A00x)
+
 [[AngularJS] 仿照Angular Bootstrap TimePicker创建一个分钟数-秒数的输入控件](http://blog.csdn.net/dm_vincent/article/details/42612189)
+
 [有jQuery背景，该如何用AngularJS编程思想？ - 博客 - 伯乐在线](http://blog.jobbole.com/46589/)
+
 [七步从Angular.JS菜鸟到专家（1）：如何开始 - 博客 - 伯乐在线](http://blog.jobbole.com/46779/)
+
 [表单控件 | AngularJS学习笔记](http://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter7/7-5.html)
+
 [如何在AngularJS指令中创建controller与ngModel进行交互 - 用Angular开发web应用 - 前端乱炖](http://www.html-js.com/article/Using-Angular-to-develop-web-application-to-AngularJS-instruction-to-create-controller-interacts-with-ngModel)
 
 
@@ -377,8 +425,15 @@ var app = angular.module('test', [])
 
 ### AngularJS Parse
 [MVVM大比拼之vue.js源码精析 - 侯振宇 - 博客园](http://www.cnblogs.com/sskyy/p/3695003.html)
+
 [MVVM大比拼之AngularJS源码精析 - 侯振宇 - 博客园](http://www.cnblogs.com/sskyy/p/3709649.html)
+
 [angularjs - "Computed Properties" in Angular.js - Stack Overflow](http://stackoverflow.com/questions/11216651/computed-properties-in-angular-js)
+
+
+### `angular.bootstrap`
+
+[angularjs-chinese-api bootstrap](https://114000.gitbooks.io/angularjs-chinese-api/content/Functions/ng.angular.bootstrap.html)
 
 
 hid say: 后端的思维。
