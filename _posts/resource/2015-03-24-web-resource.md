@@ -47,6 +47,19 @@ description:
 
 [Anotherhome](https://www.anotherhome.net/)
 
+[艾克斯の編碼者](https://xcoder.in/)
+
+[Minary](http://f10.moe/)
+
+[AprocySanae](http://blog.kochiya.me/)
+
+[卜卜口](http://i.mouto.org/#me)
+
+[crzidea](http://crzidea.com/)
+
+[TooBug](http://www.toobug.net/)
+
+
 ### Gulp
 [gulp详细入门教程](http://www.ydcss.com/archives/18)
 
