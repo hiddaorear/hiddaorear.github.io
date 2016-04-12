@@ -28,6 +28,10 @@ description:
 
 [好多视频](http://haoduoshipin.com/all)
 
+[实验楼](https://www.shiyanlou.com/courses/)
+
+[则修](http://zexeo.com/home)
+
 ### 前端blog
 
 [iwillwen](http://lifemap.in/)
