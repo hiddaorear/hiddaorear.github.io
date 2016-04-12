@@ -25,6 +25,7 @@ description:
 [卢昌海个人主页](http://www.changhai.org/)
 
 ### 视频
+
 [好多视频](http://haoduoshipin.com/all)
 
 ### 前端blog
@@ -58,6 +59,10 @@ description:
 [crzidea](http://crzidea.com/)
 
 [TooBug](http://www.toobug.net/)
+
+[blog of purplebamboo](http://purplebamboo.github.io/)
+
+[MZhou's blog](http://zencode.in/)
 
 
 ### Gulp
