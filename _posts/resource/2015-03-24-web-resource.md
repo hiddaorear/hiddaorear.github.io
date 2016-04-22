@@ -115,36 +115,6 @@ description:
 ### Linux
 [CS Slayer](https://www.csslayer.info/wordpress/)
 
-### web性能
-[渲染性能](https://developers.google.com/web/fundamentals/performance/rendering/)
-
-[javascript性能优化](http://my.oschina.net/u/1401419/blog/191199)
-
-[【译】编写高性能JavaScript](http://www.alloyteam.com/2012/11/performance-writing-efficient-javascript/)
-
-[7 天打造前端性能监控系统](http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
-
-[CSS3硬件加速也有坑！！！](http://div.io/topic/1348)
-
-[闲扯 background-position 的单位属性值](http://div.io/topic/1344)
-
-[Vue.js 和 Webpack ](http://div.io/topic/1343)
-
-[[译] JavaScript 性能优化杀手](http://div.io/topic/1269)
-
-[移动时代的前端加密](http://div.io/topic/1220)
-
-[chrome的debug工具Profiles使用方法](http://div.io/topic/1391)
-
-[Web性能优化与HTTP/2 ](http://div.io/topic/1382)
-
-[译】使用requestIdleCallback ](http://div.io/topic/1370)
-
-[Why BPG will replace GIFs and not only.](https://eek.ro/why-bpg-will-replace-gifs-and-not-only/)
-
-[BPG examples with alpha channel](http://bellard.org/bpg/gallery2.html)
-
-[webrebuild 2014 图片优化](http://webrebuild.org/2014/ppt/webrebuild_ppt_05.pdf)
 
 ## λ
 [类型系統](https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1)
@@ -184,6 +154,22 @@ description:
 
 ### 英语
 [Urban Dictionary](http://www.urbandictionary.com/)
+
+### Google技巧
+
+1. "原样照搬"(英语引号)
+2. -不相关内容
+3. site:缩小范围.com
+4. 这个 OR 那个
+5. type:格式
+6. 维基网助阵(利用维基百科)
+7. 对比结果
+8. 时间筛选
+9. Wayback machine时光机
+10. whois数据库
+11. ngram
+
+[goolge 技巧](http://www.google.cn/intl/zh-CN/insidesearch/tipstricks/all.html)
 
 
 hid say: 陆陆续续收集了很多资料，但几乎没有深入阅读。那些在项目中用了资料还好，没有用过的几乎都是浅阅读。其实深阅读可以解决很多事情，可以节省很多时间，但是浮躁是知识之大敌，致使时间就这么白白流失了，多么可惜呀！
