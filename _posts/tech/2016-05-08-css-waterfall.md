@@ -15,9 +15,110 @@ description:
 
 ![陈璧](/../../assets/img/tech/2016/ChenBi_8.jpg)
 
-### CSS瀑布流列布局
+## `float`列布局
+通过float使块元素水平排列，超过一行自动折行。此时有一个问题，里面排布的子元素间距的处理。考虑响应式布局，每行数目不固定，不能通过CSS3的选择器给最右边的单独设置间距。
+
+### 负margin
+
+```html
+<ul class="list-wrap">
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+</ul>
+
+```
+
+```css
+.list-wrap {
+  padding-top: 28px;
+  padding-bottom: 20px;
+  margin-left: -8px;
+}
+
+// 清除浮动
+.list-wrap:before, .list-wrap:after {
+  content: " ";
+  display: table;
+}
+.list-wrap:after {
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+  clear: both;
+}
 
 
+.list-wrap li {
+  float: left;
+  margin-top: 28px;
+  margin-left: 8px;
+  width: 222px;
+  height: 302px;
+  overflow: hidden;
+  position: relative;
+}
+
+```
+
+要点： `margin`负值刚好与间距相等，这样刚好抵消多次来的间距。注意整体宽度的处理。
+
+
+
+### 父元素padding
+
+思路来自淘宝首页
+
+```html
+<ul class="list-wrap">
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+</ul>
+
+```
+
+```css
+.list-wrap {
+  padding-left: 20px;
+  padding-top: 28px;
+  padding-bottom: 20px;
+  /* margin-right: -20px; */ // 作者带上这个负margin的实现，实际在这里并没有用处
+}
+
+// 清除浮动
+.list-wrap:before, .list-wrap:after {
+  content: " ";
+  display: table;
+}
+.list-wrap:after {
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+.list-wrap li {
+  float: left;
+  margin-top: 28px;
+  margin-right: 8px;
+  width: 222px;
+  height: 302px;
+  overflow: hidden;
+  position: relative;
+}
+
+```
+
+要点：父元素提供统一的左间距，而子元素统一拥有右间距，故每列最后一个元素此时不会被换行。
+
+## `display:inline-block`列布局
+
+## `column-width`列布局
 
 ## 参考资料：
 
