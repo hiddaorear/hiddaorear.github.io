@@ -66,7 +66,6 @@ description:
 要点： `margin`负值刚好与间距相等，这样刚好抵消多次来的间距。注意整体宽度的处理。
 
 
-
 ### 父元素padding
 
 思路来自淘宝首页
@@ -118,7 +117,71 @@ description:
 
 ## `display:inline-block`列布局
 
+利用`inline, inline-block`的两端对齐。注意最后一行的处理。
+
+```html
+<ul class="list-wrap">
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+</ul>
+
+```
+
+```css
+
+.list-wrap {
+  text-align: justify;
+}
+
+.list-wrap li {
+  display: inline-block;
+  width: 210px;
+
+}
+
+```
+
+要点：子元素必须是`inline-block`，父元素设置`text-align: justify;`。缺点，间距要通过宽度来控制，其子元素宽度占据空间剩下的宽度均分的距离。
+
+
 ## `column-width`列布局
+
+使用CSS3属性，`column-width`设置资子元素宽度，`colmun-gap`设置子元素间距。兼容`IE9-`，即IE9以及其以下不支持。
+
+```html
+<ul class="list-wrap">
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+  <li>1</li>
+</ul>
+
+```
+
+```css
+
+.list-wrap {
+  column-width: 320px;
+  column-gap: 15px;
+  width: 90%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-wrap li {
+
+}
+
+```
+
+所谓瀑布流，在列布局的基础上，在各列加上多行即可。
+
+
 
 ## 参考资料：
 
