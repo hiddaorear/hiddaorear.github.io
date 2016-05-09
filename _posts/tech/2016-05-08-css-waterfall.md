@@ -120,7 +120,7 @@ description:
 利用`inline, inline-block`的两端对齐。注意最后一行的处理。
 
 ```html
-<ul class="list-wrap">
+<ul class="list-wrap wrap">
   <li>1</li>
   <li>1</li>
   <li>1</li>
@@ -139,8 +139,25 @@ description:
 .list-wrap li {
   display: inline-block;
   width: 210px;
-
 }
+
+.wrap {
+      text-align:justify;
+      text-justify:distribute-all-lines;/*ie6-8*/
+      text-align-last:justify;/* ie9*/
+      -moz-text-align-last:justify;/*ff*/
+      -webkit-text-align-last:justify;/*chrome 20+*/
+  }
+  @media screen and (-webkit-min-device-pixel-ratio:0){/* chrome*/
+      .wrap:after{
+          content:".";
+          display: inline-block;
+          width:100%;
+          overflow:hidden;
+          height:0;
+      }
+  }
+
 
 ```
 
@@ -196,6 +213,10 @@ description:
 [ 瀑布流布局浅析 ](http://ued.taobao.org/blog/2011/09/waterfall/)
 
 [ jQuery 瀑布流布局插件 jQuery Masonry 参数介绍](http://www.lrxin.com/archives-693.html)
+
+[css 文本两端对齐](http://www.cnblogs.com/rubylouvre/archive/2012/11/28/2792504.html)
+
+[css实现两端对齐的3种方法](http://www.cnblogs.com/PeunZhang/p/3289493.html)
 
 
 
