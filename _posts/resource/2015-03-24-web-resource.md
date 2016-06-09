@@ -36,6 +36,8 @@ description:
 
 [十年踪迹的博客](https://www.h5jun.com/)
 
+[小胡子哥](http://www.barretlee.com/blog/2016/05/30/h5-crash-research/)
+
 [iwillwen](http://lifemap.in/)
  
 [囧克斯这里是勾三股四的新家](http://jiongks.name/)
