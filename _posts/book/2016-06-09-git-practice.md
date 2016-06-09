@@ -28,6 +28,12 @@ description:
 
 [初次使用 git 的“核弹级选项”：filter-branch](http://lilydjwg.is-programmer.com/2011/4/22/tried-the-nuclear-option-filter-branch-of-git-the-first-time.26331.html)
 
+[5.3 Git log高级用法](https://github.com/geeeeeeeeek/git-recipes/wiki/5.3-Git-log%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95)
+
+[每一行代码都有记录—如何用git一步步探索项目的历史](http://www.cnblogs.com/lanxuezaipiao/p/3552805.html)
+
+[ 发新帖 Git中级用户的25个提示](http://www.guokr.com/post/696433/)
+
 [如何优雅地使用 Git？](https://www.zhihu.com/question/20866683)
 
 [25个Git用法技巧](http://www.techug.com/25-git-tips)
