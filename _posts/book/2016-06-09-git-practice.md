@@ -18,6 +18,18 @@ description:
 
 ### 参考资料
 
+[How to remove/delete a large file from commit history in Git repository?](http://stackoverflow.com/questions/2100907/how-to-remove-delete-a-large-file-from-commit-history-in-git-repository)
+
+[9.7 Git 内部原理 - 维护及数据恢复](https://git-scm.com/book/zh/v1/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-%E7%BB%B4%E6%8A%A4%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D)
+
+[如何修改 git 记录？](https://segmentfault.com/a/1190000003947100)
+
+[6.4 Git 工具 - 重写历史](https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
+
+[初次使用 git 的“核弹级选项”：filter-branch](http://lilydjwg.is-programmer.com/2011/4/22/tried-the-nuclear-option-filter-branch-of-git-the-first-time.26331.html)
+
+[如何优雅地使用 Git？](https://www.zhihu.com/question/20866683)
+
 [25个Git用法技巧](http://www.techug.com/25-git-tips)
 
 [够用一年的Git 技巧 ](http://www.imooc.com/article/1426)
