@@ -17,6 +17,8 @@ description:
 
 ## 查看git history
 
+## 重写 git history
+
 ## modified 之后重写history
 
 `git checkout -- file_name`
@@ -25,7 +27,6 @@ description:
 
 `git reset HEAD file_name`
 
-## 重写 git history
 
 ## commit 之后重写history
 
