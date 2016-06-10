@@ -15,7 +15,62 @@ description:
 
 ![nice](/../../assets/img/book/2016/nice_13.jpg)
 
-## 查看git history
+## 查看 git history
+
+## git log 用法
+
+### 过滤
+
+#### 按范围
+
+用法
+
+`git log <since>..<until>`
+
+作用
+
+比如，显示两个分支的差异：`git log master..feature`，显示包含在feature分支，而不在master的所有提交。注意范围的顺序，如果是`git log feature..master`则是表示包含在master而不在feature分支所有提交。如果两个分支提交都输出了，表明提交历史已经交叉了。
+
+#### 按内容
+
+用法
+
+`git log -S "<string>"`
+
+`git log -G "<regex>"`
+
+作用
+
+搜索某字符串何时加到何文件中。类似于条是工具，定位到所有影响代码中特定的一行的提交。
+
+### 按提交信息
+
+用法
+
+`git log --grep="<string>"`
+
+作用
+
+按提交信息来过滤。
+
+用法(利用shell的grep功能)
+
+`git shortlog --format='%H|%cn|%s' | grep '<string>'`
+
+作用
+
+找出某些commit内容包含某个特定的字符串。
+
+## git diff
+
+`git diff master..branch_name`，找出master与branch_name之间的差异。
+
+`git diff master...branch_name`，找出master与branch_name之间的共同点。
+
+`git diff`，当前工作目录与上次提交的差异。
+
+
+
 
 ## 重写 git history
 
