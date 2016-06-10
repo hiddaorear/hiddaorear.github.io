@@ -24,6 +24,9 @@ description:
 
 [卢昌海个人主页](http://www.changhai.org/)
 
+[MacTalk](http://macshuo.com/)
+
+
 ### 视频
 
 [好多视频](http://haoduoshipin.com/all)
