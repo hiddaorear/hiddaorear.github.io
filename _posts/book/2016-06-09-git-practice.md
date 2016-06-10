@@ -61,6 +61,18 @@ description:
 
 找出某些commit内容包含某个特定的字符串。
 
+### 查看特定历史
+
+`git log file_name`，查看此文件的修改历史。
+
+### git show
+
+`git show commit_hash`，查看某次commit的修改。
+
+`git show :/^string`，查看满足正则最后一条commit。`-a`标示，会在远程查找。
+
+
+
 ## git diff
 
 `git diff master..branch_name`，找出master与branch_name之间的差异。
@@ -68,6 +80,14 @@ description:
 `git diff master...branch_name`，找出master与branch_name之间的共同点。
 
 `git diff`，当前工作目录与上次提交的差异。
+
+`git diff --cached`，下次提交时，所要提交的内容。
+
+`git diff branch_name`，工作目录与另一个分支差异。
+
+`git diff HEAD -- ./lib`，当前分支中`/lib`目录与上次提交之间的差别。
+
+`git diff --stat`，查看统计信息。
 
 
 
@@ -195,6 +215,24 @@ ths solution was:
 
 run `git config --global core.editor "gvim -f"`.
 
+
+## 恢复 git history
+
+`git branch branch_name commit_hash`，基于commit新建分支。
+
+## 冲突的处理
+
+当我们`git pull/push/merge`时，有可能产生冲突，有些文件可能要我们手来解决，还有些可以确定时保留`local`还是`remote/other_branch`分支的修改。
+
+`git checkout --ours path/file`
+
+`git checkout --theirs path/file`
+
+`git -lr '<<<<<<<' . | xargs git checkout --ours`
+
+`git -lr '>>>>>>>' . | xargs git checkout --theirs`
+
+
 ### 参考资料
 
 [No Changes - Did You Forget to Use ‘Git Add’?](http://wholemeal.co.nz/blog/2010/06/11/no-changes-did-you-forget-to-use-git-add/)
@@ -212,14 +250,6 @@ run `git config --global core.editor "gvim -f"`.
 [5.3 Git log高级用法](https://github.com/geeeeeeeeek/git-recipes/wiki/5.3-Git-log%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95)
 
 [每一行代码都有记录—如何用git一步步探索项目的历史](http://www.cnblogs.com/lanxuezaipiao/p/3552805.html)
-
-[ 发新帖 Git中级用户的25个提示](http://www.guokr.com/post/696433/)
-
-[如何优雅地使用 Git？](https://www.zhihu.com/question/20866683)
-
-[25个Git用法技巧](http://www.techug.com/25-git-tips)
-
-[够用一年的Git 技巧 ](http://www.imooc.com/article/1426)
 
 [你所不知道的git技巧](http://ilucas.me/2015/12/17/git-tips/)
 
@@ -243,4 +273,4 @@ run `git config --global core.editor "gvim -f"`.
 
 
 
-id say: 温故。
+hid say: 温故。
