@@ -89,6 +89,33 @@ description:
 
 `git diff --stat`，查看统计信息。
 
+### `git cherry`
+
+`git cherry -v other_branch_name`，cherry检查分支的变化是否存在于其他分支，`+`表示不存在，`-`表示存在。
+
+### `git branch`
+
+`git branch --merged`，查看已经合并过当前分支。
+
+`git branch --no-merged`，查看未合并过当前分支。
+
+`git branch --merged | xargs git branch -d`，删除已经合并过的分支。
+
+### `git blame`
+
+blame显示一份文件每一行最近一次提交的hash值和提交者。
+
+```shell
+
+git blame -W <filename> # 忽略增删空白的改动
+git blame -M <filename> # 忽略文本移动的改动
+git blame -C <filename> # 忽略移动文本内容到其他文件的改动
+
+```
+
+### `git rev-list`
+
+`git rev-list --all | xargs git grep -f "<string>"`，搜索字符串.
 
 
 
@@ -216,6 +243,11 @@ ths solution was:
 run `git config --global core.editor "gvim -f"`.
 
 
+### 清除 git history
+
+`git checkout --orphan new_branch_name`，新建一个分支，并清除历史信息。
+
+
 ## 恢复 git history
 
 `git branch branch_name commit_hash`，基于commit新建分支。
@@ -231,6 +263,37 @@ run `git config --global core.editor "gvim -f"`.
 `git -lr '<<<<<<<' . | xargs git checkout --ours`
 
 `git -lr '>>>>>>>' . | xargs git checkout --theirs`
+
+
+## 发布 git history
+
+### `git archive`
+
+场景
+
+打增量包。
+
+用法
+
+`git archive -o ../updated.zip HEAD $(git diff --name-only HEAD^)`,把最近commit过的修改的文件，导出到一个zip文件。也就git打增量包。
+
+`git archive -o ../latest.zip new_commit_id_head $(git diff --name-only old_commit_id_head new_commit_id_head)`，导出两次提交之间修改过的文件。
+
+
+## 常用技巧
+
+0.
+发布版本之前，一定要去master分支看看是否有新的提交，避免覆盖代码。
+
+1.
+`git checkout branch_name -- path_to_file_in_branch`，在不切换分支的情况下，从其他分支获取文件。
+
+2.
+`git update-index --assume-unchanged path_to_file`，忽略特定的文件的更改。
+
+3.
+`git checkout -`，切换到上次的分支。
+
 
 
 ### 参考资料
@@ -255,22 +318,7 @@ run `git config --global core.editor "gvim -f"`.
 
 [高富帅们的Git技巧](http://mux.alimama.com/posts/711)
 
-[ Git命令10个很有用的使用技巧](http://www.linuxde.net/2013/08/15141.html)
-
-[Git 有什么奇技淫巧？](https://www.zhihu.com/question/27462267)
-
-[19个Git日常实用技巧(上)](http://www.jointforce.com/jfperiodical/article/1522)
-
-[开发指南之Git命令的最佳实践技巧 ](http://www.freebuf.com/sectool/98396.html)
-
-[Git显示漂亮日志的小技巧](http://coolshell.cn/articles/7755.html)
-
-[git使用技巧汇总](http://www.jianshu.com/p/b0e072c5470c)
-
-[少有人知的 GitHub 使用技巧](https://segmentfault.com/a/1190000000475547)
-
-[MrZheng Git版本控制器的基本使用 ](http://div.io/topic/897)
-
+[你不一定知道的几个很有用的 Git 命令](http://www.cnblogs.com/lhb25/p/10-useful-advanced-git-commands.html)
 
 
 hid say: 温故。
