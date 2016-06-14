@@ -42,6 +42,10 @@ description:
 [小胡子哥](http://www.barretlee.com/blog/2016/05/30/h5-crash-research/)
 
 [iwillwen](http://lifemap.in/)
+
+[猫叔の杂记 · 手帐](http://www.inkpaper.io/blog/)
+
+[Marshal@十万光年](http://marshal.ohtly.com/)
  
 [囧克斯这里是勾三股四的新家](http://jiongks.name/)
 
