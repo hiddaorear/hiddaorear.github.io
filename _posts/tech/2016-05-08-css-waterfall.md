@@ -119,6 +119,8 @@ description:
 
 利用`inline, inline-block`的两端对齐。注意最后一行的处理。
 
+主意，`li`标签之间必须有换行之类的，否则对齐不能生效。
+
 ```html
 <ul class="list-wrap wrap">
   <li>1</li>
