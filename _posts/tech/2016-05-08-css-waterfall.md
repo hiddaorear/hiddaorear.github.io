@@ -165,7 +165,7 @@ description:
   
 ```
 
-要点：子元素必须是`inline-block`，父元素设置`text-align: justify;`。缺点，间距要通过宽度来控制，其子元素宽度占据空间剩下的宽度均分的距离。
+要点：子元素必须是`inline-block`，父元素设置`text-align: justify;`。主意，元素之间一定要有空格之类，否则无法生效，特别留心用JavaScript生成的代码。缺点，间距要通过宽度来控制，其子元素宽度占据空间剩下的宽度均分的距离。
 
 
 ## `column-width`列布局
