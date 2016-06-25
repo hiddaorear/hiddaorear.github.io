@@ -19,6 +19,7 @@ description: hiddaorear
 url: http://hiddaorear.github.io/blog
 rss_url: /pages/atom.xml
 baseurl: /blog
+highlighter: rouge
 
 # avatar头像及Favicon
 avatar: http://hiddaorear.github.io/assets/img/me.jpg

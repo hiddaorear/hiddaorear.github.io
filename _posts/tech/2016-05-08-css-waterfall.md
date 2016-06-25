@@ -136,6 +136,7 @@ description:
 
 .list-wrap {
   text-align: justify;
+  font-size: 0; // 去掉多余空格
 }
 
 .list-wrap li {
@@ -150,20 +151,21 @@ description:
       -moz-text-align-last:justify;/*ff*/
       -webkit-text-align-last:justify;/*chrome 20+*/
   }
-  @media screen and (-webkit-min-device-pixel-ratio:0){/* chrome*/
-      .wrap:after{
-          content:".";
-          display: inline-block;
-          width:100%;
-          overflow:hidden;
-          height:0;
-      }
-  }
-
-
+  
+  // 单行的情况，必须加上这个才能生效(chrome)
+.wrap:after {
+  display: inline-block;
+  overfow: hidden;
+  width: 100%;
+  height:0;
+  content: "";
+  vertical-align: top; //去除多余空白
+}
+  
+  
 ```
 
-要点：子元素必须是`inline-block`，父元素设置`text-align: justify;`。缺点，间距要通过宽度来控制，其子元素宽度占据空间剩下的宽度均分的距离。
+要点：子元素必须是`inline-block`，父元素设置`text-align: justify;`。主意，元素之间一定要有空格之类，否则无法生效，特别留心用JavaScript生成的代码。缺点，间距要通过宽度来控制，其子元素宽度占据空间剩下的宽度均分的距离。
 
 
 ## `column-width`列布局
