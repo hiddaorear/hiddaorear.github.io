@@ -125,6 +125,12 @@ git blame -C <filename> # 忽略移动文本内容到其他文件的改动
 
 `git checkout -- file_name`
 
+`git clean -df`，删除所有untracked文件，被tracked的文件不能回退。
+
+`git reset --hard`，把traked的文件revert到前一个版本，untracked不会被删除。
+
+`git checkout -f`，删除所有修改，如果merge时有冲突，执行此命名，相当回到未merge之前的版本。
+
 ## add 之后重写history
 
 `git reset HEAD file_name`
