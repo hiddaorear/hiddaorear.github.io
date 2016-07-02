@@ -19,4 +19,6 @@ description:
 
 [深入浅出 - Redux](http://www.w3ctech.com/topic/1561)
 
+[精益 React 学习指南 （Lean React）](https://zhuanlan.zhihu.com/p/21107252)
+
 hid say：重复是学习之道。
