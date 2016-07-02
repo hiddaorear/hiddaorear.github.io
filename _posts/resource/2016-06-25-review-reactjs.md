@@ -17,4 +17,6 @@ description:
 
 ## 参考资料：
 
-id say：重复是学习之道。
+[深入浅出 - Redux](http://www.w3ctech.com/topic/1561)
+
+hid say：重复是学习之道。
