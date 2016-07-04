@@ -17,6 +17,8 @@ description:
 
 ## 参考资料：
 
+[React.js 资料和教程](https://github.com/thoughtbit/it-note/issues/12)
+
 [深入浅出 - Redux](http://www.w3ctech.com/topic/1561)
 
 [精益 React 学习指南 （Lean React）](https://zhuanlan.zhihu.com/p/21107252)
