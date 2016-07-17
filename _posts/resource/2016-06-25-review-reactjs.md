@@ -17,6 +17,12 @@ description:
 
 ## 参考资料：
 
+[我们为什么需要React?](https://www.zhihu.com/question/47161776#answer-40022112)
+
+[如何评价数据流管理架构 Redux?](https://www.zhihu.com/question/38591713)
+
+[用 React 做出好用的 Switch 组件](https://zhuanlan.zhihu.com/p/21573490)
+
 [React.js 资料和教程](https://github.com/thoughtbit/it-note/issues/12)
 
 [深入浅出 - Redux](http://www.w3ctech.com/topic/1561)
