@@ -57,6 +57,8 @@ quicksort (x: xs) =
   
 ````
 
+### JavaScript
+
 ````javascript
 
     var quickSort = function(arr) {
