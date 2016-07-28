@@ -118,11 +118,11 @@ React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL
 问题：
 
 1. 跨组件通信；
-2. 
+
 2. 多组建共享状态；
-3. 
+
 3. 大量嵌套组件的性能；
-4. 
+
 
 导致本来`callApi(res => data = res)`的事情,变成了`action => reducer => store => state => view`
 
