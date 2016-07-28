@@ -98,6 +98,27 @@ quicksort (x: xs) =
 
 这是其模型。
 
+双向绑定的实现：
+
+````javascript
+
+<div class={{foo}}></div>
+//angular首先会分析以上代码，在当前的scope下，执行以下（伪）代码：
+scope.watch(
+  //watch function，返回模板分析出的获取值表达式
+  function (scope) {
+    return scope.foo
+  }
+  // listener function，值表达式对应的渲染UI的函数
+  funciton (newValue, oldValue, scope) {
+    div.class = newValue
+  }
+)
+
+````
+
+随后执行`scope.$digest()`，这个$disgest函数检测scope上所有watcher function返回值是否有变更，若有，则执行对应listner function，将新的值渲染到UI上。Angular1使用脏检测存在性能问题，趋势是使用Object.defineProperty设置`setter/getter`或Object.observe这样更优雅的方式。
+
 ### Flux
 
 不再绑定，而是View更新会映射到Action,自己实现Action到Model的更新，不再受限制。
@@ -175,6 +196,7 @@ Redux三原则：
 
 [子回技术博客](http://blog.leapoahead.com/)
 
+[创建你自己的AngularJS -- 第一部分 Scopes（一）](http://www.html-js.com/article/1863)
 
 
 hid say：重复是学习之道。
