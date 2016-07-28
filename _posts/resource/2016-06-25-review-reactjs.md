@@ -160,6 +160,15 @@ React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL
 
 由于JavaScript自身的缺点，实现不过理想。无不可变数据，不易隔离副作用。
 
+优点：
+
+传统MVC下View和Model双向绑定导致关系混乱：
+![react](/../../assets/img/resource/2016/ViewModel.jpg)
+
+把上图的Model和Controller拼成一个Dispatcher，在View和Model中间加一层Store来整理Model和View的关系，然后View收到的任何Action不再直接作用于ViewModel，而是回到Dispatcher。将混乱的数据与视图的对应关系清晰化。
+![react](/../../assets/img/resource/2016/Dispatcher.jpg)
+
+
 ### React
 
 `f(state, props) = veiw`，一个组件的渲染函数是基于state和props的纯函数，state是自身的，props是外来的，有变化则重新渲染。
