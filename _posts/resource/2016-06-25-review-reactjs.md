@@ -117,6 +117,34 @@ scope.watch(
 
 ````
 
+依赖注入
+
+JavaScript中实现DI，原理很简单，核心技术是Function对象的toString()。我们获取函数源码，然后对函数进行解析。
+
+````javascript
+var giveMe = function (config) {}
+
+var registry = {};
+
+var inject = function (func, thisForFunc) {
+  // 获取源码
+  var source = func.toString();
+  // 用正则表示解析源码
+  var matcher = source.match(/正则表达式/);
+  // 解析结果是各个参数名字
+  var objectIds = ...
+  // 查阅对应的对象，放到数组中准备作为参数传递过去；
+  var objects = [];
+  for (var i = 0; i < objectIds.length; ++i) {
+    objects.push(registry[objectIds[i]]);
+  }
+  func.apply(thisForFunc || func, objects)
+}
+
+inject(giveMe)
+
+````
+
 随后执行`scope.$digest()`，这个$disgest函数检测scope上所有watcher function返回值是否有变更，若有，则执行对应listner function，将新的值渲染到UI上。Angular1使用脏检测存在性能问题，趋势是使用Object.defineProperty设置`setter/getter`或Object.observe这样更优雅的方式。
 
 ### Flux
