@@ -162,10 +162,12 @@ React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL
 
 优点：
 
-传统MVC下View和Model双向绑定导致关系混乱：
+传统MVC下View和Model双向绑定导致关系混乱。
+
 ![react](/../../assets/img/resource/2016/ViewModel.jpg)
 
 把上图的Model和Controller拼成一个Dispatcher，在View和Model中间加一层Store来整理Model和View的关系，然后View收到的任何Action不再直接作用于ViewModel，而是回到Dispatcher。将混乱的数据与视图的对应关系清晰化。
+
 ![react](/../../assets/img/resource/2016/Dispatcher.jpg)
 
 
