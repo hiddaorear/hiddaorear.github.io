@@ -128,11 +128,11 @@ React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL
 
 Redux三原则：
 
-1. 单一数据源， Single Source of Truth，或单一状态树；
+1. 单一数据源， 整个应用的state被存储在一棵object tree中，并且这个object tree只存在于一个唯一的store中。得益于单一state tree，实现撤销重做变得容易。
 
-2. 所有数据只读，修改数据需要dispatch一个action;
+2. state只读，修改数据需要dispatch一个action，action是一个描述已发生事件的普通对象。视图与网络请求都不能直接修改state，只能表达修改的意图。所有修改被集中处理，严格的顺序执行，无race condition。
 
-3. 处理action时，必须生成一个新的state，不能直接修改原对象；
+3. 使用纯函数来执行修改。为了描述action如何改变state tree，需要些reducers。
 
 
 单一数据源，使得所有数据在同一个store中，全部作为React的props。
