@@ -126,6 +126,8 @@ React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL
 
 导致本来`callApi(res => data = res)`的事情,变成了`action => reducer => store => state => view`
 
+### Redux
+
 Redux三原则：
 
 1. 单一数据源， 整个应用的state被存储在一棵object tree中，并且这个object tree只存在于一个唯一的store中。得益于单一state tree，实现撤销重做变得容易。
@@ -135,7 +137,7 @@ Redux三原则：
 3. 使用纯函数来执行修改。为了描述action如何改变state tree，需要些reducers。
 
 
-单一数据源，使得所有数据在同一个store中，全部作为React的props。
+单一数据源，使得所有数据在同一个store中，全部作为React的props。让变化可以预测。
 
 
 
