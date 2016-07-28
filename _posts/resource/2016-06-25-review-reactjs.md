@@ -98,7 +98,7 @@ quicksort (x: xs) =
 
 这是其模型。
 
-双向绑定的实现：
+双向绑定的脏检查实现（双向绑定有三种实现，脏检查，观测机制，封装属性访问器）：
 
 ````javascript
 
@@ -229,6 +229,8 @@ Redux三原则：
 [构建自己的AngularJS，第一部分：Scope和Digest](https://github.com/xufei/Make-Your-Own-AngularJS/blob/master/01.md)
 
 [FictionInjection-始动：Angular 依赖注入分析和源码抽取改造（上）](http://blog.e10t.net/fictioninjection-series-analyze-angular-dependence-injection-and-extract-it-part-1/)
+
+[JS中的双向数据绑定及Object.defineProperty方法](http://blog.gejiawen.com/2015/04/02/2-way-data-binding-and-define-property/)
 
 
 hid say：重复是学习之道。
