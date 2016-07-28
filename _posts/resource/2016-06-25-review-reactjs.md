@@ -186,7 +186,7 @@ Redux三原则：
 3. 使用纯函数来执行修改。为了描述action如何改变state tree，需要些reducers。
 
 
-单一数据源，使得所有数据在同一个store中，全部作为React的props。让变化可以预测。
+单一数据源，使得所有数据在同一个store（相当于modal）中，全部作为React的props。让变化可以预测。
 一句话说Redux作用，将action通过reducer变换成state，然后放到一个统一的地方store来setState。
 缺点： switch case很难看，其中包含了多个reducers，reducers不可组合，没有达到pattern matching。数据流并不是很清晰，也就一堆handler。
 
