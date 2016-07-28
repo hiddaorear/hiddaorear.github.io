@@ -198,5 +198,7 @@ Redux三原则：
 
 [创建你自己的AngularJS -- 第一部分 Scopes（一）](http://www.html-js.com/article/1863)
 
+[构建自己的AngularJS，第一部分：Scope和Digest](https://github.com/xufei/Make-Your-Own-AngularJS/blob/master/01.md)
+
 
 hid say：重复是学习之道。
