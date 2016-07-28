@@ -116,16 +116,24 @@ React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL
 `f(state, props) = veiw`，一个组件的渲染函数是基于state和props的纯函数，state是自身的，props是外来的，有变化则重新渲染。
 
 问题：
+
 1. 跨组件通信；
+2. 
 2. 多组建共享状态；
+3. 
 3. 大量嵌套组件的性能；
+4. 
 
 导致本来`callApi(res => data = res)`的事情,变成了`action => reducer => store => state => view`
 
 Redux三原则：
+
 1. 单一数据源， Single Source of Truth，或单一状态树；
+
 2. 所有数据只读，修改数据需要dispatch一个action;
+
 3. 处理action时，必须生成一个新的state，不能直接修改原对象；
+
 
 单一数据源，使得所有数据在同一个store中，全部作为React的props。
 
