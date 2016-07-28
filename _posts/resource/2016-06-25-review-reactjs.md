@@ -153,7 +153,7 @@ inject(giveMe)
 
 ![react](/../../assets/img/resource/2016/react.png)
 
-React的DOM是声明式的DSL，通过DOM diff生成更新。
+React的DOM(UI，且UI=f(state))是声明式的DSL，通过DOM diff生成更新。
 
 MVVM通过将数据变成observable来变相实现Reactive Programming，数据按照数据流自动同步, JavaScript原生对象被hack掉，HTML也被hack掉，建立自己的DSL。
 React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL。
