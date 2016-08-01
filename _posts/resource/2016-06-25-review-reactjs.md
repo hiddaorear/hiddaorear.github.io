@@ -2,7 +2,8 @@
 layout: post
 title:  从Lisp到React.js
 category: 资源
-tags: [ReactJS] keywords: ReactJS
+tags: [ReactJS] 
+keywords: ReactJS
 description:
 ---
 
@@ -57,36 +58,25 @@ quicksort (x: xs) =
   
 ````
 
+#### JavaScript
+
 ````javascript
 
     var quickSort = function(arr) {
-
     　　if (arr.length <= 1) { return arr; }
-
+    　　
     　　var pivotIndex = Math.floor(arr.length / 2);
-
     　　var pivot = arr.splice(pivotIndex, 1)[0];
-
     　　var left = [];
-
     　　var right = [];
-
     　　for (var i = 0; i < arr.length; i++){
-
     　　　　if (arr[i] < pivot) {
-
     　　　　　　left.push(arr[i]);
-
     　　　　} else {
-
     　　　　　　right.push(arr[i]);
-
     　　　　}
-
     　　}
-
     　　return quickSort(left).concat([pivot], quickSort(right));
-
     };
 
 ````
@@ -108,36 +98,108 @@ quicksort (x: xs) =
 
 这是其模型。
 
+双向绑定的脏检查实现（双向绑定有三种实现，脏检查，观测机制，封装属性访问器）：
+
+````javascript
+
+<div class={{foo}}></div>
+//angular首先会分析以上代码，在当前的scope下，执行以下（伪）代码：
+scope.watch(
+  //watch function，返回模板分析出的获取值表达式
+  function (scope) {
+    return scope.foo
+  }
+  // listener function，值表达式对应的渲染UI的函数
+  funciton (newValue, oldValue, scope) {
+    div.class = newValue
+  }
+)
+
+````
+
+依赖注入
+
+JavaScript中实现DI，原理很简单，核心技术是Function对象的toString()。我们获取函数源码，然后对函数进行解析。
+
+````javascript
+var giveMe = function (config) {}
+
+var registry = {};
+
+var inject = function (func, thisForFunc) {
+  // 获取源码
+  var source = func.toString();
+  // 用正则表示解析源码
+  var matcher = source.match(/正则表达式/);
+  // 解析结果是各个参数名字
+  var objectIds = ...
+  // 查阅对应的对象，放到数组中准备作为参数传递过去；
+  var objects = [];
+  for (var i = 0; i < objectIds.length; ++i) {
+    objects.push(registry[objectIds[i]]);
+  }
+  func.apply(thisForFunc || func, objects)
+}
+
+inject(giveMe)
+
+````
+
+随后执行`scope.$digest()`，这个$disgest函数检测scope上所有watcher function返回值是否有变更，若有，则执行对应listner function，将新的值渲染到UI上。Angular1使用脏检测存在性能问题，趋势是使用Object.defineProperty设置`setter/getter`或Object.observe这样更优雅的方式。
+
 ### Flux
 
 不再绑定，而是View更新会映射到Action,自己实现Action到Model的更新，不再受限制。
 
 ![react](/../../assets/img/resource/2016/react.png)
 
-React的DOM是声明式的DSL，通过DOM diff生成更新。
+React的DOM(UI，且UI=f(state))是声明式的DSL，通过DOM diff生成更新。
 
 MVVM通过将数据变成observable来变相实现Reactive Programming，数据按照数据流自动同步, JavaScript原生对象被hack掉，HTML也被hack掉，建立自己的DSL。
 React，使用Immutable替换掉基础类型，JSX替换DOM，建立自己的DSL。
 
 由于JavaScript自身的缺点，实现不过理想。无不可变数据，不易隔离副作用。
 
+优点：
+
+传统MVC下View和Model双向绑定导致关系混乱。
+
+![react](/../../assets/img/resource/2016/ViewModel.jpg)
+
+把上图的Model和Controller拼成一个Dispatcher，在View和Model中间加一层Store来整理Model和View的关系，然后View收到的任何Action不再直接作用于ViewModel，而是回到Dispatcher。将混乱的数据与视图的对应关系清晰化。
+
+![react](/../../assets/img/resource/2016/Dispatcher.jpg)
+
+
 ### React
 
 `f(state, props) = veiw`，一个组件的渲染函数是基于state和props的纯函数，state是自身的，props是外来的，有变化则重新渲染。
 
 问题：
+
 1. 跨组件通信；
+
 2. 多组建共享状态；
+
 3. 大量嵌套组件的性能；
+
 
 导致本来`callApi(res => data = res)`的事情,变成了`action => reducer => store => state => view`
 
-Redux三原则：
-1. 单一数据源， Single Source of Truth，或单一状态树；
-2. 所有数据只读，修改数据需要dispatch一个action;
-3. 处理action时，必须生成一个新的state，不能直接修改原对象；
+### Redux
 
-单一数据源，使得所有数据在同一个store中，全部作为React的props。
+Redux三原则：
+
+1. 单一数据源， 整个应用的state被存储在一棵object tree中，并且这个object tree只存在于一个唯一的store中。得益于单一state tree，实现撤销重做变得容易。
+
+2. state只读，修改数据需要dispatch一个action，action是一个描述已发生事件的普通对象。视图与网络请求都不能直接修改state，只能表达修改的意图。所有修改被集中处理，严格的顺序执行，无race condition。
+
+3. 使用纯函数来执行修改。为了描述action如何改变state tree，需要些reducers。
+
+
+单一数据源，使得所有数据在同一个store（相当于modal）中，全部作为React的props。让变化可以预测。
+一句话说Redux作用，将action通过reducer变换成state，然后放到一个统一的地方store来setState。
+缺点： switch case很难看，其中包含了多个reducers，reducers不可组合，没有达到pattern matching。数据流并不是很清晰，也就一堆handler。
 
 
 
@@ -175,6 +237,13 @@ Redux三原则：
 
 [子回技术博客](http://blog.leapoahead.com/)
 
+[创建你自己的AngularJS -- 第一部分 Scopes（一）](http://www.html-js.com/article/1863)
+
+[构建自己的AngularJS，第一部分：Scope和Digest](https://github.com/xufei/Make-Your-Own-AngularJS/blob/master/01.md)
+
+[FictionInjection-始动：Angular 依赖注入分析和源码抽取改造（上）](http://blog.e10t.net/fictioninjection-series-analyze-angular-dependence-injection-and-extract-it-part-1/)
+
+[JS中的双向数据绑定及Object.defineProperty方法](http://blog.gejiawen.com/2015/04/02/2-way-data-binding-and-define-property/)
 
 
 hid say：重复是学习之道。
