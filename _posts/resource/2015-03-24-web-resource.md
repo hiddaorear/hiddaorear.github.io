@@ -112,6 +112,8 @@ description:
 
 ### 社区
 
+[社区集合](http://programming.webcity.io/)
+
 [Campo](http://codecampo.com/)
 
 [Hacker News](https://news.ycombinator.com/news)
