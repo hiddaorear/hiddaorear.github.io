@@ -15,3 +15,8 @@ description:
 
 ![cassini](/../../assets/img/resource/2016/cassini_9.jpg)
 
+
+### 参考资料
+
+《当我谈跑步时，我谈些什么》 春上春树
+
