@@ -389,7 +389,7 @@ var app = angular.module('test', [])
 
 [AngularJS性能优化心得 · Issue #5 · atian25/blog](https://github.com/atian25/blog/issues/5)
 
-[使用超动感HTML & JS开发WEB应用! | AngularJS中文社区](http://angularjs.cn/A0lr)
+[使用超动感HTML JS开发WEB应用! | AngularJS中文社区](http://angularjs.cn/A0lr)
 
 
 ### AnguarlarJS introduction
