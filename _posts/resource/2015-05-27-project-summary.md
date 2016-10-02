@@ -74,9 +74,13 @@ git在多人协作的情况下，使用需要谨慎。虽然在github游荡了�
 
 ### 3. 错误类型
 记录一下错误类型：
+
 1. 名字拼错了。这类低级错误很常见，有时候又不容易发现，现在处理也只能用Gvim的`#`之类的功能来看看变量名是否一致。从本质上讲，其实是对变量使用的不重视，一个变量使用时应该记住，这样也可以促使自己使得变量尽可能少，写出简明的代码。
+
 2. 初始条件。一个逻辑的初始条件与终止条件非常重要，而我往往注意中间的过程，而忽略了初始与终止条件，可能因为没有全局思维，只注重单方面功能的实现。从本质上讲，编写之前没有思考程序运行的过程，只好的办法是动手之前，程序在大脑里运行几遍，到呼之欲出的程度再写代码。
+
 3. 原理不熟悉。对于API不熟悉，会导致很多问题，首当其冲的是编程的速度很慢，其实是容易滋生bug。很多API还是有必要记住。框架的原理也要深入理解，不然使用起来就不得心应手。
+
 
 最近用Node体会了一些后端编程，很有意思，想深入了解一下。
 
@@ -87,9 +91,13 @@ git在多人协作的情况下，使用需要谨慎。虽然在github游荡了�
 ### git
 1. rebase
 [git rebase小计(转) - 飞林沙](http://www.cnblogs.com/kym/archive/2010/08/12/1797937.html)
+
 [使用 git rebase 避免無謂的 merge](https://ihower.tw/blog/archives/3843)
+
 [关于git rebase和git merge - MinGKai的个人空间](http://my.oschina.net/MinGKai/blog/142517)
+
 [Git Book 中文版 - rebase](http://gitbook.liuhui998.com/4_2.html)
+
 [Git 少用 Pull 多用 Fetch 和 Merge - 技术翻译](http://www.oschina.net/translate/git-fetch-and-merge)
 
 2. rerere
@@ -99,9 +107,13 @@ git在多人协作的情况下，使用需要谨慎。虽然在github游荡了�
 
 3. trick 
 [图解Git](https://marklodato.github.io/visual-git-guide/index-zh-cn.html#rebase)
+
 [对于解决 Git 的 Merge Conflict 你有哪些经验和技巧？ - 知乎](http://www.zhihu.com/question/21215715)
+
 [Git索引 | 猴子都能懂的GIT入门| 贝格乐](http://backlogtool.com/git-guide/cn/reference/)
+
 [Git - 远程分支](http://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF)
+
 [解决冲突 - 廖雪峰的官方网站](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000)
 
 ### sublime
@@ -109,30 +121,49 @@ git在多人协作的情况下，使用需要谨慎。虽然在github游荡了�
 
 ### DOM
 [document节点 -- JavaScript 标准参考教程（alpha）](http://javascript.ruanyifeng.com/dom/document.html)
+
 [scrollTop | anjia](http://anjia.github.io/2014/11/08/jsScrollTop/)
+
 [两个viewport的故事（第一部分）](http://weizhifeng.net/viewports.html)
+
 [开发一个完整的JavaScript组件 - Div.IO](http://div.io/topic/831)
 
 
 ### Fiddler
 [使用Fiddler| 微软WEB技术培训](http://te-webtraining.azurewebsites.net/cn/samples/using-fiddler.html)
+
 [阿里巴巴（中国站）用户体验设计部博客 » 使用Fiddler提高前端工作效率 (实例篇)](http://www.aliued.cn/2010/04/25/use-fiddler-to-improve-efficiency-of-front-development-example.html)
+
 [Web调试利器fiddler介绍-raochaoxun-ChinaUnix博客](http://blog.chinaunix.net/uid-27105712-id-3738821.html)
+
 [使用fiddler提高前端开发效率 - lavachen.cn-一个程序猿的技术博客](http://www.lavachen.cn/?post=31)
+
 [看懂 Fiddler 的瀑布图 | JerryQu 的小站](https://www.imququ.com/post/timeline-in-fiddler.html)
+
 [谈谈Fiddler](http://zxhfighter.github.io/blog/javascript/2013/05/10/talk-about-fiddler.html)
+
 [使用fiddler进行安卓手机抓包 - SegmentFault](http://segmentfault.com/a/1190000002597285)
+
 [web debugger fiddler 使用小结 - for certain - 博客园](http://www.cnblogs.com/forcertain/archive/2012/11/29/2795139.html)
+
 [使用fiddler模拟http请求 - 麒麟 - 博客园](http://www.cnblogs.com/zhuqil/archive/2011/10/11/2206918.html)
+
 [网络抓包工具 - Fiddler使用方法 - 微软互联网开发支持 - 博客园](http://www.cnblogs.com/developersupport/archive/2013/03/24/fiddler.html)
+
 [本文介绍Android及IPhone手机上如何进行网络数据抓包](http://www.trinea.cn/android/android-network-sniffer/)
+
 [【HTTP】Fiddler（二） - 使用Fiddler做抓包分析](http://blog.csdn.net/ohmygirl/article/details/17849983)
+
 [Fiddler高级进阶——使用自定义脚本 - 专栏 [] - 前端乱炖](http://www.html-js.com/article/The-frontend-tool-Fiddler-senior-advanced--using-a-custom-script-to-achieve-cross-domain-and-by-the-port-or-changing-directory-hosts)
+
 
 ### grunt
 [Grunt: JavaScript世界的构建工具 -- Grunt中文网](http://www.gruntjs.net/)
+
 [【grunt整合版】30分钟学会使用grunt打包前端代码 - 叶小钗 - 博客园](http://www.cnblogs.com/yexiaochai/p/3603389.html)
+
 [Grunt打造前端自动化工作流-TGideas-腾讯游戏官方设计团队](http://tgideas.qq.com/webplat/info/news_version3/804/808/811/m579/201307/216460.shtml)
+
 [Grunt教程——初涉Grunt | css3教程-css3实例-css3动画 | W3CPlus](http://www.w3cplus.com/tools/grunt-tutorial-start-grunt.html)
 
 
