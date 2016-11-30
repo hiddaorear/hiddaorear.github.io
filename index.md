@@ -7,7 +7,7 @@ title: Welcome
 
 ````javascript
 {
-  "name": "Waly"
+  "name": "Wayl"
   ,"gender": "male"
   ,"age": "27"
   ,"github": "https://github.com/hiddaorear"
