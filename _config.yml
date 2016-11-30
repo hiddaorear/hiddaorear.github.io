@@ -16,18 +16,18 @@ author:
 # 站点信息
 title: hiddaorear
 description: hiddaorear
-url: http://hiddaorear.coding.me
+url: http://hiddaorear.github.io
 rss_url: /pages/atom.xml
 baseurl: /blog
 highlighter: rouge
 
 # avatar头像及Favicon
-avatar: http://hiddaorear.coding.me/assets/img/me.jpg
-favicon: http://hiddaorear.coding.me/assets/img/github.ico
+avatar: http://hiddaorear.github.io/assets/img/me.jpg
+favicon: http://hiddaorear.github.io/assets/img/github.ico
 
 # google analytics 设置
 ga:
-  url: hiddaorear.coding.me
+  url: hiddaorear.github.io
 
 # disqus 设置
 disqus:
