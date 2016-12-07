@@ -11,19 +11,19 @@ author:
   email: hiddaorear@outlook.com
   link: null
   weibo: null
-  github: http://github.com/hiddaorear
+  github: https://github.com/hiddaorear
 
 # 站点信息
 title: hiddaorear
 description: hiddaorear
-url: http://hiddaorear.github.io
+url: https://hiddaorear.github.io
 rss_url: /pages/atom.xml
 baseurl: /blog
 highlighter: rouge
 
 # avatar头像及Favicon
-avatar: http://hiddaorear.github.io/assets/img/me.jpg
-favicon: http://hiddaorear.github.io/assets/img/github.ico
+avatar: https://hiddaorear.github.io/assets/img/me.jpg
+favicon: https://hiddaorear.github.io/assets/img/github.ico
 
 # google analytics 设置
 ga:
