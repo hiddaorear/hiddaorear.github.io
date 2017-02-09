@@ -15,3 +15,24 @@ description:
 
 ![cassini](/../../assets/img/resource/2016/cassini_21.jpg)
 
+### ES7中的`::`
+
+````javascript
+
+  this.x = 0
+  let module = {
+    x: 1,
+    getX: function() {
+      console.log(this.x)
+    }
+  }
+  module.getX()
+  let get = module.getX
+  get() // 0
+  let boundGetX = get.bind(module)
+  boundGetX() // 1
+  let ES7boundGetx = module::get
+  ES7boundGetx() // 1
+
+````
+
