@@ -36,3 +36,24 @@ description:
 
 ````
 
+### jQuery中的end()
+
+### call, apply, bind
+
+### 箭头函数
+
+### super
+
+### 为什么设计this？
+
+### this指向的改变
+
+### 利与弊
+
+### 不同环境中的this值
+
+### 拾遗
+
+this可被重新赋值么？（不能，this是保留字）
+
+
