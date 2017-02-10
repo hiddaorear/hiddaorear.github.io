@@ -81,6 +81,8 @@ function pushStack( ele ) {
 
 ````
 
+pushStack函数在很多涉及DOM操作的函数都有调用，用于缓存了当前的this。由于只存储当前，所以这里只需要一个preObject即可，无需放在一个数组里。
+
 
 ### call, apply, bind以及箭头函数
 
@@ -179,15 +181,185 @@ E.foo() // P.foo
 
 ### 为什么设计this？
 
+this是一个指针，便于代码的更为简洁地复用。
+
+````javascript
+
+// 无this
+function upper(context) {
+  return context.name.toUpperCase()
+}
+function speak(context) {
+  var greeting = "Hello, I'm " + upper(context)
+  console.log(greeting)
+}
+
+var me = {
+  name: 'm'
+}
+
+var you = {
+  name: 'y'
+}
+
+speak(me)
+
+// 利用this
+
+function upper() {
+  return this.name.toUpperCase()
+}
+function speak() {
+  var greeting = "Hello, I'm " + upper.call(this)
+  console.log(greeting)
+}
+
+speak.call(me)
+
+
+````
+
+这里this可以简化上下文对象的传递。其他OPP语言中this关键字和OPP密切相关，一般是引用刚创建的对象，但在ECMAScript中，this只限于引用创建过的对象，this的指向和函数调用形式有关，不一定引用类型调用就指向引用类型。
+
 ### this指向的改变
+
+1 构造函数中的this
+
+````javascript
+
+function C() {
+  console.log(this)
+  this.x = 10
+}
+
+var a = new C()
+console.log(a.x);
+
+````
+
+new操作符会调用函数的内部的Construct方法，创建对象，之后调用函数的Call方法，把新创建对象作为this值。
+
+2 调用函数时call与apply设置this的值
+
+````javascript
+
+var b = 10
+function a(c) {
+  console.log(this.b)
+  console.log(c)
+}
+
+a(20)
+a.call({b: 20}, 30)
+a.apply({b: 20}, [40])
+
+````
+
+### 原理
+
+`this`是执行上下文的一个属性：
+
+````javascript
+
+activeExecutionContext = {
+  VO: {...},
+  this: thisValue
+}
+
+````
+
+在普通函数调用中，this是由激活上下文的调用者提供，即调用这个函数的父作用域，函数调用的语法形式，决定了this的值，这是一个动态可变的值。
+
+而并不是通常所说的：如果是全局对象，这this为全局对象，如果是对象的方法，这this为这个对象。
+
+````javascript
+
+var foo = {
+  bar: function() {
+    console.log(this)
+    console.log(this === foo)
+  }
+}
+
+foo.bar() // foo, true
+
+var fn = foo.bar
+
+console.log(fn === foo.bar) // true
+
+fn() // global, false
+
+
+````
+
+为什么会引起这个差异呢？
+因为引用类型的不同处理，是否会获取真实的值，所导致的。
+引用类型存在形式：
+1 标识符（变量名，函数名，函数参数名，全局对象属性名）
+2 属性访问器（`foo.bar(); foo['bar']()`, 点标记法；与可以动态设置属性名的方括号）
+
+为了从引用类型中获取真实的值，存在类似`getValue`的方法。而函数上下文的规则是，函数上下文中this是有调用者提供，并由调用形式决定。如果调用的圆括号左侧是一个引用类型，this为这个引用类型，如果是非引用类型，这为null，但为null无意义，被隐式转化为全局对象。
+
+
 
 ### 利与弊
 
-### 不同环境中的this值
+this是JavaScript特性之一，具有脚本语言的动态特性，带来很多便捷，同时由于super和箭头函数的特性，使得this具有了静态的特性，在这两种情况下，this是固定且无法改变的。其利与弊都是this的灵活，双刃剑。所以才有了ES2015中super和箭头函数的固定this的特性。
+
 
 ### 拾遗
 
 this可被重新赋值么？（不能，this是保留字）
+
+### 问题
+
+1 call参数为null时，this的指向
+
+````javascript
+
+function a() {
+  console.log(this)
+}
+a.call(null)
+
+````
+
+2 调用形式对this的影响
+
+````javascript
+
+var foo = {
+  bar: function() {
+    console.log(this)
+  }
+}
+
+foo.bar();
+(foo.bar)();
+
+(foo.bar = foo.bar)();
+(false || foo.bar)();
+(foo.bar, foo.bar)();
+
+````
+
+
+
+### 参考资料：
+
+《你所不知道的JavaScript（上卷）》
+
+[关于JavaScript的执行域,标识符解析,闭包的研究 ](http://www.laruence.com/2008/07/28/210.html)
+
+[深入ECMA-262-3 第三章、This](http://weizhifeng.net/chapter-3-this.html)
+
+[JavaScript内部原理实践——真的懂JavaScript吗？](https://github.com/goddyZhao/GPosts/blob/master/javascript/JavaScript%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86%E5%AE%9E%E8%B7%B5%E2%80%94%E2%80%94%E7%9C%9F%E7%9A%84%E6%87%82JavaScript%E5%90%97%EF%BC%9F.md)
+
+
+### 答案
+
+1 全局对象（window）,由于null没有意义，此处变为全局对象。
+2 前两者为foo，后面都是全局对象。前两者没有没有调用GetValue，都是引用类型的。后面的赋值(3)，逗号(4)，逻辑表达式(5)失去了引用类型的值，而是得到函数类型的值，this的值被设置为全局对象。
 
 
 
