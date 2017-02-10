@@ -38,7 +38,7 @@ description:
 
 ### jQuery中的this
 
-链式调用
+链式调用的实现；
 
 ````javascript
 
@@ -110,7 +110,7 @@ value is "lexical", this is an ArrowFunction and does not have a local this
 value. If thisModel is lexical, return NormalCompletion(undefined).
 
 箭头函数没有自己的this绑定，同时在函数执行时绑定this会被直接忽略。其中this总是指向定义时所在的对象，而不是运行时所在的对象。即箭头函数的this值是lexical
-scope 的this值。
+scope 的this值。这一特性使得箭头函数在React中的render函数中使用起来很方便。
 
 ````javascript
 
@@ -296,9 +296,9 @@ fn() // global, false
 因为引用类型的不同处理，是否会获取真实的值，所导致的。
 引用类型存在形式：
 1 标识符（变量名，函数名，函数参数名，全局对象属性名）
-2 属性访问器（`foo.bar(); foo['bar']()`, 点标记法；与可以动态设置属性名的方括号）
+2 属性访问器（`foo.bar(); foo['bar']()`, 点标记法；可以动态设置属性名的方括号`[]`）
 
-为了从引用类型中获取真实的值，存在类似`getValue`的方法。而函数上下文的规则是，函数上下文中this是有调用者提供，并由调用形式决定。如果调用的圆括号左侧是一个引用类型，this为这个引用类型，如果是非引用类型，这为null，但为null无意义，被隐式转化为全局对象。
+为了从引用类型中获取真实的值，存在类似`getValue`的方法。而函数上下文的规则是，函数上下文中this由调用者提供，并由调用形式决定。如果调用的圆括号左侧是一个引用类型，this为这个引用类型，如果是非引用类型，这为null，但为null无意义，被隐式转化为全局对象。
 
 
 
@@ -359,6 +359,7 @@ foo.bar();
 ### 答案
 
 1 全局对象（window）,由于null没有意义，此处变为全局对象。
+
 2 前两者为foo，后面都是全局对象。前两者没有没有调用GetValue，都是引用类型的。后面的赋值(3)，逗号(4)，逻辑表达式(5)失去了引用类型的值，而是得到函数类型的值，this的值被设置为全局对象。
 
 
