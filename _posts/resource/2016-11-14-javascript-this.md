@@ -15,171 +15,88 @@ description:
 
 ![cassini](/../../assets/img/resource/2016/cassini_21.jpg)
 
-### ES7中的`::`
+## 原理
+
+### 错误的this指向
+
+通常所说的：如果是全局环境中，this指向全局对象，如果是对象的方法，这this指向这个对象。
+
+例子1：
 
 ````javascript
 
-  this.x = 0
-  let module = {
-    x: 1,
-    getX: function() {
-      console.log(this.x)
-    }
-  }
-  module.getX()
-  let get = module.getX
-  get() // 0
-  let boundGetX = get.bind(module)
-  boundGetX() // 1
-  let ES7boundGetx = module::get
-  ES7boundGetx() // 1
-
-````
-
-### jQuery中的this
-
-链式调用的实现；
-
-````javascript
-
-function Constructor() {
-  this.art = 0
-}
-
-Constructor.prototype.fn_0 = function() {
-  console.log('0')
-  return this;
-}
-
-Constructor.prototype.fn_1 = function() {
-  console.log('1')
-  return this;
-}
-
-new Constructor().fn_0().fn_1()
-
-````
-
-调用的方法返回this即可。
-
-`end()`的实现
-
-````javascript
-
-function end() {
-  return this.prevObject || this.constructor(null)
-}
-
-// 设置preObject的函数
-function pushStack( ele ) {
-  // Build a new jQuery macthed element set
-  var ret = jQuery.merge( this.constructor(), elems);
-  ret.prevObject = this // ret.pervObject 设置为当前jQuery对象引用
-  ret.context = this.context
-  return ret;
-}
-
-````
-
-pushStack函数在很多涉及DOM操作的函数都有调用，用于缓存了当前的this。由于只存储当前，所以这里只需要一个preObject即可，无需放在一个数组里。
-
-
-### call, apply, bind以及箭头函数
-
-call,apply,bind皆为动态的改变this指针的方法。其中call和apply是当Object没有某个方法，但是其它对象有，可以借助call和apply改变this的指向，调用其它对象的方法。bind为绑定this为某个对象。
-
-典型的应用：
-
-将类数组元素转化为数组：
-`Array.prototype.slice.apply(document.getElementsByTagName('*'))`
-
-检查类型：
-
-````javascript
-
-function isArray(obj) {
-  return Object.prototpye.toString.call(obj) === '[object Array]'
-}
-
-````
-
-
-箭头函数则与前三者不同。
-If kind is Arrow, set the `[[ThisModel]]` internal slot of F to lexical.If the
-value is "lexical", this is an ArrowFunction and does not have a local this
-value. If thisModel is lexical, return NormalCompletion(undefined).
-
-箭头函数没有自己的this绑定，同时在函数执行时绑定this会被直接忽略。其中this总是指向定义时所在的对象，而不是运行时所在的对象。即箭头函数的this值是lexical
-scope 的this值。这一特性使得箭头函数在React中的render函数中使用起来很方便。
-
-````javascript
-
-function foo() {
-  setTimeout(() => {
-    console.log('id: ', this.id)
-  }, 100)
-}
-
-var id = 0
-
-foo.call({id: 42})
-
-// 容易误解的地方
-// {id: 42}
-// 是箭头函数定义所在的对象还是运行时所在的对象。由于箭头函数位于foo函数内部，只有foo函数运行之后他才会生成，所以foo运行时所在的对象，即箭头函数定义所在的对象。
-
-````
-
-````javascript
-
-var f = () => 5;
-// 近似等价于
-var f = function() {return 5;}.bind(this);
-
-````
-
-综上，call,apply,bind使得JavaScript具有动态改变this的特性，而箭头函数使得JavaScript具有固定this的指向的特性。一动一静，相得益彰。
-
-
-### super
-
-````javascript
-
-class P {
-  foo() {
-    console.log('P.foo')
+var foo = {
+  bar: function() {
+    console.log(this)
   }
 }
 
-class C extends P {
-  foo() {
-    super.foo()
-  }
-}
+foo.bar();
+(foo.bar)();
 
-var c1 = new C()
-c1.foo() // P.foo
-
-var D = {
-  foo: function() {
-    console.log('D.foo')
-  }
-}
-
-var E = {
-  foo: C.prototype.foo
-}
-
-Object.setPrototypeOf(E, D)
-E.foo() // P.foo
-
+(foo.bar = foo.bar)();
+(false || foo.bar)();
+(foo.bar, foo.bar)();
 
 ````
 
-可见super的绑定是静态绑定，创建时即完成绑定。所以E委托了D，但并不能调用到`D.foo()`，类似于箭头的函数的this绑定。
+例子1前两者为foo，后面都是全局对象。后三者并没有指向foo。所以我们上面的通常说法不精确。
+
+### 精确的this指向
+
+在全局环境中，this指向全局对象。而在普通函数调用中，this是由激活上下文的调用者提供，即调用这个函数的父作用域，以及函数调用的语法形式，决定了this的值，这是一个动态可变的值。
+
+例子2：
+
+````javascript
+
+var foo = {
+  bar: function() {
+    console.log(this)
+    console.log(this === foo)
+  }
+}
+
+foo.bar() // foo, true
+
+var fn = foo.bar
+
+console.log(fn === foo.bar) // true
+
+fn() // global, false
+
+````
+
+例子2中，第一次调用指向foo，把`foo.bar`赋值给fn之后，this没有指向foo。是什么导致this指向的变化呢？
+
+### this指向的内部原理
+
+`this`是执行上下文的一个属性：
+
+````javascript
+
+activeExecutionContext = {
+  VO: {...},
+  this: thisValue
+}
+
+````
+
+在普通函数调用中，this是由激活上下文的调用者提供，即调用这个函数的父作用域，函数调用的语法形式，决定了this的值，这是一个动态可变的值。
+
+为什么会引起这个差异呢？
+因为引用类型的不同处理，是否会获取真实的值，所导致的。
+
+引用类型存在形式：
+
+1 标识符（变量名，函数名，函数参数名，全局对象属性名）
+
+2 属性访问器（`foo.bar(); foo['bar']()`, 点标记法；可以动态设置属性名的方括号`[]`）
+
+为了从引用类型中获取真实的值，存在类似`getValue`的方法。而函数上下文的规则是，函数上下文中this由调用者提供，并由调用形式决定。如果调用的圆括号左侧是一个引用类型，this为这个引用类型，如果是非引用类型，这为null，但为null无意义，被隐式转化为全局对象。
 
 
-### 为什么设计this？
+### 为什么有this的特性？
 
 this是一个指针，便于代码的更为简洁地复用。
 
@@ -255,52 +172,169 @@ a.apply({b: 20}, [40])
 
 ````
 
-### 原理
+### call, apply, bind以及箭头函数
 
-`this`是执行上下文的一个属性：
+call,apply,bind皆为动态的改变this指针的方法。其中call和apply是当Object没有某个方法，但是其它对象有，可以借助call和apply改变this的指向，调用其它对象的方法。bind为绑定this为某个对象。
+
+典型的应用：
+
+将类数组元素转化为数组：
+`Array.prototype.slice.apply(document.getElementsByTagName('*'))`
+
+检查类型：
 
 ````javascript
 
-activeExecutionContext = {
-  VO: {...},
-  this: thisValue
+function isArray(obj) {
+  return Object.prototpye.toString.call(obj) === '[object Array]'
 }
 
 ````
 
-在普通函数调用中，this是由激活上下文的调用者提供，即调用这个函数的父作用域，函数调用的语法形式，决定了this的值，这是一个动态可变的值。
 
-而并不是通常所说的：如果是全局对象，这this为全局对象，如果是对象的方法，这this为这个对象。
+箭头函数则与前三者不同。
+If kind is Arrow, set the `[[ThisModel]]` internal slot of F to lexical.If the
+value is "lexical", this is an ArrowFunction and does not have a local this
+value. If thisModel is lexical, return NormalCompletion(undefined).
+
+箭头函数没有自己的this绑定，同时在函数执行时绑定this会被直接忽略。其中this总是指向定义时所在的对象，而不是运行时所在的对象。即箭头函数的this值是lexical
+scope 的this值。这一特性使得箭头函数在React中的render函数中使用起来很方便。
 
 ````javascript
 
-var foo = {
-  bar: function() {
-    console.log(this)
-    console.log(this === foo)
+function foo() {
+  setTimeout(() => {
+    console.log('id: ', this.id)
+  }, 100)
+}
+
+var id = 0
+
+foo.call({id: 42})
+
+// 容易误解的地方
+// {id: 42}
+// 是箭头函数定义所在的对象还是运行时所在的对象。由于箭头函数位于foo函数内部，只有foo函数运行之后他才会生成，所以foo运行时所在的对象，即箭头函数定义所在的对象。
+
+````
+
+````javascript
+
+var f = () => 5;
+// 近似等价于
+var f = function() {return 5;}.bind(this);
+
+````
+
+综上，call,apply,bind使得JavaScript具有动态改变this的特性，而箭头函数使得JavaScript具有固定this的指向的特性。一动一静，相得益彰。
+
+## 在编程中的运用
+
+### ES7中的`::`
+
+````javascript
+
+  this.x = 0
+  let module = {
+    x: 1,
+    getX: function() {
+      console.log(this.x)
+    }
+  }
+  module.getX()
+  let get = module.getX
+  get() // 0
+  let boundGetX = get.bind(module)
+  boundGetX() // 1
+  let ES7boundGetx = module::get
+  ES7boundGetx() // 1
+
+````
+
+### super
+
+````javascript
+
+class P {
+  foo() {
+    console.log('P.foo')
   }
 }
 
-foo.bar() // foo, true
+class C extends P {
+  foo() {
+    super.foo()
+  }
+}
 
-var fn = foo.bar
+var c1 = new C()
+c1.foo() // P.foo
 
-console.log(fn === foo.bar) // true
+var D = {
+  foo: function() {
+    console.log('D.foo')
+  }
+}
 
-fn() // global, false
+var E = {
+  foo: C.prototype.foo
+}
+
+Object.setPrototypeOf(E, D)
+E.foo() // P.foo
 
 
 ````
 
-为什么会引起这个差异呢？
-因为引用类型的不同处理，是否会获取真实的值，所导致的。
-引用类型存在形式：
-1 标识符（变量名，函数名，函数参数名，全局对象属性名）
-2 属性访问器（`foo.bar(); foo['bar']()`, 点标记法；可以动态设置属性名的方括号`[]`）
-
-为了从引用类型中获取真实的值，存在类似`getValue`的方法。而函数上下文的规则是，函数上下文中this由调用者提供，并由调用形式决定。如果调用的圆括号左侧是一个引用类型，this为这个引用类型，如果是非引用类型，这为null，但为null无意义，被隐式转化为全局对象。
+可见super的绑定是静态绑定，创建时即完成绑定。所以E委托了D，但并不能调用到`D.foo()`，类似于箭头的函数的this绑定。
 
 
+### jQuery中的this
+
+链式调用的实现；
+
+````javascript
+
+function Constructor() {
+  this.art = 0
+}
+
+Constructor.prototype.fn_0 = function() {
+  console.log('0')
+  return this;
+}
+
+Constructor.prototype.fn_1 = function() {
+  console.log('1')
+  return this;
+}
+
+new Constructor().fn_0().fn_1()
+
+````
+
+调用的方法返回this即可。
+
+`end()`的实现
+
+````javascript
+
+function end() {
+  return this.prevObject || this.constructor(null)
+}
+
+// 设置preObject的函数
+function pushStack( ele ) {
+  // Build a new jQuery macthed element set
+  var ret = jQuery.merge( this.constructor(), elems);
+  ret.prevObject = this // ret.pervObject 设置为当前jQuery对象引用
+  ret.context = this.context
+  return ret;
+}
+
+````
+
+pushStack函数在很多涉及DOM操作的函数都有调用，用于缓存了当前的this。由于只存储当前，所以这里只需要一个preObject即可，无需放在一个数组里。
 
 ### 利与弊
 
