@@ -3,20 +3,37 @@ layout: post
 title: Welcome
 ---
 
-## 有朋自远方来，不亦乐乎？
+## 关于Wong
 
-````javascript
-{
-  "name": "Wayl"
-  ,"gender": "male"
-  ,"age": "28"
-  ,"github": "https://github.com/hiddaorear"
-  ,"github_blog": "https://hiddaorear.github.io/index.html"
-  ,"coding_blog": "http://hiddaorear.coding.me/index.html"
-  ,"hobby": "reading"
-}
-````
+你好，我是Yifeng Wong，很业余的前端程序员，本业是物理学，曾参加数学建模比赛，用程序实现数学模型，不指望以此谋生。少年易老学难成，遂以此过日子。因为是半路出家，根基不牢靠，还在补习基础知识。
+
+## 个人信息
+
+Email：hiddaorear(at)163.com(不常登陆，github会经常登陆)
+githut：https://github.com/hiddaorear
+blog: https://hiddaorear.github.io/index.html
+豆瓣：https://www.douban.com/people/152478027/
+座右铭：唐棣之华，偏其反而。岂不尔思，室是远而。子曰：未之思也，夫何远之有。
+
+## 个人简介
+
+89年生人，名义上的80后，但过于接近90后，80后一般不买帐，90后也买账。加上乱翻书太多，如果一本书是体验作者所写的一生，过了许多人生，垂垂老矣，实为70后。上学晚，出道更晚，2013出来做前端至今。
+
+曾在明源软件呆过，得遇好的老大与朋友，时过境迁，笑声犹在。后去OnePlus，在大海边工作，累了，去阳台看海潮，海阔天空，海水自由来去，OnePlus就是这种气氛。后来到EC工作，目前主要用React和jQuery。
+
+入行喜欢尝鲜，CSS以及LESS都玩，从jQuery到AngularJS到React，以及相关的Webpack和Gulp，挨个尝试一遍，剩下的Vue也在练手。擅长JavaScript，偏客户端，了解Node。
+
+技术更新不可谓不快，然后在我看来，这个基本是前端借鉴成熟的后台技术的过程，比如各种MVC模式。
+
+## 喜好
+
+平日无事乱读书，不成系统，不过技术，数学，物理，历史，小说，散文偏多。觉得《史记》写实在是好，当故事当历史，都很可读。因为要恶补计算机基础，也乱读技术书籍，之前读《代码大全》，里面所写，非常实用，的确是可以改善写代码的习惯。现在读2013年买的Matz的《代码的未来》，Matz是Ruby的作者，书中对技术见解非常深刻而简明，印象深刻。
+
+读古典文学多了，想学围棋，自学之，颇有乐趣。2017年AI下棋突然这么厉害，是我未曾料到的。下围棋的人，少不得好为人师。
+
+既下棋，又好写字，无专业训练，心不静，则抓笔写之，写完心静。琴棋书画，少不得补全。目前在自学素描和口琴，自得其乐。
+
+生活平淡，好运动，跑步打羽毛球，皆好之。日久不运动，必心中有所念想，跑步打球而后快。
+
 
 ## [github](https://github.com/hiddaorear)
-
-
