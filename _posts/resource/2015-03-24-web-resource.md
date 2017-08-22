@@ -10,6 +10,10 @@ description:
 
 ### Blog
 
+[GeekPlux](http://geekplux.com/)
+
+[藤原妹红](https://blog.windrunner.me/)
+
 [当然我在扯淡](http://www.yinwang.org/)
 
 [Chun Tian (binghe) - 冰河 - 网易博客](http://tianchunbinghe.blog.163.com/)
