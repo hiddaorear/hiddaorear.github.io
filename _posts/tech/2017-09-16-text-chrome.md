@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  文本
+title:  文本之Chrome搜索
 category: 技术
 tags: [text]
 keywords:  text Chrome
@@ -11,7 +11,7 @@ description:
 
 #### Saturday, 16  2017 September
 
-![Well](/../../assets/img/tech/2017/PlayRoja.jpg)
+![ChenBi](/../../assets/img/tech/2017/ChenBi_1.g)
 
 ### 避免搜索
 搜索第一件事，是如何避免去搜索。搜索是不得已而为之的技巧，首先我要分析，问题是什么，即使到了搜索这一步，可以有的放矢的去搜索，可做狙击手，不用散弹枪。
