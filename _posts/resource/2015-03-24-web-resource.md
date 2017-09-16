@@ -10,6 +10,14 @@ description:
 
 ### Blog
 
+[李杀网](http://xahlee.org/)
+
+[GeekPlux](http://geekplux.com/)
+
+[東北角的小徑](https://kuanyui.github.io/)
+
+[藤原妹红](https://blog.windrunner.me/)
+
 [当然我在扯淡](http://www.yinwang.org/)
 
 [Chun Tian (binghe) - 冰河 - 网易博客](http://tianchunbinghe.blog.163.com/)
@@ -25,6 +33,12 @@ description:
 [卢昌海个人主页](http://www.changhai.org/)
 
 [MacTalk](http://macshuo.com/)
+
+[老赵茶馆前端](http://zhw-island.com/page/2/)
+
+### EMACS
+
+[如何学习 Emacs](http://www.songofcode.com/how-to-learn-emacs-chinese-edition/#_关于这本_emacs_入门指南)
 
 
 ### 视频
