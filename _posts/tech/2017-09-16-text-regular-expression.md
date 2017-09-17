@@ -11,7 +11,7 @@ description:
 
 #### Saturday, 16  2017 September
 
-![ChenBi](/../../assets/img/tech/2017/ChenBi_3.jpg)
+![ChengBi](/../../assets/img/tech/2017/ChengBi_3.jpg)
 
 
 
