@@ -88,25 +88,25 @@ Allows you to create a new buffer by pressing RET, under the header Create Buffe
 
 与一般的搜索mode不同，会新建一个缓冲区，在其中可以编辑搜索显示的行。我喜欢其显示形式，是新开一个窗口显示搜索列表，点击列表中的行，可以跳转对应的原文件对应之处。在修改之前，使用ocur预览，或者查找某一函数在此文本中的使用。
 
-#### helm-occur
+### helm-occur
 
 Similar to occur, but using Helm interface. As you type, matching lines are updated immediately. This is convenient when you want to have a list of matches in the current buffer to jump back and forth. TAB to temporarily move the point to the location of the currently highlighted match. C-g cancels the current Helm session and returns to the original location where helm-occur was invoked. RET on a match jumps to that match.
 
 相对与occur原生功能，`helm-occur`支持`Ctrl-n Ctrl-p`上下移动选择，而原生需要使用鼠标，当然原生也可以修改，就使用而言，原生的occur更好。
 
-#### helm-semantic-or-imenu
+### helm-semantic-or-imenu
 
 The Imenu facility offers a way to find the major definitions, such as function definitions or variable definitions in a file by name. You can run imenu command individually.
 
 相当于大纲视图，有了这个功能就无需折叠代码的功能。可以浏览代码中所定义的函数之类。
 
-#### evil
+### evil
 
 使emacs支持vim的编辑模式，vim的编辑模式的快捷键很用。无需因为两个编辑器的差异与争论，而抹杀其优点。兼容并包，方能成其大。
 
 我使用vim有三年多，切换到evil很自然。且因为是在emacs中，有额外的好处。其中vim的编辑模式是其强大之处，但有时常常需要切换，也不甚方便。比如编辑之后，需要移动光标，就需要切换，或者使用上下左右，但我喜欢。而在emacs，此时使用`Ctrl-f Ctrl-b`等即可。当然，也可以在vim设置，此处不争论，我需要的工具的好处，不在乎其差异，能更好的为我所用即可。
 
-#### bookmark
+### bookmark
 
 `Ctrl-x r m` bookmark set;
 `Ctrl-x r b` bookmark jump;
