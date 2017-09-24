@@ -114,10 +114,16 @@ The Imenu facility offers a way to find the major definitions, such as function 
 
 标签的优点在于，其全局性，不局限与本文件，可以直接跳转在其他文件的标记之处。在多个常用的文件进行切换，其速度当数第一。
 
-
-## 全局操作
-
 ## `org-mode`
+
+TAB是折叠的开关。这个功能，让我想用org来做PPT，简洁而条理分明；
+
+`Alt-return`插入同级标题；
+
+`C-c C-t`，`unmarked->TODO->DONE`在这三个状况间循环；
+
+`Ctrl-c Ctrl-e`导出，可以选择各种格式；
+
 
 ## 插件列表
 
