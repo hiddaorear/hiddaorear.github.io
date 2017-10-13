@@ -15,6 +15,12 @@ description:
 
 ## git
 
+### branch
+
+merge branch
+
+`git pull master you_branch`
+
 ### commit
 
 commit message
@@ -24,14 +30,45 @@ commit message
 `[修改类型] 主要涉及的组件： 修改内容`
 
 `[Feature] tabs: 新建tabs组件`
+
 `[Deleted] tabs: 删除tabs组件`
+
 `[Update] tabs: 修改tabs组件`
+
 `[Debug] tabs: 修复tabs的bug`
+
 `[Optimization] tabs: 优化tabs的加载`
+
 `[Releast] tabs: 发布tabs组件`
+
 `[Merge] branch: 合并branch_name分支`
+
 `[Refactoring] tabs: 重构tabs组件`
 
+
+stash
+
+`git stash`
+
+### search
+
+log
+
+`git reflog`
+
+`git log -p -1` 查看上一次提交修改的详细内容
+
+diff
+
+`git diff master --stat` 显示差异文件列表
+
+grep
+
+`git grep --count string`  输出匹配的文件，以及有匹配个数
+
+`git grep -p function_value *.js` 匹配的行是属于那一个方法或函数
+
+`git grep --break --heading -n -e string` 输出易读的文本
 
 ## 端口占用
 
