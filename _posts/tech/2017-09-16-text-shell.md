@@ -50,7 +50,12 @@ merge branch
 `git branch -r` 列出远端分支
 `git branch -m old new` 重命名分支
 
+`git remote prune origin ` 如果远程已经删除了branch，可以用此清除本地多余的branch
+
+
 ### commit
+
+`git add -p` 交互式add，有时候我们会在代码中带有调试的代码，这样子可以避免匆忙的提交
 
 commit message
 
@@ -94,7 +99,7 @@ stash
 
 log (在整个历史中搜索)
 
-`git reflog` 所有的操作记录
+`git reflog` 所有的操作记录，在进行一系列git操作，如果陷入混乱，不妨使用这个命令看一下自己的操作记录
 
 `git blame filename` 查看每一行的修改的作者
 
@@ -116,6 +121,10 @@ grep （在指定的提交中搜索）
 diff
 
 `git diff master --stat` 显示差异文件列表
+
+clean
+
+`git clean -f` 可以清除没有跟踪的文件，例如merge的时候，生成了`.orig`文件，可以直接干掉。或者复制了一堆文件，想干掉
 
 
 ## 端口占用
