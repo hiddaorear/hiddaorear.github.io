@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title:  代码组织一点思考
