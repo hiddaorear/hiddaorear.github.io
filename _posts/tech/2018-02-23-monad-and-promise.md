@@ -26,7 +26,7 @@ description:
 
 [组合软件：6. 函子和范畴](http://www.zcfy.cc/article/functors-amp-categories-javascript-scene-medium-2698.html)
 
-[ Promises: 所有的错误使用方式 | getiblog ](http://www.zcfy.cc/article/promises-all-the-wrong-ways-getiblog-493.html)
+[Promises: 所有的错误使用方式](http://www.zcfy.cc/article/promises-all-the-wrong-ways-getiblog-493.html)
 
 ## 函数式编程相关资料
 
