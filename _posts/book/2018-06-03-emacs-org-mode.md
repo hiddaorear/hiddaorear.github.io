@@ -55,6 +55,9 @@ Org mode 是 Emacs 的一个插件，能为 Emacs 用户提供一个强大的纯
 ```` elisp
     (setq org-src-fontify-natively t)
 
+````
+
+```` js
     function demo() {
       console.log("Hi!");
     }
