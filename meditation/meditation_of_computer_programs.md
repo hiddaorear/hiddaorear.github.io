@@ -1,7 +1,5 @@
 # React Design Patterns and Best Practices
 
-[meditation_of_computer_programs](./meditation/meditation_of_computer_programs.md)
-
 ## 关于编程的思考
 
 React是我使用时间最长，具有高级抽象能力的前端组件。在学习和使用过程中，技巧繁多，对项目反思，以及重构的冲动，都会归于对复杂度的控制上。这个让我想起了SICP。摘录这本书中一些话。
@@ -45,4 +43,4 @@ FunctionAsChild.propTypes = {
     {(param, url) => <div>Hello, {param}! and {url}</div>}
 </FunctionAsChild>
 
-```
+`
