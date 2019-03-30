@@ -4,7 +4,7 @@
 
 ## 计算机技术
 
-### [meditation_of_computer_programs](./meditation/meditation_of_computer_programs.md)
+### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
 
 ## 文学历史
 
