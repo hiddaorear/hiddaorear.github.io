@@ -1,6 +1,6 @@
-# React Design Patterns and Best Practices
+# SICP笔记
 
-## 关于编程的思考
+#### 2019/3/31
 
 React是我使用时间最长，具有高级抽象能力的前端组件。在学习和使用过程中，技巧繁多，对项目反思，以及重构的冲动，都会归于对复杂度的控制上。这个让我想起了SICP。摘录这本书中一些话。
 
@@ -19,28 +19,6 @@ Alan J. Perlis
 > - 组合的方法。简单个体构造复合元素
 > - 抽象的方法。通过这个抽象的方法，为复合对象命名，并将它当做单元去操作
 
-## JSX的抽象能力
+## 版本
 
-JSX顾名思义，是JavaScript和XML的结合。XML描述UI的结构，JavaScript操作UI。二者混在一起的时候，JS可能有描述UI的能力。二者在React中结合运用的例子：函数子组件。
-
-### 函数子组件
-
-``` javascript
-
-const FunctionAsChild = ({ children, url }) => {
-    console.log(url);
-    return children('World');
-};
-
-FunctionAsChild.propTypes = {
-    children: PropTypes.func.isRequired,
-    url: PropTypes.string.isRequired,
-};
-
-<FunctionAsChild
-    url='http://www.yinwang.org'
->
-    {(param, url) => <div>Hello, {param}! and {url}</div>}
-</FunctionAsChild>
-
-`
+- 2019/3/31 总结React抽象方法，想起SICP，重读，并抄写
