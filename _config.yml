@@ -20,5 +20,5 @@ author:
 title: 石下读书
 description: hiddaorear
 url: https://hiddaorear.github.io
-baseurl: /blog
+baseurl: /
 highlighter: rouge
