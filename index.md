@@ -18,6 +18,8 @@ title: 石下读书
 
 ## 医学
 
+### [溺水急救](./medicine/drown.md)
+
 ## 随笔
 
 ### [你真的需要提高技术吗？](./essay/badminton_technique.md)
