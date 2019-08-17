@@ -8,7 +8,11 @@ title: 石下读书
 
 ## 计算机技术
 
-#### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
+### [Monad](./computer_programs/monad.md)
+
+### [前端上报](./computer_programs/analytics.md)
+
+### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
 
 ## 文学历史
 
