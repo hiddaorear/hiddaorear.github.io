@@ -19,3 +19,13 @@ title: 石下读书
 ## 医学
 
 ## 随笔
+
+### [你真的需要提高技术吗？](./essay/badminton_technique.md)
+
+### [下厨房](./essay/cooking.md)
+
+### [自制的陀螺](./essay/gyro.md)
+
+### [我们的十年](./essay/junior_high_school_ten_years.md)
+
+### [一次就好](./essay/single_step.md)
