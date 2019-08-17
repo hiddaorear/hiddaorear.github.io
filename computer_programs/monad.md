@@ -43,7 +43,7 @@ IoC 的核心思想是 “Don’t call me, I’ll call you”，也被叫作”�
 
 仅仅是wrap一个值。
 
-``` JavaScript
+``` javascript
 function Identity(value) {
     this.value = value;
 }
@@ -56,7 +56,7 @@ new Identity(5).bind(a => new Identity(6).bind(b => console.log(a + b)));
 
 除了像Identity Monad存储值，还可以表征缺少值。如果计算遇到Nothing，则随后的计算停止，直接返回Nothing。
 
-``` JavaScript
+``` javascript
 
 function Just(value) {
     this.value = value;
@@ -78,7 +78,7 @@ let result = new Just(5).bind(value =>
 
 #### 可以用于避免因为null而产生的错误：
 
-``` JavaScript
+``` javascript
 
 function getUser() {
     return {
@@ -91,7 +91,7 @@ function getUser() {
 ```
 1. 捕获异常
 
-``` JavaScript
+``` javascript
 try {
     let url = getUser().getAvatar().url;
     console.log(url); // this never happens
@@ -103,7 +103,7 @@ try {
 
 2. 或者做null检测
 
-``` JavaScript
+``` javascript
 let user = getUser();
 if (user !== null) {
     let avatar = user.getAvatar();
@@ -115,7 +115,7 @@ if (user !== null) {
 ```
 3. 使用Maybe Monad
 
-``` JavaScript
+``` javascript
 function getUser(){
     return new Just({
         getAvatar: function(avatar) {
@@ -150,7 +150,7 @@ bind funciton，变换数据并返回Promise： `Promise.prototype.then(value =>
 
 证明单位元：e + a = a
 
-``` JavaScript
+``` javascript
 Promise.resolve(3).then(result => console.log(result));
 // 3
 
@@ -160,7 +160,7 @@ Promise.resolve(Promise.resolve(3)).then(result => console.log(result));
 
 证明结合律： (a + b) + c = a + (b + c)
 
-``` JavaScript
+``` javascript
 
 // (a + b) + c
 Promise
@@ -189,7 +189,7 @@ Promise
 
 #### 组合函数
 
-``` JavaScript
+``` javascript
 const add1 = x => x + 1;
 const mul3 = x => x * 3;
 const compose = (fn1, fn2) => x => fn1(fn2(x));
@@ -204,7 +204,7 @@ console.log(addOneThenMul3(4)) // 打印 15
 
 1. 假设请求syncAjax是同步请求：
 
-``` JavaScript
+``` javascript
 const sync = url => {return syncAjax(url);};
 const compose = (fn1, fn2) => x => fn1(fn2(x));
 const result = compose(syncAjax, syncAjax)(urlString);
@@ -212,7 +212,7 @@ const result = compose(syncAjax, syncAjax)(urlString);
 
 2. CPS处理异步请求ajax
 
-``` JavaScript
+``` javascript
 const async = (url, cb) => ajax(url, cb);
 const composeCPS = (fn1, fn2) => (x, cb) => fn1(x, x1 => fn2(x1, cb));
 composeCPS(async, async)(urlString, reslut => console.log(result));
@@ -220,7 +220,7 @@ composeCPS(async, async)(urlString, reslut => console.log(result));
 
 3. 柯里化
 
-``` JavaScript
+``` javascript
 const async = url => cb => ajax(url, cb);
 const composeCPS = (fn1, fn2) => x => cb => fn1(x)(x1 => fn2(x1)(cb));
 composeCPS(async, async)(urlString)(reslut => console.log(result));
@@ -228,7 +228,7 @@ composeCPS(async, async)(urlString)(reslut => console.log(result));
 
 4. 添加done
 
-``` JavaScript
+``` javascript
 const async = url => {
     return {
         done: cb => ajax(url, cb)
@@ -248,7 +248,7 @@ composeCPS(async, async)(urlString)
 
 a. 组合对象从函数，修改为doneObj
 
-``` JavaScript
+``` javascript
 const createDoneObj = done  => ({done});
 
 const async = url => {
@@ -268,7 +268,7 @@ bindDone(async(urlSting), async)
 
 b. bindDone放入createThenObj
 
-``` JavaScript
+``` javascript
 const createThenObj = done => ({
     done,
     then(fn) {
@@ -331,7 +331,7 @@ shouldComponentUpdate对应的是React.memo
 
 #### useReducer
 
-``` JavaScript
+``` javascript
 const initialState = {count: 0};
 
 function reducer(state, action) {
