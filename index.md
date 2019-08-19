@@ -8,6 +8,8 @@ title: 石下读书
 
 ## [github](https://github.com/hiddaorear)
 
+## [2019年以前博客存档](https://github.com/hiddaorear/history_blog)
+
 ## 计算机技术
 
 ### [Monad](./computer_programs/monad.md)
