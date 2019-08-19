@@ -6,6 +6,8 @@ title: 石下读书
 
 ## 不与人物接，不为山海游。终生伏几案，天地一书囚。
 
+## [github](https://github.com/hiddaorear)
+
 ## 计算机技术
 
 ### [Monad](./computer_programs/monad.md)
