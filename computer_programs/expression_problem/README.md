@@ -192,7 +192,7 @@ let rec new_toString : new_exp -> string = function
 
 我们把操作抽象出去，集合在Class中，然后把这个Class，用参数传递各个expression的方法里。
 
-``` Java
+``` java
 
 interface Exp {
     <T> T accept(ExpVisitor<T> visitor);
