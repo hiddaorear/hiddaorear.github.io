@@ -819,7 +819,7 @@ print_endline (string_of_int num);;
 
 ### OCaml polymorphic variant
 
-``` OCaml
+``` ocaml
 
 exception BadResult of string
 
