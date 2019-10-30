@@ -38,7 +38,7 @@
 
 ### 变体(variant)实现expression
 
-``` OCaml
+``` ocaml
 (*定义表达式的类型：Int Negate Add*)
 type exp =
   Int of int
@@ -69,7 +69,7 @@ variant实现的expression，表达式的类型是固定的，无法拓展。但
 我们实现toString的时候，忘记实现`Add`的，模式匹配就会报错：
 
 缺失`Add`实现toString的代码：
-``` OCaml
+``` ocaml
 let rec toString = function
   | Int i -> string_of_int i
   | Negate e -> "-(" ^ (toString e) ^ ")"
@@ -77,7 +77,7 @@ let rec toString = function
 
 编译时的报错：
 
-``` OCaml
+``` ocaml
 File "exp.ml", line 11, characters 19-98:
 11 | ...................function
 12 |   | Int i -> string_of_int i
@@ -102,7 +102,7 @@ Here is an example of a case that is not matched:
 
 使用多态变体实现exprssion，使得variant具有拓展能力。
 
-``` OCaml
+``` ocaml
 type exp =
   [`Int of int
   | `Negate of exp
@@ -128,7 +128,7 @@ let rec toString = function
 
 缺少`Add`的`toString`实现：
 
-``` OCaml
+``` ocaml
 let rec toString = function
   | `Int i -> string_of_int i
   | `Negate e -> "-(" ^ (toString e) ^ ")"
@@ -137,7 +137,7 @@ let rec toString = function
 
 这时，需要手动写明函数的类型，如
 
-``` OCaml
+``` ocaml
 let rec toString : exp -> string = function
   | `Int i -> string_of_int i
   | `Negate e -> "-(" ^ (toString e) ^ ")"
@@ -146,7 +146,7 @@ let rec toString : exp -> string = function
 
 此时，如果我们忘记实现`Add`的，就会报错：
 
-``` OCaml
+``` ocaml
 File "exp_exhaustive.ml", line 13, characters 35-116:
 13 | ...................................function
 14 |   | `Int i -> string_of_int i
@@ -162,13 +162,13 @@ Here is an example of a case that is not matched:
 
 我们新增一种表达式。
 
-``` OCaml
+``` ocaml
 type new_exp = [ exp | `Sub of new_exp * new_exp]
 ```
 
 支持eval求值操作和toString操作：
 
-``` OCaml
+``` ocaml
 let rec new_eval : new_exp -> int = function
   | #exp as exp -> eval exp
   | `Sub(e1, e2) -> (new_eval e1) - (new_eval e2)
@@ -435,7 +435,7 @@ C语言的结构体和联合体内的分量是可以修改的，但OCaml的记�
 
 即：
 
-``` OCaml
+``` ocaml
 Int                         <==>    int
 MyType Int Int or (Int,Int) <==>    int*int
 Left Int | Right Int        <==>    int+int
@@ -491,7 +491,7 @@ Left Int | Right Int        <==>    int+int
 
 - 错误的二叉树定义
 
-``` OCaml
+``` ocaml
 
 type inttree = Leaf of int | Node of inttree * intree
 
@@ -499,7 +499,7 @@ type inttree = Leaf of int | Node of inttree * intree
 
 - 错误的用多态变量定义的二叉树
 
-``` OCaml
+``` ocaml
 type 'a tree =
 | Leaf
 | Node of 'a tree * 'a tree
@@ -508,7 +508,7 @@ type 'a tree =
 
 - binary tree
 
-``` OCaml
+``` ocaml
 type 'a tree =
 | Leaf
 | Node of 'a * 'a tree * 'a tree
@@ -517,7 +517,7 @@ type 'a tree =
 
 - list
 
-``` OCaml
+``` ocaml
 
 type 'a mylist =
 | Nil
@@ -529,7 +529,7 @@ type 'a mylist =
 
 构造一个简单的二叉树
 
-``` OCaml
+``` ocaml
 (* the code below constructs this tree:
          4
        /   \
@@ -553,7 +553,7 @@ let t =
 
 求二叉树的深度
 
-``` OCaml
+``` ocaml
 
 let rec size = function
 | Leaf -> 0
@@ -573,7 +573,7 @@ let rec size = function
 
 举个例子，包含三个整数的积类型： `int*int*int` ，或者 `int ^ 3`的三次方，用tuple的表示法就是 `(Int, Int, Int)` ，要挖个洞的话有三种挖法：
 
-``` OCaml
+``` ocaml
 (_, int, int)
 (int, _, int)
 (int, int, _)
@@ -649,7 +649,7 @@ public static void insertion_sort(int[] arr) {
 
  Mu Xian Ming的OOP vs FP：用 Visitor 模式克服 OOP 的局限》中错误的OCaml实现：
 
-``` OCaml
+``` ocaml
 exception BadResult of string
 type exp =
     Int    of int
@@ -683,7 +683,7 @@ toString (eval (Add ((Negate (Int 5)), (Int 6))))
 
 > 对于函数式模式来说，可以在类型定义中增加一个“其他”的类型，然后所有的函数都接受一个额外的函数类型的参数来处理“其他”的数据类型。
 
-``` OCaml
+``` ocaml
 type ’a ext_exp =
     Int    of int
   | Negate of ’a ext_exp
