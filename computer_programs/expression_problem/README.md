@@ -238,7 +238,7 @@ class ExpEvalVisitor implements ExpVisitor<Integer> {
 
 我们拓展一下这个实现，新增一种操作：除法Divide。
 
-``` Java
+``` java
 
 // 拓展接口
 interface ExpVisitor2<T> extends ExpVisitor<T> {
@@ -277,7 +277,7 @@ class Divide implements Exp2 {
 
 在观察者模式中，expression的Class实现，还可以进一步简化抽象，直接省略此class。
 
-``` Java
+``` java
 
 interface Exp<T> {
     public T literal(int v);
@@ -301,7 +301,7 @@ class Eval implements Exp<Integer> {
 
 新增方法
 
-``` Java
+``` java
 
 class Show implements Exp<String> {
     @Override
@@ -319,7 +319,7 @@ class Show implements Exp<String> {
 
 新增expression
 
-``` Java
+``` java
 
 interface Exp2<T> extends Exp<T> {
     public T divide(T a, T b);
@@ -622,7 +622,7 @@ let rec size = function
 
 分析插入排序：
 
-``` Java
+``` java
 //将arr[i] 插入到arr[0]...arr[i - 1]中
 public static void insertion_sort(int[] arr) {
     for (int i = 1; i < arr.length; i++ ) {
@@ -711,7 +711,7 @@ Anders Janmy 的《Solving the Expression Problem in Javascript》，试图用Ja
 
 > Now lets solve it with Javascript in a dynamic style. The solution we have looks a lot like the subtype polymorphic solution above.
 
-``` JavaScript
+``` javascript
 
 function Add(e1, e2) {
     this.e1 = e1;
@@ -735,7 +735,7 @@ Num.prototype.value = function() { return this.n; };
 
 > But, what about adding a new functions? It turns out that this is just as easy because of the dynamic nature of Javascript. We just add them to the prototype.
 
-``` JavaScript
+``` javascript
 // Adding new functions to existing prototypes
 Add.prototype.toString = function() {
   return '(' + this.e1.toString() + ' + ' + this.e2.toString() + ')';
@@ -752,7 +752,7 @@ Mul.prototype.toString = function() {
 ```
 > Now getting a string representation of an expression is a simple as:
 
-``` JavaScript
+``` javascript
 var x = new Num(1);
 var y = new Num(2);
 var z = new Add(x, y);
