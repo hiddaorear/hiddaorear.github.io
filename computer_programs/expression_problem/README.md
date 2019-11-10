@@ -180,6 +180,8 @@ let rec new_toString : new_exp -> string = function
 
 完整可运行代码见附录。
 
+expression的实现，其实一个初步interpreter，附录有一个相对完整的用Racket实现的interpreter。本想用OCaml实现一遍，Lisp看起来差不多，没必要。Racket还有一个好工具DrRacket，OCaml我暂时只有utop可用，虽然很方便，但不如DrRacket，后者具有IDE的功能。
+
 ## Java
 
 我们用Java来解决expression problem。在Java中，expression用Class来声明。与函数式编程语言相反，Java中很方便新增expression，新增Class即可。但新增操作就很不方便，需要去修改每一个表达式的Class，逐一加上新操作。
@@ -824,6 +826,8 @@ e.toString(); // returns ((1 + 2) * (1 - 2))
 
 - 2019/10/29 晚上10点，完成文章的初稿。研究这个课题，一个月有余
 
+- 2019/11/10 上午，用Racket完成interpreter
+
 ## 附录
 
 ### 完整代码
@@ -1080,5 +1084,78 @@ class Eval2 extends Eval implements Exp2<Integer> {
         return a / b;
     }
 }
+
+```
+
+
+### interpreter
+
+``` Racket
+#lang racket
+
+(define env0 '())
+
+(define ext-env
+  (lambda (x v env)
+          (cons `(,x ., v) env)))
+
+
+(define lookup
+  (lambda (x env)
+          (let ([p (assq x env)])
+            (cond
+              [(not p) #f]
+              [else (cdr p)]))))
+
+(struct Closure (f env))
+
+(define interp
+  (lambda (exp env)
+    (match exp
+      [(? symbol? x)
+       (let ([v (lookup x env)])
+         (cond
+           [(not v)
+            (error "undefined variable" x)]
+           [else v]))]
+      [(? number? x) x]
+      [`(lambda (,x), e)
+       (Closure exp env)]
+      [`(let ([,x, e1]), e2)
+       (let ([v1 (interp e1 env)])
+         (interp e2 (ext-env x v1 env)))]
+      [`(,e1, e2)
+       (let ([v1 (interp e1 env)]
+             [v2 (interp e2 env)])
+         (match v1
+           [(Closure `(lambda (,x), e) env-save)
+            (interp e (ext-env x v2 env-save))]))]
+      [`(,op, e1, e2)
+       (let ([v1 (interp e1 env)]
+             [v2 (interp e2 env)])
+         (match op
+           ['+ (+ v1 v2)]
+           ['- (- v1 v2)]
+           ['* (* v1 v2)]
+           ['/ (/ v1 v2)]))])))
+
+(define r2
+  (lambda (exp)
+    (interp exp env0)))
+
+
+(r2 '(+ 1 2))
+(r2 '(* (+ 1 2) (+ 3 4)))
+
+(r2
+ '(let ([x 2])
+      (let ([f (lambda (y) (* x y))])
+         (f 3))))
+
+(r2
+ '(let ([x 2])
+ (let ([f (lambda (y) (* x y))])
+   (let ([x 4])
+     (f 3)))))
 
 ```
