@@ -1090,7 +1090,7 @@ class Eval2 extends Eval implements Exp2<Integer> {
 
 ### interpreter
 
-``` Racket
+``` racket
 #lang racket
 
 (define env0 '())
