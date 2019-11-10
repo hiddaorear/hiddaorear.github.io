@@ -4,10 +4,6 @@ title: 石下读书
 
 # 石下读书
 
-## 不与人物接，不为山海游。终生伏几案，天地一书囚。
-
-## [github](https://github.com/hiddaorear)
-
 ## 计算机技术
 
 ### [expression problem](./computer_programs/expression_problem/README.md)
@@ -37,3 +33,11 @@ title: 石下读书
 ### [我们的十年](./essay/junior_high_school_ten_years.md)
 
 ### [一次就好](./essay/single_step.md)
+
+## 自我介绍
+
+### 读书人而已
+
+不与人物接，不为山海游。终生伏几案，天地一书囚。
+
+##### [github](https://github.com/hiddaorear)
