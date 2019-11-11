@@ -9,7 +9,7 @@
 > Java没有模式匹配，所以很多需要类似功能的人就得使用visitor pattern。为了所谓的“通用性”，他们往往把visitor pattern搞出多层继承关系，让你转几弯也搞不清楚到底哪个visitor才是干实事的。
 -- 王垠
 
-## expresssion problem 简介
+## expression problem 简介
 
 > The Expression Problem is a new name for an old problem.  The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).  For the concrete example, we take expressions as the data type, begin with one case (constants) and one function (evaluators), then add one more construct (plus) and one more function (conversion to a string).
 -- Philip Wadler
@@ -98,7 +98,7 @@ Here is an example of a case that is not matched:
 
 如果一个类A中的方法都包含在另一个类B中，则A和B之间具有子类型关系。子类(subtyping)关系是子类型关系的一种特殊情况。subtyping是面向对象编程中的一个核心概念。决定了C类型的对象什么时候可以用在原本需要D类型对象的表达式中。
 
-### 多态变体(polymorphic variant)解决exprssion problem
+### 多态变体(polymorphic variant)解决expression problem
 
 使用多态变体实现exprssion，使得variant具有拓展能力。
 
