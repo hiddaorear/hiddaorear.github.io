@@ -234,7 +234,7 @@ class ExpEvalVisitor implements ExpVisitor<Integer> {
 
 ```
 
-显然在观察者模式中，新增操作非常容易，直接`implements ExpVisitor`即可。
+显然在访问者者模式中，新增操作非常容易，直接`implements ExpVisitor`即可。
 
 完整代码见附录。
 
@@ -277,7 +277,7 @@ class Divide implements Exp2 {
 
 ### Object Algebras
 
-在观察者模式中，expression的Class实现，还可以进一步简化抽象，直接省略此class。
+在访问者者模式中，expression的Class实现，还可以进一步简化抽象，直接省略此class。
 
 ``` java
 
