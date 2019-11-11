@@ -34,13 +34,11 @@ Java代码和OCaml代码，并不是一一对应。本想改成一一对应的�
 > - Message-Passing: Use the high order procedure to represent the data type.
 
 
-## expresssion problem
+## expression problem
 
 ### 程序 = 数据结构 + 算法
 
 数据和算法是程序的两个维度，他们之间存在映射关系。数据可以应用在多个算法上，算法也可以操作多个数据。但我们的代码是维度只有一个，按顺序从上到下写。以数据为主来组织代码，如：面向对象；已算法或函数来组织代码，如：函数式编程。当程序需要在两个维度——数据和算法，都需要拓展的时候，两者有各自不同的优势和劣势。需要拓展数据和算法的典型的问题，有expression problem。在类型安全的前提下，新增数据，并新增对应的函数。
-
-### expresssion problem 简介
 
 > The Expression Problem is a new name for an old problem.  The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).  For the concrete example, we take expressions as the data type, begin with one case (constants) and one function (evaluators), then add one more construct (plus) and one more function (conversion to a string).
 -- Philip Wadler
@@ -130,7 +128,7 @@ Here is an example of a case that is not matched:
 
 如果一个类A中的方法都包含在另一个类B中，则A和B之间具有子类型关系。子类(subtyping)关系是子类型关系的一种特殊情况。subtyping是面向对象编程中的一个核心概念。决定了C类型的对象什么时候可以用在原本需要D类型对象的表达式中。
 
-### 多态变体(polymorphic variant)解决exprssion problem
+### 多态变体(polymorphic variant)解决expression problem
 
 使用多态变体实现exprssion，使得variant具有拓展能力。
 
