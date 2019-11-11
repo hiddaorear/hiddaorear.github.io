@@ -6,15 +6,45 @@
 > visitor，本质上是函数式编程语言里的含有“模式匹配pattern matching”的递归函数。
 -- 王垠
 
-> Java没有模式匹配，所以很多需要类似功能的人就得使用visitor pattern。为了所谓的“通用性”，他们往往把visitor pattern搞出多层继承关系，让你转几弯也搞不清楚到底哪个visitor才是干实事的。
--- 王垠
+## 导读
 
-## expresssion problem 简介
+以expression problem作为引子，用函数式编程语言OCaml和面向对象语言Java，分别解决这个问题。
+
+简要介绍一下OCaml的变体(variant)和多态变体(polymorphic variant)，了解一下sum类型的使用，以及模式匹配的使用。
+
+利用访问者模式(visitor pattern)处理此问题，并进一步用Object Algebras处理此问题。
+
+后续转入介绍一下 Algebraic data types，只能作为朴素的理解，不成系统。
+
+简单介绍了代数类型里面的Product类型和Sum类型，以及其和代数之间的同构。接着介绍Lisp中列表的类型和二叉树的类型，然后是Zipper与求导的关系，二叉树的挖洞。以及与此关系很弱的Git的底层的数据结构设计。为什么要加Git的设计呢？因为这篇文章是我的读书笔记，读了很多资料，后来写了一个汇总。笔记和阅读的资料相关，比一定是成体系的，如果真要找一条线，那就是计算机编程和数学的关联，具体来说，就是与离散数据，或者抽象代数的关联。
+
+所引用的书，文中涉及的部分，都是阅读过，并且自己写代码，OCaml的代码是读了《The Real World OCaml》，自己想出来的，估计不是最佳方案。但很长一段时间，被一篇用OCaml解决expression problem的实现误导了，思考了很久，算是一种别样的阅读体验。好多年没写Java，这是头一次，代码也自己参考技术博客，然后自己修改的，保证可以运行，但代码风格不能保证。搜索访问者模式的资料，发现各个资料的实现，各有不同，加上我对Java不熟悉，这里的实现存疑。请教了几位同事，当前实现应该没有硬伤。
+
+完整可运行代码见附录。
+
+文章应该还是没有把这个问题本质的困难点出来，如消息传递(message passing)与数据导向(data directed)，这个应该是expression problem的本质困难。可惜我都SICP没有忽略。后续补上，这里记录一下。
+
+> Multiple Representation(2.4)
+> when multiple representations of a data type needs to coexist in a system. there are three ways to do this.
+
+> - Tagged Data : Every representation use a unique tag
+> - Data-Directed: Use a two dimensions(operations X type) table to dispatch the operation
+> - Message-Passing: Use the high order procedure to represent the data type.
+
+
+## expresssion problem
+
+### 程序 = 数据结构 + 算法
+
+数据和算法是程序的两个维度，他们之间存在映射关系。数据可以应用在多个算法上，算法也可以操作多个数据。但我们的代码是维度只有一个，按顺序从上到下写。以数据为主来组织代码，如：面向对象；已算法或函数来组织代码，如：函数式编程。当程序需要在两个维度——数据和算法，都需要拓展的时候，两者有各自不同的优势和劣势。需要拓展数据和算法的典型的问题，有expression problem。在类型安全的前提下，新增数据，并新增对应的函数。
+
+### expresssion problem 简介
 
 > The Expression Problem is a new name for an old problem.  The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).  For the concrete example, we take expressions as the data type, begin with one case (constants) and one function (evaluators), then add one more construct (plus) and one more function (conversion to a string).
 -- Philip Wadler
 
 ![Expression Problem](./Expression_Problem_0.png)
+
 
 ## OCaml
 
@@ -599,35 +629,35 @@ let rec size = function
 
 #### SVN与Git的diff的不同
 
-> 大多数系统（比如CVS和SVN）会跟踪一系列修订版本，并只存储文件间的差异。这个策略是为了节省空间和开销。
+大多数系统（比如CVS和SVN）会跟踪一系列修订版本，并只存储文件间的差异。这个策略是为了节省空间和开销。
 
-> 在Git中，如你所见，每一个提交都包含一棵树，也就是该提交包含的文件列表。每一个树都是跟其他书独立的。Git的用户也会谈论diff和patch，当然，因为这些依旧相当有用。但是，在Git中，diff和patch是导出的数据，而不是SVN或者CVS中的基本数据。
+在Git中，如你所见，每一个提交都包含一棵树，也就是该提交包含的文件列表。每一个树都是跟其他书独立的。Git的用户也会谈论diff和patch，当然，因为这些依旧相当有用。但是，在Git中，diff和patch是导出的数据，而不是SVN或者CVS中的基本数据。
 
-> 每个修订版本有一颗自己的树，但Git不需要他们来生成diff；Git可以直接操作两个版本的完整状态的快照。存储系统中这个简单的差异是Git比其他RCS速度快得多的最重要原因之一。
+每个修订版本有一颗自己的树，但Git不需要他们来生成diff；Git可以直接操作两个版本的完整状态的快照。存储系统中这个简单的差异是Git比其他RCS速度快得多的最重要原因之一。
 
-> SVN之类的系统中，需要很多时间去思考这样的问题：“在A文件和B文件之间有什么差异”。如：当你从中心版本库更新文件的时候，SVN会记着你上次更新时是版本r1095，但这次更新时版本已经到了版本r1123。因此，服务器必须把r1095和r1123之间的diff发给你。一旦你的SVN客户端有了这些diff，他就可以把这些diff合并到你的工作副本中，从而产生r1123。这样就避免了，每次更新的时候发送所有文件的全部内容。
+SVN之类的系统中，需要很多时间去思考这样的问题：“在A文件和B文件之间有什么差异”。如：当你从中心版本库更新文件的时候，SVN会记着你上次更新时是版本r1095，但这次更新时版本已经到了版本r1123。因此，服务器必须把r1095和r1123之间的diff发给你。一旦你的SVN客户端有了这些diff，他就可以把这些diff合并到你的工作副本中，从而产生r1123。这样就避免了，每次更新的时候发送所有文件的全部内容。
 
-> Git可以检索和生成任意两个版本之间的差异。但这个过程中，SVN要查看版本r1095和版本r1123间的所有版本，而Git则不关心这些中间步骤。
+Git可以检索和生成任意两个版本之间的差异。但这个过程中，SVN要查看版本r1095和版本r1123间的所有版本，而Git则不关心这些中间步骤。
 
 #### Git追踪内容（content tracking system）
 
-> Git不仅仅是一个VCS，还是一个内容追踪系统（content tracking system）。Git的内容追踪主要表现为两种关键方式，与其他多数版本控制系统不一样。
+Git不仅仅是一个VCS，还是一个内容追踪系统（content tracking system）。Git的内容追踪主要表现为两种关键方式，与其他多数版本控制系统不一样。
 
-> 首先，Git的对象库，基于对象内容的散列计算的值。而不是基于用户原始文件的文件名或目录。Git追踪的是文件内容，而不是文件名或者目录。如果文件对应的blob有相同的SHA1值，则内容相同，无论文件在用户什么目录，都只有一个blob对象。如果，文件发生了变化，Git会计算一个新的SHA1值，标识新的blob对象。
+首先，Git的对象库，基于对象内容的散列计算的值。而不是基于用户原始文件的文件名或目录。Git追踪的是文件内容，而不是文件名或者目录。如果文件对应的blob有相同的SHA1值，则内容相同，无论文件在用户什么目录，都只有一个blob对象。如果，文件发生了变化，Git会计算一个新的SHA1值，标识新的blob对象。
 
-> 其次，文件从一个版本到另一个版本，Git内部的数据会存储文件的每一个版本，而不是他们的差异。因为Git使用一个文件的全部内容的SHA1散列值，所以必须针对每一个文件的完整副本。Git不能把SHA1散列值建立在文件内容的一部分或者文件的两个版本之间的差异上。
+其次，文件从一个版本到另一个版本，Git内部的数据会存储文件的每一个版本，而不是他们的差异。因为Git使用一个文件的全部内容的SHA1散列值，所以必须针对每一个文件的完整副本。Git不能把SHA1散列值建立在文件内容的一部分或者文件的两个版本之间的差异上。
 
 这样可能导致的问题：
 
-> 直接存储每一个文件每一个版本的完整内容的效率是否太低了？如果只修改了一行到文件里，是不是存储两个版本的全部内容？
+直接存储每一个文件每一个版本的完整内容的效率是否太低了？如果只修改了一行到文件里，是不是存储两个版本的全部内容？
 
-> 答案是“不是，不完全是！”
+答案是“不是，不完全是！”
 
-> Git使用一种叫做打包文件(pack file)的存储机制。Git是内容驱动的，并不真正关心计算出来的两个文件之间的差异是否属于同一个文件的两个版本。Git还维护打包文件表示中每个完整文件（包含完整内容的文件和通过差异重建出来的文件）的原始blob的SHA1值。这个给定位包内对象的索引机制提供了基础。
+Git使用一种叫做打包文件(pack file)的存储机制。Git是内容驱动的，并不真正关心计算出来的两个文件之间的差异是否属于同一个文件的两个版本。Git还维护打包文件表示中每个完整文件（包含完整内容的文件和通过差异重建出来的文件）的原始blob的SHA1值。这个给定位包内对象的索引机制提供了基础。
 
-> Git创建一个打包文件，首先会定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。
+Git创建一个打包文件，首先会定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。
 
-> 如果只修改了一行。Git可能会存储新版本的全部内容，然后记录那一行更改作为差异，并存储在包里。(感觉作者叙述不清晰，并没有说明Git与存储diff的版本管理的区别)
+如果只修改了一行。Git可能会存储新版本的全部内容，然后记录那一行更改作为差异，并存储在包里。(感觉作者叙述不清晰，并没有说明Git与存储diff的版本管理的区别)
 
 在原文的基础上略有修改，以方便诠释主题。
 
