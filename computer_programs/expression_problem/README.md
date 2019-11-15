@@ -82,6 +82,65 @@ z)`是y。任何满足上述三个过程都可以称为实现序对的基础。
 (cdr one-half)
 ```
 
+实现复数：
+
+``` scheme
+#lang racket
+(define (square x) (* x x))
+
+(define (make-from-real-imag x y)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) x)
+          ((eq? op 'imag-part) y)
+          ((eq? op 'imagnitude)
+           (sqrt (+ (square x) (square y))))
+          ((eq? op 'angle) (atan x y))
+          (else
+           (error "Unkown op -- MAKE-FORM-REAL-IMAG" op))))
+  dispatch)
+
+(define test (make-from-real-imag 3 4))
+(test 'real-part)
+```
+
+`make-from-real-imag`返回值是一个过程——其内部的dispatch过程。这种风格的程序设计称为消息传递，这一名字源自将数据对象设想为一个实体，他以“消息”的方式接收到所需操作的名字。消息传递并不是一种数学技巧，而是一种有价值的技术，可以用于组织带有通用型操作的系统。
+
+### 显示分派、数据导向和消息传递的可拓展性
+
+> 练习2.76  一个带有通用操作的大型系统可能不断演化，在演化中常需要加入新的数据类型或新的操作。有三种策略——显示分派、数据导向和消息传递，有新类型或操作加入时，请描述系统所必须的修改。那种组织方式最适合那些经常需要经常加入新类型的系统？那种组织方式最适合那些经常需要加入新操作的系统？
+
+``` scheme
+#lang racket
+
+(define (assoc key records)
+  (cond ((null? records) false)
+        ((equal? key (car records)) (car records))
+        (else (assoc key (cdr records)))))
+
+(define (make-table)
+  (let ((local-table (list '*table*)))
+    (define (lookup key-1 key-2)
+      (let ((subtable (assoc key-1 (cdr local-table))))
+        (if subtable
+            (let ((record (assoc key-2 (cdr subtable))))
+              (if record
+                  (cdr record)
+                  false))
+            false)))
+    (define (insert! key-1 key-2 value)
+      (let ((subtable (assoc key-1 (cdr local-table))))
+        (if subtable
+            (let ((record (assoc key-2 (cdr subtable)))))
+            )))
+    (define (dispatch m)
+      (cond ((eq? m 'lookup-proc) lookup)
+            ((eq? m 'insert-proc!) insert!)
+            (else (error "Unknown operation -- TABLE" m))))
+    dispatch))
+
+
+```
+
 
 ### 数据抽象屏障的优点
 
