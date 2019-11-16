@@ -3,9 +3,6 @@
 > 密涅瓦的猫头鹰，只有在黄昏的时候才起飞
 -- 黑格尔
 
-> visitor，本质上是函数式编程语言里的含有“模式匹配pattern matching”的递归函数。
--- 王垠
-
 ## 导读
 
 以expression problem作为引子，用函数式编程语言OCaml和面向对象语言Java，分别解决这个问题。
@@ -22,45 +19,186 @@
 
 Java代码和OCaml代码，并不是一一对应。本想改成一一对应的，后来想一下，其实不影响主题的诠释，就懒得修改了。
 
+
+在SICP第二章中，介绍了复数的两种表示，并介绍了基于类型分派(Tagged Data) ，消息传递(message passing)，数据导向(data directed)。其中消息传递是面向对象的一个雏形，基于类型分派带有函数式编程的痕迹。二者有各自的优缺点。数据导向是解决这个问题非常好的方案。
+
+在介绍这三种不同的编程思想的时候，我想结合一下实际工程实践，我本人前端编程偏多，这里就以前端编程中遇到问题，从实践角度展示一下SICP中所讲内容的深刻。其中，基于类型分派，对应的例子为：React早期的Mixins，以及一个不够强的例子，jQuey的匿名函数的使用技巧。消息传递，没有想到非常贴切的例子，但这种数据的过程性表示，和Redux具有一定的相似性，以及于策略模式也有类似的地方。而数据导向，与《代码大全》(Code Complete)中的表驱动法，有类似的地方。这些思考有似是而非的地方，暂时对计算的理解只有这个深度，先写下来，以后有新的理解，再补充纠错。
+
 完整可运行代码见附录。
-
-文章应该还是没有把这个问题本质的困难点出来，如消息传递(message passing)与数据导向(data directed)，这个应该是expression problem的本质困难。可惜我都SICP没有忽略。后续补上，这里记录一下。
-
-> Multiple Representation(2.4)
-> when multiple representations of a data type needs to coexist in a system. there are three ways to do this.
-
-> - Tagged Data : Every representation use a unique tag
-> - Data-Directed: Use a two dimensions(operations X type) table to dispatch the operation
-> - Message-Passing: Use the high order procedure to represent the data type.
 
 ## 构造数据抽象
 
-### 数据导向的程序设计
+这里我想以自己的理解，以简单表述，尽可能少的代码总结一下SICP上的内容。SICP写得非常精炼，内容之间环环相扣，摘录上面的内容，很容易导致叙述有跳跃，估计假以时日，我自己都需要回去重读SICP。所以，我选择以自己归纳的方式表述出来。
 
-> 允许我们孤立地设计每一种数据表示，而后用添加的方式将他们组合进去（也就是说，需要任何修改）。
+### 复数的两种表示
 
-> 数据抽象：一种方法，将一个复合数据对方的使用，与数据对象怎样由更基本的数据对象构造起来的细节隔离开。数据的定义，与程序中使用数据的方式无关。这两个部分之间的界面是一组过程，称之为构造函和选择函数。
+![复数](./complex_number.png)
 
-> 构造函数，用于创建数据对象。选择函数，用于访问复合数据对象中的各个部分。
+复数有两种表示方式：直角坐标形式（实部和虚部），极坐标形式（模和幅角）。如何使得两者共存于同一个系统中呢？可以通过类型标志和通用型操作。
 
-> 数据抽象的基本思想是为每一类数据对象标识出一组操作，使得对这类数据对象的所有操作都可以基于他们表述，而且在操作这些数据对象的时候，只使用他们。
-
-> 数据究竟意味着什么？“由给定的构造函数和选择函数所实现的东西”，是不够的。并非任意过程都适合某一数据的实现基础。一般而言，我们总可以将数据定义为一组适当的选择函数和构造函数，以及为使这些过程成为一套合法的表示，必须满足一组特定的条件。
-
-### 闭包
-
-术语“闭包”来自抽象代数，一个集合的元素在某个运算之下封闭，如果将该运算应用于这一集合中的元素，得到的仍然是该集合的元素。具体到抽象数据结构，某种组合数据对象的操作满足闭包性质，即通过组合起来的数据对象得到的结果本身还是可以通过同样的操作再进行组合。
-
-闭包性质是任何一种组合功能的威力的关键要素，可以使得我们能过建立起层次性的结构。这种结构可以一些结构构成，而各个部分又是他们的部分构成，且可以继续如此下去。
-
-思考：这与递归，以及数学里面的分形非常相似。
+操作和类型的表格
 
 
-### 消息传递
-> 数据的过程性表示的程序设计风格，称为消息传递。
+![复数操作表](./complex_table.png)
 
-序对有三个操作，用cons将两个对象连接在一起，用car和cdr取出其中一个对象。即序对满足条件：对任何对象x和y，如果z是`(cons x y)`，那么`(car z)`是x，而`(cdr
-z)`是y。任何满足上述三个过程都可以称为实现序对的基础。
+数据抽象：一种方法，将一个复合数据对方的使用，与数据对象怎样由更基本的数据对象构造起来的细节隔离开。数据的定义，与程序中使用数据的方式无关。这两个部分之间的界面是一组过程，称之为构造函和选择函数。
+
+构造函数，用于创建数据对象。选择函数，用于访问复合数据对象中的各个部分。
+
+数据抽象的基本思想是为每一类数据对象标识出一组操作，使得对这类数据对象的所有操作都可以基于他们表述，而且在操作这些数据对象的时候，只使用他们。
+
+数据究竟意味着什么？“由给定的构造函数和选择函数所实现的东西”，是不够的。并非任意过程都适合某一数据的实现基础。一般而言，我们总可以将数据定义为一组适当的选择函数和构造函数，以及为使这些过程成为一套合法的表示，必须满足一组特定的条件。
+
+### 基于类型分派(Tagged Data)
+
+> 检查一个数据的类型，并据此去调用某个适当的过程，称之为**基于类型的分派**
+
+基于类型分派的组织方式，让每一个操作管理的分派。从效果上看，相当于将`操作-类型表格`分解危一行一行，每一个通用型过程表示表格中的一行。
+
+在系统设计中，这是一种构造模块的策略。但有显著的弱点，所设计的模块，不具有可加性（个人理解是可以随意添加新的实现，而不需要修改原来的代码）。添加新数据类型的时候，必须小心的避免命名冲突。同时，还需要去修改处理不同数据类型的函数，这些函数必须支持所有不同数据类型。即：
+
+- 需要小心避免命名冲突
+
+- 处理不同类型数据的函数，必须知道所有不同的数据类型。即函数依赖具体的类型。
+
+#### React早期的Mixins
+
+使用Mixins的例子：
+
+``` jsx
+import React from 'react';
+
+var MyMixin = {
+  doSomething() {
+
+  }
+};
+const MyComponent = React.createClass({
+  mixins: [MyMixin],
+  handleClick() {
+    this.doSomething(); // invoke mixin's method
+  },
+  render() {
+    return (
+      <button onClick={this.handleClick}>Do Something</button>
+    );
+  }
+});
+
+export default MyComponent;
+
+```
+
+简单的Mixins实现。
+
+``` javascript
+const mixin = function(obj, mixins) {
+  const newObj = obj;
+  newObj.prototype = Object.create(obj.prototype);
+
+  for (let prop in mixins) {
+    if (mixins.hasOwnProperty(prop)) {
+      newObj.prototype[prop] = mixins[prop];
+    }
+  }
+
+  return newObj;
+}
+```
+
+Mixins缺点（来自《Mixins Considered Harmful》）
+
+- Mixins 引起名称冲突（Mixins cause name clashes）
+- Mixins 引入了隐式的依赖关系（Mixins introduce implicit dependencies）
+
+原文还有一条：Mixins 导致滚雪球式的复杂性（Mixins cause snowballing complexity）。这其实是隐式依赖关系的结果。
+
+命名冲突显而易见，Mixins到当前组件的属性，不能于组件本身的属性名字相同，否则会被覆盖。与组件不同，mixins 不能构成层次结构，它们被平坦化并在相同的命名空间中运行。
+
+React的隐式依赖关系的理解。组件依赖mixins，或mixins 依赖于其他 mixin，删除其中的一个会破坏另一个 mixins。JavaScript 是一种动态语言，因此很难强制记录这些依赖关系。有mixins的情况下，告诉数据如何流入和流出 mixin ，以及它们的依赖图怎样是非常棘手的。即，修改mixins或者修改组件，需要清楚的知道所有的依赖关系。这与基于类型分派的第二条，函数依赖具体的类型有类似之处。组件与Mixins混合在一起，缺少中间的抽象层，必然导致需要直接处理这些依赖关系。基于类型分派，也没有函数与类型之间的抽象屏障，本质原因是一样的。
+
+#### `jQuery.noConflict()`
+
+
+背景：在ES3时代，JavaScript没有块作用域，一般会使用函数构造一个作用域。
+
+``` javascript
+(function(window, undefined){
+    var
+    // Map over jQuery in case of overwrite
+    _jQuery = window.jQuery,
+    // Map over the $ in case of overwrite
+    _$ = window.$,
+
+    // 其他代码
+
+    jQuery.extend({
+        noConflict: function(deep){
+            if (window.$ === jQuery) {
+                window.$ = _$;
+            }
+            if (deep && window.jQuery === jQuery) {
+                window.jQuery = _jQuery;
+            }
+            return jQuery;
+        }
+    })
+}(window);
+
+```
+
+多个jQuery版本共存的方案。其实就是取多个别名。
+
+``` html
+<!-- load jQuery 1.1.3 -->
+<script type="text/javascript" src="http://example.com/jquery-1.1.3.js"></script>
+<script type="text/javascript">
+var jQuery_1_1_3 = $.noConflict(true);
+</script>
+
+<!-- load jQuery 1.3.2 -->
+<script type="text/javascript" src="http://example.com/jquery-1.3.2.js"></script>
+<script type="text/javascript">
+var jQuery_1_3_2 = $.noConflict(true);
+</script>
+```
+
+
+
+### 消息传递(Message-Passing)
+
+基于消息传递的组织方式，是将`操作-类型表格`按列分解，不是采用一批“智能操作”去基于数据类型进行分派，而是采用“智能数据对象”，基于操作名完成分派。这样，我们需要把数据对象表示一个过程，以操作名作为输入，去执行指定操作。
+
+复数的消息传递实现：
+
+``` scheme
+#lang racket
+(define (square x) (* x x))
+
+(define (make-from-real-imag x y)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) x)
+          ((eq? op 'imag-part) y)
+          ((eq? op 'imagnitude)
+           (sqrt (+ (square x) (square y))))
+          ((eq? op 'angle) (atan x y))
+          (else
+           (error "Unkown op -- MAKE-FORM-REAL-IMAG" op))))
+  dispatch)
+
+(define test (make-from-real-imag 3 4)) ; 返回dispatch，隐含闭包，保持了x和y
+(test 'real-part)
+```
+
+`make-from-real-imag`返回值是一个过程——其内部的dispatch过程。这种风格的程序设计称为消息传递，这一名字源自将数据对象设想为一个实体，他以“消息”的方式接收到所需操作的名字。消息传递并不是一种数学技巧，而是一种有价值的技术，可以用于组织带有通用型操作的系统。
+
+本质是数据的过程性表示。
+
+#### 数据的过程性表示
+
+用过程来实现序对。
+
+序对有三个操作，用cons将两个对象连接在一起，用car和cdr取出其中一个对象。即序对满足条件：对任何对象x和y，如果z是`(cons x y)`，那么`(car z)`是x，而`(cdr z)`是y。任何满足上述三个过程都可以称为实现序对的基础。
 
 我们可以不同任何数据结构，只使用过程，就可以实现序对。
 
@@ -82,64 +220,35 @@ z)`是y。任何满足上述三个过程都可以称为实现序对的基础。
 (cdr one-half)
 ```
 
-实现复数：
 
-``` scheme
-#lang racket
-(define (square x) (* x x))
+### 数据导向的程序设计(Data-Directed)
 
-(define (make-from-real-imag x y)
-  (define (dispatch op)
-    (cond ((eq? op 'real-part) x)
-          ((eq? op 'imag-part) y)
-          ((eq? op 'imagnitude)
-           (sqrt (+ (square x) (square y))))
-          ((eq? op 'angle) (atan x y))
-          (else
-           (error "Unkown op -- MAKE-FORM-REAL-IMAG" op))))
-  dispatch)
+我们把数据类型作为一个维度，操作作为一个维度，处理针对不同类型的操作时，我们可以看作在处理一个二位表格，一个维度是包括所有操作，一个维度包含所有类型。数据导向就是利用这种表格的程序设计技术。实现一个过程，用操作名和类型参数的组合，到表中查找，找到对应的过程。这中设计，可以使得我们加新的类型到系统里，不需要修改任何现存的过程，只需要在表格中新增一项即可。
 
-(define test (make-from-real-imag 3 4))
-(test 'real-part)
-```
+允许我们孤立地设计每一种数据表示，而后用添加的方式将他们组合进去。
 
-`make-from-real-imag`返回值是一个过程——其内部的dispatch过程。这种风格的程序设计称为消息传递，这一名字源自将数据对象设想为一个实体，他以“消息”的方式接收到所需操作的名字。消息传递并不是一种数学技巧，而是一种有价值的技术，可以用于组织带有通用型操作的系统。
+处理这种`操作-类型`的表格，需要两个方法：
+
+- 将function加入到表格中，以operation和type作为索引，`(put <operation><type><function>))`
+- 从表格中获取function，以operation和type作为索引，`(get <operation><type>))`
+
+具体的scheme加附录。
+
+
 
 ### 显示分派、数据导向和消息传递的可拓展性
 
-> 练习2.76  一个带有通用操作的大型系统可能不断演化，在演化中常需要加入新的数据类型或新的操作。有三种策略——显示分派、数据导向和消息传递，有新类型或操作加入时，请描述系统所必须的修改。那种组织方式最适合那些经常需要经常加入新类型的系统？那种组织方式最适合那些经常需要加入新操作的系统？
 
-``` scheme
-#lang racket
+#### 练习2.76
 
-(define (assoc key records)
-  (cond ((null? records) false)
-        ((equal? key (car records)) (car records))
-        (else (assoc key (cdr records)))))
+> Multiple Representation(2.4)
+> when multiple representations of a data type needs to coexist in a system. there are three ways to do this.
 
-(define (make-table)
-  (let ((local-table (list '*table*)))
-    (define (lookup key-1 key-2)
-      (let ((subtable (assoc key-1 (cdr local-table))))
-        (if subtable
-            (let ((record (assoc key-2 (cdr subtable))))
-              (if record
-                  (cdr record)
-                  false))
-            false)))
-    (define (insert! key-1 key-2 value)
-      (let ((subtable (assoc key-1 (cdr local-table))))
-        (if subtable
-            (let ((record (assoc key-2 (cdr subtable)))))
-            )))
-    (define (dispatch m)
-      (cond ((eq? m 'lookup-proc) lookup)
-            ((eq? m 'insert-proc!) insert!)
-            (else (error "Unknown operation -- TABLE" m))))
-    dispatch))
+> - Tagged Data : Every representation use a unique tag
+> - Data-Directed: Use a two dimensions(operations X type) table to dispatch the operation
+> - Message-Passing: Use the high order procedure to represent the data type.
 
-
-```
+译文：一个带有通用操作的大型系统可能不断演化，在演化中常需要加入新的数据类型或新的操作。有三种策略——显示分派、数据导向和消息传递，有新类型或操作加入时，请描述系统所必须的修改。那种组织方式最适合那些经常需要经常加入新类型的系统？那种组织方式最适合那些经常需要加入新操作的系统？
 
 
 ### 数据抽象屏障的优点
@@ -189,6 +298,15 @@ z)`是y。任何满足上述三个过程都可以称为实现序对的基础。
 ### 高阶过程与类型
 
 如果创建了不同种类的过程，就将迫使我们同时去创建不同种类的高阶过程。这是常规类型语言（如Pascal）在处理高阶过程时所遇到的困难情况在Lisp里的一种小小反应。在那些语言里，程序员必须刻画每一个过程的参数和结果的数据类型：数、逻辑值、序列等。因此，我们就无法表述某些抽象，例如用一个如stream-map那样的高阶过程“将给定过程proc映射到一个序列里的每个元素”。相反，我们将需要对每种参数和结果数据类型的不同组合定义不同的映射过程，各自应用于特定的proc。在出现了高阶函数的情况下，维持一种实际的“数据类型”概念就变成了一个很困难的问题。语言ML阐明了处理这一问题的一种方法（Gordon，Milner，and Wadsworth 1979），其中的“多态数据类型”包含着数据类型间高阶变换的模式。这就使程序员不必显示声明ML里的大部分过程的数据类型。ML包含一种“类型推导”机制，用于从环境中归结出新定义的过程的数据类型。
+
+### 闭包
+
+术语“闭包”来自抽象代数，一个集合的元素在某个运算之下封闭，如果将该运算应用于这一集合中的元素，得到的仍然是该集合的元素。具体到抽象数据结构，某种组合数据对象的操作满足闭包性质，即通过组合起来的数据对象得到的结果本身还是可以通过同样的操作再进行组合。
+
+闭包性质是任何一种组合功能的威力的关键要素，可以使得我们能过建立起层次性的结构。这种结构可以一些结构构成，而各个部分又是他们的部分构成，且可以继续如此下去。
+
+思考：这与递归，以及数学里面的分形非常相似。
+
 
 ## expression problem
 
@@ -369,6 +487,9 @@ let rec new_toString : new_exp -> string = function
 expression的实现，其实一个初步interpreter，附录有一个相对完整的用Racket实现的interpreter。本想用OCaml实现一遍，Lisp看起来差不多，没必要。Racket还有一个好工具DrRacket，OCaml我暂时只有utop可用，虽然很方便，但不如DrRacket，后者具有IDE的功能。
 
 ## Java
+
+> visitor，本质上是函数式编程语言里的含有“模式匹配pattern matching”的递归函数。
+-- 王垠
 
 我们用Java来解决expression problem。在Java中，expression用Class来声明。与函数式编程语言相反，Java中很方便新增expression，新增Class即可。但新增操作就很不方便，需要去修改每一个表达式的Class，逐一加上新操作。
 
@@ -1345,5 +1466,54 @@ class Eval2 extends Eval implements Exp2<Integer> {
  (let ([f (lambda (y) (* x y))])
    (let ([x 4])
      (f 3)))))
+
+```
+
+### 创建二维表格
+
+``` scheme
+#lang racket
+
+(require rnrs/mutable-pairs-6)
+
+
+(define (assoc key records)
+  (cond ((null? records) false)
+        ((equal? key (car records)) (car records))
+        (else (assoc key (cdr records)))))
+
+(define (make-table)
+  (let ((local-table (list '*table*)))
+    (define (lookup key-1 key-2)
+      (let ((subtable (assoc key-1 (cdr local-table))))
+        (if subtable
+            (let ((record (assoc key-2 (cdr subtable))))
+              (if record
+                  (cdr record)
+                  false))
+            false)))
+    (define (insert! key-1 key-2 value)
+      (let ((subtable (assoc key-1 (cdr local-table))))
+        (if subtable
+            (let ((record (assoc key-2 (cdr subtable))))
+             (if record
+                 (set-cdr! record value)
+                 (set-cdr! subtable
+                           (cons (cons key-2 value)
+                                 (cdr subtable)))))
+            (set-cdr! local-table
+                      (cons (list key-1
+                                  (cons key-2 value))
+                            (cdr local-table)))))
+      'ok)
+    (define (dispatch m)
+      (cond ((eq? m 'lookup-proc) lookup)
+            ((eq? m 'insert-proc!) insert!)
+            (else (error "Unknown operation -- TABLE" m))))
+    dispatch))
+
+(define operation-table (make-table))
+(define get (operation-table 'lookup-proc))
+(define put (operation-table 'insert-proc!))
 
 ```
