@@ -6,7 +6,7 @@ title: 石下读书
 
 ## 计算机技术
 
-### [expression problem](./PL/expression_problem/README.md)
+### [expression problem](./computer_programs/PL/README.md)
 
 ### [Monad](./computer_programs/monad.md)
 
