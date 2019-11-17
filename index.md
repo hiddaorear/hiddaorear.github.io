@@ -6,7 +6,7 @@ title: 石下读书
 
 ## 计算机技术
 
-### [expression problem](./computer_programs/expression_problem/README.md)
+### [expression problem](./PL/expression_problem/README.md)
 
 ### [Monad](./computer_programs/monad.md)
 
@@ -15,6 +15,8 @@ title: 石下读书
 ### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
 
 ## 文学历史
+
+### [中途岛战役](./history/Midway_Island.md)
 
 ## 医学
 

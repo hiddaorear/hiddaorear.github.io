@@ -13,12 +13,11 @@
 
 后续转入介绍一下 Algebraic data types，只能作为朴素的理解，不成系统。
 
-简单介绍了代数类型里面的Product类型和Sum类型，以及其和代数之间的同构。接着介绍Lisp中列表的类型和二叉树的类型，然后是Zipper与求导的关系，二叉树的挖洞。以及与此关系很弱的Git的底层的数据结构设计。为什么要加Git的设计呢？因为这篇文章是我的读书笔记，读了很多资料，后来写了一个汇总。笔记和阅读的资料相关，比一定是成体系的，如果真要找一条线，那就是计算机编程和数学的关联，具体来说，就是与离散数据，或者抽象代数的关联。
+简单介绍了代数类型里面的Product类型和Sum类型(union类型)，以及其和代数之间的同构。介绍Sum类型时附带介绍Java的异常说明（Checked Exception）。接着介绍Lisp中列表的类型和二叉树的类型，然后是Zipper与求导的关系，二叉树的挖洞。以及与此关系很弱的Git的底层的数据结构设计。为什么要加Git的设计呢？因为这篇文章是我的读书笔记，读了很多资料，后来写了一个汇总。笔记和阅读的资料相关，比一定是成体系的，如果真要找一条线，那就是计算机编程和数学的关联，具体来说，就是与离散数据，或者抽象代数的关联。
 
 所引用的书，文中涉及的部分，都是阅读过，并且自己写代码，OCaml的代码是读了《The Real World OCaml》，自己想出来的，估计不是最佳方案。但很长一段时间，被一篇用OCaml解决expression problem的实现误导了，思考了很久，算是一种别样的阅读体验。好多年没写Java，这是头一次，代码也自己参考技术博客，然后自己修改的，保证可以运行，但代码风格不能保证。搜索访问者模式的资料，发现各个资料的实现，各有不同，加上我对Java不熟悉，这里的实现存疑。请教了几位同事，当前实现应该没有硬伤。
 
 Java代码和OCaml代码，并不是一一对应。本想改成一一对应的，后来想一下，其实不影响主题的诠释，就懒得修改了。
-
 
 在SICP第二章中，介绍了复数的两种表示，并介绍了基于类型分派(Tagged Data) ，消息传递(message passing)，数据导向(data directed)。其中消息传递是面向对象的一个雏形，基于类型分派带有函数式编程的痕迹。二者有各自的优缺点。数据导向是解决这个问题非常好的方案。
 
@@ -451,8 +450,6 @@ var jQuery_1_3_2 = $.noConflict(true);
 
 ```
 
-
-
 本质是数据的过程性表示。
 
 #### 数据的过程性表示
@@ -480,6 +477,55 @@ var jQuery_1_3_2 = $.noConflict(true);
 (car one-half)
 (cdr one-half)
 ```
+
+#### Church计数
+
+《Structure and Interpretation of Computer Programs》一下简称SICP ，练习2.6，提及Church计数，考虑将0和加一的操作实现为：
+
+``` scheme
+(define zero (lambda (f) (lambda (x) x)))
+
+(define (add-1 n)
+    (lambda (f) (lambda (x) (f ((n f) x)))))
+```
+
+直接定义one和two。
+
+``` scheme
+
+(define one (add-1 zero))
+
+(define one
+    (lambda (f) (lambda (x) (f ((zero f) x)))))
+
+(define one
+    (lambda (f) (lambda (x)
+        (f (((lambad (f) (lambad (x) x))) x)))))
+
+(define one
+    (lambda (f) (lambda (x)
+        (f (((lambad () (lambad (x) x))) x)))))
+
+(define one
+    (lambda (f) (lambda (x)
+        (f ((lambad (x) x) x)))))
+
+(define one (lambda (f) (lambda (x) (f (lambad (x) x)))))
+
+(define one (lambda (f) (lambda (x) (f x))))
+
+```
+
+数据的过程性表示。在程序设计中称之为消息传递。
+
+一般而言，我们总可以将数据定义为一组适当的选择函数和构造函数，以及为使这些过程成为一套合法表示，它们就必选满足的一组特定条件。
+
+这一思想严格地形式化却非常困难。目前存在着两种完成这一形式化的途径：抽象模型方法和代数规范。
+
+由MIT的Zilles、Goguen和IBM的Thatcher、Wagner和Wright，以及Toronto的Guttag提出，称为代数规范。这一方式将“过程”看作是一个抽象代数系统的元素，系统的行为由一些对应于我们的“条件”的公理刻画，并通过抽象代数的技术去检查有关数据对象的短语。
+
+以上引用自SICP。
+
 
 
 ### 数据导向的程序设计(Data-Directed)
@@ -802,6 +848,79 @@ function validateForm(formData) {
 
 以上引用自陈钢的《OCaml语言编程与基础教程》
 
+sum类型用伪码表示： `def type T = A | B `
+
+类型T实例化之后，可能是A类型或者B类型。类似于多态。
+
+可以类比`C/C++`的enum structure，不过，enum枚举的是变量。
+
+#### sum 类型（union 类型）和Java的异常说明（Checked Exception）
+
+Java的异常设计和C++类似，C++异常借鉴了CLU。从中带来了一个思想：异常说明。即，用编程的方式在方法特征签名中，声明这个方法将要抛出的异常。异常说明意味着：
+
+1. 我的代码产生这种类型的异常，由你来处理；
+2. 我的代码忽略这些异常，这由你来处理。
+
+这两句口语，道出了异常的一个重要目标：错误处理的代码同错误发生地点相分离。通过这中方式来规避主干代码和处理错误的代码混淆的麻烦。降低了处理错误的代码的复杂度，容易理解和维护。
+
+Java的异常说明，能过在编译阶段保证异常的正确性。
+
+函数的类型里声明可能抛出的异常：
+
+``` java
+void getFile(string fileanme) throws FileNotFoundException {
+    if (/* ...*/) {
+        throw new FileNotFoundException();
+    }
+}
+```
+
+Java要求必须在函数头部写上`throws FileNotFoundException`，否则不能编译。这个声明，表示函数getFile可能会抛出 FileNotFoundException异常。编译看到这个声明，就会严格检查getFile的用法，调用这个函数的时候，必须处理这个异常。如：
+
+``` java
+try {
+    getFile('test.txt');
+} catch (FileNotFoundException e) {
+    // ...
+}
+```
+
+
+我们可以把函数的返回值和异常一起，看作一个“sum类型”。
+
+``` java
+String fun() throw MyException {
+    // ...
+}
+```
+
+fun的返回类型，可以看作：`(String, MyException)`。调用fun的代码，必须合理处理 MyException。Java类型系统强制要求函数在类型声明中声明可能的异常，而且强制调用者需要处理这些异常。这样就有一个比较严格的异常处理，避免遗漏。
+
+异常throw与函数返回值类似，函数调用throw异常了，从调用函数的角度看，函数此时也返回了，可以简单的把异常看作一种不同的返回机制。
+
+然而，异常与返回值还有不同的地方。异常将在异常处理程序中得到解决，异常处理程序可能离异常非常远，甚至可能跨越方法调用栈很多层。这和普通方法的返回完全不同。
+
+异常检查使得异常处理有了约束，有人为了摆脱这种约束，写了吞食有害的代码(harmful if swallowed，来自《Java编程思想》)
+
+``` java
+try {
+    fun();
+} catch (ObligatoryException e) {} // Gulp!
+```
+
+这种做法很省事，但会付出代价。就像生病了，拒绝吃药治疗，迟早病入膏肓。
+
+catch异常的时候，要catch正好可能发生的异常，不是使用非常宽泛的异常，因为这样可能会catch意料之外的异常。
+
+同时，最好在恰当的时候处理异常，不要简单的把下层异常加到自己的函数里，然后抛出。这样，多层调用之后，会导致后面的函数积累了非常多的异常，调用者难以处理，最好直接抛出宽泛的异常`throw Exception`。
+
+Java要求对异常进行显示声明，实质上就是把一个需要全局分析的问题，分解成一个个模块化的小问题。函数的作者完成一部分，调用中完成一部分，编译进行异常检查，防止遗漏的异常，避免不必要的`try-catch`。(JavaScript中就只有类似于全局的`try-catch`)
+
+
+来自《Java编程思想》 Thinking in Java (Fourth Editron) by Bruce Eckel
+
+Checked Exception类似于 union type的思想，来自于王垠。《编程的智慧》和《Kotlin 和 Checked Exception》提及这一思想。原文写得非常，这里我自己并没有深刻见解，原文直接引用。
+
 ### 变体(variant)实现expression
 
 ``` ocaml
@@ -1117,55 +1236,6 @@ class Eval2 extends Eval implements Exp2<Integer> {
 ![Object_Algebras](./Object_Algebras.png)
 
 通过extend和implement拓展原来的代码，Class之间有清晰的层次关系，我们可以类比Algebraic data types，这一系列的Class结构，和代数之间，也可以构造一个可逆映射(同构)。
-
-## Church计数
-
-《Structure and Interpretation of Computer Programs》一下简称SICP ，练习2.6，提及Church计数，考虑将0和加一的操作实现为：
-
-``` scheme
-(define zero (lambda (f) (lambda (x) x)))
-
-(define (add-1 n)
-    (lambda (f) (lambda (x) (f ((n f) x)))))
-```
-
-直接定义one和two。
-
-``` scheme
-
-(define one (add-1 zero))
-
-(define one
-    (lambda (f) (lambda (x) (f ((zero f) x)))))
-
-(define one
-    (lambda (f) (lambda (x)
-        (f (((lambad (f) (lambad (x) x))) x)))))
-
-(define one
-    (lambda (f) (lambda (x)
-        (f (((lambad () (lambad (x) x))) x)))))
-
-(define one
-    (lambda (f) (lambda (x)
-        (f ((lambad (x) x) x)))))
-
-(define one (lambda (f) (lambda (x) (f (lambad (x) x)))))
-
-(define one (lambda (f) (lambda (x) (f x))))
-
-```
-
-数据的过程性表示。在程序设计中称之为消息传递。
-
-一般而言，我们总可以将数据定义为一组适当的选择函数和构造函数，以及为使这些过程成为一套合法表示，它们就必选满足的一组特定条件。
-
-这一思想严格地形式化却非常困难。目前存在着两种完成这一形式化的途径：抽象模型方法和代数规范。
-
-由MIT的Zilles、Goguen和IBM的Thatcher、Wagner和Wright，以及Toronto的Guttag提出，称为代数规范。这一方式将“过程”看作是一个抽象代数系统的元素，系统的行为由一些对应于我们的“条件”的公理刻画，并通过抽象代数的技术去检查有关数据对象的短语。
-
-以上引用自SICP。
-
 ## 代数数据类型(Algebraic data types)
 
 ### 代数数据类型与代数
