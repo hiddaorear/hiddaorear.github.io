@@ -1680,6 +1680,8 @@ e.toString(); // returns ((1 + 2) * (1 - 2))
 
 - 2019/11/17 晚上下午5点，补充Java的 Checked Exception和sum类型的关系。基本完成这篇笔记，一路过来，日日夜夜读书，写OCaml，Scheme，Racket和Java代码，摘抄，一日也不得轻松，可谓生无所息。后续再深入思考，补充自己的见解。
 
+- 2019/11/18 参考子建的建议，修改Java的checked exception部分表述
+
 ## 附录
 
 ### 完整代码
