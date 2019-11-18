@@ -888,7 +888,7 @@ String fun() throw MyException {
 
 ```
 
-Java要求必须在函数头部写上`throws FileNotFoundException`，否则不能编译。这个声明表示函数getFile可能会抛出 FileNotFoundException异常。编译阶段看到这个声明，就会严格检查getFile的用法，调用这个函数的时候，需要处理对应的异常。如：
+Java要求必须在函数头部写上`throws MyException`，否则不能编译。这个声明表示函数fun可能会抛出 MyException 异常。编译阶段看到这个声明，就会严格检查fun的用法，调用这个函数的时候，需要处理对应的异常。如：
 
 ``` java
 try {
