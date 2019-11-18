@@ -19,7 +19,7 @@
 
 后续转入介绍一下 Algebraic data types，只能作为朴素的理解，不成系统。
 
-简单介绍了代数类型里面的Product类型和Sum类型(union类型)，以及其和代数之间的同构。介绍Sum类型时附带介绍Java的异常说明（Checked Exception）。
+简单介绍了代数类型里面的Product类型和Sum类型(union类型)，以及其和代数之间的同构。介绍Sum类型时附带介绍Java的异常声明（Checked Exception）。
 
 接着介绍Lisp中列表的类型和二叉树的类型，然后是Zipper与求导的关系，二叉树的挖洞。
 
@@ -864,33 +864,36 @@ sum类型用伪码表示： `def type T = A | B `
 
 可以类比`C/C++`的enum structure，不过，enum枚举的是变量。
 
-#### sum 类型（union 类型）和Java的异常说明（Checked Exception）
+#### sum 类型（union 类型）和Java的异常声明（Checked Exception）
 
-Java的异常设计和C++类似，C++异常借鉴了CLU。从中带来了一个思想：异常说明。即，用编程的方式在方法特征签名中，声明这个方法将要抛出的异常。异常说明意味着：
+Java的异常设计和C++类似，C++异常借鉴了CLU。从中带来了一个思想：异常声明。即，用编程的方式在方法特征签名中，声明这个方法将要抛出的异常。异常声明意味着：
 
 1. 我的代码产生这种类型的异常，由你来处理；
 2. 我的代码忽略这些异常，这由你来处理。
 
-这两句口语，道出了异常的一个重要目标：错误处理的代码同错误发生地点相分离。通过这中方式来规避主干代码和处理错误的代码混淆的麻烦。降低了处理错误的代码的复杂度，容易理解和维护。
+这两句口语，道出了异常的一个重要目标：错误处理的代码同错误发生地点相分离。通过这中方式来规避业务代码与处理错误的代码混淆的麻烦。降低了处理错误的代码的复杂度，容易理解和维护。
 
-Java的异常说明，能过在编译阶段保证异常的正确性。
+Java的异常声明，能在编译阶段保证异常的正确性。
 
 函数的类型里声明可能抛出的异常：
 
 ``` java
-void getFile(string fileanme) throws FileNotFoundException {
+String fun() throw MyException {
+    // ...
     if (/* ...*/) {
-        throw new FileNotFoundException();
+        throw new MyException();
     }
+
 }
+
 ```
 
-Java要求必须在函数头部写上`throws FileNotFoundException`，否则不能编译。这个声明，表示函数getFile可能会抛出 FileNotFoundException异常。编译看到这个声明，就会严格检查getFile的用法，调用这个函数的时候，必须处理这个异常。如：
+Java要求必须在函数头部写上`throws FileNotFoundException`，否则不能编译。这个声明表示函数getFile可能会抛出 FileNotFoundException异常。编译阶段看到这个声明，就会严格检查getFile的用法，调用这个函数的时候，需要处理对应的异常。如：
 
 ``` java
 try {
-    getFile('test.txt');
-} catch (FileNotFoundException e) {
+    fun();
+} catch (MyException e) {
     // ...
 }
 ```
@@ -898,13 +901,7 @@ try {
 
 我们可以把函数的返回值和异常一起，看作一个“sum类型”。
 
-``` java
-String fun() throw MyException {
-    // ...
-}
-```
-
-fun的返回类型，可以看作：`(String, MyException)`。调用fun的代码，必须合理处理 MyException。Java类型系统强制要求函数在类型声明中声明可能的异常，而且强制调用者需要处理这些异常。这样就有一个比较严格的异常处理，避免遗漏。
+fun的返回类型，可以看作：`(String, MyException)`。调用fun的代码，必须合理处理 MyException。Java要求函数需要声明可能的异常，而且强制调用者需要处理这些异常。这样就有一个比较严格的异常处理，避免遗漏。
 
 异常throw与函数返回值类似，函数调用throw异常了，从调用函数的角度看，函数此时也返回了，可以简单的把异常看作一种不同的返回机制。
 
