@@ -6,7 +6,9 @@ title: 石下读书
 
 ## 计算机技术
 
-### [expression problem](./computer_programs/PL/SICP_and_expression_problem.md)
+### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
+
+### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
 
 ### [Monad](./computer_programs/monad.md)
 
