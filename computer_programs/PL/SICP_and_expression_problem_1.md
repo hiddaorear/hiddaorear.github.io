@@ -5,21 +5,49 @@
 > 密涅瓦的猫头鹰，只有在黄昏的时候才起飞
 --黑格尔
 
+## 导读
+
+本文是我个人的读书笔记，很多地方引用原文。
+
+读了很多资料，写的一个个汇总。笔记和阅读的资料相关，不成体系的，如果真要找一条线，那就是希望找到技术问题共同的本质难点，这样难免会与数学的关联。
+
+expression problem作为引子，用函数式编程语言OCaml和面向对象语言Java，分别解决这个问题。这其实应该是本文的思考起点和中心的，整片文章就是思考这个问题，并回忆所读的书籍写出来的。只是没想到牵扯了这么东西，这导致本文的叙述很乱，没有一个清晰的结构。
+
+简要介绍一下OCaml的变体(variant)和多态变体(polymorphic variant)，了解一下sum类型的使用。介绍Sum类型时附带介绍Java的异常声明（Checked Exception）。并用OCaml解决expression problem。
+
+利用访问者模式(visitor pattern)处理此问题，并进一步用Object Algebras处理expression problem。
+
+后续转入介绍一下 Algebraic data types，只能作为朴素的理解，不成系统。
+
+简单介绍了代数类型里面的Product类型和Sum类型(union类型)，以及其和代数之间的同构。
+
+接着介绍Lisp中列表的类型和二叉树的类型，然后是Zipper与求导的关系，二叉树的挖洞。
+
+以及与此关系很弱的Git的底层的数据结构设计。为什么要加Git的设计呢？
+
+所引用的书，文中涉及的部分，都是阅读过，并且自己写代码，OCaml的代码是读了《The Real World OCaml》，自己想出来的，估计不是最佳方案。但很长一段时间，被一篇用OCaml解决expression problem的实现误导了，思考了很久，算是一种别样的阅读体验。好多年没写Java，这是头一次，代码也自己参考技术博客，然后自己修改的，保证可以运行，但代码风格不能保证。搜索访问者模式的资料，发现各个资料的实现，各有不同，加上我对Java不熟悉，这里的实现存疑。请教了几位同事，当前实现应该没有硬伤。
+
+Java代码和OCaml代码，并不是一一对应。本想改成一一对应的，后来想一下，其实不影响主题的诠释，就懒得修改了。
+
+完整可运行代码见[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)。所有的代码均保证可以运行。
+
 ## expression problem
 
-### 程序 = 数据结构 + 算法
+![Expression Problem](./Expression_Problem_0.png)
 
-数据和算法是程序的两个维度，他们之间存在映射关系。数据可以应用在多个算法上，算法也可以操作多个数据。但我们的代码是维度只有一个，按顺序从上到下写。以数据为主来组织代码，如：面向对象；已算法或函数来组织代码，如：函数式编程。当程序需要在两个维度——数据和算法，都需要拓展的时候，两者有各自不同的优势和劣势。需要拓展数据和算法的典型的问题，有expression problem。在类型安全的前提下，新增数据，并新增对应的函数。
+数据类型和函数是程序的两个维度，他们之间存在映射关系。数据可以应用在多个算法上，函数也可以操作多个数据。但我们的代码是维度只有一个，按顺序从上到下写。以数据为主来组织代码，如：面向对象；以函数来组织代码，如：函数式编程。
+
+当程序需要在两个维度——数据和函数——都需要拓展的时候，两者有各自不同的优势和劣势。在类型安全的前提下，新增数据类型，并新增对应的函数的问题，即expression problem。
 
 > The Expression Problem is a new name for an old problem.  The goal is to define a datatype by cases, where one can add new cases to the datatype and new functions over the datatype, without recompiling existing code, and while retaining static type safety (e.g., no casts).  For the concrete example, we take expressions as the data type, begin with one case (constants) and one function (evaluators), then add one more construct (plus) and one more function (conversion to a string).
 -- Philip Wadler
 
-![Expression Problem](./Expression_Problem_0.png)
 
+## OCaml解决expression problem
 
-## OCaml
+### 前置知识
 
-## variant
+#### variant
 
 联合类型(sum)也称变体(variants)。
 
@@ -107,6 +135,17 @@ Java要求对异常进行显示声明，实质上就是把一个需要全局分�
 
 Checked Exception类似于 union type的思想，来自于王垠。《编程的智慧》和《Kotlin 和 Checked Exception》提及这一思想。原文写得非常，这里我自己并没有深刻见解，原文直接引用。
 
+#### 模式匹配
+
+```
+function
+  | 类型1 -> 代码1
+  | 类型2 -> 代码2
+   ...   ...
+)
+```
+
+
 ### 变体(variant)实现expression
 
 ``` ocaml
@@ -133,9 +172,11 @@ let num = eval (Add ((Negate (Int 5)), (Int 6)));;
 
 ```
 
-variant实现的expression，表达式的类型是固定的，无法拓展。但操作可以随意添加，我们还可以添加其他操作，模式匹配保证了类型安全。如果操作支持的类型不全，模式匹配就会报错。
+### 从类型-操作表格角度分析
 
 ![Expression Problem](./Expression_Problem_1.png)
+
+variant实现的expression，表达式的类型是固定的，无法拓展。但操作可以随意添加，我们还可以添加其他操作，模式匹配保证了类型安全。如果操作支持的类型不全，模式匹配就会报错。
 
 我们实现toString的时候，忘记实现`Add`的，模式匹配就会报错：
 
@@ -156,9 +197,12 @@ File "exp.ml", line 11, characters 19-98:
 Warning 8: this pattern-matching is not exhaustive.
 Here is an example of a case that is not matched:
 ```
+
 ### 多态变体(polymorphic variant)
 
 常规变体需要先定义，再使用，且在其他变体中不能使用。多态变体，可以直接使用，且多个多态变体可以共享构造子名字，使得我们可以在多态变体类型的基础上拓展。这与OCaml对子类型(subtyping)的支持紧密相关。子类型会带来大量的复杂性。
+
+> 如果一个类A中的方法都包含在另一个类B中，则A和B之间具有子类型关系。子类(subtyping)关系是子类型关系的一种特殊情况。subtyping是面向对象编程中的一个核心概念。决定了C类型的对象什么时候可以用在原本需要D类型对象的表达式中。
 
 多态变体缺点：
 1. 复杂性
@@ -166,8 +210,6 @@ Here is an example of a case that is not matched:
 3. 效率。OCaml为匹配多态变体时，无法向常规变体那样生成同样高效的代码
 
 以上引用自《Real World OCaml》。
-
-如果一个类A中的方法都包含在另一个类B中，则A和B之间具有子类型关系。子类(subtyping)关系是子类型关系的一种特殊情况。subtyping是面向对象编程中的一个核心概念。决定了C类型的对象什么时候可以用在原本需要D类型对象的表达式中。
 
 ### 多态变体(polymorphic variant)解决expression problem
 
@@ -191,7 +233,7 @@ let rec toString = function
 
 ```
 
-#### 多态变体的缺点
+### 多态变体的缺点
 
 但也失去模式匹配和类型推导的好处，无法检测是否覆盖所有类型。
 
@@ -227,7 +269,7 @@ Here is an example of a case that is not matched:
 `Add _
 ```
 
-#### 多态变体的优点
+### 多态变体的优点
 
 多态变体就有可拓展性，可以用多态变体解决expression problem。
 
@@ -249,18 +291,18 @@ let rec new_toString : new_exp -> string = function
   | #exp as exp -> toString exp
 ```
 
-完整可运行代码见附录。
-
 expression的实现，其实一个初步interpreter，附录有一个相对完整的用Racket实现的interpreter。本想用OCaml实现一遍，Lisp看起来差不多，没必要。Racket还有一个好工具DrRacket，OCaml我暂时只有utop可用，虽然很方便，但不如DrRacket，后者具有IDE的功能。
 
-## Java
+## Java解决expression problem
 
 > visitor，本质上是函数式编程语言里的含有“模式匹配pattern matching”的递归函数。
 -- 王垠
 
-我们用Java来解决expression problem。在Java中，expression用Class来声明。与函数式编程语言相反，Java中很方便新增expression，新增Class即可。但新增操作就很不方便，需要去修改每一个表达式的Class，逐一加上新操作。
+### 从类型-操作表格分析
 
 ![Expression Problem](./Expression_Problem_2.png)
+
+我们用Java来解决expression problem。在Java中，expression用Class来声明。与函数式编程语言相反，Java中很方便新增expression，新增Class即可。但新增操作就很不方便，需要去修改每一个表达式的Class，逐一加上新操作。
 
 解决这个拓展问题的办法是访问者模式(Visitor Pattern)。这个模式很厉害，是Friedman的《A Little Java, A Few Patterns》中讲解的模式。Friedman的Little系列的书，很厉害，如《The Little Typer》，讲dependently typed，如《The Little Schemer》，讲递归和Scheme。当然，系列书风格一致，类似于古希腊的柏拉图的《理想国》，很话痨，但很细致深刻。
 
@@ -310,7 +352,27 @@ class ExpEvalVisitor implements ExpVisitor<Integer> {
 
 显然在访问者者模式中，新增操作非常容易，直接`implements ExpVisitor`即可。
 
-完整代码见附录。
+### 新增操作
+
+``` java
+
+// 返回对应的字符串的操作
+class ExpShowVisitor implements ExpVisitor<String> {
+    @Override
+    public String forLiteral(int v) {
+        return v + "";
+    }
+
+    @Override
+    public String forAdd(Exp a, Exp b) {
+        return "(" + a.accept(this) + "+" + b.accept(this) + ")";
+    }
+}
+
+
+```
+
+### 新增类型
 
 我们拓展一下这个实现，新增一种操作：除法Divide。
 
@@ -351,7 +413,7 @@ class Divide implements Exp2 {
 
 ### Object Algebras
 
-在访问者者模式中，expression的Class实现，还可以进一步简化抽象，直接省略此class。
+在访问者者模式中，expression的实现，还可以进一步简化抽象。
 
 ``` java
 
@@ -375,7 +437,7 @@ class Eval implements Exp<Integer> {
 
 ```
 
-新增方法
+### 新增方法
 
 ``` java
 
@@ -393,7 +455,7 @@ class Show implements Exp<String> {
 
 ```
 
-新增expression
+### 新增类型
 
 ``` java
 
@@ -410,7 +472,8 @@ class Eval2 extends Eval implements Exp2<Integer> {
 
 ```
 
-完整可运行代码见附录。
+
+### Object Algebras总结
 
 以上实现，被称之为Object Algebras。
 
@@ -422,6 +485,7 @@ class Eval2 extends Eval implements Exp2<Integer> {
 ![Object_Algebras](./Object_Algebras.png)
 
 通过extend和implement拓展原来的代码，Class之间有清晰的层次关系，我们可以类比Algebraic data types，这一系列的Class结构，和代数之间，也可以构造一个可逆映射(同构)。
+
 ## 代数数据类型(Algebraic data types)
 
 ### 代数数据类型与代数
@@ -448,9 +512,9 @@ C语言的结构体和联合体内的分量是可以修改的，但OCaml的记�
 
 在类型上定义加法与乘法
 
-- 加法: a + b = {x or y | x ∈ a, y ∈ b}
+- 加法: `a + b = {x or y | x ∈ a, y ∈ b}`
 
-- 乘法: a * b = { (x , y) | x ∈ a, y ∈ b}  (笛卡尔乘积)
+- 乘法: `a * b = { (x , y) | x ∈ a, y ∈ b}`  (笛卡尔乘积)
 
 可以证明类型上的加法与乘法具有代数加法与乘法相同性质(交换律, 结合律, 分配律)。并且空类型为加法单位元, 单位类型为乘法单位元。
 
@@ -831,408 +895,17 @@ e.toString(); // returns ((1 + 2) * (1 - 2))
 
 我觉得这个问题与subtyping，有深刻的联系，而subtyping我目前不能深入研究，暂且记录在这里，以后补上。估计要到读完《The Little Typer》以后。
 
+### 完整可运行代码
+
+[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)
+
+
+### 上篇
+
+[SICP and Expression Problem 上](./SICP_and_expression_problem_0.md)
+
 ## change log
 
-- 2019/9/20 created doc
+- 2019/11/21 created document
 
-- 2019/9/22 补充参考资料
-
-- 2019/9/30 完成OCaml版本的Finally Tagless的版本理解，可以开始写OCaml部分了
-
-- 2019/10/11 完成OCaml的expression problem例子，补充参考资料
-
-- 2019/10/12 完成正确的OCaml的expression problem的实现，直接参考别人的博客写代码，被坑了半个月。也是由于我对OCaml不熟悉，加上心急，被这个博客的作者气死了，瞎写代码。
-
-- 2019/10/20 合并visitor模式文档
-
-- 2019/10/28 凌晨1点，完成代数和循环不变式
-
-- 2019/10/29 凌晨1点，完成OCaml多态类型部分，并学习subtyping概念
-
-- 2019/10/29 晚上10点，完成文章的初稿。研究这个课题，一个月有余
-
-- 2019/11/10 上午，用Racket完成interpreter
-
-- 2019/11/11 晚上，写分享的PPT的时候，有新的理解，初步补充
-
-- 2019/11/17 晚上12点，补全SICP的内容，后续需要精简或加上自己的思考
-
-- 2019/11/17 晚上下午5点，补充Java的 Checked Exception和sum类型的关系。基本完成这篇笔记，一路过来，日日夜夜读书，写OCaml，Scheme，Racket和Java代码，摘抄，一日也不得轻松，可谓生无所息。后续再深入思考，补充自己的见解。
-
-- 2019/11/18 参考子建的建议，修改Java的checked exception部分表述
-
-## 附录
-
-### 完整代码
-
-### OCaml Expression Problem
-
-``` ocaml
-type exp =
-  Int of int
-| Negate of exp
-| Add of exp * exp
-
-let rec eval  = function
-  | Int i -> i
-  | Negate e ->  -(eval e)
-  | Add(e1, e2) -> (eval e1 ) + (eval e2)
-
-let rec toString = function
-  | Int i -> string_of_int i
-  | Negate e -> "-(" ^ (toString e) ^ ")"
-  | Add(e1, e2)  -> "(" ^ (toString e1) ^ "+" ^ (toString e2) ^ ")"
-
-;;
-
-
-let res = toString (Add ((Negate (Int 5)), (Int 6)));;
-let num = eval (Add ((Negate (Int 5)), (Int 6)));;
-print_endline res;;
-print_endline (string_of_int num);;
-```
-
-### OCaml polymorphic variant
-
-``` ocaml
-
-exception BadResult of string
-
-type exp =
-  [`Int of int
-  | `Negate of exp
-  | `Add of exp * exp]
-
-let rec eval  = function
-  | `Int i -> i
-  | `Negate e ->  -(eval e)
-  | `Add(e1, e2) -> (eval e1 ) + (eval e2)
-
-let rec toString = function
-  | `Int i -> string_of_int i
-  | `Negate e -> "-(" ^ (toString e) ^ ")"
-  | `Add(e1, e2)  -> "(" ^ (toString e1) ^ "+" ^ (toString e2) ^ ")"
-
-type new_exp = [ exp | `Sub of new_exp * new_exp]
-
-let rec new_eval : new_exp -> int = function
-  | #exp as exp -> eval exp
-  | `Sub(e1, e2) -> (new_eval e1) - (new_eval e2)
-
-let rec new_toString : new_exp -> string = function
-  | `Sub(e1, e2) -> "(" ^ (new_toString e1) ^ "-" ^ (new_toString e2) ^ ")"
-  | #exp as exp -> toString exp
-
-;;
-
-let a = `Int 10
-let b = `Int 6
-let c = `Sub(a, b)
-let d = new_eval c
-;;
-print_endline (string_of_int d);;
-
-let res = toString (`Add ((`Negate (`Int 5)), (`Int 6)));;
-let num = eval (`Add ((`Negate (`Int 5)), (`Int 6)));;
-print_endline res;;
-print_endline (string_of_int num);;
-
-```
-
-### Java Visitor pattern
-
-``` java
-
-package siegel.visitor;
-
-public class VisitorPattern {
-    public static void main(String[] args) {
-        System.out.println("nice!");
-        Exp exp1 = new Add(new Literal(1), new Literal(2));
-        int res = exp1.accept(new ExpEvalVisitor());
-        String show = exp1.accept(new ExpShowVisitor());
-        System.out.println("eval reslut:" + res);
-        System.out.println("show reslut:" + show);
-
-
-        Exp exp2 = new Add(new Literal(2), new Literal(2));
-        Exp2 exp3 = new Divide(exp1, exp2);
-        int res4 = exp3.accept(new ExpEvalVisitor2());
-        System.out.println("divide eval reslut:" + res4);
-    }
-}
-
-
-interface Exp {
-    <T> T accept(ExpVisitor<T> visitor);
-}
-
-interface ExpVisitor<T> {
-    public T forLiteral(int v);
-    public T forAdd(Exp a, Exp b);
-}
-
-
-class Literal implements Exp {
-    public final int val;
-
-    public Literal(int val) {
-        this.val = val;
-    }
-
-    public <T> T accept(ExpVisitor<T> visitor) {
-        return visitor.forLiteral(val);
-    }
-}
-
-class Add implements Exp {
-    public final Exp a;
-    public final Exp b;
-
-    public Add(Exp a, Exp b) {
-        this.a = a;
-        this.b = b;
-    }
-
-    public <T> T accept(ExpVisitor<T> visitor) {
-        return visitor.forAdd(a, b);
-    }
-}
-
-class ExpEvalVisitor implements ExpVisitor<Integer> {
-    @Override
-    public Integer forLiteral(int v) {
-        return v;
-    }
-
-    @Override
-    public Integer forAdd(Exp a, Exp b) {
-        return a.accept(this) + b.accept(this);
-    }
-}
-
-class ExpShowVisitor implements ExpVisitor<String> {
-    @Override
-    public String forLiteral(int v) {
-        return v + "";
-    }
-
-    @Override
-    public String forAdd(Exp a, Exp b) {
-        return "(" + a.accept(this) + "+" + b.accept(this) + ")";
-    }
-}
-
-interface ExpVisitor2<T> extends ExpVisitor<T> {
-    public T forDivide(Exp a, Exp b);
-}
-
-interface Exp2 {
-    public abstract <T> T accept(ExpVisitor2<T> visitor);
-}
-
-class ExpEvalVisitor2 extends ExpEvalVisitor implements ExpVisitor2<Integer> {
-    @Override
-    public Integer forDivide(Exp a, Exp b) {
-        return a.accept(this)  / b.accept(this);
-    }
-}
-
-
-
-class Divide implements Exp2 {
-    public final Exp a;
-    public final Exp b;
-
-    public Divide(Exp a, Exp b) {
-        this.a = a;
-        this.b = b;
-    }
-
-    public <T> T accept(ExpVisitor2<T> visitor) {
-        return visitor.forDivide(a, b);
-    }
-}
-
-
-```
-
-### Java object Algebras
-
-``` java
-
-package siegel.objectAlgebras;
-
-public class ObjectAlgebras {
-    public static void main(String[] args) {
-        System.out.println("nice!");
-        Eval e = new Eval();
-        int res = e.add(e.literal(1), e.literal(2));
-        System.out.println("result: " + res);
-
-        Eval2 e2 = new Eval2();
-        int res2 = e2.divide(e2.literal(4), e2.literal(2));
-        System.out.println("2 result: " + res2);
-    }
-}
-
-
-interface Exp<T> {
-    public T literal(int v);
-    public T add(T a, T b);
-}
-
-
-class Eval implements Exp<Integer> {
-    @Override
-    public Integer literal(int v) {
-        return v;
-    }
-
-    @Override
-    public Integer add(Integer a, Integer b) {
-        return a + b;
-    }
-}
-
-class Show implements Exp<String> {
-    @Override
-    public String literal(int v) {
-        return v + "";
-    }
-
-    @Override
-    public String add(String a, String b) {
-        return "(" + a + "+" + b + ")";
-    }
-}
-
-interface Exp2<T> extends Exp<T> {
-    public T divide(T a, T b);
-}
-
-class Eval2 extends Eval implements Exp2<Integer> {
-    @Override
-    public Integer divide(Integer a, Integer b) {
-        return a / b;
-    }
-}
-
-```
-
-
-### interpreter
-
-``` racket
-#lang racket
-
-(define env0 '())
-
-(define ext-env
-  (lambda (x v env)
-          (cons `(,x ., v) env)))
-
-
-(define lookup
-  (lambda (x env)
-          (let ([p (assq x env)])
-            (cond
-              [(not p) #f]
-              [else (cdr p)]))))
-
-(struct Closure (f env))
-
-(define interp
-  (lambda (exp env)
-    (match exp
-      [(? symbol? x)
-       (let ([v (lookup x env)])
-         (cond
-           [(not v)
-            (error "undefined variable" x)]
-           [else v]))]
-      [(? number? x) x]
-      [`(lambda (,x), e)
-       (Closure exp env)]
-      [`(let ([,x, e1]), e2)
-       (let ([v1 (interp e1 env)])
-         (interp e2 (ext-env x v1 env)))]
-      [`(,e1, e2)
-       (let ([v1 (interp e1 env)]
-             [v2 (interp e2 env)])
-         (match v1
-           [(Closure `(lambda (,x), e) env-save)
-            (interp e (ext-env x v2 env-save))]))]
-      [`(,op, e1, e2)
-       (let ([v1 (interp e1 env)]
-             [v2 (interp e2 env)])
-         (match op
-           ['+ (+ v1 v2)]
-           ['- (- v1 v2)]
-           ['* (* v1 v2)]
-           ['/ (/ v1 v2)]))])))
-
-(define r2
-  (lambda (exp)
-    (interp exp env0)))
-
-
-(r2 '(+ 1 2))
-(r2 '(* (+ 1 2) (+ 3 4)))
-
-(r2
- '(let ([x 2])
-      (let ([f (lambda (y) (* x y))])
-         (f 3))))
-
-(r2
- '(let ([x 2])
- (let ([f (lambda (y) (* x y))])
-   (let ([x 4])
-     (f 3)))))
-
-```
-
-### 复数的消息传递完整实现
-
-``` scheme
-#lang racket
-
-(define (square x) (* x x))
-
-(define (average x y)
-  (/ (+ x y) 2))
-
-(define (sqrt x)
-  (define (good-enough? guess)
-    (< (abs (- (square guess) x)) 0.001))
-  (define (improve guess)
-    (average guess (/ x guess)))
-  (define (sqrt-iter guess)
-    (if (good-enough? guess)
-        guess
-        (sqrt-iter (improve guess))))
-  (sqrt-iter 1.0))
-
-(define (make-from-real-imag x y)
-  (define (dispatch op)
-    (cond ((eq? op 'real-part) x)
-          ((eq? op 'imag-part) y)
-          ((eq? op 'imagnitude)
-           (sqrt (+ (square x) (square y))))
-          ((eq? op 'angle) (atan x y))
-          (else
-           (error "Unkown op -- MAKE-FORM-REAL-IMAG" op))))
-  dispatch)
-
-(define (apply-generic op arg) (arg op))
-(define (real-part z) (apply-generic 'real-part z))
-(define (imag-part z) (apply-generic 'imag-part z))
-(define (magnitude z) (apply-generic 'magnitude z))
-(define (angle z) (apply-generic 'angle z))
-
-(define test (make-from-real-imag 3 4))
-(test 'real-part)
-(real-part test)
-
-```
+- 2019/11/21 晚上11点完成文章结构整理
