@@ -20,6 +20,8 @@ title: 石下读书
 
 ### [中途岛战役](./history/Midway_Island.md)
 
+### [莫放春秋佳日去](./history/teacher.md)
+
 ## 医学
 
 ### [溺水急救](./medicine/drown.md)
