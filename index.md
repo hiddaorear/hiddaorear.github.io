@@ -16,6 +16,13 @@ title: 石下读书
 
 ### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
 
+### [SICP笔记：Computing with Register Machines](./computer_programs/PL/Computing_with_Register_Machines.md)
+
+### [SICP笔记：metalinguistic abstraction](./computer_programs/PL/metalinguistic_abstraction.md)
+
+### [数学与编程笔记：List with Cycle](./computer_programs/list_with_cycle.md)
+
+
 ## 文学历史
 
 ### [中途岛战役](./history/Midway_Island.md)
