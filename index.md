@@ -10,15 +10,17 @@ title: 石下读书
 
 ### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
 
-### [Monad](./computer_programs/monad.md)
-
-### [前端上报](./computer_programs/analytics.md)
-
-### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
-
 ### [SICP笔记：Computing with Register Machines](./computer_programs/PL/Computing_with_Register_Machines.md)
 
 ### [SICP笔记：metalinguistic abstraction](./computer_programs/PL/metalinguistic_abstraction.md)
+
+### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
+
+### [Server Model](./computer_programs/server_model.md)
+
+### [Monad](./computer_programs/monad.md)
+
+### [前端上报](./computer_programs/analytics.md)
 
 ### [数学与编程笔记：List with Cycle](./computer_programs/list_with_cycle.md)
 
