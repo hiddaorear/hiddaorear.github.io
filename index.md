@@ -37,6 +37,8 @@ title: 石下读书
 
 ## 随笔
 
+### [看《红鳉鱼》](./essay/the_red_Killifish.md)
+
 ### [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
 
 ### [你真的需要提高技术吗？](./essay/badminton_technique.md)
