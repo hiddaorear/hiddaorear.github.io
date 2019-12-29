@@ -37,6 +37,8 @@ title: 石下读书
 
 ## 随笔
 
+### [陈省身先生](./node/2019_12_29_maths_Chern.md)
+
 ### [看《红鳉鱼》](./essay/the_red_Killifish.md)
 
 ### [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
