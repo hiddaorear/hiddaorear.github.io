@@ -6,7 +6,7 @@ title: 石下读书
 
 ## 读书笔记
 
-### [读《启功给你讲书法》](./ node/2019_12_01_calligraphy_qigong.md)
+### [读《启功给你讲书法》](./node/2019_12_01_calligraphy_qigong.md)
 
 ## 计算机技术
 
