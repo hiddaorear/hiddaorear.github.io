@@ -6,6 +6,8 @@ title: 石下读书
 
 ## 计算机技术
 
+### [漫谈斐波那契算法](./computer_programs/Fibonacci.md)
+
 ### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
 
 ### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
