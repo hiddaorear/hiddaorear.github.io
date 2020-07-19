@@ -4,6 +4,10 @@ title: 石下读书
 
 # 石下读书
 
+## 读书笔记
+
+### [读《启功给你讲书法》](./node/2019_12_01_calligraphy_qigong.md)
+
 ## 计算机技术
 
 ### [漫谈斐波那契算法](./computer_programs/Fibonacci.md)
@@ -38,6 +42,10 @@ title: 石下读书
 ### [溺水急救](./medicine/drown.md)
 
 ## 随笔
+
+### [陈省身先生](./node/2019_12_29_maths_Chern.md)
+
+### [看《红鳉鱼》](./essay/the_red_Killifish.md)
 
 ### [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
 
