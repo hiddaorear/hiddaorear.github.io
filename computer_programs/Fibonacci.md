@@ -12,7 +12,7 @@
 
 ### 依据定义实现
 
-``` C++
+``` cpp
 
 int fib0(int n) {
 	if (n == 0) return 0;
@@ -53,7 +53,7 @@ F5 = F4 + F3
 
 ### 带缓存的实现
 
-``` C++
+``` cpp
 #include <utility>
 
 int fib1(int n) {
@@ -103,38 +103,224 @@ A = 0 1
 
 记此算法为fib2。
 
-即计算Fn只需要计算矩阵A的自乘。计算`A^n`需要多少次矩阵乘法呢？考虑n为偶数，`n = 2^k`，实际k次即可计算出结果，即O(logn)次乘法。
+即计算Fn只需要计算矩阵A的自乘。计算`A^n`最少需要多少次矩阵乘法呢？
 
-用矩阵的算法只需O(logn)次，而fib1需要O(n)次，我们的算法又得到新的提示。
+## 半群
+
+### 求矩阵的n次幂
+
+``` cpp
+
+bool odd(int n) { return n & 0x1; }
+int half(int n) { return n >> 1; }
+
+template <Matrix A,  Integer N, MatrixMultiply Op>
+A power_matrix(A a, N n, Op op) {
+
+	while(!odd(n)) {
+		a = op(a, a);
+		n = half(n);
+	}
+
+	if (n == 1) return a;
+	return power_accumulate_matrix(a, op(a, a), half(n - 1), op);
+}
+
+// 计算 r * (a^n)
+// 乘积累加函数
+// r为运算中持续更新的值
+// n和a为乘数
+// Op为矩阵乘法操作，此处暂未实现
+template <Matrix A,  Integer N, MatrixMultiply Op>
+A power_accumulate_matrix(A r, A a, N n, Op op) {
+	// precondition(n >= 0);
+	if (n == 0) return r;
+	while(true) {
+		if (odd(n)) {
+			r = op(r, a);
+			if (n == 1)  return r;
+		}
+		n = half(n);
+		a = op(a, a);
+	}
+}
+
+
+
+```
+
+从以上算法，我们知道矩阵的n次方，只需O(logn)次乘法(实际上应该还可以进一步降低，考虑乘法琏)。用矩阵的算法只需O(logn)次，而fib1需要O(n)次，我们的算法又得到新的提升。
+
+### 埃及乘法(Egyptian multiplication)或俄罗斯农夫算法(Russian Peasant Algorithm)
+
+乘法可以看做“某个数多次加到其自身”。即乘法可以用加法来计算。
+
+```
+1 * a = a
+
+(n + 1) * a = n * a + a
+```
+
+对应的算法：
+
+``` cpp
+
+int multiply0(int n, int a) {
+	if (n == 2) return a;
+	return multiply0(n - 1, a) + a;
+}
+
+```
+
+我们考察：
+
+```
+4a = ((a + a) + a) + a
+   = (a + a) + (a + a)
+```
+
+依赖加法的结合律：`a + (b + c) = (a + b) + c`
+
+这样我们只需计算`a + a`一次即可，降低了加法的运算次数。我们优化multiply0算法，可以得到：
+
+``` cpp
+
+bool odd(int n) { return n & 0x1; }
+int half(int n) { return n >> 1; }
+
+int multiply_int(int n, int a) {
+	while(!odd(n)) {
+		a = a + a;
+		n = half(n);
+	}
+	if (n == 1) return a;
+	return mult_acc_int(a, half(n - 1), a + a);
+}
+
+// 乘积累加函数
+// r为运算中持续更新的值
+// n和a为乘数
+int mult_acc_int(int r, int n, int a) {
+	while(true) {
+		if (odd(n)) {
+			r = r + a;
+			if (n == 1) return r;
+		}
+		n = half(n);
+		a = a + a;
+	}
+}
+
+```
+
+### 抽象
+
+我们对比power_matrix和multiply_int，发现二者除了类型不一致，其他算法本身是一样的。我们把power_matrix抽象一下：
+
+``` cpp
+bool odd(int n) { return n & 0x1; }
+int half(int n) { return n >> 1; }
+
+template <Regular A,  Integer N, SemigroupOperation Op>
+// requires (Domain<Op, A>) OP运算的定义域必须是A。C++支持concept，则可以转换为类似断言的语句(assertion)，从编译阶段保证类型直接的相互关系
+A power_semigroup(A a, N n, Op op) {
+	// precondition(n > 0);
+	while(!odd(n)) {
+		a = op(a, a);
+		n = half(n);
+	}
+
+	if (n == 1) return a;
+	return power_accumulate_semigroup(a, op(a, a), half(n - 1), op);
+}
+
+// 计算 r * (a^n)
+// 乘积累加函数
+// r为运算中持续更新的值
+// n和a为乘数
+template <Reguler A,  Integer N, SemigroupOperation Op>
+// requires (Domain<Op, A>)
+A power_accumulate_semigroup(A r, A a, N n, Op op) {
+	// precondition(n >= 0);
+	if (n == 0) return r;
+	while(true) {
+		if (odd(n)) {
+			r = op(r, a);
+			if (n == 1)  return r;
+		}
+		n = half(n);
+		a = op(a, a);
+	}
+}
+
+```
+
+我们考虑类型A所满足的要求。
+
+- 必须具备具有结合性的运算
+- 支持数据之间进行构造、赋值(`=`)和等价测试(`==`)的类型
+
+定义常规类型T(regular type)：像int等内置类型一样，支持同类数据之间进行构造、赋值和等价测试的类型。
+
+那么A的要求为：
+
+- 常规类型
+- 必须具备具有结合性的运算
+
+### 幺半群(monoid)
+
+半群(semigroup)定义：支持二元运算且运算具有结合性的代数结构。
+
+即：
+
+- 运算：`x * y`
+
+- 结合性公理：` x * (y * z) = (x * y) * z`
+
+举例：正整数构成的加法半群，元素是正整数，运算是加法。
+
+幺半群(monid)定义：支持二元运算，具有结合性，且具有单位元的代数结构。
+
+相对半群，增加了单位元的要求。即：
+
+- 运算：`x * y`
+
+- 结合性公理：` x * (y * z) = (x * y) * z`
+
+- e为单位元：`x * e = e * x = x`
+
+举例：整数构成的乘法幺半群：元素是整数，运算是乘法，单位元是1。
+
+我们可以把power_semigroup算拓展一下，支持单位元。由于不知道op参数代表的运算，我们需要通过op参数来确定单位元。
+
+``` cpp
+template <Reguler A,  Integer N, MonoidOperation Op>
+// requires (Domain<Op, A>)
+A power_monoid(A r, A a, N n, Op op) {
+	// precondition(n >= 0);
+	if (n == 0) return indentity_element(op);
+	return power_semigroup(a, n, op);
+}
+
+// + 和 * 的indentity_element 函数
+template <NoncommutativeAdditiveMonoid T>
+T indentity_element(std::plus<T>) { return T(0);};
+
+template <MultiplicativeMonoid T>
+T indentity_element(std::multiplies<T>) { return T(1);};
+
+```
+
+A支持二元运算，支持结合性公理(支持等价判断，且满足结合性)。
+
+我们考察埃及乘法(Egyptian multiplication)和矩阵乘法。二者的对象和运算，整数和加法，矩阵和矩阵乘法，二者构成了乘法幺半群，故二者可以用相同的算法实现。因此，适用于乘法幺半群的power算法，可用用于求解斐波那契数列的矩阵乘法，其复杂度为log(n)。
+
+## 大数情况下Fibonacci numbers算法分析
 
 我们分析一下，矩阵的算法性能提升的原因在于，算法中不只有加法，还有乘法。大数的乘法要慢于加法。考虑大数操作，fib1的复杂度变为`O(n^2)`。
 
 假设两个n二进制数相乘的运行时间是M(n)，在没有优化的情况下，`M(n)=O(n^2)`。那么fib2的复杂度为`O(M(n)logn)`，M(n)的增长大于logn，故fib2的复杂度为O(M(n))。即fib2的算法能否比fib1快，取决于我们能否以少于O(n^2)的次数来完成两个n位数相乘。
 
-
-## FFT
-
-### 傅里叶变换
-
-#### 多项式的两种表示
-
-#### 以线性代数角度看傅里叶变换
-
-### FFT算法
-
-### FFT与大数相乘算法关系
-
-## 求余运算与群
-
-## Fibonacci heap
-
-## 反思
-
-### 大数相乘面试题
-
-### 简单实现的缺点
-
-### 数学的重要性
 
 ## change log
 
