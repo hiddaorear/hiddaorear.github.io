@@ -1,6 +1,28 @@
-# 漫谈Fibonacci sequence
+# 群与编程
 
-## 定义
+## 计算 Fibonacci numbers
+
+### 定义
+
+$$F_0? = 0
+$$F_1? = 1
+$$F_n? = $$F_n-1? + $$F_n-2?
+
+### 依据定义实现
+
+``` C++
+
+int fib0(int n) {
+	if (n == 0) return 0;
+	if (n == 1) return 1;
+	return fib0(n - 1) + fib0(n - 2);
+}
+
+```
+
+
+
+
 
 ## 计算通项
 
@@ -9,6 +31,8 @@
 ### 生成函数
 
 ### 与黄金分割比的关系
+
+
 
 ## 算法
 
@@ -45,3 +69,4 @@
 ## change log
 
 - 2020/7/19 下午 created doc
+- 2020/8/9 下午
