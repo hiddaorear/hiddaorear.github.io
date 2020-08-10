@@ -15,9 +15,9 @@
 ``` cpp
 
 int fib0(int n) {
-	if (n == 0) return 0;
-	if (n == 1) return 1;
-	return fib0(n - 1) + fib0(n - 2);
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+ return fib0(n - 1) + fib0(n - 2);
 }
 
 ```
@@ -57,12 +57,12 @@ F5 = F4 + F3
 #include <utility>
 
 int fib1(int n) {
-	if (n == 0) return 0;
-	std::pair<int, int> v = {0, 1};
-	for (int i = 1; i < n; ++i) {
-		v = {v.second, v.firt + v.second};
-	}
-	return v.second;
+  if (n == 0) return 0;
+  std::pair<int, int> v = {0, 1};
+  for (int i = 1; i < n; ++i) {
+    v = {v.second, v.firt + v.second};
+  }
+  return v.second;
 }
 
 ```
@@ -117,13 +117,13 @@ int half(int n) { return n >> 1; }
 template <Matrix A,  Integer N, MatrixMultiply Op>
 A power_matrix(A a, N n, Op op) {
 
-	while(!odd(n)) {
-		a = op(a, a);
-		n = half(n);
-	}
+  while(!odd(n)) {
+    a = op(a, a);
+    n = half(n);
+  }
 
-	if (n == 1) return a;
-	return power_accumulate_matrix(a, op(a, a), half(n - 1), op);
+  if (n == 1) return a;
+  return power_accumulate_matrix(a, op(a, a), half(n - 1), op);
 }
 
 // 计算 r * (a^n)
@@ -133,16 +133,16 @@ A power_matrix(A a, N n, Op op) {
 // Op为矩阵乘法操作，此处暂未实现
 template <Matrix A,  Integer N, MatrixMultiply Op>
 A power_accumulate_matrix(A r, A a, N n, Op op) {
-	// precondition(n >= 0);
-	if (n == 0) return r;
-	while(true) {
-		if (odd(n)) {
-			r = op(r, a);
-			if (n == 1)  return r;
-		}
-		n = half(n);
-		a = op(a, a);
-	}
+  // precondition(n >= 0);
+  if (n == 0) return r;
+  while(true) {
+    if (odd(n)) {
+      r = op(r, a);
+      if (n == 1)  return r;
+    }
+    n = half(n);
+    a = op(a, a);
+  }
 }
 
 
@@ -166,8 +166,8 @@ A power_accumulate_matrix(A r, A a, N n, Op op) {
 ``` cpp
 
 int multiply0(int n, int a) {
-	if (n == 2) return a;
-	return multiply0(n - 1, a) + a;
+  if (n == 2) return a;
+  return multiply0(n - 1, a) + a;
 }
 
 ```
@@ -189,26 +189,26 @@ bool odd(int n) { return n & 0x1; }
 int half(int n) { return n >> 1; }
 
 int multiply_int(int n, int a) {
-	while(!odd(n)) {
-		a = a + a;
-		n = half(n);
-	}
-	if (n == 1) return a;
-	return mult_acc_int(a, half(n - 1), a + a);
+  while(!odd(n)) {
+    a = a + a;
+    n = half(n);
+  }
+  if (n == 1) return a;
+  return mult_acc_int(a, half(n - 1), a + a);
 }
 
 // 乘积累加函数
 // r为运算中持续更新的值
 // n和a为乘数
 int mult_acc_int(int r, int n, int a) {
-	while(true) {
-		if (odd(n)) {
-			r = r + a;
-			if (n == 1) return r;
-		}
-		n = half(n);
-		a = a + a;
-	}
+  while(true) {
+    if (odd(n)) {
+      r = r + a;
+      if (n == 1) return r;
+    }
+    n = half(n);
+    a = a + a;
+  }
 }
 
 ```
@@ -224,14 +224,14 @@ int half(int n) { return n >> 1; }
 template <Regular A,  Integer N, SemigroupOperation Op>
 // requires (Domain<Op, A>) OP运算的定义域必须是A。C++支持concept，则可以转换为类似断言的语句(assertion)，从编译阶段保证类型直接的相互关系
 A power_semigroup(A a, N n, Op op) {
-	// precondition(n > 0);
-	while(!odd(n)) {
-		a = op(a, a);
-		n = half(n);
-	}
+  // precondition(n > 0);
+  while(!odd(n)) {
+    a = op(a, a);
+    n = half(n);
+  }
 
-	if (n == 1) return a;
-	return power_accumulate_semigroup(a, op(a, a), half(n - 1), op);
+  if (n == 1) return a;
+  return power_accumulate_semigroup(a, op(a, a), half(n - 1), op);
 }
 
 // 计算 r * (a^n)
@@ -241,16 +241,16 @@ A power_semigroup(A a, N n, Op op) {
 template <Reguler A,  Integer N, SemigroupOperation Op>
 // requires (Domain<Op, A>)
 A power_accumulate_semigroup(A r, A a, N n, Op op) {
-	// precondition(n >= 0);
-	if (n == 0) return r;
-	while(true) {
-		if (odd(n)) {
-			r = op(r, a);
-			if (n == 1)  return r;
-		}
-		n = half(n);
-		a = op(a, a);
-	}
+  // precondition(n >= 0);
+  if (n == 0) return r;
+  while(true) {
+    if (odd(n)) {
+      r = op(r, a);
+      if (n == 1)  return r;
+    }
+    n = half(n);
+    a = op(a, a);
+  }
 }
 
 ```
@@ -297,9 +297,9 @@ A power_accumulate_semigroup(A r, A a, N n, Op op) {
 template <Reguler A,  Integer N, MonoidOperation Op>
 // requires (Domain<Op, A>)
 A power_monoid(A r, A a, N n, Op op) {
-	// precondition(n >= 0);
-	if (n == 0) return indentity_element(op);
-	return power_semigroup(a, n, op);
+  // precondition(n >= 0);
+  if (n == 0) return indentity_element(op);
+  return power_semigroup(a, n, op);
 }
 
 // + 和 * 的indentity_element 函数
