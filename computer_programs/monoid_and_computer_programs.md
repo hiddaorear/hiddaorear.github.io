@@ -1,4 +1,4 @@
-# 群与编程
+# 半群与计算机编程
 
 ## 计算 Fibonacci numbers
 
@@ -15,8 +15,12 @@
 ``` cpp
 
 int fib0(int n) {
-  if (n == 0) return 0;
-  if (n == 1) return 1;
+  if (n == 0) {
+    return 0;
+  }
+  if (n == 1) {
+    return 1;
+  }
  return fib0(n - 1) + fib0(n - 2);
 }
 
@@ -27,9 +31,9 @@ int fib0(int n) {
 ```
 
 F5 = F4 + F3
-   = (F3 + F3) + (F2 + F1)
-   = ((F2 + F1) + (F2 + F1)) + ((F1 + F0) + F1)
-   = (((F1 + F0) + F1) + ((F1 + F0) + F1)) + ((F1 + F0) + F1)
+   = (F3 + F2) + (F2 + F1)
+   = ((F2 + F1) + (F1 + F0)) + ((F1 + F0) + F1)
+   = (((F1 + F0) + F1) + (F1 + F0))+ ((F1 + F0) + F1)
 
 ```
 
@@ -57,7 +61,9 @@ F5 = F4 + F3
 #include <utility>
 
 int fib1(int n) {
-  if (n == 0) return 0;
+  if (n == 0) {
+    return 0;
+  }
   std::pair<int, int> v = {0, 1};
   for (int i = 1; i < n; ++i) {
     v = {v.second, v.firt + v.second};
@@ -122,7 +128,9 @@ A power_matrix(A a, N n, Op op) {
     n = half(n);
   }
 
-  if (n == 1) return a;
+  if (n == 1) {
+    return a;
+  }
   return power_accumulate_matrix(a, op(a, a), half(n - 1), op);
 }
 
@@ -134,11 +142,15 @@ A power_matrix(A a, N n, Op op) {
 template <Matrix A,  Integer N, MatrixMultiply Op>
 A power_accumulate_matrix(A r, A a, N n, Op op) {
   // precondition(n >= 0);
-  if (n == 0) return r;
+  if (n == 0) {
+    return r;
+  }
   while(true) {
     if (odd(n)) {
       r = op(r, a);
-      if (n == 1)  return r;
+      if (n == 1) {
+        return r;
+      }
     }
     n = half(n);
     a = op(a, a);
@@ -166,7 +178,9 @@ A power_accumulate_matrix(A r, A a, N n, Op op) {
 ``` cpp
 
 int multiply0(int n, int a) {
-  if (n == 2) return a;
+  if (n == 2) {
+    return a;
+  }
   return multiply0(n - 1, a) + a;
 }
 
@@ -193,7 +207,9 @@ int multiply_int(int n, int a) {
     a = a + a;
     n = half(n);
   }
-  if (n == 1) return a;
+  if (n == 1) {
+    return a;
+  }
   return mult_acc_int(a, half(n - 1), a + a);
 }
 
@@ -204,7 +220,9 @@ int mult_acc_int(int r, int n, int a) {
   while(true) {
     if (odd(n)) {
       r = r + a;
-      if (n == 1) return r;
+      if (n == 1) {
+        return r;
+      }
     }
     n = half(n);
     a = a + a;
@@ -230,7 +248,9 @@ A power_semigroup(A a, N n, Op op) {
     n = half(n);
   }
 
-  if (n == 1) return a;
+  if (n == 1) {
+    return a;
+  }
   return power_accumulate_semigroup(a, op(a, a), half(n - 1), op);
 }
 
@@ -242,11 +262,15 @@ template <Reguler A,  Integer N, SemigroupOperation Op>
 // requires (Domain<Op, A>)
 A power_accumulate_semigroup(A r, A a, N n, Op op) {
   // precondition(n >= 0);
-  if (n == 0) return r;
+  if (n == 0) {
+    return r;
+  }
   while(true) {
     if (odd(n)) {
       r = op(r, a);
-      if (n == 1)  return r;
+      if (n == 1) {
+        return r;
+      }
     }
     n = half(n);
     a = op(a, a);
@@ -298,7 +322,9 @@ template <Reguler A,  Integer N, MonoidOperation Op>
 // requires (Domain<Op, A>)
 A power_monoid(A r, A a, N n, Op op) {
   // precondition(n >= 0);
-  if (n == 0) return indentity_element(op);
+  if (n == 0) {
+    return indentity_element(op);
+  }
   return power_semigroup(a, n, op);
 }
 
@@ -422,3 +448,4 @@ A支持二元运算，支持结合性公理(支持等价判断，且满足结合
 - 2020/7/19 下午 created doc
 - 2020/8/9 下午
 - 2020/8/9 晚上，完成补码与幺半群的描述
+- 2020/8/10 上午，修正代码格式；以及斐波那契数列展开错误
