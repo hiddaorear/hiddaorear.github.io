@@ -10,6 +10,8 @@ title: 石下读书
 
 ## 计算机技术
 
+### [工程效率](./computer_programs/engineering.md)
+
 ### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
 
 ### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
