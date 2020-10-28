@@ -10,6 +10,10 @@ title: 石下读书
 
 ## 计算机技术
 
+### [iOS program](./computer_programs/iOS_program.md)
+
+### [Objective-C 学习](./computer_programs/Objective-C.md)
+
 ### [工程效率](./computer_programs/engineering.md)
 
 ### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
