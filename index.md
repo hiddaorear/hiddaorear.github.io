@@ -12,7 +12,7 @@ title: 石下读书
 
 ### [iOS program](./computer_programs/iOS_program.md)
 
-### [Objective-C 学习](./computer_programs/Objective-C.md)
+### [Objective-C 学习](./computer_programs/PL/Objective-C.md)
 
 ### [工程效率](./computer_programs/engineering.md)
 
