@@ -5,7 +5,6 @@
 > 从事任何方向的技术研究，不知道该干什么的时候，就问自己四个问题：
 >
 > 1、这个方向上最新进展是什么？ 都知道吗？
->
 > 2、这个方向上最著名的专家有哪些？他们的研究都看过吗？
 >
 > 3、这个方向上最著名的技术社区有哪些？精华帖都看过一遍吗？
@@ -25,128 +24,14 @@
 
 ![objc](./img/objc.png)
 
-# 代码组织
-
-## 符号查找
-
-如果两个类的头文件各自引入对方的头文件，会导致循环引用(chicken-and-egg situation)。使用`#import`而非`#include`指令，虽然不会导致死循环，但也意味着其中一个无法正确编译。我们可以使用向前声明解决这个问题(forward declaring)。向前声明，就意味着，只需要知道当前有一个类名即可，而不需要知道类的细节。
-
-- 类的向前声明`@class SomeClase`
-
-- 协议的向前声明`@protocol SomeProtocol`
-
-**头文件和实现的中间地带**
-
-![class](./img/class.png)
-
-## 运行时模块加载
-
-**热更新**
-
-
 
 # 类型系统
 
 # 面向对象
 
-## 可拓展性
-
-
-![expand](./img/expand.jpg)
-
-**新增类型**
-
-**新增方法**
-
-**类型安全的拓展**
-
 ## 封装
 
-隐藏内部实现，对外暴露接口。在SICP中，设置抽象屏障，提供操作界面。对应在OC中，则是通过接口，以及实现私有属性和方法。
-
-![abstract](./img/abstract.png)
-
-
 **私有属性实现**
-
-OC的动态消息系统的工作方式，决定了OC 不可能实现真正的私有方法或私有实例变量。然而，我们还是只想部分对外公开，部分隐藏，可以使用`class-continuation`。其特点是，这是唯一能声明实例变量的分类，且此分类没有特定文件，而是要定义在类的主实现文件中。
-
-这一文件的拓扑结构的不同，导致`class-continuation`与普通的category不同：
-
-普通categroy可以随意拓展类的方法，但不能定义属性(可以定义但不推荐)；而`class-continuation`可以在当前实现文件中随意添加类的属性和方法，但受这一点的限制，我们不能随意拓展类，原因在于我们并非所有时候都可以修改类的实现`.m`文件。
-
-
-如果我们声明私有的变量在公共接口中，则信息泄露了，无法到达私有的目的。
-
-``` objc
-
-# import <Foundation/Foundation.h>
-
-@interface EOCSuperSecretClass () {
-@private
-	EOCSuperSecretClass * _secretInstance;
-}
-@end
-
-```
-
-可以使用`class-continuation`解决此问题：
-
-``` objc
-// EOCClass.h
-# import <Foundation/Foundation.h>
-
-@interface EOCClass : NSObject
-@end
-
-
-// EOCClass.m
-#import "EOCClass"
-#import "EOCSuperSecretClass"
-
-
-@interface EOCClass () {
-@private
-	EOCSuperSecretClass * _secretInstance;
-}
-@end
-
-@implementation EOCClass
-// Methods here
-@end
-
-```
-
-实例变量也可以定义在实现块中，与添加到`clsss-continuation`中等效。但放在后者中显然更好，私有变量和方法放在一起了，一眼便知是否是私有的。
-
-这个办法的本质就是把私有的属性和方法，从头文件移动到实现的文件了，由于实现并不公开，头文件会公开，这样就可以屏蔽了头文件的公开能力，且有私有实现的声明，一举两得。
-
-这一个技巧，可以用在编写`Objective-C++`的时候，避免把`.mm`文件的影响扩散，导致所有文件都要用`Objective-C++`来编译。
-
-> *其本质和上面实现私有化的技巧一样，就是部分切断了头文件和实现之间的联系，改变了头文件和实现直接的拓扑结构。*
-
-
-**声明为只读，但内部能修改**
-
-public接口中声明为只读的属性，可以拓展为可读写，以便于在类的内部设置值。通常我们不直接访问实例变量，而是通过设置访问方法来做，这样可以触发KVO通知，其他对象可能监听了此事件。
-
-``` objc
-
-// .h
-#import <Foundation/Foundation.h>
-
-@interface EOCPerson : NSObject
-@property (nonatomic, copy, readonly) NSString *name
-@end
-
-// .m
-@interface EOCPerson()
-@property (nonatomic, copy, readwrite) NSString *name
-@end
-
-```
-
-
 
 ## 继承
 
@@ -442,7 +327,8 @@ int intString = [str intValue];
 // 2.float转字符串
 NSString *stringFloat = [NSString stringWithFormat:@"%f",floatString];
 
-// 3.int转字符串NSString *stringInt = [NSString stringWithFormat:@"%d",intString];
+// 3.int转字符串
+NSString *stringInt = [NSString stringWithFormat:@"%d",intString];
 
 // 4.字符串转float
 float floatString = [str floatValue];
