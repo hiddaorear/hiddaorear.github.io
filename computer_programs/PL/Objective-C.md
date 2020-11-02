@@ -39,13 +39,147 @@
 
 ![class](./img/class.png)
 
+## 变量作用域
+
+OC没有命名空间(namespace)机制，故我们需要设法避免潜在的命名冲突，避免报错。从命名上，我们可以为变量添加三个字母的前缀，因为Apple宣称其保留使用“两个字母前缀”的权利。
+
+我们还可以使用一些关键字来修饰变量，限制其影响范围。
+
+**static**
+
+static意味着：
+1. 限定作用域：仅仅定义在此变量的编译单元，不会导致与其他单元的命名冲突。即其他文件不可见。非静态全局变量的作用域是整个源程序，多个源文件共用
+2. 延长生命周期：被修饰的变量，会保存到bbs段（静态区），整个工程执行期间一直存在，系统只分配一次内存地址。用static修饰的数据，不管执行多少次，只初始化一次。
+
+**const**
+
+const表示常量，不可被修改，存储在常量区。
+
+**extern**
+
+声明外部全局变量。只能声明，不能实现。故extern声明的变量，编译会从内部到外部查找。
+
+
 ## 运行时模块加载
+
+**FBI 问题**
+
+[OOP语言中FBC问题对应用框架的影响](https://zhuanlan.zhihu.com/p/110002452)
 
 **热更新**
 
 
 
-# 类型系统
+# 基础类型
+
+## 浮点数的声明
+
+- 如果是赋给CGFloat类型，则加不加f后缀都是一样的。
+- 如果是赋给double或float类型，就要考虑精度的问题。不加f后缀的话类型为double，8字节，加f后缀的话类型为float，4字节。
+
+``` objc
+
+CGFloat a = 5.3f;
+CGFloat b = 5.3;
+NSLog(@"%lu  %lu", sizeof(a), sizeof(b));
+NSLog(@"%lu  %lu", sizeof(double), sizeof(float));
+NSLog(@"%lu  %lu", sizeof(typeof(5.3)), sizeof(typeof(5.3f)));
+
+// 以下是打印结果：
+// 8  8
+// 8  4
+// 8  4
+
+```
+
+
+## `BOOL` 陷阱
+
+
+- 将常规整数值转换为`BOOL` ，请使用三元运算符返回`YES` 或`NO` 值。
+对  `BOOL`  使用逻辑运算符 ( `&&` ,  `||`  和  `!`  ) 是可以的，其返回值可以安全转换为  `BOOL`  ，无需三元运算符。
+
+
+``` objc
+// GOOD:
+- (BOOL)isBold {
+  return ([self fontTraits] & NSFontBoldTrait) ? YES : NO;  // & 在枚举中用于判断是否包含某个值
+}
+
+- (BOOL)isValid {
+  return [self stringValue] != nil;
+}
+
+- (BOOL)isEnabled {
+  return [self isValid] && [self isBold];
+}
+```
+
+``` objc
+// AVOID:
+- (BOOL)isBold {
+  return [self fontTraits] & NSFontBoldTrait;  // AVOID.
+}
+
+- (BOOL)isValid {
+  return [self stringValue];  // AVOID.
+}
+```
+
+
+- 永远不要直接将`BOOL`变量与`YES`比较，返回值可能不如你所愿。`BOOL`定义为`signed char`，因此它可能具有除`YES` ( `1` ) 和`NO`( `0` ) 之外的值。也没有必要将BOOL值与NO比较，使用`if`以及`!`进行判断会使代码更为直观。
+
+
+``` objc
+// GOOD:
+BOOL great = [foo isGreat];
+if (great) {         // GOOD.
+  // ...be great!
+}
+
+if (![someObject boolValue]) {
+  //...
+}
+```
+
+``` objc
+// AVOID:
+BOOL great = [foo isGreat];
+if (great == YES) {  // AVOID. 永远别这么做
+  // ...be great!
+}
+
+if ([someObject boolValue] == NO) { //AVOID
+
+}
+```
+
+## 枚举与位掩码
+
+使用  `const`  定义浮点型或者单个的整数型常量，如果要定义一组相关的整数常量，应该优先使用枚举。
+Objective-C 枚举与位掩码常量的命名采用大驼峰式(upper camel case)。
+枚举使用  `NS_ENUM` 。
+
+``` objc
+typedef NS_ENUM(NSInteger, FeedType) {
+    FeedTypeFriends = 0,
+    FeedTypeHomepage,
+    FeedTypeBlog,
+};
+```
+当用到位掩码时，使用  `NS_OPTIONS`  宏。
+
+``` objc
+typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
+    NYTAdCategoryAutos      = 1 << 0,
+    NYTAdCategoryJobs       = 1 << 1,
+    NYTAdCategoryRealState  = 1 << 2,
+    NYTAdCategoryTechnology = 1 << 3
+};
+//使用位掩码，后面 用位运算&，判断在枚举中用于判断是否包含某个值
+```
+
+
 
 # 面向对象
 
@@ -498,6 +632,18 @@ NSLog(immutableString, nil);
 ## 编码
 
 ## 截取
+
+## 异常
+
+### 异常捕获
+
+可以使用  `@try/@catch/@finally/@throw`  来进行异常处理。此外，也可以通过返回值（ `nil` ,  `NULL` ,  `NO`  或者  `错误码` ）或者传递一个  `NSError`  对象来返回错误。
+鉴于使用异常的代价较高（安装包、退堆栈带来的性能开销，此外还可能引发内存泄露），条件允许时，应该优先使用  `NSError`  对象或者返回错误码形式，但对于第三方组件的代码，在使用时，应使用  `@try/@catch`  进行异常保护。
+对于后台返回的数据以及文件中读取的数据，应进行足够的校验与异常保护。包括但不限于对数据类型、长度进行校验，使用  `@try/@catch`  进行序列化，反序列化过程的保护等。
+
+### 日志
+
+### 断言
 
 
 # change log
