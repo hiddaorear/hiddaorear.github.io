@@ -7,3 +7,12 @@
 ## UI
 
 [iOS 保持界面流畅的技巧](https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/)
+
+## 构造与析构
+
+[Zen and the Art of the Objective-C Craftsmanship](https://github.com/oa414/objc-zen-book-cn/#init-%E5%92%8C-dealloc)
+
+### 构造
+
+
+### 析构
