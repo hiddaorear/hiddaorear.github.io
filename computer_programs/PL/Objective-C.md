@@ -541,6 +541,36 @@ mutArray = array; // NSMutableString是NSString的子类
 
 ## Macro
 
+### 基础 Macro
+
+**`__cplusplus`**
+
+``` objc
+
+#ifdef __cplusplus // cpp 自定义宏，表示这是cpp代码
+extern "C" { // exern "C"的原因是，cpp支持函数重载，需要对函数名做一些处理，也就是C++和C的函数名会不一样。这里表示用C的方式连接对应的函数，避免链接错误
+#endif
+	// 代码
+#ifdef __cplusplus
+}
+#endif
+
+```
+
+**`可变参数宏 …和__VA_ARGS__`**
+
+``` cpp
+
+#define Log(fmt, ...) LogMessage(LogLevelDebug, __FILE__, __LINE__, fmt, ##__VA_ARGS__);
+
+// ##__VA_ARGS__对应参数'...'加##的原因，没有传递可变参数的时候，可以去掉前面多余的','，避免编译报错
+// __FILE__ 显示了文件绝对路径
+// __LINE__ 当前源代码行号
+
+```
+
+
+
 [ReactiveCocoa 中 奇妙无比的“宏”魔法](https://halfrost.com/reactivecocoa_macro/)
 
 
@@ -560,6 +590,10 @@ mutArray = array; // NSMutableString是NSString的子类
 [线程安全的可变数组、可变字典](https://www.jianshu.com/p/9082d66fff3c)
 
 [知识点：可变数组的属性使用copy修饰的后果](https://juejin.im/post/6844903714793193485)
+
+# 多线程
+
+## dispatch_semaphore_signal
 
 # 字符串
 
