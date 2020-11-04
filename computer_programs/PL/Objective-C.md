@@ -291,7 +291,12 @@ public接口中声明为只读的属性，可以拓展为可读写，以便于�
 Category、Extension 和 Protocol涉及到类的可拓展性问题，Category从语言设计角度看，完全是可以看做是为了解决 Expression Problem问题的设计，所以Category支持添加方法，不支持添加属性(可以添加，但不方便)。如果再加上Protocol约束，就可以做到类型安全的可拓展性。
 
 
-### Category
+### Category和Extension
+
+1. Category 的实现可以依赖主类，但主类一定不依赖 Category，也就是说移除任何一个 Category 的代码不会对主类产生任何影响。
+2. Category 可以直接使用主类已有的私有成员变量，但不应该为实现 Category 而往主类中添加成员变量，考虑在 Category 的实现中使用 objc association 来达到相同效果。
+
+从语机制上看：Class Extension 在编译就j将定义的Ivar、属性、方法等合并到主类，而Category 在程序启动以后，在Runtime Loading 才将属性(无Ivar)和方法合并到主类。
 
 [OC 的类别和扩展（Category 和 Extension）](https://xiaovv.me/2017/06/03/Talk-about-Category-and-Extension-in-Objective-C/)
 
@@ -541,7 +546,7 @@ mutArray = array; // NSMutableString是NSString的子类
 
 ## Macro
 
-### 基础 Macro
+### Macro 基础
 
 **`__cplusplus`**
 
@@ -569,7 +574,66 @@ extern "C" { // exern "C"的原因是，cpp支持函数重载，需要对函数�
 
 ```
 
+**在宏中展开宏**
 
+``` objc
+
+#define metamacro_stringify(VALUE) \
+				metamacro_stringify_(VALUE)
+
+
+#define metamacro_stringify_(VALUE) # VALUE
+
+```
+
+利用`#`把参数变为字符串。metamacro_stringify的目的就是把入参变为一个字符串返回。但为什么要包装一层呢？不直接定义为
+
+` #define metamacro_stringify_(VALUE) # VALUE`
+
+
+虽然语义没有变化，但在宏中使用这个宏，可能会有问题。举例：
+
+
+``` objc
+
+#define NUMBER 10
+#define ADD(a,b) (a+b)
+NSLog(@"%d+%d=%d", NUMBER, NUMBER, ADD(NUMBER,NUMBER));
+
+// 输出
+10+10=20
+
+```
+
+但如果在宏里面调用：
+
+``` objc
+#define STRINGIFY(S) #S
+#define CALCULATE(A,B) (A##10##B)
+
+NSLog(@"int max: %s", STRINGIFY(INT_MAX));
+NSLog(@"%d", CALCULATE(NUMBER,NUMBER))
+
+//展开以后
+
+NSLog(@"int max: %s", NUMBER);
+NSLog(@"%d", (NUMBER10NUMBER))
+
+```
+
+可见宏没有被再次展开。
+
+把宏再包装一层，写一个转接宏，就可以解决这个问题。
+
+``` objc
+#define CALCULATE(A,B) _CALCULATE(A,B)
+#define _CALCULATE(A,B) (A##10##B)
+```
+
+当然这里只支持一层，如果再多一层，还是会报错，需要对应的多层宏。
+
+
+**参考资料**
 
 [ReactiveCocoa 中 奇妙无比的“宏”魔法](https://halfrost.com/reactivecocoa_macro/)
 
