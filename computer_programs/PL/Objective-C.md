@@ -72,6 +72,24 @@ const表示常量，不可被修改，存储在常量区。
 
 # 基础类型
 
+## NSInteger vs. int
+
+You usually want to use `NSInteger` when you don't know what kind of processor architecture your code might run on, so you may for some reason want the largest possible integer type, which on 32 bit systems is just an `int`, while on a 64-bit system it's a `long`.
+
+`NSInteger`/`NSUInteger` are defined as *dynamic `typedef`*s to one of these types, and they are defined like this:
+
+```objectivec
+#if __LP64__ || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE || TARGET_OS_WIN32 || NS_BUILD_32_LIKE_64
+typedef long NSInteger;
+typedef unsigned long NSUInteger;
+#else
+typedef int NSInteger;
+typedef unsigned int NSUInteger;
+#endif
+```
+
+
+
 ## 浮点数的声明
 
 - 如果是赋给CGFloat类型，则加不加f后缀都是一样的。
@@ -154,7 +172,9 @@ if ([someObject boolValue] == NO) { //AVOID
 }
 ```
 
-## 枚举与位掩码
+## 枚举
+
+**枚举与位掩码**
 
 使用  `const`  定义浮点型或者单个的整数型常量，如果要定义一组相关的整数常量，应该优先使用枚举。
 Objective-C 枚举与位掩码常量的命名采用大驼峰式(upper camel case)。
@@ -178,6 +198,37 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 };
 //使用位掩码，后面 用位运算&，判断在枚举中用于判断是否包含某个值
 ```
+
+**数组的下标初始化(C语言特性)**
+
+``` c
+const int numbers[] = {
+	[1] = 3,
+	[2] = 2,
+	[3] = 1,
+	[5] = 12306
+};
+// [0, 3, 2, 1, 0, 12306]
+
+```
+
+用于处理枚举与字符串的映射
+
+``` objc
+
+typedef NS_NUM(NSInteger, XXType) {
+	XXType1,
+	XXType2
+};
+
+const NSString *XXTypeNameMappding[] = {
+	[XXType1] = @"type1",
+	[XXType2] = @"type2",
+};
+
+```
+
+
 
 
 
@@ -279,6 +330,39 @@ public接口中声明为只读的属性，可以拓展为可读写，以便于�
 @end
 
 ```
+
+**readonly属性支持扩展的写法**
+
+假如一个类有一个readonly属性：
+
+``` objc
+@interface Sark : NSObject
+@property (nonatomic, readonly) NSArray *friends;
+@end
+```
+
+.m中可以使用_friends来使用自动合成的这个变量，但假如：
+
+- 习惯使用self.来set实例变量时（只合成了getter）
+- 希望重写getter进行懒加载时（重写getter时则不会生成下划线的变量，除非手动@synthesize）
+- 允许子类重载这个属性来修改它时（编译报错属性修饰符不匹配）
+- 这种readonly声明方法就行不通了，所以下面的写法更有通用性：
+
+``` objc
+@interface Sark : NSObject
+@property (nonatomic, readonly, copy/*加上setter属性修饰符*/) NSArray *friends;
+@end
+```
+
+如想在.m中像正常属性一样使用：
+
+``` objc
+@interface Sark ()
+@property (nonatomic, copy) NSArray *friends;
+@end
+```
+
+> 疑问：copy标识符带来的变化是什么？
 
 
 
@@ -638,6 +722,23 @@ NSLog(@"%d", (NUMBER10NUMBER))
 [ReactiveCocoa 中 奇妙无比的“宏”魔法](https://halfrost.com/reactivecocoa_macro/)
 
 
+### Macro 高级用法
+
+**预处理断言**
+
+``` objc
+
+#define C_ASSERT(test) \
+	switch(test) { \
+		case 0: \
+		case test:; \
+	}
+
+C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
+
+```
+
+
 # 内存模型
 
 ## 对象的持有
@@ -657,7 +758,36 @@ NSLog(@"%d", (NUMBER10NUMBER))
 
 # 多线程
 
+> 不同的方案，实际上是不同的适用范围。
+> 1. `spinlock`适用于开发硬件驱动，比如USB外接设备的软件，因为需要低级（内核级）的锁来控制设备的传输状态同步等。
+> 2. `dispatch_semaphore`和`mutex`适合服务器软件需要高并发模型的网络应用开发，但是据我了解，Mac OS信号量做得不是很好，signal很容易crash，要set sigpipe。
+> 3. 所有的general target（一般目标）应用软件，用`NSQueue`是最理想的，也是它设计的初衷，为绝大多数Cocoa应用布置多线程。
+> 4. `synchronized`：当需要自行控制锁的时候，而NSQueue不够自己的需求，然后需要手动控制的情况。
+> 不要觉得什么都要用低级的才觉得bigger很高，要根据业务需求，如果本身对lock需求不高，只是做UI应用层业务开发的去使用spin，本身操作系统、硬件层面知识不足的人（这些人一般是软件工程师而不是硬件工程师）很容易犯错，导致死锁，实际上所有的锁都是安全的。
+> spin出问题也是出在开发者错误的逻辑，也是建立在不符自身领域范围的控制欲。区分优先级也是为了避免越权，有些开发者为了满足自己特殊的癖好或者虚荣心才用无法master的工具，甚至跨越上一层runtime级别的操作，很容易会开发出buggy的应用。
+> 这也是编译器出现的目的，不至于你使用指令集级别去写应用程序，而是一层一层的编译，你要是为了bigger用Assembly Language（汇编）去写iOS应用也是很无聊的。
+
+## Grand Central Dispatch (GCD) 
+
+## `@synchronized`
+
+## NSQueue
+
+## spinlock
+
+自旋锁，性能最高的锁。原理是一直 do while 忙等。缺点是等待会消耗大量的CPU资源，不适合用于做长时间任务。适合内存缓存的存取。
+
+**Priority Inversion 问题**
+
+优先级的线程始终在低优先级线程前执行。但有些情况下，会出现优先级反转的问题，从而破坏 spin lock。
+
+具体来说，一个低优先级的线程获得锁，并访问资源，一个高优先级的线程也尝试获得锁，高优先级的线程会处于spin lock等待状态，从而占用大量的CPU。此时低优先级的线程尝试争取CPU时间，导致任务迟迟不能完成，无法释放lock。
+
+
 ## dispatch_semaphore_signal
+
+信号量，当信号总量设置为1的时候，可以用来作为锁。没有延迟等待的情况下，其性能比pthead_mutex还搞，一旦有等待，性能会下降许多。优势在于等待不会消耗CPU资源。适合磁盘缓存。
+
 
 # 字符串
 
@@ -759,6 +889,34 @@ NSLog(immutableString, nil);
 ### 日志
 
 ### 断言
+
+# C语言
+
+## A compound statement enclosed in parentheses
+
+``` c
+RETURN_VALUE_RECEIVER = ({
+	// Do whatever you want
+	RETURN_VALUE; // 返回值
+});
+```
+
+应用举例：
+
+``` objc
+self.backgroundView = ({
+	UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
+	view.backgroundColor = [UIColor redColor];
+	view.alpha = 0.8f;
+	view;
+});
+```
+
+最大的意义在于将代码分块，在同一个逻辑的代码放在一起。是的代码行增大的时候，层次依然比较清晰明确。
+
+
+
+注意：返回值和代码结束点，必须放在结尾。
 
 
 # change log
