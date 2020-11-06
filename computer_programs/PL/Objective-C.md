@@ -23,8 +23,6 @@
 
 **从语言设计角度看Objective-C**
 
-![objc](./img/objc.png)
-
 # 代码组织
 
 ## 符号查找
@@ -34,10 +32,6 @@
 - 类的向前声明`@class SomeClase`
 
 - 协议的向前声明`@protocol SomeProtocol`
-
-**头文件和实现的中间地带**
-
-![class](./img/class.png)
 
 ## 变量作用域
 
@@ -87,7 +81,6 @@ typedef int NSInteger;
 typedef unsigned int NSUInteger;
 #endif
 ```
-
 
 
 ## 浮点数的声明
@@ -230,8 +223,6 @@ const NSString *XXTypeNameMappding[] = {
 
 
 
-
-
 # 面向对象
 
 ## 可拓展性
@@ -365,11 +356,6 @@ public接口中声明为只读的属性，可以拓展为可读写，以便于�
 > 疑问：copy标识符带来的变化是什么？
 
 
-
-## 继承
-
-## 多态
-
 ## Category、Extension 和 Protocol
 
 Category、Extension 和 Protocol涉及到类的可拓展性问题，Category从语言设计角度看，完全是可以看做是为了解决 Expression Problem问题的设计，所以Category支持添加方法，不支持添加属性(可以添加，但不方便)。如果再加上Protocol约束，就可以做到类型安全的可拓展性。
@@ -382,11 +368,6 @@ Category、Extension 和 Protocol涉及到类的可拓展性问题，Category从
 
 从语机制上看：Class Extension 在编译就j将定义的Ivar、属性、方法等合并到主类，而Category 在程序启动以后，在Runtime Loading 才将属性(无Ivar)和方法合并到主类。
 
-[OC 的类别和扩展（Category 和 Extension）](https://xiaovv.me/2017/06/03/Talk-about-Category-and-Extension-in-Objective-C/)
-
-[OC 底层探索 - Category 和 Extension](https://juejin.im/post/6844904067987144711)
-
-[深入理解Objective-C：Category](https://tech.meituan.com/2015/03/03/diveintocategory.html)
 
 ### Protocol
 
@@ -758,6 +739,82 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
 
 # 多线程
 
+## 两个线程，其中一个优先级高，且二者有超时的处理
+
+
+`dispatch_semaphore_signal`信号量，当信号总量设置为1的时候，可以用来作为锁。没有延迟等待的情况下，其性能比pthead_mutex还高，一旦有等待，性能会下降许多。优势在于等待不会消耗CPU资源。适合磁盘缓存。
+
+**使用两次dispatch_semaphore_wait**
+
+线程2的优先级比线程1高
+
+``` objc
+ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // 线程1
+                [NSThread sleepForTimeInterval:100];
+                NSLog(@"线程1完成 %@", [NSThread currentThread]);
+                dispatch_semaphore_wait(semaphore, waitTimeout);  // 信号量减1
+            });
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // 线程2
+                for (NSInteger i = 0, l = 2; i < l; i++) {
+                	NSLog(@"线程2 %@", [NSThread currentThread]);
+                    [NSThread sleepForTimeInterval:0.1];
+                    if (i % 2 == 0) { // 模拟失败和成功的场景
+                        dispatch_semaphore_signal(semaphore);  // 信号量加1
+                    } 
+                    dispatch_semaphore_signal(semaphore);  // 信号量加1
+                }
+            });
+
+
+            dispatch_time_t waitTimeout = dispatch_time(DISPATCH_TIME_NOW, 8000 / 1000.f * NSEC_PER_SEC);
+            dispatch_semaphore_wait(semaphore, waitTimeout);  // 使用两次dispatch_semaphore_wait
+            dispatch_semaphore_wait(semaphore, waitTimeout);  
+
+            NSLog(@"--------------end %@", [NSThread currentThread]);
+        });
+
+```
+
+**使用1次dispatch_semaphore_wait的问题**
+
+``` objc
+ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // 线程1
+                [NSThread sleepForTimeInterval:100];
+                NSLog(@"线程1完成 %@", [NSThread currentThread]);
+            });
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                // 线程2
+                for (NSInteger i = 0, l = 2; i < l; i++) {
+                	NSLog(@"线程2 %@", [NSThread currentThread]);
+                    [NSThread sleepForTimeInterval:0.1];
+                    if (i % 2 == 0) { // 模拟失败和成功的场景
+                        dispatch_semaphore_signal(semaphore);  // 成功的时候，信号量加1
+                    } 
+                }
+            });
+
+
+            dispatch_time_t waitTimeout = dispatch_time(DISPATCH_TIME_NOW, 8000 / 1000.f * NSEC_PER_SEC);
+            dispatch_semaphore_wait(semaphore, waitTimeout);  // 使用1次dispatch_semaphore_wait
+
+            NSLog(@"--------------end %@", [NSThread currentThread]);
+        });
+
+```
+
+问题，当线程2失败的时候，不执行`dispatch_semaphore_signal`，如果此时线程1已经完成了，仍然要等到超时。性能不佳。
+
+## 多线程元素
+
 > 不同的方案，实际上是不同的适用范围。
 > 1. `spinlock`适用于开发硬件驱动，比如USB外接设备的软件，因为需要低级（内核级）的锁来控制设备的传输状态同步等。
 > 2. `dispatch_semaphore`和`mutex`适合服务器软件需要高并发模型的网络应用开发，但是据我了解，Mac OS信号量做得不是很好，signal很容易crash，要set sigpipe。
@@ -766,12 +823,6 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
 > 不要觉得什么都要用低级的才觉得bigger很高，要根据业务需求，如果本身对lock需求不高，只是做UI应用层业务开发的去使用spin，本身操作系统、硬件层面知识不足的人（这些人一般是软件工程师而不是硬件工程师）很容易犯错，导致死锁，实际上所有的锁都是安全的。
 > spin出问题也是出在开发者错误的逻辑，也是建立在不符自身领域范围的控制欲。区分优先级也是为了避免越权，有些开发者为了满足自己特殊的癖好或者虚荣心才用无法master的工具，甚至跨越上一层runtime级别的操作，很容易会开发出buggy的应用。
 > 这也是编译器出现的目的，不至于你使用指令集级别去写应用程序，而是一层一层的编译，你要是为了bigger用Assembly Language（汇编）去写iOS应用也是很无聊的。
-
-## Grand Central Dispatch (GCD) 
-
-## `@synchronized`
-
-## NSQueue
 
 ## spinlock
 
@@ -783,10 +834,6 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
 
 具体来说，一个低优先级的线程获得锁，并访问资源，一个高优先级的线程也尝试获得锁，高优先级的线程会处于spin lock等待状态，从而占用大量的CPU。此时低优先级的线程尝试争取CPU时间，导致任务迟迟不能完成，无法释放lock。
 
-
-## dispatch_semaphore_signal
-
-信号量，当信号总量设置为1的时候，可以用来作为锁。没有延迟等待的情况下，其性能比pthead_mutex还搞，一旦有等待，性能会下降许多。优势在于等待不会消耗CPU资源。适合磁盘缓存。
 
 
 # 字符串
