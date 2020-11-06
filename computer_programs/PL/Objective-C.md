@@ -765,7 +765,7 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
                     [NSThread sleepForTimeInterval:0.1];
                     if (i % 2 == 0) { // 模拟失败和成功的场景
                         dispatch_semaphore_signal(semaphore);  // 信号量加1
-                    } 
+                    }
                     dispatch_semaphore_signal(semaphore);  // 信号量加1
                 }
             });
@@ -773,12 +773,14 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
 
             dispatch_time_t waitTimeout = dispatch_time(DISPATCH_TIME_NOW, 8000 / 1000.f * NSEC_PER_SEC);
             dispatch_semaphore_wait(semaphore, waitTimeout);  // 使用两次dispatch_semaphore_wait
-            dispatch_semaphore_wait(semaphore, waitTimeout);  
+            dispatch_semaphore_wait(semaphore, waitTimeout);
 
             NSLog(@"--------------end %@", [NSThread currentThread]);
         });
 
 ```
+
+注意：这个方案应该只适合这个特殊的场景：两个线程，其中一个优先级高，且对性能要求高。如果这里有三个线程，这个方案就非常不直观，难以维护。
 
 **使用1次dispatch_semaphore_wait的问题**
 
@@ -798,7 +800,7 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
                     [NSThread sleepForTimeInterval:0.1];
                     if (i % 2 == 0) { // 模拟失败和成功的场景
                         dispatch_semaphore_signal(semaphore);  // 成功的时候，信号量加1
-                    } 
+                    }
                 }
             });
 
