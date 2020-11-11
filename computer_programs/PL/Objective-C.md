@@ -739,6 +739,30 @@ C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
 
 # 多线程
 
+## 异步请求的惯用法
+
+**使用1次dispatch_semaphore_wait**
+
+``` objc
+dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+NSInteger imgDownloadStartTimeStamp = [[NSDate date] timeIntervalSince1970] * 1000;
+dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+  //开始下载图片
+  // ... 下载逻辑
+  imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgUrl]];
+  dispatch_semaphore_signal(sema);
+});
+long waitRet = dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(imgDownloadTimeout * NSEC_PER_MSEC)));
+
+```
+
+起线程异步请求，但用`dispatch_semaphore_wait`阻塞主流程，一种典型的惯用法。
+
+好处:
+
+1. 不用把异步返回以后的逻辑写在回调里面
+2. 方便设置超时
+
 ## 两个线程，其中一个优先级高，且二者有超时的处理
 
 
