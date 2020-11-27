@@ -25,6 +25,57 @@
 
 # 代码组织
 
+## 基础概念
+
+### 静态库与动态库
+
+- 静态库：链接时，完整的复制到可执行文件中，被多少次使用就有多份复制，浪费空间
+- 动态库：链接时不复制，程序运行时由系统动态加载到内存，只加载一次，多个程序共用，节省空间
+
+一般一种常以.a为后缀，为静态库；另一种以.so为后缀，为动态。
+
+**静态库优缺点**：
+
+命名由来：在链接阶段，会将汇编生成的目标文件`.o`文件，与引用到的库一起打包到可执行文件中，故名静态链接
+
+1. 对函数库的链接在编译期完成
+2. 程序运行时与函数库在于瓜葛，移植方便
+3. 浪费空间和资源，因所有相关的目标文件与牵涉的函数库，被链接合成一个可执行文件
+
+**动态库**：
+
+为什么需要动态库？
+
+1. 静态库的空间浪费
+2. 静态库的程序更新部署很麻烦，需要重新编译发布，只能全量更新
+
+命名由来：编译时并不会被链接到目标代码中，而是程序运行时才加载。故可以支持增量更新。
+
+1. 库函数的加载推迟到运行时
+2. 实现进程之间的资源共享（动态库也成为共享库）
+3. 程序升级更简单
+4. 甚至可以做到，链接载入完成由程序控制（显式调用）
+5. 缺点：会带来DLL Hell问题
+
+### OC中的静态库和动态库
+
+- 静态库：`.a`和`.framework`
+
+- 动态库：`.bylib`和`.framework`
+
+framework为什么既是动态也是静态？
+
+系统的framework是动态库，自定义的framework是静态库
+
+`.a`和`.framework`区别
+
+`.a + .h + sourceFile = .framework`
+
+- `.a`是纯二进制文件，`.framework`除了二进制文件还有资源文件
+
+- `.a`是不能直接使用，至少需要`.h`文件配合，`.framework`文件可以直接使用
+
+
 ## 符号查找
 
 如果两个类的头文件各自引入对方的头文件，会导致循环引用(chicken-and-egg situation)。使用`#import`而非`#include`指令，虽然不会导致死循环，但也意味着其中一个无法正确编译。我们可以使用向前声明解决这个问题(forward declaring)。向前声明，就意味着，只需要知道当前有一个类名即可，而不需要知道类的细节。
@@ -606,6 +657,169 @@ mutArray = array; // NSMutableString是NSString的子类
 # 函数式
 
 ## block特性
+
+### Block捕获外部变量以及`__block`实现原理
+
+Block即带有自动变量（局部变量）的匿名函数。实际上是其他语言中的支持闭包的lamda。
+
+1. 数据的存储
+
+C语言中的变量一种5种：
+
+- 自动变量
+- 函数参数
+- 静态变量
+- 静态全局变量
+- 全局变量
+
+![block data](./img/block_data.png)
+
+2. 引用与复制
+
+自动变量以值的方式传递到block的构造函数。Block只捕获会用到的变量，且只捕获自动变量的值，即只做复制，不做引用，而非内存地址，故Block内部不能修改自动变量的值。
+
+Block捕获的静态变量、静态全局变量、全局变量，可以改变其值。静态变量传递的是引用，即内存地址，故可以在Block中改变其值。
+
+所以Block改变值有2中方式，其一，传递内存地址到Block中；其二，改变存储区方式(`__block`)
+
+
+通常情况下：
+
+- 自动变量，被copy到Block，不带`__block`的自动变量只能在里面访问，不能改变其值
+- 带`__block`的自动变量和静态变量，直接内存地址访问，故可以改变其值
+- 全局变量，静态全局变量和函数参数，可以在直接在Block中改变值，但他们并没有成为Block的结构体`__main_block_impl_0`的成员变量，只是因为其作用域大，所以可以直接改变他们的值。他们其实没有被Block持有，不会增加retainCount的值。
+
+## 循环引用Retain Circle问题
+
+有两种情况：1. A强引用B，B强引用A；2. 自引用自身。常见的有Block强引用obj，obj强引用Block。
+
+### 所有权修饰符
+
+- `__strong`修饰符
+- `__weak`修饰符
+- `__unsafe_unretained`修饰符
+- `__autoreleasing`修饰符
+
+如果省略不写，默认修饰符是`__strong`。
+
+### 赋值为nil解决循环引用问题
+
+``` objc
+
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    Student *student = [[Student alloc]init];
+    student.name = @"Hello World";
+    __block Student *stu = student;
+
+    student.study = ^{
+        NSLog(@"my name is = %@",stu.name);
+        stu = nil;  // 赋值为nil
+    };
+
+    student.study();
+}
+
+```
+
+`__block`可以控制对象持有时间，动态改变其值，赋值为nil。但是，这个办法有一个缺点，就是一定要执行Block才行，否则还是会造成循环引用。
+
+
+## 使用 `weak`
+
+``` objc
+
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    Student *student = [[Student alloc]init];
+    student.name = @"Hello World";
+    __weak typeof(student) weakSelf = student;
+
+    student.study = ^{
+        NSLog(@"my name is = %@",weakSelf.name);
+    };
+
+    student.study();
+}
+
+```
+
+提炼最关键的部分：`#define WEAKSELF typeof(self) __weak weakSelf = self; `
+
+`__weak`的变量，每使用一次，就会自动拷贝一份临时变量，注册到AutoreleasePool里面，在使用这个临时变量。但`__strong`就不会。
+
+但`__weak`可能造成问题，如果Block是异步执行的，由于Block不再强引用持有。对于`__weak`，在原对象释放以后，`__weak`对象会变为null，防止野指针。为了避免这种情况，我们需要再Block再次强持有变量。所以`__weak`和`__strong`往往成对出现。
+
+例如：
+
+``` objc
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    Student *student = [[Student alloc]init];
+
+    student.name = @"Hello World";
+    __weak typeof(student) weakSelf = student;
+
+    student.study = ^{
+        __strong typeof(student) strongSelf = weakSelf;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"my name is = %@",strongSelf.name);
+        });
+
+    };
+
+    student.study();
+}
+
+
+```
+
+
+
+可以使用.@weakify、@strongify两个宏。
+
+``` objc
+@weakify(self);
+self.someBlock = @{
+    @strongify(self);
+    [self doSomething];
+}
+```
+
+
+
+综上：
+
+weakSelf是为了Block不持有self，避免循环引用。
+
+strongSelf的目的是一旦进入Block执行，假设不允许self这个变量在执行过程释放，需要加入strongSelf。
 
 # 元编程
 
