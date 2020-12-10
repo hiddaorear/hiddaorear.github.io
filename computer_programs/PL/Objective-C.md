@@ -25,6 +25,12 @@
 
 # 代码组织
 
+## 数据的封装
+
+### 函数参数过多的处理
+
+### 类型约束技巧
+
 ## 基础概念
 
 ### 静态库与动态库
@@ -260,15 +266,36 @@ const int numbers[] = {
 
 ``` objc
 
-typedef NS_NUM(NSInteger, XXType) {
-	XXType1,
-	XXType2
+typedef NS_ENUM(NSInteger, XXType){
+    XXType1,
+    XXType2
+};
+const NSString *XXTypeNameMapping[] = {
+    [XXType1] = @"Type1",
+    [XXType2] = @"Type2"
 };
 
-const NSString *XXTypeNameMappding[] = {
-	[XXType1] = @"type1",
-	[XXType2] = @"type2",
+```
+
+这一技巧用处大不，主要是枚举值自身其实可以用自定义的数字，而多数场景下，大家定义的枚举就是数字，不用转化为其他非数字的字符串。
+
+这个技巧的缺点是，对枚举值的数字有依赖，如果数字非常离散，则不适合，此时应该用`NSDictionary`。优点也很明显，在OC的头文件中定义数组，直接可以编译。但定义NSDictionary就麻烦一些，不能直接在头文件中定义，需要用函数包起来。如用inline函数：
+
+``` objc
+// 头文件  ClassName.h
+typedef NS_ENUM(NSInteger, EClassNameType) {
+    ClassName0 = 0, // 注意枚举的命名，用E开头，带上类名；字段的命名，前缀与枚举类型前缀保持一致，方便识别
+    ClassName1,
+    ClassName2
 };
+static inline NSDictionary * kClassNameTypeMapping() {
+    NSDictionary *dic = @{
+        @(ClassName0) : @"1", 
+        @(ClassName1) : @"2", 
+        @(ClassName2) : @"3",
+    };
+    return dic;
+}
 
 ```
 
