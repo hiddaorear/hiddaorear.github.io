@@ -46,14 +46,14 @@ NSString * const KEY_C_PARAM = @"key_c_param";
 
 // 函数实现
 (NSDictionary *) aParam: (BOOL)aParam
-								 bParam: (ESomeEnumerateTYPE)bParam
-								 cParam: (NSString*)cParam {
-		NSDictionary *dict = @{
-				KEY_A_PARAM: [NSNumber numberWithBool: aParam],
-				KEY_B_PARAM: [NSNumber numberWithInt: bParam],
-				KEY_C_PARAM: cParam
-		};
-		return dict;
+                 bParam: (ESomeEnumerateTYPE)bParam
+                 cParam: (NSString*)cParam {
+    NSDictionary *dict = @{
+            KEY_A_PARAM: [NSNumber numberWithBool: aParam],
+            KEY_B_PARAM: [NSNumber numberWithInt: bParam],
+            KEY_C_PARAM: cParam
+    };
+    return dict;
 }
 
 // 获取dict中的值
@@ -95,16 +95,16 @@ NSString *cParam = params[KEY_C_PARAM];
 @implementation CommonCollector
 
 - (instancettype)initWithContext:(id)commonContext {
-		if (self = [super init]) {
-				_commonContext = commonContext;
-		}
-		return self;
+    if (self = [super init]) {
+            _commonContext = commonContext;
+    }
+    return self;
 }
 
 - (NSDictionary *)getCommonParams {
-		return @{
-				kCommonParamA: @"pamam a" // kCommonParamA为常量字符串，定义技巧见常量条目
-		};
+    return @{
+            kCommonParamA: @"pamam a" // kCommonParamA为常量字符串，定义技巧见常量条目
+    };
 }
 
 @end
@@ -142,18 +142,18 @@ NSString *cParam = params[KEY_C_PARAM];
 
 // 注意mutableCopy和copy的使用技巧
 - (NSDictionary *)getCommonParams {
-		NSMutableDictionary *params = self.getCommonParams.mutableCopy;
-		BOOL success = self.commonContext.isAAA;
-		if (success) {
-				params[kSuccess] = YES; // kSuccess为常量
-		} else {
-				params[kSuccess] = NO;
-		}
-		return params.copy;
+    NSMutableDictionary *params = self.getCommonParams.mutableCopy;
+    BOOL success = self.commonContext.isAAA;
+    if (success) {
+            params[kSuccess] = YES; // kSuccess为常量
+    } else {
+            params[kSuccess] = NO;
+    }
+    return params.copy;
 }
 
 - (BOOL)isAAA {
-		return self.commonContext.isAAA;
+    return self.commonContext.isAAA;
 }
 @end
 // ------------------- ACollector end -------------------
@@ -406,10 +406,10 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 
 ``` c
 const int numbers[] = {
-	[1] = 3,
-	[2] = 2,
-	[3] = 1,
-	[5] = 12306
+    [1] = 3,
+    [2] = 2,
+    [3] = 1,
+    [5] = 12306
 };
 // [0, 3, 2, 1, 0, 12306]
 
@@ -491,7 +491,7 @@ OC的动态消息系统的工作方式，决定了OC 不可能实现真正的私
 
 @interface EOCSuperSecretClass () {
 @private
-	EOCSuperSecretClass * _secretInstance;
+    EOCSuperSecretClass * _secretInstance;
 }
 @end
 
@@ -514,7 +514,7 @@ OC的动态消息系统的工作方式，决定了OC 不可能实现真正的私
 
 @interface EOCClass () {
 @private
-	EOCSuperSecretClass * _secretInstance;
+    EOCSuperSecretClass * _secretInstance;
 }
 @end
 
@@ -628,8 +628,8 @@ Category、Extension 和 Protocol涉及到类的可拓展性问题，Category从
 ``` objc
 
 if ([_delegate respondsToSelector:
-					@selector(networkFetcher:didReceiveData:)]) {
-	[_delegate networkFetcher:self didReceiveData:data];
+                    @selector(networkFetcher:didReceiveData:)]) {
+    [_delegate networkFetcher:self didReceiveData:data];
 }
 
 ```
@@ -645,11 +645,11 @@ if ([_delegate respondsToSelector:
 @interface EOCNetworkFetcher () {
 
 // 定义
-	struct {
-		unsigned int didReceiveData: 1;
-		unsigned int didFailWithError: 1;
-		unsigned int didUpdateProgressTo: 1;
-	} _delegateFlags;
+    struct {
+        unsigned int didReceiveData: 1;
+        unsigned int didFailWithError: 1;
+        unsigned int didUpdateProgressTo: 1;
+    } _delegateFlags;
 
 }
 
@@ -658,19 +658,19 @@ if ([_delegate respondsToSelector:
 // 设置值
 - (void)  setDelegate: (id<EOCNetworkFetcher>) delegate {
 
-	_delegate = delagate;
-	_delegateFlags.didReceiveData = [delegate respondsToSelector:
-																						@selector(networkFetcher:didReceiveData:)];
-	_delegateFlags.didFailWithError = [delegate respondsToSelector:
-																						@selector(networkFetcher:didReceiveData:)];
-	_delegateFlags.didUpdataProgressTo = [delegate respondsToSelector:
-																						@selector(networkFetcher:didReceiveData:)];
+    _delegate = delagate;
+    _delegateFlags.didReceiveData = [delegate respondsToSelector:
+                                                                                        @selector(networkFetcher:didReceiveData:)];
+    _delegateFlags.didFailWithError = [delegate respondsToSelector:
+                                                                                        @selector(networkFetcher:didReceiveData:)];
+    _delegateFlags.didUpdataProgressTo = [delegate respondsToSelector:
+                                                                                        @selector(networkFetcher:didReceiveData:)];
 }
 
 // 调用的时候
 if (_delegateFlages.didUpdateProgressTo) {
-	[_delegate networkFetcher:self
-				didUpdateProgressTo];
+    [_delegate networkFetcher:self
+                didUpdateProgressTo];
 }
 
 ```
@@ -694,13 +694,13 @@ if (_delegateFlages.didUpdateProgressTo) {
     if (any) {
         if ([any isKindOfClass:[self class]]) {
             return any;
-				}
+                }
         else if (warnOnFailure) {
             NSLog(@"Can't cast %@ to type %@", any, NSStringFromClass([self class]));
-				}
+                }
     } else {
-    	return nil;
-		}
+        return nil;
+        }
 }
 @end
 
@@ -766,15 +766,15 @@ Objective-C语言的动态性，让集合类操作，参数传递等场合容易
 // 定义
 
 -(instancetype) init {
-	self = [super init];
-	if (self) {
-		_array = [[NSMutableArray alloc] init];
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _array = [[NSMutableArray alloc] init];
+    }
+    return self;
 }
 
 -(void) addObject:(id)obj {
-	[_array addObject:obj];
+    [_array addObject:obj];
 }
 
 
@@ -824,10 +824,10 @@ mutArray = array; // NSMutableString是NSString的子类
 ``` objc
 
 - (void)viewDidLoad {
-	UIButton * btn;
-	MyArray * array = [[MyArray alloc] init];
-	[array.viewArray addObject:btn];
-	UIButton * button = [array.viewArray firstObject]; // 会有告警
+    UIButton * btn;
+    MyArray * array = [[MyArray alloc] init];
+    [array.viewArray addObject:btn];
+    UIButton * button = [array.viewArray firstObject]; // 会有告警
 }
 
 // 为了避免强转，以及警告
@@ -1042,7 +1042,7 @@ strongSelf的目的是一旦进入Block执行，假设不允许self这个变量�
 #ifdef __cplusplus // cpp 自定义宏，表示这是cpp代码
 extern "C" { // exern "C"的原因是，cpp支持函数重载，需要对函数名做一些处理，也就是C++和C的函数名会不一样。这里表示用C的方式连接对应的函数，避免链接错误
 #endif
-	// 代码
+    // 代码
 #ifdef __cplusplus
 }
 #endif
@@ -1066,7 +1066,7 @@ extern "C" { // exern "C"的原因是，cpp支持函数重载，需要对函数�
 ``` objc
 
 #define metamacro_stringify(VALUE) \
-				metamacro_stringify_(VALUE)
+                metamacro_stringify_(VALUE)
 
 
 #define metamacro_stringify_(VALUE) # VALUE
@@ -1132,10 +1132,10 @@ NSLog(@"%d", (NUMBER10NUMBER))
 ``` objc
 
 #define C_ASSERT(test) \
-	switch(test) { \
-		case 0: \
-		case test:; \
-	}
+    switch(test) { \
+        case 0: \
+        case test:; \
+    }
 
 C_ASSERT(3 == 2); // 编译会报错，相当于switch中出现了两个case:0
 
@@ -1207,7 +1207,7 @@ long waitRet = dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, (i
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 // 线程2
                 for (NSInteger i = 0, l = 2; i < l; i++) {
-                	NSLog(@"线程2 %@", [NSThread currentThread]);
+                    NSLog(@"线程2 %@", [NSThread currentThread]);
                     [NSThread sleepForTimeInterval:0.1];
                     if (i % 2 == 0) { // 模拟失败和成功的场景
                         dispatch_semaphore_signal(semaphore);  // 信号量加1
@@ -1242,7 +1242,7 @@ long waitRet = dispatch_semaphore_wait(sema, dispatch_time(DISPATCH_TIME_NOW, (i
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 // 线程2
                 for (NSInteger i = 0, l = 2; i < l; i++) {
-                	NSLog(@"线程2 %@", [NSThread currentThread]);
+                    NSLog(@"线程2 %@", [NSThread currentThread]);
                     [NSThread sleepForTimeInterval:0.1];
                     if (i % 2 == 0) { // 模拟失败和成功的场景
                         dispatch_semaphore_signal(semaphore);  // 成功的时候，信号量加1
@@ -1391,8 +1391,8 @@ NSLog(immutableString, nil);
 
 ``` c
 RETURN_VALUE_RECEIVER = ({
-	// Do whatever you want
-	RETURN_VALUE; // 返回值
+    // Do whatever you want
+    RETURN_VALUE; // 返回值
 });
 ```
 
@@ -1400,10 +1400,10 @@ RETURN_VALUE_RECEIVER = ({
 
 ``` objc
 self.backgroundView = ({
-	UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
-	view.backgroundColor = [UIColor redColor];
-	view.alpha = 0.8f;
-	view;
+    UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
+    view.backgroundColor = [UIColor redColor];
+    view.alpha = 0.8f;
+    view;
 });
 ```
 
