@@ -29,7 +29,137 @@
 
 ### 函数参数过多的处理
 
+**使用NSDictionary封装**
+
+把相关的参数，放在`NSDictionary`处理。但由于字典中存储的键值对都必须是对象，故存取的时候，需要注意转换。
+
+``` objc
+// 调用的地方
+NSDictionary *params = [self aParam: YES bParam: 1 cParam: @"ccccc"];
+[self someFunctionWithParams: params];
+
+
+// key 定义
+NSString * const KEY_A_PARAM = @"key_a_param";
+NSString * const KEY_B_PARAM = @"key_b_param";
+NSString * const KEY_C_PARAM = @"key_c_param";
+
+// 函数实现
+(NSDictionary *) aParam: (BOOL)aParam
+								 bParam: (ESomeEnumerateTYPE)bParam
+								 cParam: (NSString*)cParam {
+		NSDictionary *dict = @{
+				KEY_A_PARAM: [NSNumber numberWithBool: aParam],
+				KEY_B_PARAM: [NSNumber numberWithInt: bParam],
+				KEY_C_PARAM: cParam
+		};
+		return dict;
+}
+
+// 获取dict中的值
+BOOL aParam = [params[KEY_A_PARAM] boolValue];
+ESomeEnumerateTYPE bParam = [params[KEY_B_PARAM] intValue];
+NSString *cParam = params[KEY_C_PARAM];
+```
+
+
 ### 类型约束技巧
+
+使用一个空的实现，来约束对象属性。使用继承特性和泛型特性。
+
+``` objc
+// ------------------- CommonContext begin -------------------
+// CommonContext.h
+@interface CommonContext: NSObject
+@end
+// CommonContext.m
+@implementation CommonContext
+
+@end
+// ------------------- CommonContext end -------------------
+
+// ------------------- CommonCollector begin -------------------
+// CommonCollector.h
+#import "CommonContext.h"
+
+// __covariant表示允许将子类转为父类
+@interface CommonCollector<__covariant T: CommonContext *> : NSObject
+@property (nonatomic, strong, readonly) T commonContext;
+- (instancetype)initWithContext:(T)commonContext;
+- (NSDictionary *)getCommonParams;
+@end
+
+// CommonCollector.m
+#import "CommonCollector.h"
+
+@implementation CommonCollector
+
+- (instancettype)initWithContext:(id)commonContext {
+		if (self = [super init]) {
+				_commonContext = commonContext;
+		}
+		return self;
+}
+
+- (NSDictionary *)getCommonParams {
+		return @{
+				kCommonParamA: @"pamam a" // kCommonParamA为常量字符串，定义技巧见常量条目
+		};
+}
+
+@end
+// ------------------- CommonCollector end -------------------
+
+
+// 还可以实现BContext BCollector等等
+// ------------------- AContext begin -------------------
+// AContext.h
+#import "CommonContext.h"
+@interface AContext : CommonContext
+@property (nonatomic, assign) BOOL isAAA;
+@end
+
+// AContext
+#import "AContext.h"
+@implementation AContext
+
+@end
+// ------------------- AContext end -------------------
+
+
+// ------------------- ACollector begin -------------------
+// ACollector.h
+#import "CommonContext.h"
+#import "CommonCollector.h"
+
+@interface ACollector : CommonCollector<AContext *>
+
+@end
+
+// ACollector.m
+#import "AContext.h"
+@implementation AContext
+
+// 注意mutableCopy和copy的使用技巧
+- (NSDictionary *)getCommonParams {
+		NSMutableDictionary *params = self.getCommonParams.mutableCopy;
+		BOOL success = self.commonContext.isAAA;
+		if (success) {
+				params[kSuccess] = YES; // kSuccess为常量
+		} else {
+				params[kSuccess] = NO;
+		}
+		return params.copy;
+}
+
+- (BOOL)isAAA {
+		return self.commonContext.isAAA;
+}
+@end
+// ------------------- ACollector end -------------------
+
+```
+
 
 ## 基础概念
 
@@ -105,6 +235,29 @@ static意味着：
 **const**
 
 const表示常量，不可被修改，存储在常量区。
+
+常见用法：
+``` objc
+// .h
+extern NSString * const kClassNameConst;
+
+// .m
+NSString * const kClassNameConst = @"xxxxx";
+```
+
+有事时候常量需要定义在头文件中，但头文件中不能直接定义常量NSDictionary，可以用一个inline函数绕过这个限制。
+
+``` objc
+static inline NSDictionary * kClassNameTypeMapping() {
+    NSDictionary *dic = @{
+        @(ClassName0) : @"1",
+        @(ClassName1) : @"2",
+        @(ClassName2) : @"3",
+    };
+    return dic;
+}
+
+```
 
 **extern**
 
@@ -279,7 +432,7 @@ const NSString *XXTypeNameMapping[] = {
 
 这一技巧用处大不，主要是枚举值自身其实可以用自定义的数字，而多数场景下，大家定义的枚举就是数字，不用转化为其他非数字的字符串。
 
-这个技巧的缺点是，对枚举值的数字有依赖，如果数字非常离散，则不适合，此时应该用`NSDictionary`。优点也很明显，在OC的头文件中定义数组，直接可以编译。但定义NSDictionary就麻烦一些，不能直接在头文件中定义，需要用函数包起来。如用inline函数：
+这个技巧的缺点是，对枚举值的数字有依赖，如果数字非常离散，则不适合，此时应该用常量`NSDictionary`。优点也很明显，在OC的头文件中定义数组，直接可以编译。但定义常量NSDictionary就麻烦一些，不能直接在头文件中定义，需要用函数包起来。如用inline函数：
 
 ``` objc
 // 头文件  ClassName.h
@@ -290,8 +443,8 @@ typedef NS_ENUM(NSInteger, EClassNameType) {
 };
 static inline NSDictionary * kClassNameTypeMapping() {
     NSDictionary *dic = @{
-        @(ClassName0) : @"1", 
-        @(ClassName1) : @"2", 
+        @(ClassName0) : @"1",
+        @(ClassName1) : @"2",
         @(ClassName2) : @"3",
     };
     return dic;
@@ -448,6 +601,12 @@ Category、Extension 和 Protocol涉及到类的可拓展性问题，Category从
 
 
 ### Protocol
+
+协议是一组方法声明，为对象指定角色。类似于Java中的接口。
+
+协议中能够声明方法，以及属性。注意，虽然支持属性，但属性与方法不同。
+
+协议中声明属性其实和在其中定义方法一样只是声明了getter和setter方法，并没有具体实现，所以当这个协议属性修饰符为@required时，如果不实现编译器就会报出警告，最简单的方式就是就是实现对应的getter和setter方法，或加上属性同步语句@synthesize propertyName;
 
 **require与optional的选择**
 
@@ -677,9 +836,31 @@ mutArray = array; // NSMutableString是NSString的子类
 
 ```
 
-[Objective—C语言的新魅力——Nullability、泛型集合与类型延拓](https://my.oschina.net/u/2340880/blog/514804)
+**协议+泛型**
 
-[oc 中的泛型与nullability](https://zhang759740844.github.io/2016/09/28/oc%E6%96%B0%E7%89%B9%E6%80%A7/)
+约束对象响应特定的方法和属性，可以使用协议并加上泛型。
+
+``` objc
+// protocol
+@protocol SomeProtocol <NSObject>
+@property (nonatomic, copy) NSString *name;
+@end
+
+// .h
+@interface ViewController ()
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSArray <UIViewController <SomeProtocol> *> *array;
+
+// .m
+// 调用
+- (void)useGenericProtocol {
+    NSString *name = self.array.firstObject.name;
+}
+
+@end
+
+```
+
 
 # 函数式
 
