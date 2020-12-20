@@ -8,6 +8,8 @@ title: 石下读书
 
 ### [读《启功给你讲书法》](./node/2019_12_01_calligraphy_qigong.md)
 
+### [夜读聊斋](./essay/readed_Strange_Tales_from_a_Chinese_Studio.md)
+
 ## 计算机技术
 
 ### [iOS program](./computer_programs/iOS_program.md)
