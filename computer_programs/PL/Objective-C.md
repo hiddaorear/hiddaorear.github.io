@@ -21,6 +21,50 @@
 > 最好的实践办法是先了解这个方向的书籍（可以通过作者质量筛选），因为书籍是知识体系化的载体。只有对这个体系有很清晰的认知，才能更深入理解这个方向（原来还有xxx这种细分领域啊？），找到了合适自己的方向，再深入研究。
 
 
+# 路线
+
+做项目其实并不能深入熟悉，做项目很多时候是调用API。
+
+- 熟悉语法：做面试题，虽然很多语法平日用不到，但应当熟悉；每周熟悉一个关键字的所有用法，总结；
+- 深入原理：看关键基础的源码
+- 基础支持：红黑树之类，utf8的解析等
+
+# 基础
+
+## 面试题
+
+- [iOS面试了20几家总结出来的面试题（一）](https://juejin.cn/post/6854573212165111822)
+
+- [iOS Interviews DevNotes](https://github.com/DevDragonLi/iOSInterviewsAndDevNotes)
+
+- [日常积累所看到的面试题集锦](https://github.com/iOShuyang/Book-Recommended-Interview)
+
+- [阿里、字节 一套高效的iOS面试题解答（完结）](https://www.jianshu.com/p/c1765a6305ab)
+
+- [2020年iOS面试题总结(一)](https://www.xuebaonline.com/2020%E5%B9%B4iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93(%E4%B8%80)/)
+
+## protocol
+
+相当于C++中的virtual虚函数
+
+## 属性：retain,assign,copy,readonly
+
+属性的陷阱：
+
+- 不能直接对属release
+- 需要使用点运算符来对属性赋值，会使用get和set方法，init中除外
+- 对象类型的属性尽量使用retain
+
+### readonly
+
+- 直接用_xxx访问则不会使用get和set，后者能对readonly属性赋值。
+
+### assgin一般用于基础类型
+
+### copy使用较少，除非属性是无法retain，才会考虑copy
+
+## 分类 categral
+
 **从语言设计角度看Objective-C**
 
 # 代码组织
