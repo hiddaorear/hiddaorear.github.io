@@ -100,13 +100,128 @@ str2 = [NSMutableString stringWithFormat:@"f"] // 不合法，st2指向的对象
 1. `BOOL`定义为`signed char`，因此值具有除了`YES`和`NO`（1和0）之外的值。所以不要将BOOL与`YES`或`NO`比较
 2. 由于原因1，所以将常规整型转换为`BOOL`，在没有使用`&&`,`||`,`!`的情况下，请使用三元运算符返回`YES`或`NO`
 
-
-
 ### NSString
 
 ### NSNumber
 
 - int32_t类型，如果是后台下发，且有初始值。如果需要设置默认值，则需要考虑值是否存在为0的情况。此时，客户端应该无法处理。因为后台下发的值，可能恰好就是0，此时我们不能认为无值，而去用默认值。只有后台自身能处理。
+
+### 枚举
+
+#### 枚举与枚举之间的映射
+
+通常使用switch处理。但如果int值相同(一般是出现在需要拓展原来的枚举值)。可以使用类型强转，就不用写冗长的switch语句。
+
+``` C
+typedef EnumA{
+    a_dog = 0,
+    a_cat = 1
+} EnumA;
+
+typedef EnumB{
+	b_dog = 0,
+	b_cat = 1
+} EnumB;
+
+EnumA a = a_dog;
+EnumB b;
+
+b = (EnumB)a;
+// or
+b = (int)a;
+```
+
+#### 枚举值与字符串之间的映射
+
+通常使用switch处理。但有其他更优雅一点的方案，避免一旦枚举较多，会导致swtich的圈复杂度较高的情况。使用数组和字典，都需要注意一个问题，当枚举更新的时候，需要更新数组和字典。
+
+1. 使用数组
+
+``` objc
+
+
+// 例子1
+
+typedef enum {
+  JSON,
+  XML,
+  Atom,
+  RSS
+} FormatType;
+
++ (NSArray *)names {
+    static NSMutableArray * _names = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _names = [NSMutableArray arrayWithCapacity:4];
+        [_names insertObject:@"JSON" atIndex:JSON];
+        [_names insertObject:@"XML" atIndex:XML];
+        [_names insertObject:@"Atom" atIndex:Atom];
+        [_names insertObject:@"RSS" atIndex:RSS];
+    });
+
+    return _names;
+}
+
++ (NSString *)nameForType:(FormatType)type {
+    return [[self names] objectAtIndex:type];
+}
+
+
+// 例子2
+
+// In a header file
+typedef enum FormatType {
+    JSON,
+    XML,
+    Atom,
+    RSS
+} FormatType;
+
+extern NSString * const FormatType_toString[];
+
+// In a source file
+// initialize arrays with explicit indices to make sure 
+// the string match the enums properly
+NSString * const FormatType_toString[] = {
+    [JSON] = @"JSON",
+    [XML] = @"XML",
+    [Atom] = @"Atom",
+    [RSS] = @"RSS"
+};
+...
+// To convert enum to string:
+NSString *str = FormatType_toString[theEnumValue];
+
+```
+
+2. 使用字典
+
+``` objc
+
+typedef NS_ENUM(NSUInteger, UserType) {
+    UserTypeParent = 0,
+    UserTypeStudent = 1,
+    UserTypeTutor = 2,
+    UserTypeUnknown = NSUIntegerMax
+};  
+
+@property (nonatomic) UserType type;
+
++ (NSDictionary *)typeDisplayNames {
+    return @{@(UserTypeParent) : @"Parent",
+             @(UserTypeStudent) : @"Student",
+             @(UserTypeTutor) : @"Tutor",
+             @(UserTypeUnknown) : @"Unknown"};
+}
+
+- (NSString *)typeDisplayName {
+    return [[self class] typeDisplayNames][@(self.type)];
+}
+
+NSLog(@"%@", [self typeDisplayName]);
+
+```
 
 
 ## 基本容器
