@@ -15,6 +15,34 @@
 
 # 基础
 
+## nil
+
+OC独特的消息传递机制，允许对nil发消息。在其他语言中，需要多一层if判nil的情况，在OC可以省略，代码可以更简洁。
+
+举例：
+
+``` objc
+if (self.handers) {
+	for(id<EventHandler> handler in self.handlers){
+		if (handler && [handler respondsToSelector:@selector(onVideoStart:)]) {
+			[handler onVideoStart:adItem];
+		}
+	}
+}
+```
+
+有冗余的if判断，可以简化为：
+
+``` objc
+for(id<EventHandler> handler in self.handlers){
+	if ([handler respondsToSelector:@selector(onVideoStart:)]) {
+		[handler onVideoStart:adItem];
+	}
+}
+```
+
+以上例子虽然很简单，但在实际项目中非常常见。去掉多余的if语句以后，代码看起来会更清爽。
+
 ## 常量
 
 新规范要求以g开头，而非以k开头。k开头为《Effective Objective-C 2.0》第4条中常量命名的推荐写法。
@@ -92,6 +120,8 @@ str2 = [NSMutableString stringWithFormat:@"f"] // 不合法，st2指向的对象
 点评：PL理论中，特别是函数式编程中，不可变变量是非常重要的内容。变量可变，就导致有状态，有状态就导致多线程问题，为了解决多线程问题，就回引入各种锁，就有死锁问题。当然，变量不可变也有他自己的问题，性能以及理解的成本，monad能理解清楚的人，怕是比例不多吧。实际上，变量还有其他语义，如变量的持有等等，这些可以在Rust语义，看到严格的处理。const这种写法，看来是一种习惯约定。
 
 ### 命名规则
+
+TODO
 
 ## 基础类
 
@@ -222,9 +252,93 @@ typedef NS_ENUM(NSUInteger, UserType) {
 NSLog(@"%@", [self typeDisplayName]);
 
 ```
-
-
 ## 基本容器
+
+### 命名
+
+容器类的命名，以苹果UIKit为例，使用复数即可。切忌带上多余的类型，如：`handerArray`，直接`handers`即可。
+
+``` objc
+
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) @interface UITabBar : UIView
+
+@property(nullable, nonatomic, weak) id<UITabBarDelegate> delegate;     // weak reference. default is nil
+@property(nullable, nonatomic, copy) NSArray<UITabBarItem *> *items;        // get/set visible UITabBarItems. default is nil. changes not animated. shown in order
+@property(nullable, nonatomic, weak) UITabBarItem *selectedItem; // will show feedback based on mode. default is nil
+
+- (void)setItems:(nullable NSArray<UITabBarItem *> *)items animated:(BOOL)animated;   // will fade in or out or reorder and adjust spacing
+
+// Reorder items. This will display a sheet with all the items listed, allow the user to change/reorder items and shows a 'Done' button at the top
+
+- (void)beginCustomizingItems:(NSArray<UITabBarItem *> *)items API_UNAVAILABLE(tvos);   // list all items that can be reordered. always animates a sheet up. visible items not listed are fixed in place
+- (BOOL)endCustomizingAnimated:(BOOL)animated API_UNAVAILABLE(tvos);    // hide customization sheet. normally you should let the user do it. check list of items to see new layout. returns YES if layout changed
+
+@property(nonatomic, readonly, getter=isCustomizing) BOOL customizing API_UNAVAILABLE(tvos);
+
+```
+
+如UIkit中的`items`。
+
+### 集合的遍历
+
+从集合中遍历找到对应的元素，然后删除。需要注意以下2点：
+
+1. 以数组为例，如果直接正序遍历，并移除元素，所移除的元素以后的元素会前移，即index减1，会导致下标不一致，导致结果与预期不一样。所以如果用for，则需要逆序遍历
+2. `for in`遍历时删除元素，会抛异常。且`for in`无法获取index
+
+为了规避删除元素，index错乱问题。有几种方案：
+
+1. 逆序删除，以`enumerateObjectsWithOptions:usingBlock`为例，也可以使用for循环实现
+
+``` objc
+
+NSMutableArray *array = @[@"1", @"2", [NSNull null]].mutableCopy;
+__weak typeof(array) weakArray = array;  // retain cycle
+[array enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+	if ([obj isKindOfClass:[NSString class]]) {
+		[weakArray removeObject:obj];
+	}
+}]
+
+```
+
+还可以通过NSEnumerationConcurrent枚举值开启并发迭代功能。
+
+2. 使用额外的变量缓存（缓存全部数组，或者缓存要删除的元素）
+
+``` objc
+
+NSMutableArray *array = @[@"1", @"2", [NSNull null]].mutableCopy;
+
+NSMutableArray *removedArray = [NSMutableArray array];
+
+for (id element in array) {
+	if ([element isKindOfClass:[NSString class]]) {
+		[removedArray addObject:element];
+	}
+}
+
+[array removeObjectsInArray:removeArray];
+
+```
+
+**其他遍历方式**
+
+1. 使用GCD中的dispatch_apply函数
+
+优点：开启多线程并发处理
+缺点：对字典和集合需要借助数组，无法反向遍历
+
+``` objc
+
+NSArray *array = @[@"1", @"2", @"3"];
+dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+
+dispatch_apply(array.count, queue, ^(size_t index) {
+	NSLog(@"%@--%@", array[index], [NSThread currentThread]);
+});
+
+```
 
 ### 字面量的优点和局限
 
@@ -472,6 +586,10 @@ property声明为只读，但支持内部修改。
 @property (nonatomic, copy, readwrite) NSString *name
 @end
 ```
+
+# block
+
+TODO
 
 # 类型
 
