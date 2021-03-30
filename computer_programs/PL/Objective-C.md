@@ -12,6 +12,16 @@
 
 - [2020年iOS面试题总结(一)](https://www.xuebaonline.com/2020%E5%B9%B4iOS%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93(%E4%B8%80)/)
 
+# 技术博客
+
+- [上善若水，人淡如菊](https://onevcat.com/)
+
+- [一缕殇流化隐半边冰霜](https://halfrost.com/)
+
+- [唐巧的博客](https://blog.devtang.com/)
+
+- [ObjC中国](https://objccn.io/issues/)
+
 
 # 基础
 
@@ -125,10 +135,16 @@ TODO
 
 ## 基础类
 
-### BOOL的陷阱
+### BOOL
 
-1. `BOOL`定义为`signed char`，因此值具有除了`YES`和`NO`（1和0）之外的值。所以不要将BOOL与`YES`或`NO`比较
-2. 由于原因1，所以将常规整型转换为`BOOL`，在没有使用`&&`,`||`,`!`的情况下，请使用三元运算符返回`YES`或`NO`
+#### BOOL的陷阱
+
+1. `BOOL`定义为`signed char`(此说法不准确)，因此值具有除了`YES`和`NO`（1和0）之外的值。所以不要将BOOL与`YES`或`NO`比较
+2. 由于原因1，所以将常规整型转换为`BOOL`，在没有使用`&&`,`||`,`!`，if的括号，以上情况下，请使用三元运算符返回`YES`或`NO`。直接赋值`BOOL hasButton = self.button;`，`BOOL hasButton = (BOOL)self.button`，这些可能在32-bit和64-bit下出现不同的结果，不安全
+
+补充一下历史原因：
+
+BOOL在32-bit和64-bit环境下，具有不同的定义。在iPhone 4s(32-bit)，BOOL的本质是signed char。在内存占一个字节。当把超过2位的值赋值给BOOL的时候，高位会被截断。而在64-bit环境下，BOOL的本质是`_Bool`，即C语言定义的boolean的真布尔类型，只有0和1。只有0是0，非0都会变为1.
 
 ### NSString
 
@@ -427,6 +443,23 @@ init用于初始化对象，即此时对象处于可用状态，实例变量可�
 - 必须明确指定初始化方法：基于上一条，此类如果需要被继承，需要明确指出初始化方法，子类只需要重写一个初始化方法。有助于调试和理解
 - 提供“全能初始化方法”：当底层数据存储机制改变时，只需修改此方法的代码，无须修改其他初始化方法。子类也可以调用，维护全能初始化方法的调用链。【来自《Effective Objective-C 2.0》第16条】
 
+评论与补充：
+
+现代编程语言，创建对象很难看到需要两步，一般直接new即可。而在OC中需要两步，先alloc，后init。这样设计，有历史原因。
+
+1. OC诞生较早，需要手动管理内存。alloc的主要功能是从虚拟地址空间为对象分配内存
+2. 将新对象的Retain Count设置为1
+3. 将isa成员变量指向类对象
+4. 将新对象所有其他成员的值设置为nil或Nil或0
+
+而init类方法会做真正的初始化工作，让成员变量初始化。
+
+后面苹果引入类方法new来创建对象。但new不能指定init参数。原因无他，init是实例方法，而new是类方法。
+
+所以历史上，alloc和init做了2件不同的事情，放在2个方法中，职责分明。
+
+但有了ARC以后，这个设计就显得冗余了。
+
 ### NSDictionary
 
 **减少函数参数个数**
@@ -589,9 +622,170 @@ property声明为只读，但支持内部修改。
 
 # block
 
-TODO
+点评：block是一项常见的PL特性，主要是为了解决函数中的自由变量问题。PL中有两种方案，其一，定义的时候从外部捕获，即常见的词法或静态作用域；其二，使用的时候从外部捕获，当前已不常见了，部分函数式编程语言使用。OC使用的是前者，就涉及一个变量捕获的问题。通常来说，需要维护一下外在环境，保存这些被捕获的变量。在手动管理内存的语言里面，这就容易导致循环引用问题。虽然会导致问题，但这是一项非常有表现力的语言特性，比如：早期JS会用这个特性模拟私有变量。函数式编程语言模拟面向对象。
+
+## block变量的捕获
+
+OC中有5种变量类型：
+
+1. 自动变量
+2. 函数参数
+3. 静态变量
+4. 全局静态变量
+5. 全局变量
+
+从Block特性来说，以上5中变量类型中，需要捕获只有自动变量和静态变量，其余可以看作在“环境”中，无需捕获，即不会增加retainCount的值。
+
+自动变量的值，会被copy，只能访问，不能改变外部的值。相当于参值。
+
+带`__block`的自动变量和静态变量，可以改变外部的值。相当于传引用。
+
+变量类型一分为二，非对象类型的变量和对象类型的变量。对象无论是声明为`__block`还是没有声明，block都会retain。这是为了保证block能安全使用外部对象。正是因为这个特性，容易导致循环引用。
+
+## 循环引用
+
+所有权修饰符共4种：
+
+1. `__strong`
+2. `__weak`：底层维护了weak_table_t的hash表，key为对象地址，value是weak指针的地址数组。达到不用持有对象，但能访问对象的目的。weak_table_t使得retainCount不用加1.
+3. `__unsafe_unretained`
+4. `__autoreleasing`
+
+如果不写，默认是`__strong`。
+
+**循环引用举例（来自一缕殇流化隐半边冰霜博客）**
+
+``` objc
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController 
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+
+	Student *student = [[Student alloc] init];
+
+	__block Student *stu = student;
+	student.name = @"Hello World";
+	student.study = ^{
+		NSLog(@"my name is =%@", stu.name);
+		stu = nil;
+	};
+}
+
+@end
+
+```
+
+其中block没有执行，student持有block，block持有`__block`变量，`__block`变量持有student。3者形成了环。如果打破其中一个引用，就可以破坏环。
+
+执行block即可。
+
+``` objc
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    Student *student = [[Student alloc]init];
+    student.name = @"Hello World";
+    __block Student *stu = student;
+
+    student.study = ^{
+        NSLog(@"my name is = %@",stu.name);
+        stu = nil;
+    };
+
+    student.study();
+}
+
+@end
+```
+
+
+**weak和strong使用举例（来自一缕殇流化隐半边冰霜博客）**
+
+``` objc
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    Student *student = [[Student alloc]init];
+    student.name = @"Hello World";
+    __weak typeof(student) weakSelf = student;
+    
+    student.study = ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"my name is = %@",weakSelf.name);
+        });
+    };
+
+    student.study();
+}
+
+```
+
+输出：`my name is = (null)`
+
+为什么是null呢？问题在dispatch_after里面，study的block结束以后，student是weak，被自动释放了。`__weak`对象会变为null，防止野指针。
+
+怎么做到既要被`__weak`修饰，又能在逻辑执行完了，才释放呢？
+
+此时把weak变量变为`__strong`修复即可。由于weak的实现是中层weak_table_t的hash表维护的，用`__strong`，也不会导致循环引用。
+
+``` objc
+
+#import "ViewController.h"
+#import "Student.h"
+
+@interface ViewController ()
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    Student *student = [[Student alloc]init];
+    
+    student.name = @"Hello World";
+    __weak typeof(student) weakSelf = student;
+    
+    student.study = ^{
+        __strong typeof(student) strongSelf = weakSelf;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"my name is = %@",strongSelf.name);
+        });
+        
+    };
+
+    student.study();
+}
+
+```
+
+这个举例中的一步场景，weakSelf和strongSelf使用较为常见。但具体情况需要具体分析，不能无论是否需要，都加上二者。
 
 # 类型
+
+TODO
 
 ## 泛型
 
@@ -758,6 +952,36 @@ framework为什么既是动态也是静态？
 虽然静态库和动态库各有优缺点，但苹果鼓励使用静态库。在项目实践中，将动态改为静态，会减少包大小。静态库虽然单个库大，但链接到可执行文件会小很多，并且会加快启动速度，减少启动时间。有时候，处于性能考虑，也会优先使用静态库。
 
 参考资料：[iOS 静态库和动态库对ipa包大小的影响](https://www.jianshu.com/p/2dd7fe0c4333)
+
+# 调试
+
+## log
+
+注意NSLog是一个C函数：
+
+> Logs an error message to the Apple System Log facility.
+
+对性能有影响。所以只能在demo或者调试阶段使用。
+
+### 在Log中使用宏
+
+- `__func__`：C99标准，输出函数名
+
+- `__FUNCTION__`：同`__func__`
+
+- `__PRETTY_FUNCTION__`：同`__func__`，非标准宏，但功能更强。前者只输出类的方法名，而后者会方法的详细信息
+
+- `__LINE__`：源码的行号
+
+- `__FILE__`：源文件名
+
+### Core Fundation从CFString层级获取有用字符串，如selector，class，protocol
+
+- `NSLog(@"Current selector: %@", NSStringFromSelector(_cmd))`，`_cmd`在OC中表示当前方法的selector
+
+- `NSLog(@"Object class:%@", NSStringFromClass([self class]))`，`[self class]`获取当前方法调用类，同理`[self superclass]`当前方法调用的父类
+
+- `NSLog(@"Filename:%@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent])`
 
 # 开源项目
 
