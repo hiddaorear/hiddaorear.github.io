@@ -1066,10 +1066,15 @@ framework为什么既是动态也是静态？
 
 # 开源项目
 
-## AFNetwork
+值得花时间看的库：
 
-
-
+1. MessageKit
+2. Parchment
+3. SDWebImage
+4. Alamofire
+5. Alpha
+6. analytics-swift
+7. AFNetwork
 
 
 # change log
