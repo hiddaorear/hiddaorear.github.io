@@ -1058,6 +1058,12 @@ framework为什么既是动态也是静态？
 
 - `NSLog(@"Filename:%@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent])`
 
+
+# OC和Swift混编
+
+[如何在模块化/组件化项目中实现 ObjC-Swift 混编？](https://juejin.cn/post/6844904182873325581)
+
+
 # 开源项目
 
 ## AFNetwork
