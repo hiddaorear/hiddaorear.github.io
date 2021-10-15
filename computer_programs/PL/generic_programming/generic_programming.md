@@ -116,7 +116,7 @@ first和last是前开后闭不对称区间。first指向序列的第一个元素
 
 我们考察一下大名鼎鼎的 Robert Sedgewick 的《Algorithms》第四版：
 
-```
+```java
 public class Quick extends Example {
 	public static void sort(Comparable[] aComparables) {
     StdRandom.shuffle(a);  // 消除对输入的依赖
@@ -186,7 +186,7 @@ public class Quick extends Example {
 
 区间是一个好的抽象，但需要传递区间开头和区间结尾，两个参数也有不够时候。例如，要一组数据，这组数据由sequence方法返回，我们需要这样写：
 
-```
+```c++
 sequence *seq = sequence();
 std::for_each(seq.begin(), seq.end(), std::remove);
 
@@ -203,8 +203,8 @@ std::for_each(seq.begin(), seq.end(), std::remove);
 
 在标准库中用`concept`定义范围：
 
-```
-template< class T >
+```c++
+template<class T >
 concept range = requires(T& t) {
   ranges::begin(t); // equality-preserving for forward iterators
   ranges::end  (t);
@@ -216,7 +216,7 @@ concept range = requires(T& t) {
 
 使用举例：
 
-```
+```c++
 vector<int> vec{3,5,2,8,10};
 std::ranges::sort(vec); 
 for(auto i:vec) {
@@ -226,6 +226,50 @@ for(auto i:vec) {
 ```
 
 简化了sort的调用，无需传入两个参数。
+
+## concept
+
+泛型编程的核心理念是concept。concept用来描述一群彼此相关的对象类型。concept是比type（类型）更高阶的抽象。
+
+> 对象类型（object type）：一组能根据对象地址，在给定值类型的特定对象上面，具有进行数值存储或获取操作的统一方法的对象
+
+> 对象（object）：内存中特定值类型且包含值的一组二进制位
+
+> 值类型（value type）：按照同一方式来解读的一组值
+
+| 自然科学 | 编程 | 编程范例|
+| :-----: | :----: | :----: |
+| 属 | concept | Integral，Character |
+| 种 | type（类型）或class（类） | uint8_t，char |
+| 个体 | instance（实例） | 0100001，'A' |
+
+> 自然科学一列具体指，亚里士多德的《工具论》中的范畴篇（Categories）论述了个体、物种和属之间的关系。这些术语在今天被用于生物学，亚里士多德却用所有事物上。“种”概括了一类事物的本质特征，而“属”则包含一系列“种”，“种”以种差区分，种差是指“种”与同属内的“种”的区别。泛型编程是把注意力放在“属”层面，而非“种”层面的编程。
+
+concept对类型有约束，主要有：
+
+- 类型必须支持那些操作
+- 操作的语义
+- 操作的时间/空间复杂度
+
+满足这些要求，就满足concept。这里特别要注意，concept对复杂度有要求。复杂度不当仅仅作为实现细节。例如如果用数组实现栈（stack），如果每次加入新元素，要把现有元素向后移动，则向栈加入新元素具有线性时间的复杂度，而这个应该是常数时间才对。无法迅速推入或弹出的栈（stack），不是真正的栈（stack）。
+
+concept并不等同于一些编程语言中的接口（指定某个类型的接口，并稍后给出接口实现）。例如C++的抽象类和Java的接口。因接口必须完整实现，如：严格按照规定的参数和返回值类型。而concept允许通过一系列相关的类型来指定接口，如在Java或C++中，必须把size()返回int32，而concept则不要具体指定，返回类型是整数即可，无须指明是uint8，int16，还是int64等等。
+
+## 迭代器
+
+迭代器是一种concept，用来指示序列中的位置，可视为广义的指针，支持能够在线性时间内搜索的操作。
+
+某个类型要成为迭代器，需要满足三种操作：
+
+- 常规类型（Regular）所应支持的操作
+- 移动到后继位置的操作
+- 解引用操作
+
+迭代器能在线性时间内搜索，还能解引用（dereferencing）操作，获取元素的值。
+
+迭代器的解引用操作和移动到后继位置的操作，密切相关：
+- 当且仅当移动到后继位置，具备定义的时候，才可以执行解引用操作
+- 只要未达到数据范围的末端，都可以执行解引用操作
 
 ## 单向列表
 
@@ -237,7 +281,7 @@ http://leofen.github.io/%E9%9B%95%E8%99%AB%E5%B0%8F%E6%8A%80/2013/06/01/coolshel
 
 https://github.com/nguliu/mySTL/blob/master/mySTL/10stl_slist.h
 
-```
+```c++
 
 // 单向链表节点的基本结构（拓扑结构）
 struct __slist_node_base {
