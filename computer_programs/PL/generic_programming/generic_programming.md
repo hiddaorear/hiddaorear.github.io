@@ -195,6 +195,38 @@ std::for_each(seq.begin(), seq.end(), std::remove);
 
 区间和迭代器的抽象，不仅仅是一种约定，会带来更一致的代码。
 
+在C++20中新增了特性范围（Ranges）：引用了一系列元素的对象。
+
+> A range is an object that refers to a sequence of elements, conceptually similar to a pair of iterators.
+
+> A range is a concept. ──C++之父Bjarne Stroustrup
+
+在标准库中用`concept`定义范围：
+
+```
+template< class T >
+concept range = requires(T& t) {
+  ranges::begin(t); // equality-preserving for forward iterators
+  ranges::end  (t);
+};
+
+```
+
+像SLT容器一样，具备`begin()`和`end()`就能满足`range`约束。
+
+使用举例：
+
+```
+vector<int> vec{3,5,2,8,10};
+std::ranges::sort(vec); 
+for(auto i:vec) {
+    cout<< i<<" ";
+}
+
+```
+
+简化了sort的调用，无需传入两个参数。
+
 ## 单向列表
 
 SGI STL单向链表（single linked list，名为slist）的实现：
