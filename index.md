@@ -12,7 +12,7 @@ title: 石下读书
 
 ## 计算机技术
 
-### [浅析STL](./computer_programs/PL/generic_programming/computer_programs.md)
+### [浅析STL](./computer_programs/PL/generic_programming/generic_programming.md)
 
 ### [iOS program](./computer_programs/iOS_program.md)
 
