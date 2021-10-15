@@ -12,6 +12,8 @@ title: 石下读书
 
 ## 计算机技术
 
+### [浅析STL](./computer_programs/generic_programming/computer_programs.md)
+
 ### [iOS program](./computer_programs/iOS_program.md)
 
 ### [Objective-C 学习](./computer_programs/PL/Objective-C.md)

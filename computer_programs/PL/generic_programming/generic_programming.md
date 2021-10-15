@@ -1,0 +1,301 @@
+# 浅析STL
+
+## 前闭后开区间
+
+### “差一错误”（off-by-one error）
+
+怎么描述x, x+1、x+2、x+3、x+4、x+5...x+N这样一个系列呢？我们有以下4中选择：
+
+1. x <= i < x+N+1
+2. x-1 < i < x+N+1
+3. x <= i <= x+N
+4. x-1 < i < x+N+1
+
+以上4种方案，都可以描述N+1个元素的范围(range)，如何从其中选择呢？
+
+我们不仅仅需要考虑直接表示范围，还需要考虑元素个数。计算元素个数虽然简单，但容易犯错。例如：做一个10米篱笆，每隔1米用一根竹竿，一共需要多少根？正确答案是11根，而不是10根。因为两端各需要一根。思考问题的时候，试着使用简化以后的特例，然后外推，能减少犯错。简化一下这个问题，如果1米篱笆，每隔1米用一根竹竿，需要多少根呢？答案就很明显了，只需要2根即可。在C系列语言里面，大量用到for循环，常常会遇到计数问题，类似于计算需要多少根竹竿，恰好少计算了一根。被称为“差一错误”（off-by-one error），名称来自《C陷阱与缺陷》。
+
+例如错误计算数组元素个数：
+
+```c
+int i, a[10];
+for (i = 0; i <= 10; i++)
+    a[i] = 0;
+
+```
+
+代码的本意是设置数组中所有元素为0。但由于for语句的比较部分，本应写成`i < 10`，被写成了`i <= 10`，因此会把实际上不存在的`a[10]`设置为0，即数组a之后的一个字被设置为0。
+造成这个错误的原因是，从0到10，实际上有11个元素，而不是10个。同样考虑一下最简特例，假设只有一个元素。假定下界为0，上界为h。如果使用方案3，上下界重合，即h也为0，计算元素个数：h-0=0。显然是错误的。正确的应该是：`h-0+1 = 1`。通过这个特例，我们外推一下。在闭区间方案中，计算元素个数应该是：
+
+`元素个数 = 上界 - 下界 + 1`
+
+如果我们调整一下这个公式：
+
+`元素个数 = 上界 + 1 - 下界`
+
+
+`上界+1`作为新的上界，那么计算的时候，就不需要额外加1了。这恰好是方案1和方案4的上界。用第一个入界点作为下界，和用第一个出界点作为上界。
+
+
+![semi_open_range](./semi_open_range.png)
+
+因此，为了降低在工程中出错。选择range的时候，需要考虑，能直接相减得到元素个数的方案。以上只有1和4满足。2和3，都需要做额外的处理。
+
+用这种不对称的边界，重写上面错误的代码：
+
+```c
+int i, a[10];
+for (i = 0; i < 10; i++)
+    a[i] = 0;
+
+```
+
+而不是使用：
+
+```c
+int i, a[10];
+for (i = 0; i <= 9; i++)
+    a[i] = 0;
+
+```
+
+### 上下界与子序列
+
+同时，上下界之差是这个系列的长度，还有一个特性：如果我们需要处理一个系列的多个子序列，在1和4方案里，子序列将会是相邻的，上一个子序列的下界，是下一个子序列的上界。
+
+
+很多算法需要将一个大的序列的分割为子序列，然后处理子序列，处理好子序列以后，将子序列连起来，完成算法的计算。典型的如快排（Quick，Sort）
+
+快排的平均复杂度为`Ο(NlogN)`，最坏为`Ο(N^2)`。早期STL sort算法采用的是Quick Sort。算法叙述如下。设S代表要处理的序列：
+
+1. 如果S的元素个数为0或1，结束；
+2. 取S中任一元素，当做枢轴（pivot）v。用于分割S为两个子序列
+3. 将S分割为L、R两个子序列，L内元素都小于或等于v，R内元素大于或等于v
+4. 对L和R子序列，递归执行Quick Sort
+
+
+```c++
+template <class RandomAccessIterator, class T>
+RandomAccessIterator __unguarded_partition (RandomAccessIterator first, RandomAccessIterator last, T pivot) {
+    while (true) {
+        while (*first < pivot) ++first; // first 找到 >= pivot的元素则停下来
+        --last; // 调整。第一次调整，是从下边界指向最后一个元素（否则执行swap有问题）。后续调整是从当前元素（已执行此算法）指向前一个元素
+        while (pivot < *last) --last; // last 找到 <= pivot 元素则停下来
+        if (!(first < lase)) return first;  // 交错了，结束循环
+        std::iter_swap(first, last);  // 大小值交换
+        ++first;  // 调整
+    }
+}
+
+```
+
+first和last是前开后闭不对称区间。first指向序列的第一个元素，而last则是出了序列的第一个元素。因此，第一次first调整以后，last也可以调整，调整以后，恰好是序列的最后一个元素。后续如果first调整，即找到大于或等于枢轴元素值的元素，last指向的是上一次调整过的元素，此次不需要再调整此元素了，需要让last自减，指向左边的元素。可以看出，此过程是对称的，第一次调整和后续调整一样。即起初的区间有效，那么每一轮迭代的区间，都有效。这样能直观保证算法的正确性，就像数学中的归纳法证明一样。
+
+分割过程：
+
+![qucik_sort_partition](./qucik_sort_partition.png)
+
+1. 分割（partitioning）方法不只一种，上面使用简单有效的做法。令头端迭代器first向尾部移动，尾端迭代器last向头部移动。当`*first`大于或等于枢轴（pivot）v的时候，停下来；当`*last`小于或等于枢轴（pivot）v的时候也停下来，并检查两个迭代器是否交错。
+2. 如果first依然左在last在右，则交换两个元素，然后各自调整一次位置，继续想中央靠拢；并继续步骤1
+3. 如果迭代器交错了，则表示序列调整完毕。此时，first为枢轴，将整个序列分割为左右两个子序列，左边的元素的值，小于或等于枢轴，右边反之。
+
+### 索引开始值选择0还是1？
+
+1和4如何选择呢？我们考虑自然数（皮亚诺公理0是自然数）：`0、1、2、3、4...N`。如果选择4，这个左边区间为`-1`，是一个负数，需要用到非自然数，不优雅。因此左边有闭区间，选择方案1。 
+
+然而，当我们处理长度为l的序列的时候，例如长度为l的数组，即使选择方案1，也还有一个问题：下标索引是从1开始，还是从0开始？
+
+当我们从1开始的时候，区间表示为`1 <= i < l+1`，若从0开始，区间表示为`0 <= i < l`。从0开始有一个好处，右边的区间恰好是元素的个数。
+
+但这种不对称的边界还有一个问题：长度为N的数组a，并不存在元素a[N]，最后一个元素是a[N-1]。
+
+`a[N-1]`引用了一个不存在的元素。实际上，我们不需要使用该元素，只需要引用元素的地址或者比较索引即可。 
+
+
+## 左闭右开不对称区间
+
+我们考察一下大名鼎鼎的 Robert Sedgewick 的《Algorithms》第四版：
+
+```
+public class Quick extends Example {
+	public static void sort(Comparable[] aComparables) {
+    StdRandom.shuffle(a);  // 消除对输入的依赖
+    sort(a, 0, a.length - 1);
+  }
+	public static void sort(Comparable[] aComparables ,int lo,int hi) {
+		if(lo < hi) {
+			int j = partition(aComparables,lo,hi);  // 切分
+			sort(aComparables, lo, j-1);  // 左半部分排序
+			sort(aComparables, j+1, hi);  // 右半部分排序
+		}
+	}
+	
+	private static int partition(Comparable[] aComparables,int lo ,int hi) {
+    // 将数组分割为a[lo..i-1]，a[i]，a[i+1..hi]
+		int i = lo;  // 左指针
+		int j = hi + 1; // 右指针，注意，这里人为的加1了。为什么呢？
+		Comparable vComparable = aComparables[lo];
+		while(true)
+		{
+			while(less(aComparables[++i],vComparable))if(i == hi)break;
+			while(less(vComparable,aComparables[--j]))if(j == lo)break;
+			if(i >= j)break;
+			exch(aComparables,i,j);
+		}
+		exch(aComparables,lo,j);  // 交换位置，将v=a[j]放入正确的位置
+		return j;  // 完成a[lo..j-1] <= a[j] <= a[j+1..hi]
+	}
+}
+
+
+```
+
+很显然，Sedgewick 的快排版本的区间是前闭后闭的区间。`sort(a, 0, a.length -
+1)`，上界是最后一个元素，而不是STL中前开后闭区间的上界是出界以后的第一个元素。为了不出现特殊逻辑，保持lo和hi调整的对称，就需要人为的强行在初始化的时候，把`j`初始化为`hi+1`，而不是直接初始化为`hi`。sort的入参的右区间要加减1，在sort内部，又人为的加1。显然STL的实现更优雅。
+
+这个问题STL之父Alexander Stepanov 是怎么考虑的呢？为什么能设计出比Sedgewick更好的代码？
+
+区间（range）是一种表示连续元素的办法。
+
+从区间的开闭分类，可以是半开（semi-open），也可以是封闭的（closed range），还可以是开区间（open range）。
+从区间的形式分类，可以是双界（bounded range），用两个迭代器封闭指向区间的开头和刚刚越过结尾的位置；还可以是计数区间（counted range），用迭代器指向区间开始位置，用n表示区间包含元素的个数。
+
+我们考虑一个简单的算法，在n个元素的系列中插入新元素。新元素可能在原有的序列之中，也可以在首个元素之前，或者最后一个元素之后。插入到最后一个元素之后，就需要用到n+1一个位置。所以半开区间更适合用在通用的算法中，定义接口。
+
+同时，半开区间可以自然的描述空的范围，而闭区间不能。另外，半开区间不仅仅能描述空的范围，还指明了范围的位置，比用空值nil或空列表更好。
+
+从0开始编定下标索引，最初是表示内存偏移量的做法。这个约定能直观的表示序列的前n个元素，使得元素的下标都位于[0, n)区间。同时，我们还可以根据区间的长度n来遍历序列中的元素。
+
+在STL之父Alexander Stepanov考虑中，区间不仅仅是实现某一个算法，而是需要考虑通用算法。
+
+因此STL风格的容器和算法使用前开后闭区间。同时满足以下两条公理：
+
+1. container(c) ⇒ valid(begin(c), end(c))
+
+2. valid(x, y) ∧ x ≠ y  ⇒  valid(successor(x), y)
+
+第一条公理保证：容器c，在beign()和end()区间有效；第二条公理保证，如果[x, y)是有效区间，那么[successor(x), y)同样有效。即在区间的子区间也是有效的。successor表示获取后继元素。
+
+从工程角度看，起初有效，后续的每一轮迭代，依然有效。这个特性，能看直观证明算法的正确性。
+
+例如在STL的快排的分割算法中，第一次调整，算法对最初的first和last有效，后续调整依然有效，最后的结果就自然是正确的。相比之下，Sedgewick的快排版本，第一次需要对`j`做特殊的调整，而后续又不需要这种调整，就不如STL优雅。
+
+# 泛型编程
+
+约定了迭代器区间的通用写法，就定义了算法和容器之间的桥梁，就能实现通用的标准容器库，就能将特定类型的算法中，与类型无关的共性抽象出来。例如，在STL中，不管是数组还是链表，都是区间。泛型编程过程，就是一个抽象提升的过程，最终实现通用的算法或容器。
+
+区间是一个好的抽象，但需要传递区间开头和区间结尾，两个参数也有不够时候。例如，要一组数据，这组数据由sequence方法返回，我们需要这样写：
+
+```
+sequence *seq = sequence();
+std::for_each(seq.begin(), seq.end(), std::remove);
+
+```
+如果我们只需要遍历一次区间，就多了一个中间变量`seq`。如果允许这么写：`std::for_each(seq); `，会更简洁。即区间定义为一个抽象的整体。
+
+区间和迭代器的抽象，不仅仅是一种约定，会带来更一致的代码。
+
+## 单向列表
+
+SGI STL单向链表（single linked list，名为slist）的实现：
+
+https://coolshell.cn/articles/8990.html/comment-page-3#comments
+
+http://leofen.github.io/%E9%9B%95%E8%99%AB%E5%B0%8F%E6%8A%80/2013/06/01/coolshell/
+
+https://github.com/nguliu/mySTL/blob/master/mySTL/10stl_slist.h
+
+```
+
+// 单向链表节点的基本结构（拓扑结构）
+struct __slist_node_base {
+    __slist_node_base* next;
+};
+
+// 单向链表的节点结构
+template<class T>
+struct __slist_node : __slist_node_base {
+    T data;
+};
+
+// 单向链表迭代器基本结构
+struct __slist_iterator_base {
+public:
+    __slist_node_base* node; // 当前迭代器所指的点
+    __slist_iterator_base(__slist_iterator_base* x) : node(x) { }
+
+    void incr() { node = node->next; } // 前进一个节点
+    bool operator==(const __slist_iterator_base& x) const {
+        return node == x.node;
+    }
+    bool operator!=(const __slist_iterator_base& x) const {
+        return node != x.node;
+    }
+};
+
+
+// 单向链表迭代器结构
+template<class T, class Ref = T&, class Ptr = T*>
+struct __slist_iterator : __slist_iterator_base {
+    // ...
+    reference operator*() const {
+        return ((slist_node*)node)->data;
+    }
+    pointer operator->() const {
+        return &(operator*());
+    }
+    self& operator++() {	//前置++
+        incr();
+        return *this;
+    }
+    self operator++(int) {	//后置++
+        self tmp = *this;
+        incr();
+        return tmp;
+    }
+};
+
+
+template<class T, class Alloc = alloc>
+struct slist {
+private:
+// ...
+    slist_node_base head;  //头部。注意这是实体，而不是指针（dummyHead）
+    void clear() {
+        slist_node* node = (slist_node*)dummyHead.next;
+        while (node != nullptr) {
+            slist_node* tmp = node;
+            node = (slist_node*)node->next;
+            destroy_node(tmp);
+        }
+    }
+// ...
+};
+
+```
+
+我们重点看删除单向链表元素的方法`clear`。
+
+
+
+## C++泛型编程
+
+### 基本技巧
+
+### 用泛型实现字典
+
+
+
+https://www.zhihu.com/question/61054439
+
+https://blog.csdn.net/pongba/article/details/138209
+
+https://blog.csdn.net/pongba/article/details/391584
+
+https://blog.csdn.net/pongba/article/details/2544894
+
+
+
+# 其他语言泛型
+
+## 模式匹配
