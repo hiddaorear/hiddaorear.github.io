@@ -180,7 +180,7 @@ public class Quick extends Example {
 
 例如在STL的快排的分割算法中，第一次调整，算法对最初的first和last有效，后续调整依然有效，最后的结果就自然是正确的。相比之下，Sedgewick的快排版本，第一次需要对`j`做特殊的调整，而后续又不需要这种调整，就不如STL优雅。
 
-# 泛型编程
+# STL
 
 约定了迭代器区间的通用写法，就定义了算法和容器之间的桥梁，就能实现通用的标准容器库，就能将特定类型的算法中，与类型无关的共性抽象出来。例如，在STL中，不管是数组还是链表，都是区间。泛型编程过程，就是一个抽象提升的过程，最终实现通用的算法或容器。
 
@@ -273,13 +273,7 @@ concept并不等同于一些编程语言中的接口（指定某个类型的接�
 
 ## 单向列表
 
-SGI STL单向链表（single linked list，名为slist）的实现：
-
-https://coolshell.cn/articles/8990.html/comment-page-3#comments
-
-http://leofen.github.io/%E9%9B%95%E8%99%AB%E5%B0%8F%E6%8A%80/2013/06/01/coolshell/
-
-https://github.com/nguliu/mySTL/blob/master/mySTL/10stl_slist.h
+SGI STL单向链表（single linked list，名为slist）的注意实现：
 
 ```c++
 
@@ -295,13 +289,13 @@ struct __slist_node : __slist_node_base {
 };
 
 // 单向链表迭代器基本结构
-struct __slist_iterator_base {
+struct __slist_iterator_base {  // Regular的规定：需要提供等价操作。因迭代器时常需要作比较，判断一个迭代器是否赶上另一个迭代器
 public:
     __slist_node_base* node; // 当前迭代器所指的点
     __slist_iterator_base(__slist_iterator_base* x) : node(x) { }
 
-    void incr() { node = node->next; } // 前进一个节点
-    bool operator==(const __slist_iterator_base& x) const {
+    void incr() { node = node->next; } // 前进一个节点。对应successor操作，移动到后继元素
+    bool operator==(const __slist_iterator_base& x) const {  // 等价操作
         return node == x.node;
     }
     bool operator!=(const __slist_iterator_base& x) const {
@@ -314,7 +308,7 @@ public:
 template<class T, class Ref = T&, class Ptr = T*>
 struct __slist_iterator : __slist_iterator_base {
     // ...
-    reference operator*() const {
+    reference operator*() const {  // 解引用操作
         return ((slist_node*)node)->data;
     }
     pointer operator->() const {
@@ -346,14 +340,111 @@ private:
         }
     }
 // ...
+public:
+	iterator erase_after(iterator pos) {
+		slist_node* node = (slist_node*)pos.node->next;
+		pos.node->next = node->next;
+		destroy_node(node);
+
+		return iterator((slist_node*)pos.node->next);
+	}
 };
 
 ```
+我们稍分析一下单向链表的实现。
 
+### Regular concept
+
+迭代器使用继承，基类是`__slist_iterator_base`，恰好实现的是Regular concept，这是STL所有迭代需要遵循的concept，其中要注意一点：需要提供等价操作。因迭代器时常需要作比较，判断一个迭代器是否赶上另一个迭代器。
+
+### Iterator concept
+
+`__slist_iterator`实现了Iterator concept。`operator*`实现解引用操作，`operator++()`和`operator++(int)`实现了前置`++`和后置`++`操作，二者一起构成了后继操作 successor。
+
+综上，单向链表的迭代器遵循STL的Iterator concept。
+
+### 代码浅析
+
+我们看到STL单向链表的实现，使用了一个常用技巧，额外增加了在头部之前节点dummy head：
+
+`slist_node_base head;  //头部。注意这是实体，而不是指针（dummyHead）`
+
+这样做的好处显而易见，删除节点的时候，不需针对头部节点做特殊处理。
+
+### 普通实现
+如果我们不这么处理，删除节点的时候，就需要加判断，典型实现：
+
+```c
+struct node
+{
+	struct node *next;
+	int data;
+};
+
+typedef bool(*remove_fun)(const struct node *node, int value);
+
+bool rm(const struct node *node, int value) 
+{
+	return (node->data == value) ? true : false;
+}
+
+struct node * remove_if(node *head, int value, remove_fn rm) {
+	for(struct node *prev = NULL, *cur = head; curr != NULL;) {
+		struct node const *next = curr->next;
+		if (rm(curr, value)) {
+			if (prev) {  // 不是第一个节点的时候
+				prev->next = next;  // 改变next指针的指向
+			} else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
+				head = next;  // 改变head指针的指向
+			}
+			free(curr);
+		} else {
+			prev = curr;  // 因删除节点的操作是删除此节点，并让此节点的前一个节点指向被删除节点后一个节点，故需要prev保留上一个节点
+		}
+		curr = next;
+	}
+	return head;
+}
+
+```
+
+### 二级指针实现
+
+我们考察一下里面的关键实现：
+
+```c
+	if (prev) {  // 不是第一个节点的时候
+				prev->next = next;  // 改变next指针的指向
+			} else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
+				head = next;  // 改变head指针的指向
+			}
+
+```
+
+无论是针对第一个节点，还是其他节点，都是操作指针，改变指针的指向。普通节点用`prev`，而第一个节点用`head`。二者都是指针，既然都是指针，那么我们可以使用指向指针的指针，二重指针来操作指针，直接通过二重指针修改指针。
+
+具体分析一下，第一个节点用head访问，其他节点通过next访问。head是地址，next也是地址。这样链表中的每一个节点，都有对应的指针指向。当我们删除一个节点的时候，把这个指针指向下一个即可。注意，这样分析以后，就不需要“上一个节点”这个概念了。无论是第一个节点，还是其他节点，都有指针指向。
+
+```c
+void remove(struct node **head, int value, remove_fn rm) {
+	for(struct node **cur = head; *cur != NULL;) {
+		struct node *entry = *cur;
+		if (rm(entry, value)) {
+			*cur = entry->next;
+			free(entry);
+		} else {
+			cur = &entry->next;  // 指向下一个节点
+		}
+	}
+}
+
+```
+
+二重指针删除节点的代码，与STL中`erase_after`一样简洁，后者是通过dummy head技巧达到的。无论是dummy head技巧，还是二重指针，都是在原有的问题上，考虑问题的本质。dummy head使得所有节点可以一视同仁的处理，而二重指针可以对多有指向list的指针一视同仁的处理。二者都不仅仅着眼于删除本身，而是看到指针操作的共性，一旦看到这种共性，就有非常优雅简洁的代码。所以简洁优雅不仅仅是一种风格，还是深刻的思考，抓住问题的本质。STL的concept，就是一种抓住类型本质属性的概念。
 
 ## C++泛型编程
 
-### 基本技巧
+### trait
 
 ### 用泛型实现字典
 
