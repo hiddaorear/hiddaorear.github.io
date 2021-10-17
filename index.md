@@ -10,37 +10,6 @@ title: 石下读书
 
 ### [夜读聊斋](./essay/readed_Strange_Tales_from_a_Chinese_Studio.md)
 
-## 计算机技术
-
-### [浅析STL](./computer_programs/PL/generic_programming/generic_programming.md)
-
-### [iOS program](./computer_programs/iOS_program.md)
-
-### [Objective-C 学习](./computer_programs/PL/Objective-C.md)
-
-### [工程效率](./computer_programs/engineering.md)
-
-### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
-
-### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
-
-### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
-
-### [SICP笔记：Computing with Register Machines](./computer_programs/PL/Computing_with_Register_Machines.md)
-
-### [SICP笔记：metalinguistic abstraction](./computer_programs/PL/metalinguistic_abstraction.md)
-
-### [计算机编程的沉思](./computer_programs/meditation_of_computer_programs.md)
-
-### [Server Model](./computer_programs/server_model.md)
-
-### [Monad](./computer_programs/monad.md)
-
-### [前端上报](./computer_programs/analytics.md)
-
-### [数学与编程笔记：List with Cycle](./computer_programs/list_with_cycle.md)
-
-
 ## 文学历史
 
 ### [中途岛战役](./history/Midway_Island.md)
@@ -68,4 +37,20 @@ title: 石下读书
 ### [我们的十年](./essay/junior_high_school_ten_years.md)
 
 ### [一次就好](./essay/single_step.md)
+
+## 计算机技术
+
+### [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
+
+### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
+
+### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
+
+### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
+
+### [Monad](./computer_programs/monad.md)
+
+### [前端上报](./computer_programs/analytics.md)
+
+
 
