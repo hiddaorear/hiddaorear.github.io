@@ -29,8 +29,7 @@ struct node * remove_if(node *head, int value, remove_fn rm) {
 	return head;
 }
 
-void remove(struct node **head, int value, remove_fn rm)
-{
+void remove(struct node **head, int value, remove_fn rm) {
 	for(struct node **cur = head; *cur != NULL;) {
 		struct node *entry = *cur;
 		if (rm(entry, value)) {

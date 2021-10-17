@@ -446,6 +446,166 @@ void remove(struct node **head, int value, remove_fn rm) {
 
 # C++泛型编程
 
+## 模式匹配
+
+OCaml中的模式匹配：
+
+```
+match
+  | <模式1> -> <表达式1>
+  | <模式2> -> <表达式2>
+   ...   ...
+)
+```
+
+模式匹配举例：
+
+```ocaml
+let neg x = 
+match x with
+	| true -> false
+	| false -> true ;;
+```
+
+模式匹配必须覆盖所有情况，如果不完整，会警告：
+
+```ocaml
+let incomplete_neg x = 
+match x with
+	| false -> true;;
+	
+	Warning 8: this pattren-matching is not exhaustive.
+	Here is an example of a value that is not matched:
+	true
+```
+
+二叉树定义：
+
+```ocaml
+
+type 'a tree = 
+| Leaf 
+| Node of 'a * 'a tree * 'a tree
+
+```
+
+简析：
+
+- OCaml中类型变量用'开头的变量标识，'a是类型变量，类似C++的泛型T *)
+- 符号`*`表示构造乘积类型，乘积即笛卡尔积，类型A和类型B的乘积类型记为A*B。如元组：
+
+```
+# "String", 1;;
+- : string * int = ("String", 1)
+
+```
+
+这是泛型版的二叉树，看起来有些抽象，我们用int版本的对照看一下：
+```
+type intTree = 
+| Leaf of int
+| Node of int * intTree * intTree
+
+```
+
+二叉树构造举例：
+
+```ocaml
+(* the code below constructs this tree:
+         4
+       /   \
+      2     5
+     / \   / \
+    1   3 6   7 
+*)
+let t = 
+  Node(4,
+    Node(2,
+      Node(1,Leaf,Leaf),
+      Node(3,Leaf,Leaf)
+    ),
+    Node(5,
+      Node(6,Leaf,Leaf),
+      Node(7,Leaf,Leaf)
+    )
+  )
+```
+
+计算二叉树的节点数（非叶子节点），上面例子的树的大小是7。
+
+函数类型：`size : 'a tree -> int`
+
+```ocaml
+let rec size = function
+  | Leaf -> 0
+  | Node (_,l,r) -> 1 + size l + size r
+
+```
+
+### C++泛型与模式匹配
+
+在编译期计算3的N次幂：
+
+```c++
+
+// 模板1
+// 计算3的N次方模板，实现一般的递归计算
+template<int N>
+class Pow3 {
+	public:
+		enum { result = 3 * Pow3<N-1>::result; };
+}
+
+// 模板2
+// 特化：用于结束递归
+template<>
+class Pow3<0> {
+	public:
+		enum { result = 1 };
+}
+```
+
+计算规则：
+
+1. `3 ^ N = 3 * 3 ^(N - 1)`，对应模板1
+2. `3 ^ 0 = 1`，对应模板2
+
+我们看到C++的编译期的计算，与模式匹配类似。N不为0的时候，匹配到的是模板1，N为0的时候匹配到的是模板2.
+
+## Trait
+
+从`Pow3`的代码，我们可以看到，模板实现在编译时，根据不同的情况，执行不同的代码。就像运行时if语句的值来决断一样。
+
+简要的说，Trait：类型的if-else语句
+
+### if-else 实现
+
+```c++
+template<bool C, typename Ta, typename Tb>
+class IfThenElse;
+
+template<typename Ta, typename Tb>
+class IfThenElse<true, Ta, Tb> {
+	public:
+		typedef Ta ResultT;
+}
+
+template<typename Ta, typename Tb>
+class IfThenElse<false, Ta, Tb> {
+	public:
+		typedef Tb ResultT;
+}
+
+```
+
+### 惰性求值
+
+
+
+## 用泛型实现字典
+
+
+
 ## 泛型编程GP
 
 ### 与OO对比
@@ -455,18 +615,6 @@ void remove(struct node **head, int value, remove_fn rm) {
 效率：
 
 类型检查：
-
-## trait
-
-### 惰性求值
-
-
-### 模式匹配
-
-### if-else 实现
-
-### 用泛型实现字典
-
 
 
 https://www.zhihu.com/question/61054439
