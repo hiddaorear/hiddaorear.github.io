@@ -581,15 +581,18 @@ class Pow3<0> {
 ### if-else 实现
 
 ```c++
+// 基本模板：根据第一个实参的值，来确定使用第二个实参还是第三个实参
 template<bool C, typename Ta, typename Tb>
 class IfThenElse;
 
+// 局部特化：true的时候，使用第2个实参
 template<typename Ta, typename Tb>
 class IfThenElse<true, Ta, Tb> {
 	public:
 		typedef Ta ResultT;
 }
 
+// 局部特化：false的时候，使用第3个实参
 template<typename Ta, typename Tb>
 class IfThenElse<false, Ta, Tb> {
 	public:
@@ -598,32 +601,125 @@ class IfThenElse<false, Ta, Tb> {
 
 ```
 
-### 惰性求值
+### 正则序和应用序
 
+计算平方根：
 
+```c++
+// 计算平方根
+// 基本模板
+template<int N, int LO=0, int HI=N>
+class Sqrt {
+	public:
+		enum { mid = (LO + HI + 1/2)};
+		enum {
+			result = (N < mid * mid) ? Sqrt<N, LO, mid-1>::result : Sqrt<N, mid, HI>::result;
+		}
+}
 
-## 用泛型实现字典
+// 局部特化，当LO等于HI
+// 不够严谨，有可能资源耗尽了也没到达LO=HI。最好是在一定范围就结束了
+template<int N, int M>
+class Sqrt<N, M, M> {
+	public:
+		enum { result = M };
+}
+```
 
+以上虽然基本实现了算法，但有一个严重的问题。产生了大约是N的两倍的实例化。原因是
 
+`result = (N < mid * mid) ? Sqrt<N, LO, mid-1>::result : Sqrt<N, mid, HI>::result;`
 
-## 泛型编程GP
+在每一次求值的时候，`:`两边的分支都求值了。使用`::`访问结果类的成员`result`，类中的所有成员都被实例化了。
 
-### 与OO对比
+有什么办法来减少实例化呢？放弃`?:`运算符，使用traits特化来选择计算结果：
 
-通用性：
+```c++
+// 计算平方根
+// 基本模板
+template<int N, int LO=0, int HI=N>
+class Sqrt {
+	public:
+		enum { mid = (LO + HI + 1/2)};
+		typedef typename IfThenElse<(N < mid * mid), Sqrt<N, LO, mid-1>, Sqrt<N, mid, HI> >::ResultT subT;
+		enum { result = SubT::result; };
+}
 
-效率：
+// 局部特化，当LO等于HI
+// 不够严谨，有可能资源耗尽了也没到达LO=HI。最好是在一定范围就结束了
+template<int N, int M>
+class Sqrt<N, M, M> {
+	public:
+		enum { result = M };
+}
+```
 
-类型检查：
+为一个类模板实例定义typedef不会导致C++编译器实例化该实例的实体。
 
+`typedef typename IfThenElse<(N < mid * mid), Sqrt<N, LO, mid-1>, Sqrt<N, mid, HI> >::ResultT subT;`定义的时候，` Sqrt<N, LO, mid-1>`和`Sqrt<N, mid, HI>`不会被完全实例化。SubT最后只是其中一个类型，只有在`Sub::result`的时候，才会完全实例化SubT所代表的类型。实例化的数量减少到`log2N`。
 
-https://www.zhihu.com/question/61054439
+我们看到求值的差异，导致显著的复杂度差别。这两个版本分别对应的是正则序求值和应用序求值(来自SICP)。
 
-https://blog.csdn.net/pongba/article/details/138209
+- 正则序求值：完全展开而后归约
+- 应用序求值：先求值然后应用
 
-https://blog.csdn.net/pongba/article/details/391584
+测试解释器使用的是那种序的求值：
 
-https://blog.csdn.net/pongba/article/details/2544894
+```lisp
 
+(define (p) (p))
 
+(define (test x y)
+	(if (= x 0)
+		0
+	y))
 
+```
+如果是应用序，结果将是0。如果是正则序，将无限递归，无结果。
+
+# 区间和迭代器背后的数学
+
+## 皮亚诺公理
+
+皮亚诺公理的非形式化的方法叙述如下：
+
+1. 0是自然数；
+2. 每一个确定的自然数a，都有一个确定的后继数a' ，a' 也是自然数；
+3. 对于每个自然数b、c，b=c当且仅当b的后继数=c的后继数；
+4. 0不是任何自然数的后继数；
+5. 任意关于自然数的命题，如果证明：它对自然数0是真的，且假定它对自然数a为真时，可以证明对a' 也真。那么，命题对所有自然数都真。
+
+其中，一个数的后继数指紧接在这个数后面的数，例如，0的后继数是1，1的后继数是2等等；
+公理5保证了数学归纳法的正确性，从而被称为归纳法原理。
+
+## Inerator concept （迭代器concept）
+
+我们回归一下迭代器concept，需要满足三种操作：
+
+- 常规类型（Regular）所应支持的操作
+- 移动到后继位置的操作
+- 解引用操作
+
+其中最关键的是后继（successor）操作，直接得自于皮亚诺公理“具备后继数”。当然编程中的迭代器不如数学严格，不能满足每一条皮亚诺公理。例如：所有数都有后继数，如果已经是整数的末端，就不成立了。
+
+# 参考书籍
+
+- 《C++ Templates》 by David Vandevoorde / Nicolai M.Josuttis
+
+- 《计算机程序的构造和解释》（Structure and Interpretation of Computer Programs，SICP）
+
+- 《数学与泛型编程》Alexander A. Stepanov /  Daniel E. Rose
+
+- 《STL源码剖析》侯捷
+
+- 《算法（第4版）》Robert Sedgewick /  Kevin Wayne
+
+- 《OCaml语言编程基础教程》陈钢 张静
+
+# 参考博客
+
+- [Traits技术：类型的if-else-then(STL核心技术之一)] (https://blog.csdn.net/myan/article/details/1905)
+
+# log
+
+- 2021年10月18日深夜，完成第一版
