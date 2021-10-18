@@ -614,6 +614,15 @@ class IfThenElse<false, Ta, Tb> {
 
 ```
 
+我们对比一下模式匹配neg实现（注：二者功能不同，这里只是用来对比，就不写模式匹配的IfThenElse版本了）：
+
+```ocaml
+let neg x = 
+match x with
+    | true -> false   (* 对应模板class IfThenElse<true, Ta, Tb> *)
+    | false -> true ;; (* 对应模板class IfThenElse<false, Ta, Tb> *)
+```
+
 ### 正则序和应用序
 
 计算平方根：
