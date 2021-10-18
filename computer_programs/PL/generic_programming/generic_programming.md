@@ -93,7 +93,7 @@ RandomAccessIterator __unguarded_partition (RandomAccessIterator first, RandomAc
 
 ```
 
-first和last是前开后闭不对称区间。first指向序列的第一个元素，而last则是出了序列的第一个元素。因此，第一次first调整以后，last也可以调整，调整以后，恰好是序列的最后一个元素。后续如果first调整，即找到大于或等于枢轴元素值的元素，last指向的是上一次调整过的元素，此次不需要再调整此元素了，需要让last自减，指向左边的元素。可以看出，此过程是对称的，第一次调整和后续调整一样。即起初的区间有效，那么每一轮迭代的区间，都有效。这样能直观保证算法的正确性，就像数学中的归纳法证明一样。
+first和last是左闭右开不对称区间。first指向序列的第一个元素，而last则是出了序列的第一个元素。因此，第一次first调整以后，last也可以调整，调整以后，恰好是序列的最后一个元素。后续如果first调整，即找到大于或等于枢轴元素值的元素，last指向的是上一次调整过的元素，此次不需要再调整此元素了，需要让last自减，指向左边的元素。可以看出，此过程是对称的，第一次调整和后续调整一样。即起初的区间有效，那么每一轮迭代的区间，都有效。这样能直观保证算法的正确性，就像数学中的归纳法证明一样。
 
 分割过程：
 
@@ -122,40 +122,40 @@ first和last是前开后闭不对称区间。first指向序列的第一个元素
 
 ```java
 public class Quick extends Example {
-	public static void sort(Comparable[] aComparables) {
+    public static void sort(Comparable[] aComparables) {
     StdRandom.shuffle(a);  // 消除对输入的依赖
     sort(a, 0, a.length - 1);
   }
-	public static void sort(Comparable[] aComparables ,int lo,int hi) {
-		if(lo < hi) {
-			int j = partition(aComparables,lo,hi);  // 切分
-			sort(aComparables, lo, j-1);  // 左半部分排序
-			sort(aComparables, j+1, hi);  // 右半部分排序
-		}
-	}
-	
-	private static int partition(Comparable[] aComparables,int lo ,int hi) {
+    public static void sort(Comparable[] aComparables ,int lo,int hi) {
+        if(lo < hi) {
+            int j = partition(aComparables,lo,hi);  // 切分
+            sort(aComparables, lo, j-1);  // 左半部分排序
+            sort(aComparables, j+1, hi);  // 右半部分排序
+        }
+    }
+    
+    private static int partition(Comparable[] aComparables,int lo ,int hi) {
     // 将数组分割为a[lo..i-1]，a[i]，a[i+1..hi]
-		int i = lo;  // 左指针
-		int j = hi + 1; // 右指针，注意，这里人为的加1了。为什么呢？
-		Comparable vComparable = aComparables[lo];
-		while(true)
-		{
-			while(less(aComparables[++i],vComparable))if(i == hi)break;
-			while(less(vComparable,aComparables[--j]))if(j == lo)break;
-			if(i >= j)break;
-			exch(aComparables,i,j);
-		}
-		exch(aComparables,lo,j);  // 交换位置，将v=a[j]放入正确的位置
-		return j;  // 完成a[lo..j-1] <= a[j] <= a[j+1..hi]
-	}
+        int i = lo;  // 左指针
+        int j = hi + 1; // 右指针，注意，这里人为的加1了。为什么呢？
+        Comparable vComparable = aComparables[lo];
+        while(true)
+        {
+            while(less(aComparables[++i],vComparable))if(i == hi)break;
+            while(less(vComparable,aComparables[--j]))if(j == lo)break;
+            if(i >= j)break;
+            exch(aComparables,i,j);
+        }
+        exch(aComparables,lo,j);  // 交换位置，将v=a[j]放入正确的位置
+        return j;  // 完成a[lo..j-1] <= a[j] <= a[j+1..hi]
+    }
 }
 
 
 ```
 
-很显然，Sedgewick 的快排版本的区间是前闭后闭的区间。`sort(a, 0, a.length -
-1)`，上界是最后一个元素，而不是STL中前开后闭区间的上界是出界以后的第一个元素。为了不出现特殊逻辑，保持lo和hi调整的对称，就需要人为的强行在初始化的时候，把`j`初始化为`hi+1`，而不是直接初始化为`hi`。sort的入参的右区间要加减1，在sort内部，又人为的加1。显然STL的实现更优雅。
+很显然，Sedgewick 的快排版本的区间是左闭右闭的区间。`sort(a, 0, a.length -
+1)`，上界是最后一个元素，而不是STL中左闭右开区间的上界是出界以后的第一个元素。为了不出现特殊逻辑，保持lo和hi调整的对称，就需要人为的强行在初始化的时候，把`j`初始化为`hi+1`，而不是直接初始化为`hi`。sort的入参的右区间要加减1，在sort内部，又人为的加1。显然STL的实现更优雅。
 
 这个问题STL之父Alexander Stepanov 是怎么考虑的呢？为什么能设计出比Sedgewick更好的代码？
 
@@ -172,7 +172,7 @@ public class Quick extends Example {
 
 在STL之父Alexander Stepanov考虑中，区间不仅仅是实现某一个算法，而是需要考虑通用算法。
 
-因此STL风格的容器和算法使用前开后闭区间。同时满足以下两条公理：
+因此STL风格的容器和算法使用左闭右开区间。同时满足以下两条公理：
 
 1. container(c) ⇒ valid(begin(c), end(c))
 
@@ -318,11 +318,11 @@ struct __slist_iterator : __slist_iterator_base {
     pointer operator->() const {
         return &(operator*());
     }
-    self& operator++() {	//前置++
+    self& operator++() {    //前置++
         incr();
         return *this;
     }
-    self operator++(int) {	//后置++
+    self operator++(int) {  //后置++
         self tmp = *this;
         incr();
         return tmp;
@@ -345,13 +345,13 @@ private:
     }
 // ...
 public:
-	iterator erase_after(iterator pos) {
-		slist_node* node = (slist_node*)pos.node->next;
-		pos.node->next = node->next;
-		destroy_node(node);
+    iterator erase_after(iterator pos) {
+        slist_node* node = (slist_node*)pos.node->next;
+        pos.node->next = node->next;
+        destroy_node(node);
 
-		return iterator((slist_node*)pos.node->next);
-	}
+        return iterator((slist_node*)pos.node->next);
+    }
 };
 
 ```
@@ -382,33 +382,33 @@ public:
 ```c
 struct node
 {
-	struct node *next;
-	int data;
+    struct node *next;
+    int data;
 };
 
 typedef bool(*remove_fun)(const struct node *node, int value);
 
 bool rm(const struct node *node, int value) 
 {
-	return (node->data == value) ? true : false;
+    return (node->data == value) ? true : false;
 }
 
 struct node * remove_if(node *head, int value, remove_fn rm) {
-	for(struct node *prev = NULL, *cur = head; curr != NULL;) {
-		struct node const *next = curr->next;
-		if (rm(curr, value)) {
-			if (prev) {  // 不是第一个节点的时候
-				prev->next = next;  // 改变next指针的指向
-			} else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
-				head = next;  // 改变head指针的指向
-			}
-			free(curr);
-		} else {
-			prev = curr;  // 因删除节点的操作是删除此节点，并让此节点的前一个节点指向被删除节点后一个节点，故需要prev保留上一个节点
-		}
-		curr = next;
-	}
-	return head;
+    for(struct node *prev = NULL, *cur = head; curr != NULL;) {
+        struct node const *next = curr->next;
+        if (rm(curr, value)) {
+            if (prev) {  // 不是第一个节点的时候
+                prev->next = next;  // 改变next指针的指向
+            } else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
+                head = next;  // 改变head指针的指向
+            }
+            free(curr);
+        } else {
+            prev = curr;  // 因删除节点的操作是删除此节点，并让此节点的前一个节点指向被删除节点后一个节点，故需要prev保留上一个节点
+        }
+        curr = next;
+    }
+    return head;
 }
 
 ```
@@ -418,11 +418,11 @@ struct node * remove_if(node *head, int value, remove_fn rm) {
 我们考察一下里面的关键实现：
 
 ```c
-	if (prev) {  // 不是第一个节点的时候
-				prev->next = next;  // 改变next指针的指向
-			} else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
-				head = next;  // 改变head指针的指向
-			}
+    if (prev) {  // 不是第一个节点的时候
+                prev->next = next;  // 改变next指针的指向
+            } else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
+                head = next;  // 改变head指针的指向
+            }
 
 ```
 
@@ -432,15 +432,15 @@ struct node * remove_if(node *head, int value, remove_fn rm) {
 
 ```c
 void remove(struct node **head, int value, remove_fn rm) {
-	for(struct node **cur = head; *cur != NULL;) {
-		struct node *entry = *cur;
-		if (rm(entry, value)) {
-			*cur = entry->next;
-			free(entry);
-		} else {
-			cur = &entry->next;  // 指向下一个节点
-		}
-	}
+    for(struct node **cur = head; *cur != NULL;) {
+        struct node *entry = *cur;
+        if (rm(entry, value)) {
+            *cur = entry->next;
+            free(entry);
+        } else {
+            cur = &entry->next;  // 指向下一个节点
+        }
+    }
 }
 
 ```
@@ -468,8 +468,8 @@ match
 ```ocaml
 let neg x = 
 match x with
-	| true -> false
-	| false -> true ;;
+    | true -> false
+    | false -> true ;;
 ```
 
 模式匹配必须覆盖所有情况，如果不完整，会警告：
@@ -477,11 +477,11 @@ match x with
 ```ocaml
 let incomplete_neg x = 
 match x with
-	| false -> true;;
-	
-	Warning 8: this pattren-matching is not exhaustive.
-	Here is an example of a value that is not matched:
-	true
+    | false -> true;;
+    
+    Warning 8: this pattren-matching is not exhaustive.
+    Here is an example of a value that is not matched:
+    true
 ```
 
 二叉树定义：
@@ -496,8 +496,8 @@ type 'a tree =
 
 简析：
 
-- OCaml中类型变量用'开头的变量标识，'a是类型变量，类似C++的泛型T
-- 符号`*`表示构造乘积类型，乘积即笛卡尔积，类型A和类型B的乘积类型记为A*B。如元组：
+- OCaml中类型变量用`'`开头的变量标识，`'a`是类型变量，类似C++的泛型T
+- 符号`*`表示构造乘积类型，乘积即笛卡尔积，类型A和类型B的乘积类型记为`A*B`。如元组
 
 ```ocaml
 # "String", 1;;
@@ -558,16 +558,16 @@ let rec size = function
 // 计算3的N次方模板，实现一般的递归计算
 template<int N>
 class Pow3 {
-	public:
-		enum { result = 3 * Pow3<N-1>::result; };
+    public:
+        enum { result = 3 * Pow3<N-1>::result; };
 }
 
 // 模板2
 // 特化：用于结束递归
 template<>
 class Pow3<0> {
-	public:
-		enum { result = 1 };
+    public:
+        enum { result = 1 };
 }
 ```
 
@@ -594,15 +594,15 @@ class IfThenElse;
 // 局部特化：true的时候，使用第2个实参
 template<typename Ta, typename Tb>
 class IfThenElse<true, Ta, Tb> {
-	public:
-		typedef Ta ResultT;
+    public:
+        typedef Ta ResultT;
 }
 
 // 局部特化：false的时候，使用第3个实参
 template<typename Ta, typename Tb>
 class IfThenElse<false, Ta, Tb> {
-	public:
-		typedef Tb ResultT;
+    public:
+        typedef Tb ResultT;
 }
 
 ```
@@ -616,19 +616,19 @@ class IfThenElse<false, Ta, Tb> {
 // 基本模板
 template<int N, int LO=0, int HI=N>
 class Sqrt {
-	public:
-		enum { mid = (LO + HI + 1/2)};
-		enum {
-			result = (N < mid * mid) ? Sqrt<N, LO, mid-1>::result : Sqrt<N, mid, HI>::result;
-		}
+    public:
+        enum { mid = (LO + HI + 1/2)};
+        enum {
+            result = (N < mid * mid) ? Sqrt<N, LO, mid-1>::result : Sqrt<N, mid, HI>::result;
+        }
 }
 
 // 局部特化，当LO等于HI
 // 不够严谨，有可能资源耗尽了也没到达LO=HI。最好是在一定范围就结束了
 template<int N, int M>
 class Sqrt<N, M, M> {
-	public:
-		enum { result = M };
+    public:
+        enum { result = M };
 }
 ```
 
@@ -645,18 +645,18 @@ class Sqrt<N, M, M> {
 // 基本模板
 template<int N, int LO=0, int HI=N>
 class Sqrt {
-	public:
-		enum { mid = (LO + HI + 1/2)};
-		typedef typename IfThenElse<(N < mid * mid), Sqrt<N, LO, mid-1>, Sqrt<N, mid, HI> >::ResultT subT;
-		enum { result = SubT::result; };
+    public:
+        enum { mid = (LO + HI + 1/2)};
+        typedef typename IfThenElse<(N < mid * mid), Sqrt<N, LO, mid-1>, Sqrt<N, mid, HI> >::ResultT subT;
+        enum { result = SubT::result; };
 }
 
 // 局部特化，当LO等于HI
 // 不够严谨，有可能资源耗尽了也没到达LO=HI。最好是在一定范围就结束了
 template<int N, int M>
 class Sqrt<N, M, M> {
-	public:
-		enum { result = M };
+    public:
+        enum { result = M };
 }
 ```
 
@@ -676,9 +676,9 @@ class Sqrt<N, M, M> {
 (define (p) (p))
 
 (define (test x y)
-	(if (= x 0)
-		0
-	y))
+    (if (= x 0)
+        0
+    y))
 
 ```
 如果是应用序，结果将是0。如果是正则序，将无限递归，无结果。
@@ -698,7 +698,7 @@ class Sqrt<N, M, M> {
 其中，一个数的后继数指紧接在这个数后面的数，例如，0的后继数是1，1的后继数是2等等；
 公理5保证了数学归纳法的正确性，从而被称为归纳法原理。
 
-## Inerator concept （迭代器concept）
+## Inerator concept （迭代器concept）和左闭右开区间
 
 我们回归一下迭代器concept，需要满足三种操作：
 
@@ -706,11 +706,22 @@ class Sqrt<N, M, M> {
 - 移动到后继位置的操作
 - 解引用操作
 
+STL风格的左闭右开区间。同时满足以下两条公理：
+
+1. container(c) ⇒ valid(begin(c), end(c))
+
+2. valid(x, y) ∧ x ≠ y  ⇒  valid(successor(x), y)
+
+第一条公理保证：容器c，在beign()和end()区间有效；第二条公理保证，如果[x, y)是有效区间，那么[successor(x), y)同样有效。即在区间的子区间也是有效的。successor表示获取后继元素。
+
 其中最关键的是后继（successor）操作，直接得自于皮亚诺公理“具备后继数”。当然编程中的迭代器不如数学严格，不能满足每一条皮亚诺公理。例如：所有数都有后继数，如果已经是整数的末端，就不成立了。
+
 
 # 参考书籍
 
-- 《C++ Templates》 by David Vandevoorde / Nicolai M.Josuttis
+- 《C陷阱与缺陷》Andrew Koenig
+
+- 《C++ Templates》 David Vandevoorde / Nicolai M.Josuttis
 
 - 《计算机程序的构造和解释》（Structure and Interpretation of Computer Programs，SICP）
 
