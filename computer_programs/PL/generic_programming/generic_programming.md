@@ -216,7 +216,7 @@ public class Quick extends Example {
 
 约定了迭代器区间的通用写法，就定义了算法和容器之间的桥梁，就能实现通用的标准容器库，就能将特定类型的算法中，与类型无关的共性抽象出来。例如，在STL中，不管是数组还是链表，都是区间。泛型编程过程，就是一个抽象提升的过程，最终实现通用的算法或容器。
 
-区间是一个好的抽象，但需要传递区间开头和区间结尾，两个参数也有不够时候。例如，要一组数据，这组数据由sequence方法返回，我们需要这样写：
+区间是一个好的抽象，但需要传递区间开头和区间结尾，两个参数也有不够好的时候。例如，要一组数据，这组数据由sequence方法返回，我们需要这样写：
 
 ```c++
 sequence *seq = sequence();
@@ -305,7 +305,7 @@ concept并不等同于一些编程语言中的接口（指定某个类型的接�
 
 ## 单向列表
 
-SGI STL单向链表（single linked list，名为slist）的注意实现：
+SGI STL单向链表（single linked list，名为slist）的主要实现：
 
 ```c++
 
@@ -446,11 +446,11 @@ struct node * remove_if(node *head, int value, remove_fn rm) {
 我们考察一下里面的关键实现：
 
 ```c
-    if (prev) {  // 不是第一个节点的时候
-                prev->next = next;  // 改变next指针的指向
-            } else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
-                head = next;  // 改变head指针的指向
-            }
+if (prev) {  // 不是第一个节点的时候
+    prev->next = next;  // 改变next指针的指向
+} else {  // 当是第一个节点的时候，prev此时还是NULL，会进入此逻辑
+    head = next;  // 改变head指针的指向
+}
 
 ```
 
