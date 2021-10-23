@@ -287,6 +287,104 @@ concept对类型有约束，主要有：
 
 concept并不等同于一些编程语言中的接口（指定某个类型的接口，并稍后给出接口实现）。例如C++的抽象类和Java的接口。因接口必须完整实现，如：严格按照规定的参数和返回值类型。而concept允许通过一系列相关的类型来指定接口，如在Java或C++中，必须把size()返回int32，而concept则不要具体指定，返回类型是整数即可，无须指明是uint8，int16，还是int64等等。
 
+### STL 基本 concept
+
+1. Assignable：type X 如果是一个 concept Assignale 的一个 model，那么可以将 type X 的 object 内容复制并赋值给 type X 的另一个 object。
+2. Default Constructible：有 default constructor的 type。如：`T()`可以产生一个 type T object。
+3. Equality Comparable：可以比较两个 type T object 是否相等。如：`x == y`或`x != y`
+4. LessThen Comparable：可以用来测试一个 T object是否小于另一个 T object。如：`x < y`
+
+所谓的regular type，指的是同时满足Assignable，Default Constructible，Equality Comparable，LessThen Comparable的concept。
+
+大部分 basic C++ type都是regular type，如：`int`。而几乎所有在STL中的type都是 regular type。
+
+## 正则 Regular concept
+
+可复制的、默认可构造的，并支持等价测试的 regular。
+
+### Regular concept 定义
+
+```c++
+template <class T>
+concept regular = std::semiregular<T> && std::equality_comparable<T>;
+```
+
+支持的操作：
+
+- 拷贝构造
+- 赋值
+- 判断是否相等，等价测试
+- 析构
+
+语义：
+
+1. ∀a∀b∀c：T a(b) ⇒ (b = c ⇒ a =c)
+2. ∀a∀b∀c：b → a ⇒ (b = c ⇒ a = c)
+3. ∀f ∈ RegularFunction： a = b ⇒ f(a) = f(b)
+
+1. 如果用b构造出a，那么与b相等的，必与a相等
+2. 如果把b赋值给a，那么与b相等的，必与a相等
+3. 正则函数中，相等的输入会有相等的输出
+
+复杂度：
+
+每一项操作的复杂度不能比该对象所在的区域内的线性操作更高。
+
+### 等价测试
+
+### C++ 空类的大小为什么是1？
+
+`class A{}; sizeof(A)`大小为1，而不是0，为什么？
+
+我们假设一下，如果空类的size是0，会有什么问题？
+
+```c++
+template < typename T >
+bool isEqual( T const & t1, T const & t2 )
+{
+    return &t1 == &t2;
+}
+
+EmptyClass o1; // one object and...
+EmptyClass o2; // ...a distinct object...
+
+assert( !isEqual( o1, o2 ) ); // ...should not be one and same object!
+
+```
+
+所以如果空类size是0，会无法执行等价测试，导致对应的type，不再满足 Regular concpet。这样不能支持STL的操作，也不支持`for`、`while`语句等中的等价操作。
+
+同时还会导致其他问题，如：
+
+```c++
+
+EmptyClass o1;
+EmptyClass o2;
+
+EmptyClass * po = &o;
+po->foo();
+
+```
+`po->foo()`调用的是`o1`还是`o2`？
+
+```c++
+Person you;
+Person me;
+
+// You and I are two different persons
+// (unless I have some dissociative identity disorder!)
+// Person is a class with entity semantics (there is only one 'me', I can't make
+// a copy of myself like I would do with integers or strings)
+
+std::map< Person *, std::string > personToName;
+
+personToName[&you] = "Andrew_Lvov";
+personToName[&me]  = "Luc Touraille";
+// Oh, bother! The program confused us to be the same person, so now you and I
+// have the same name!
+
+```
+
 ## 迭代器
 
 迭代器是一种concept，用来指示序列中的位置，可视为广义的指针，支持能够在线性时间内搜索的操作。
