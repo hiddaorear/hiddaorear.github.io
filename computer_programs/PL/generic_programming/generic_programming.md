@@ -206,7 +206,7 @@ public class Quick extends Example {
 
 2. valid(x, y) ∧ x ≠ y  ⇒  valid(successor(x), y)
 
-第一条公理保证：容器c，在beign()和end()区间有效；第二条公理保证，如果[x, y)是有效区间，那么[successor(x), y)同样有效。即在区间的子区间也是有效的。successor表示获取后继元素。
+第一条公理保证：容器c，在 begin() 和 end() 区间有效；第二条公理保证，如果[x, y)是有效区间，那么[successor(x), y)同样有效。即在区间的子区间也是有效的。successor表示获取后继元素。
 
 从工程角度看，起初有效，后续的每一轮迭代，依然有效。这个特性，为验证算法是否正确提供了方便，类似于数学证明中的归纳法。
 
