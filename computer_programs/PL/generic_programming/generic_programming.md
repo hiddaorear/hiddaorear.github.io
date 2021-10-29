@@ -353,7 +353,7 @@ assert( !isEqual( o1, o2 ) ); // ...should not be one and same object!
 
 ```
 
-所以如果空类size是0，会无法执行等价测试，导致对应的type，不再满足 Regular concpet。这样不能支持STL的操作，也不支持`for`、`while`语句等中的等价操作。
+所以如果空类size是0，会无法执行等价测试，导致对应的type，不再满足 Regular concept。这样不能支持STL的操作，也不支持`for`、`while`语句等中的等价操作。
 
 同时还会导致其他问题，如：
 
