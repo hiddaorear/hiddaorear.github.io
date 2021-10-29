@@ -316,12 +316,13 @@ concept regular = std::semiregular<T> && std::equality_comparable<T>;
 - 判断是否相等，等价测试
 - 析构
 
-语义：
+定义的语义：
 
 1. ∀a∀b∀c：T a(b) ⇒ (b = c ⇒ a =c)
 2. ∀a∀b∀c：b → a ⇒ (b = c ⇒ a = c)
 3. ∀f ∈ RegularFunction： a = b ⇒ f(a) = f(b)
 
+解释：
 1. 如果用b构造出a，那么与b相等的，必与a相等
 2. 如果把b赋值给a，那么与b相等的，必与a相等
 3. 正则函数中，相等的输入会有相等的输出
