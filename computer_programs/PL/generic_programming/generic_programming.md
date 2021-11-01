@@ -271,7 +271,7 @@ for(auto i:vec) {
 
 | 自然科学 | 编程 | 编程范例|
 | :-----: | :----: | :----: |
-| 属 | concept | Integral，Character |
+| 属 | concept | Integer，Character |
 | 种 | type（类型）或class（类） | uint8_t，char |
 | 个体 | instance（实例） | 0100001，'A' |
 
