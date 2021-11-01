@@ -289,7 +289,7 @@ concept并不等同于一些编程语言中的接口（指定某个类型的接�
 
 ### STL 基本 concept
 
-1. Assignable：type X 如果是一个 concept Assignale 的一个 model，那么可以将 type X 的 object 内容复制并赋值给 type X 的另一个 object。
+1. Assignable：type X 如果是一个 concept Assignable 的一个 model，那么可以将 type X 的 object 内容复制并赋值给 type X 的另一个 object。
 2. Default Constructible：有 default constructor的 type。如：`T()`可以产生一个 type T object。
 3. Equality Comparable：可以比较两个 type T object 是否相等。如：`x == y`或`x != y`
 4. LessThen Comparable：可以用来测试一个 T object是否小于另一个 T object。如：`x < y`
@@ -339,6 +339,8 @@ concept regular = std::semiregular<T> && std::equality_comparable<T>;
 
 我们假设一下，如果空类的size是0，会有什么问题？
 
+**等价测试**
+
 ```c++
 template < typename T >
 bool isEqual( T const & t1, T const & t2 )
@@ -385,6 +387,18 @@ personToName[&me]  = "Luc Touraille";
 // have the same name!
 
 ```
+
+**数组遍历**
+
+```c++
+class A{}; 
+A* p = &a;
+A* p1= p+1;  // ?
+
+```
+空类A的size是0，会无法执行`p+1`操作，也就无法通过这种方式遍历数组。
+
+
 
 ### 异类字典
 
