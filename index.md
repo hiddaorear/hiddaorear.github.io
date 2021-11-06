@@ -38,6 +38,8 @@ title: 临溪读书
 
 ## 计算机技术
 
+### [容器类型的设计与思考](./computer_programs/PL/containers/containers.md)
+
 ### [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
 
 ### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
