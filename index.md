@@ -6,6 +6,8 @@ title: 临溪读书
 
 ## 随笔
 
+### [2022年总结](./history/2022_summary/2022.md)
+
 ### [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
 
 ### [看《红鳉鱼》](./essay/the_red_Killifish.md)
