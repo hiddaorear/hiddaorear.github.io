@@ -2,27 +2,11 @@
 title: 临溪读书
 ---
 
-# 悟道
-
-### [初学管理0：情绪的泥潭](./enlightenment/2023_negative_emotions.md)
-
-### [初学管理1：作茧自缚](./enlightenment/2023_excessive_self_discipline.md)
-
-### [初学管理2：必也正名乎](./enlightenment/2023_rectify_the_name.md)
-
-### [初学管理3：控制与逻辑](./enlightenment/2023_control_and_logic.md)
-
-### [初学管理4：政治第一](./enlightenment/2023_politics_first.md)
-
-### [初学管理5：情感与理性](./enlightenment/2023_sense_and_sensibility.md)
-
-### [初学管理6：技术的悖论](./enlightenment/2023_paradox_of_technology.md)
-
-### [初学管理7：何去何从](./enlightenment/2023_where_to_go.md)
-
 # 深柳读书堂
 
 ## 随笔
+
+### [竹排撑篙过桂林](./essay/2023_04_GuiLin_tourist/index.md)
 
 ### [种田忆旧](essay/2022_fram.md)
 
@@ -52,8 +36,6 @@ title: 临溪读书
 
 ### [不畏浮云遮望眼](./node/2022_05_03_Wang_An_Shi.md)
 
-## 文学历史
-
 ### [中途岛战役](./history/Midway_Island.md)
 
 ### [莫放春秋佳日去](./history/teacher.md)
@@ -79,6 +61,27 @@ title: 临溪读书
 ### [Monad](./computer_programs/monad.md)
 
 ### [前端上报](./computer_programs/analytics.md)
+
+
+# 坐而论道
+
+## 工作的江湖
+
+### [初学管理0：情绪的泥潭](./enlightenment/2023_negative_emotions.md)
+
+### [初学管理1：作茧自缚](./enlightenment/2023_excessive_self_discipline.md)
+
+### [初学管理2：必也正名乎](./enlightenment/2023_rectify_the_name.md)
+
+### [初学管理3：控制与逻辑](./enlightenment/2023_control_and_logic.md)
+
+### [初学管理4：政治第一](./enlightenment/2023_politics_first.md)
+
+### [初学管理5：情感与理性](./enlightenment/2023_sense_and_sensibility.md)
+
+### [初学管理6：技术的悖论](./enlightenment/2023_paradox_of_technology.md)
+
+### [初学管理7：何去何从](./enlightenment/2023_where_to_go.md)
 
 
 
