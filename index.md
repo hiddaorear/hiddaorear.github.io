@@ -44,24 +44,6 @@ title: 临溪读书
 
 ### [溺水急救](./medicine/drown.md)
 
-## 计算机技术
-
-### [答辩PPT写法总结](./node/2023-01-17_ppt.md)
-
-### [容器类型的设计与思考](./computer_programs/PL/containers/containers.md)
-
-### [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
-
-### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
-
-### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
-
-### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
-
-### [Monad](./computer_programs/monad.md)
-
-### [前端上报](./computer_programs/analytics.md)
-
 
 # 坐而论道
 
@@ -82,6 +64,25 @@ title: 临溪读书
 ### [初学管理6：技术的悖论](./enlightenment/2023_paradox_of_technology.md)
 
 ### [初学管理7：何去何从](./enlightenment/2023_where_to_go.md)
+
+
+## 计算机技术
+
+### [答辩PPT写法总结](./node/2023-01-17_ppt.md)
+
+### [容器类型的设计与思考](./computer_programs/PL/containers/containers.md)
+
+### [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
+
+### [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
+
+### [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
+
+### [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
+
+### [Monad](./computer_programs/monad.md)
+
+### [前端上报](./computer_programs/analytics.md)
 
 
 
