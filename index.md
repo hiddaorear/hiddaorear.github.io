@@ -6,7 +6,7 @@ title: 临溪读书
 
 ## 随笔
 
-### [竹排撑篙过桂林](./essay/2023_04_GuiLin_tourist/index.md)
+### [竹排摇梦过桂林](./essay/2023_04_GuiLin_tourist/index.md)
 
 ### [种田忆旧](essay/2022_fram.md)
 
