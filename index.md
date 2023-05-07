@@ -24,6 +24,10 @@ title: 临溪读书
 
 ## 随笔
 
+### [种田忆旧](essay/2022_fram.md)
+
+### [浮光掠影过苏州](./essay/2022_09_Shanghai_Tourist/index.md)
+
 ### [2022年总结](./history/2022_summary/2022.md)
 
 ### [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
