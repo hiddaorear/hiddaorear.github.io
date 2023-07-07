@@ -2,6 +2,8 @@
 title: 临溪读书
 ---
 
+![emacs](./emacs.jpeg)
+
 # 深柳读书堂
 
 ## 随笔
