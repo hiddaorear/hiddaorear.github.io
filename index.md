@@ -57,7 +57,7 @@
 
 ### 后端
 
-- [服务器开发模式](./computer_programs/server_model.md)
+- [服务器开发模式](./computer_programs/back_end/server_model.md)
 
 ### 前端
 
