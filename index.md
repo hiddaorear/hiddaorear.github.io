@@ -1,6 +1,5 @@
 ---
 ---
-@import "{{ site.theme }}";
 
 ![emacs](./emacs.jpeg)
 
