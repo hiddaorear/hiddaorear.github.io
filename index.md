@@ -2,7 +2,7 @@
 ---
 
 ![emacs](./emacs.jpeg)
-
+[About me](./about.md)
 
 ## 江湖
 
