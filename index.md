@@ -31,9 +31,7 @@
 
 ## 计算机技术
 
-- [2013年到2023所读技术书](./computer_programs/2013_2023_reading_book.md)
-
-- [答辩PPT写法总结](./node/2023-01-17_ppt.md)
+- [2013年到2023所读技术书](./computer_programs/2013_2023_reading_book/index.md)
 
 - [容器类型的设计与思考](./computer_programs/PL/containers/containers.md)
 
@@ -45,9 +43,15 @@
 
 - [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
 
+- [Objective-C笔记](./computer_programs/PL/Objective-C.md)
+
 - [Monad](./computer_programs/monad.md)
 
 - [前端上报](./computer_programs/analytics.md)
+
+## 写作技巧
+
+- [答辩PPT写法总结](./node/2023-01-17_ppt.md)
 
 ## 医学
 

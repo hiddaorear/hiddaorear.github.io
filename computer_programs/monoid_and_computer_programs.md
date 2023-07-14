@@ -84,15 +84,15 @@ int fib1(int n) {
 
 我们用矩阵来表示求Fibonacci数的操作：
 
-![Fibonacci](./assets_monoid_and_computer_programs/Fibonacci_0.png)
+![Fibonacci](./monoid_and_computer_programs_assets/Fibonacci_0.png)
 
 设：
 
-![Fibonacci](./assets_monoid_and_computer_programs/Fibonacci_1.png)
+![Fibonacci](./monoid_and_computer_programs_assets/Fibonacci_1.png)
 
 则：
 
-![Fibonacci](./assets_monoid_and_computer_programs/Fibonacci_2.png)
+![Fibonacci](./monoid_and_computer_programs_assets/Fibonacci_2.png)
 
 记此算法为fib2。
 
@@ -108,7 +108,7 @@ int fib1(int n) {
 
 求出λ，代入`(A - λI)x = 0`，即可求得特性向量。化简A为对角阵Λ，利用对角阵求矩阵幂，即可求得：
 
-![Fibonacci](./assets_monoid_and_computer_programs/Fibonacci_a.png)
+![Fibonacci](./monoid_and_computer_programs_assets/Fibonacci_a.png)
 
 当n趋近无穷大时，第二项由于小于1，剩余第一项，此时F(n+1)比F(n)为:
 
@@ -364,14 +364,14 @@ A支持二元运算，支持结合性公理(支持等价判断，且满足结合
 
 将字的最有效位解释为负权(negative weight)，我们用函数B2T(Binary to Two's-complement的缩写，长度为w)来表示。假设一个整数数据类型有w位。我们可以用向量来表示位，向量*x*表示`[x_w-1, ..., x_1, x_0]`，表示向量中的每一位，长度为w。
 
-![b2t](./assets_monoid_and_computer_programs/b2t.png)
+![b2t](./monoid_and_computer_programs_assets/b2t.png)
 
 其中≐表示左边被定义为右边。B2T将一个长度为w的0、1串映射为负整数。最小值的位向量是`[1, 0, ..., 0]`，即最高位为负权1，但其他所有位为0，最小值TMin为`-2^(w-1)`。最大值TMax用位向量`[0, 1, ..., 1]`表示，即最大值为`2^(w-1) - 1`。由定义可知，每一个介于`0 ~ 2^w - 1`之间的数，都有唯一的w位编码。反过来，每一个w长度的位向量，都有一个唯一的值与之对应。用数学语言来说，B2T是一个双射。
 
 
 最高有效位`w-1`位为符号位，权重为`-2^(w-1)`。符号位为1，为负数，0位正数。我们举例来看B2T从位向量到整数的映射：
 
-![b2t_eg](./assets_monoid_and_computer_programs/b2t_eg.png)
+![b2t_eg](./monoid_and_computer_programs_assets/b2t_eg.png)
 
 
 
@@ -379,12 +379,12 @@ A支持二元运算，支持结合性公理(支持等价判断，且满足结合
 
 把向量*x*看作一个二进制表示的数，我们就得到了*x*的无符号表示，我们用函数B2U(Binary to Unsigned)来表示，长度为w：
 
-![b2u](./assets_monoid_and_computer_programs/b2u.png)
+![b2u](./monoid_and_computer_programs_assets/b2u.png)
 
 
 其中≐表示左边被定义为右边。B2U将一个长度为w的0、1串映射为非负整数。最大值UMax用位向量`[1, 1, ..., 1]`表示，即最大值为`2^w - 1`。由定义可知，每一个介于`0 ~ 2^w - 1`之间的数，都有唯一的w位编码。反过来，每一个w长度的位向量，都有一个唯一的值与之对应。用数学语言来说，B2U也是一个双射。
 
-![b2u_eg](./assets_monoid_and_computer_programs/b2u_eg.png)
+![b2u_eg](./monoid_and_computer_programs_assets/b2u_eg.png)
 
 ### 分析对比补码和无符号数的编码
 

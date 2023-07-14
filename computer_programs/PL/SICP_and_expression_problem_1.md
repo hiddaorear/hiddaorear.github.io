@@ -29,11 +29,11 @@ expression problem作为引子，用函数式编程语言OCaml和面向对象语
 
 Java代码和OCaml代码，并不是一一对应。本想改成一一对应的，后来想一下，其实不影响主题的诠释，就懒得修改了。
 
-完整可运行代码见[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)。所有的代码均保证可以运行。
+完整可运行代码见[code of SICP and Expression Problem](./assets_SICP_and_expression_problem/SICP_and_expression_problem_code.md)。所有的代码均保证可以运行。
 
 ## expression problem
 
-![Expression Problem](./Expression_Problem_0.png)
+![Expression Problem](./assets_SICP_and_expression_problem/Expression_Problem_0.png)
 
 数据类型和函数是程序的两个维度，他们之间存在映射关系。数据可以应用在多个算法上，函数也可以操作多个数据。但我们的代码是维度只有一个，按顺序从上到下写。以数据为主来组织代码，如：面向对象；以函数来组织代码，如：函数式编程。
 
@@ -174,7 +174,7 @@ let num = eval (Add ((Negate (Int 5)), (Int 6)));;
 
 ### 从类型-操作表格角度分析
 
-![Expression Problem](./Expression_Problem_1.png)
+![Expression Problem](./assets_SICP_and_expression_problem/Expression_Problem_1.png)
 
 variant实现的expression，表达式的类型是固定的，无法拓展。但操作可以随意添加，我们还可以添加其他操作，模式匹配保证了类型安全。如果操作支持的类型不全，模式匹配就会报错。
 
@@ -300,7 +300,7 @@ expression的实现，其实一个初步interpreter，附录有一个相对完�
 
 ### 从类型-操作表格分析
 
-![Expression Problem](./Expression_Problem_2.png)
+![Expression Problem](./assets_SICP_and_expression_problem/Expression_Problem_2.png)
 
 我们用Java来解决expression problem。在Java中，expression用Class来声明。与函数式编程语言相反，Java中很方便新增expression，新增Class即可。但新增操作就很不方便，需要去修改每一个表达式的Class，逐一加上新操作。
 
@@ -482,7 +482,7 @@ class Eval2 extends Eval implements Exp2<Integer> {
 - Easy to add variants(extend interface)
 - Easy to add operations(implement interface)
 
-![Object_Algebras](./Object_Algebras.png)
+![Object_Algebras](./assets_SICP_and_expression_problem/Object_Algebras.png)
 
 通过extend和implement拓展原来的代码，Class之间有清晰的层次关系，我们可以类比Algebraic data types，这一系列的Class结构，和代数之间，也可以构造一个可逆映射(同构)。
 
@@ -656,7 +656,7 @@ let rec size = function
 
 函数式程序设计中，不允许修改数据，只能创建新的数据达成修改的目的。当数据很大的情况下，复制原来的数据，并修改之，得到新数据，成本很高。还有一个办法，就是只修改需要修改的局部即可，复用旧数据创建新数据。避免了deepCopy复制带来的消耗。
 
-![Immutable](./Immutable.gif)
+![Immutable](./assets_SICP_and_expression_problem/Immutable.gif)
 
 要达到这个目的，需要知道类型的局部特征。
 
@@ -674,9 +674,9 @@ let rec size = function
 
 对于二叉树有：挖去元素后列表断开, 剩下以该节点为树根的左右子树和从树根到该节点的路径上的每一个节点与其非路径节点的子树构成的列表, 路径上的每一个节点的非路径节点子树有两种可能(左或右子树)。
 
-![求导](./求导.jpg)
+![求导](./assets_SICP_and_expression_problem/求导.jpg)
 
-![tree_zipper](./tree_zipper.jpg)
+![tree_zipper](./assets_SICP_and_expression_problem/tree_zipper.jpg)
 
 即为:
 `T(x)^2*L(2xT(x))T(x)^2`为该节点下的左右子树。
@@ -897,7 +897,7 @@ e.toString(); // returns ((1 + 2) * (1 - 2))
 
 ### 完整可运行代码
 
-[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)
+[code of SICP and Expression Problem](./assets_SICP_and_expression_problem/SICP_and_expression_problem_code.md)
 
 
 ### 上篇

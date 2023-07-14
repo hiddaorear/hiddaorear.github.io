@@ -13,11 +13,11 @@
 
 在SICP第二章中，介绍了复数的两种表示，并介绍了基于类型分派(Tagged Data) ，消息传递(message passing)，数据导向(data directed)。其中消息传递是面向对象的一个雏形，基于类型分派带有函数式编程的痕迹。二者有各自的优缺点。数据导向是解决这个问题非常好的方案。
 
-完整可运行代码见[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)。所有的代码均保证可以运行。
+完整可运行代码见[code of SICP and Expression Problem](./assets_SICP_and_expression_problem/SICP_and_expression_problem_code.md)。所有的代码均保证可以运行。
 
 ## 复数的两种表示
 
-![复数](./complex_number.png)
+![复数](./assets_SICP_and_expression_problem/complex_number.png)
 
 复数有两种表示方式：直角坐标形式（实部和虚部），极坐标形式（模和幅角）。如何使得两者共存于同一个系统中呢？
 
@@ -111,7 +111,7 @@
 
 ## 操作和类型
 
-![复数操作表](./complex_table.png)
+![复数操作表](./assets_SICP_and_expression_problem/complex_table.png)
 
 我们有两种表示复数的类型，一种是直角坐标，一种是极坐标。二者都需要支持四种方法：
 
@@ -559,7 +559,7 @@ Actor原意是“演员”，Actor和其他Actor，通过台词（消息）对�
 
 ### 直角坐标实现
 
-二维表格的实现(代码中的`put`和`get`方法)，见[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)，创建二维表格。
+二维表格的实现(代码中的`put`和`get`方法)，见[code of SICP and Expression Problem](./assets_SICP_and_expression_problem/SICP_and_expression_problem_code.md)，创建二维表格。
 
 ``` scheme
 (define (install-rectangular-package)
@@ -855,7 +855,7 @@ function validateForm(formData) {
 
 ## 完整可运行代码
 
-[code of SICP and Expression Problem](./SICP_and_expression_problem_code.md)
+[code of SICP and Expression Problem](./assets_SICP_and_expression_problem/SICP_and_expression_problem_code.md)
 
 ### 下篇
 

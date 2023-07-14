@@ -372,7 +372,7 @@ UI渲染引擎和JS执行引擎是互斥的，JS引擎执行，则UI线程会被
 
 `async`和`defer`的外部脚本，浏览器会在后台加载脚本(并行)，加载完成之后，`defer`等到页面加载解析完成之后才执行，在`DOMContentLoader`之前；而`async`脚本，则会导致文档停止解析(如果文档还没解析完成)，执行脚本，执行完之后，文档接着解析，可能会影响`DOMContentLoader`事件。
 
-![async and defer](./async_and_defer.png)
+![async and defer](./web_analytics_assets/async_and_defer.png)
 
 
 |  | async | defer |
