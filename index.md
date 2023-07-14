@@ -1,7 +1,5 @@
 ---
 ---
-
-![emacs](./emacs.jpeg)
 [About me](./about.md)
 
 ## 江湖
@@ -31,7 +29,9 @@
 
 ## 计算机技术
 
-- [2013年到2023所读技术书](./computer_programs/2013_2023_reading_book/index.md)
+- [2013年到2023所读技术书](./computer_programs/2013_2023_reading_cs_book/index.md)
+
+### PL
 
 - [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
 
@@ -45,7 +45,16 @@
 
 - [Monad](./computer_programs/monad.md)
 
-- [前端上报](./computer_programs/web_analytics.md)
+### 前端
+
+- [前端上报](./computer_programs/front_end/web_analytics.md)
+
+- [React](./computer_programs/front_end/react/index.md)
+  
+- [算法列表](./computer_programs/algorithm/question/index.md)
+
+- [前端常见问题列表](./computer_programs/front_end/question/index.md)
+
 
 ## 写作技巧
 
@@ -58,15 +67,22 @@
 
 ## 随笔
 
-- [竹排摇梦过桂林](./essay/2023_04_GuiLin_tourist/index.md)
+### 游记
 
-- [种田忆旧](essay/2022_fram.md)
+- [竹排摇梦过桂林](./essay/2023_04_GuiLin_tourist/index.md)
 
 - [浮光掠影过苏州](./essay/2022_09_Shanghai_Tourist/index.md)
 
+- [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
+
+### 总结
+
+
 - [2022年总结](./history/2022_summary/2022.md)
 
-- [走过甘肃](./essay/Gansu_Province_and_2019/走过甘肃.md)
+### 回忆
+
+- [种田忆旧](essay/2022_fram.md)
 
 - [你真的需要提高技术吗？](./essay/badminton_technique.md)
 
@@ -78,7 +94,6 @@
 
 - [一次就好](./essay/single_step.md)
 
-- [陈省身先生](./node/2019_12_29_maths_Chern.md)
 
 ## 读书笔记
 
@@ -92,7 +107,10 @@
 
 - [看《红鳉鱼》](./essay/the_red_Killifish.md)
 
+- [陈省身先生](./node/2019_12_29_maths_Chern.md)
 
 
+
+![emacs](./emacs.jpeg)
 
 
