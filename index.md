@@ -2,6 +2,16 @@
 title: 临溪读书
 ---
 
+@import "{{ site.theme }}";
+@font-face {
+	font-family: jinkaiFont;
+    src: url("../fonts/jinkai.ttf") format("TrueType");
+}
+body {
+	font-family: jinkaiFont;
+}
+
+
 ![emacs](./emacs.jpeg)
 
 # 深柳读书堂
