@@ -23,10 +23,9 @@ body {
 
 #main_content  {
     box-sizing: border-box;
-    background-color: #FFF;
     border-radius: 5px;
     width: 60%;
-    margin: 20px;
+    max-width: 90% !important;
     padding-top: 40px;
     padding-bottom: 40px;
     padding-left: 40px;
