@@ -51,6 +51,14 @@
 
 - [算法设计思想](./computer_programs/algorithm/algorithm_design_ideas.md)
 
+### http
+
+- [htpp](./computer_programs/http/index.md)
+
+### 后端
+
+- [服务器开发模式](./computer_programs/server_model.md)
+
 ### 前端
 
 - [前端上报](./computer_programs/front_end/web_analytics.md)
