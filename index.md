@@ -33,8 +33,6 @@
 
 - [2013年到2023所读技术书](./computer_programs/2013_2023_reading_book/index.md)
 
-- [容器类型的设计与思考](./computer_programs/PL/containers/containers.md)
-
 - [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
 
 - [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
@@ -47,7 +45,7 @@
 
 - [Monad](./computer_programs/monad.md)
 
-- [前端上报](./computer_programs/analytics.md)
+- [前端上报](./computer_programs/web_analytics.md)
 
 ## 写作技巧
 
