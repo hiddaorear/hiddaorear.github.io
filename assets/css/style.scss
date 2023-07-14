@@ -38,6 +38,16 @@ body {
     }
 }
 
+@media screen and (max-width: 600px) {
+    #main_content  {
+        flex: 1;
+        width: auto;
+        overflow-y: scroll;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
 p {
     display: block;
     margin-block-start: 1em;
