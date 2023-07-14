@@ -3,13 +3,7 @@ title: 临溪读书
 ---
 
 @import "{{ site.theme }}";
-@font-face {
-	font-family: jinkaiFont;
-    src: url("../fonts/jinkai.ttf") format("TrueType");
-}
-body {
-	font-family: jinkaiFont;
-}
+
 
 
 ![emacs](./emacs.jpeg)
@@ -60,6 +54,13 @@ body {
 # 坐而论道
 
 ## 工作的江湖
+
+### [从热力学看管理](./enlightenment/2023_1.md)
+
+### [从经济学看管理](./enlightenment/2023_2.md)
+
+### [从儒家看管理](./enlightenment/2023_3.md)
+
 
 ### [初学管理0：情绪的泥潭](./enlightenment/2023_negative_emotions.md)
 
