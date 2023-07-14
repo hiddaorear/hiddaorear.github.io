@@ -11,3 +11,7 @@
 - [刘未鹏csdn](https://blog.csdn.net/pongba/)
 
 - [刘未鹏个人站点](http://mindhacks.cn/)
+
+- [云风的BLOG](https://blog.codingnow.com/)
+
+- [徐宥的博客](https://blog.youxu.info/)

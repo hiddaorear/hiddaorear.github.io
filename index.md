@@ -82,6 +82,8 @@
 
 ## 读书笔记
 
+- [读刘未鹏csdn博客](./node/2023_07_15_csdn_pngba.md)
+
 - [读《启功给你讲书法》](./node/2019_12_01_calligraphy_qigong.md)
 
 - [不畏浮云遮望眼](./node/2022_05_03_Wang_An_Shi.md)
