@@ -1,10 +1,6 @@
 ---
-title: 临溪读书
 ---
-
 @import "{{ site.theme }}";
-
-
 
 ![emacs](./emacs.jpeg)
 
