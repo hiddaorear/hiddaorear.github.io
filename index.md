@@ -4,8 +4,6 @@
 ![emacs](./emacs.jpeg)
 
 
-# 坐而论道
-
 ## 江湖
 
 - [从热力学看管理](./enlightenment/2023_1.md)
