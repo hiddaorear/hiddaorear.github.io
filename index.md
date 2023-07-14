@@ -10,6 +10,8 @@
 
 - [从儒家看管理](./enlightenment/2023_3.md)
 
+- [管理闲谈](./enlightenment/question.md)
+
 - [初学管理0：情绪的泥潭](./enlightenment/2023_negative_emotions.md)
 
 - [初学管理1：作茧自缚](./enlightenment/2023_excessive_self_discipline.md)
@@ -45,6 +47,10 @@
 
 - [Monad](./computer_programs/monad.md)
 
+### 算法
+
+- [算法设计思想](./computer_programs/algorithm/algorithm_design_ideas.md)
+
 ### 前端
 
 - [前端上报](./computer_programs/front_end/web_analytics.md)
@@ -55,6 +61,7 @@
 
 - [前端常见问题列表](./computer_programs/front_end/question/index.md)
 
+- [从工程流程看前端知识结构](./computer_programs/front_end/question/engineering_processes.md)
 
 ## 写作技巧
 
