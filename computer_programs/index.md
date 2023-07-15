@@ -11,9 +11,9 @@
 
 - [幺半群与计算机编程](./PL/monoid_and_computer_programs.md)
 
-- [SICP and Expression Problem 上](./PL/SICP_and_expression_problem_0.md)
+- [SICP and Expression Problem（上）](./PL/SICP_and_expression_problem_0.md)
 
-- [SICP and Expression Problem 下](./PL/SICP_and_expression_problem_1.md)
+- [SICP and Expression Problem (下)](./PL/SICP_and_expression_problem_1.md)
 
 - [Objective-C笔记](./PL/Objective-C.md)
 
@@ -24,7 +24,6 @@
 - [前端上报](./front_end/web_analytics.md)
 
 - [React](./front_end/react/index.md)
-  
 
 - [前端常见问题列表](./front_end/question/index.md)
 

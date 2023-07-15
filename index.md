@@ -3,9 +3,6 @@
 
 [About me](./about.md)
 
-## 计算机技术
-
-- [计算机技术文章列表](./computer_programs/index.md)
 
 ## 教育
 
@@ -26,6 +23,11 @@
 ## 笔记
 
 - [笔记文章列表](./node/index.md)
+
+## 计算机技术
+
+- [计算机技术文章列表](./computer_programs/index.md)
+
 
 ![emacs](./emacs.jpeg)
 
