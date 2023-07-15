@@ -2,74 +2,9 @@
 ---
 [About me](./about.md)
 
-## 江湖
-
-- [从热力学看管理](./enlightenment/2023_1.md)
-
-- [从经济学看管理](./enlightenment/2023_2.md)
-
-- [从儒家看管理](./enlightenment/2023_3.md)
-
-- [管理闲谈](./enlightenment/question.md)
-
-- [初学管理0：情绪的泥潭](./enlightenment/2023_negative_emotions.md)
-
-- [初学管理1：作茧自缚](./enlightenment/2023_excessive_self_discipline.md)
-
-- [初学管理2：必也正名乎](./enlightenment/2023_rectify_the_name.md)
-
-- [初学管理3：控制与逻辑](./enlightenment/2023_control_and_logic.md)
-
-- [初学管理4：政治第一](./enlightenment/2023_politics_first.md)
-
-- [初学管理5：情感与理性](./enlightenment/2023_sense_and_sensibility.md)
-
-- [初学管理6：技术的悖论](./enlightenment/2023_paradox_of_technology.md)
-
-- [初学管理7：何去何从](./enlightenment/2023_where_to_go.md)
-
 
 ## 计算机技术
 
-- [2013年到2023所读技术书](./computer_programs/2013_2023_reading_cs_book/index.md)
-
-### PL
-
-- [C++泛型獭祭](./computer_programs/PL/generic_programming/generic_programming.md)
-
-- [幺半群与计算机编程](./computer_programs/monoid_and_computer_programs.md)
-
-- [SICP and Expression Problem 上](./computer_programs/PL/SICP_and_expression_problem_0.md)
-
-- [SICP and Expression Problem 下](./computer_programs/PL/SICP_and_expression_problem_1.md)
-
-- [Objective-C笔记](./computer_programs/PL/Objective-C.md)
-
-- [Monad](./computer_programs/monad.md)
-
-### 算法
-
-- [算法设计思想](./computer_programs/algorithm/algorithm_design_ideas.md)
-
-### http
-
-- [http](./computer_programs/http/index.md)
-
-### 后端
-
-- [服务器开发模式](./computer_programs/back_end/server_model.md)
-
-### 前端
-
-- [前端上报](./computer_programs/front_end/web_analytics.md)
-
-- [React](./computer_programs/front_end/react/index.md)
-  
-- [算法列表](./computer_programs/algorithm/question/index.md)
-
-- [前端常见问题列表](./computer_programs/front_end/question/index.md)
-
-- [从工程流程看前端知识结构](./computer_programs/front_end/question/engineering_processes.md)
 
 ## 写作技巧
 
