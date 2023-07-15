@@ -53,7 +53,7 @@
 
 ### http
 
-- [htpp](./computer_programs/http/index.md)
+- [http](./computer_programs/http/index.md)
 
 ### 后端
 
