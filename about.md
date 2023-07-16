@@ -9,4 +9,4 @@
 
 - 熟练：JavaScript、TypeScript
 - 商业代码水准：Objective-C
-- StackOverflow水准：C++、Golang、OCaml、Elisp
+- StackOverflow水准：C++、Golang、OCaml、Elisp、Scheme
