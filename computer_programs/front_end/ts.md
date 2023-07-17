@@ -17,7 +17,7 @@ any可以赋值给任意类型，但unknown不行
 1. 数字类型的枚举值，则任意数字均可分配到此枚举，因此类型不安全；最初数据类型枚举，为了方便位运算
 2. 字符串型枚举值，类型安全。但字符串枚举，不是结构化类型，而是名义类型类型（Nominally Typed），即使两个类型结构完全一致，也不相等；
 3. const enum，会抹除所有enum运行时代码，直接用值替换。但这样有问题，使用枚举值映射的时候，会报错：
-   ```TypeScript
+   ```typescript
    enum Enum {
 	   A
    }
@@ -46,7 +46,7 @@ any可以赋值给任意类型，但unknown不行
 
 第1小题：
 
-```TypeScript
+```typescript
 
 function zip(target: any, source: any):any {
   if (!target.length  || !source.length) {
@@ -61,7 +61,7 @@ function zip(target: any, source: any):any {
 
 第2小题：
 
-```TypeScript
+```typescript
 // 第一种
 function zip(target: unknown[], source: unknown[]):unknown[] {
   if (!target.length  || !source.length) {
@@ -92,7 +92,7 @@ const zip: Zip = (target: unknown[], source: unknown[]) => {
 
 第3小题：
 
-```TypeScript
+```typescript
 
 type Zip<One extends unknown[], Other extends unknown[]> = 
   One extends [infer OneFirst, ...infer Rest1]
@@ -127,7 +127,7 @@ const reslut =  zip(arr1 , arr2);
 
 ### 类型状态机
 
-```TypeScript
+```typescript
 type RequestBuilder<Phase extends number = 0> = Phase extends 0
   ? {
       setId: (id: string | number) => RequestBuilder<1>;
