@@ -37,6 +37,10 @@
 
 - [使用TypeScript](./front_end/ts.md)
 
+#### 架构设计
+
+ - [动态前端页面架构设计](./front_end/architecture/dynamic_page/index.md)
+
 
 ### 算法
 
