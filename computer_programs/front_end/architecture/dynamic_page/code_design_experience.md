@@ -1,4 +1,4 @@
-# 代码设计经验
+# 经验之谈
 
 ## 五年架构
 
@@ -10,7 +10,7 @@
 
 也许为了赶进度，产品没有达到80分，但架构设计上，依然要保留将来达到80分，甚至90分的可能。
 
-## Safe Zone, Service & I/O Shield
+## 数据接入层
 
 前端页面在设计的时候，很容易犯一个错误，缺乏统一的数据接入层，也缺乏对应的Model。直接使用后台接口返回的所有数据字段，或者直接从页面组件View中发起请求，更新View的内容。
 
@@ -34,3 +34,8 @@
 - [JavaScript 错误处理完全指南](https://www.infoq.cn/article/gls9hjusghqmll1zowwn)
 - [错误处理(Error-Handling)：为何、何时、如何](https://blog.csdn.net/pongba/article/details/1815742?spm=1001.2014.3001.5501)
 - [C++11（及现代C++风格）和快速迭代式开发](https://blog.csdn.net/pongba/article/details/7911997?spm=1001.2014.3001.5501)
+
+
+## log
+
+- 2023/7/20 初稿
