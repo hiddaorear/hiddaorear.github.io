@@ -14,7 +14,7 @@
 
 ## 随笔
 
-- [随笔文章列表](./node/index.md)
+- [随笔文章列表](./essay/index.md)
 
 ## 笔记
 
@@ -27,6 +27,10 @@
 ## 计算机技术
 
 - [计算机技术文章列表](./computer_programs/index.md)
+
+## 沉思
+
+- [沉思录](./ruminations/index.md)
 
 
 ![emacs](./emacs.jpeg)

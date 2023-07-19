@@ -23,11 +23,23 @@
 
 - [前端上报](./front_end/web_analytics.md)
 
-- [React](./front_end/react/index.md)
+- [使用React hooks](./front_end/react/hooks.md)
 
 - [前端常见问题列表](./front_end/question/index.md)
 
 - [从工程流程看前端知识结构](./front_end/question/engineering_processes.md)
+
+- [debug](./front_end/debug.md)
+
+- [使用monorepo](./front_end/monorepo.md)
+
+- [编程风格指南](./front_end/style_guide.md)
+
+- [使用TypeScript](./front_end/ts.md)
+
+#### 架构设计
+
+ - [动态前端页面架构设计](./front_end/architecture/dynamic_page/index.md)
 
 
 ### 算法

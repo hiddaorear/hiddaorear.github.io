@@ -13,3 +13,6 @@
 
 - [看《红鳉鱼》](./the_red_Killifish.md)
 
+# 有思考的博客
+
+- [博客列表](./blog_list.md)
