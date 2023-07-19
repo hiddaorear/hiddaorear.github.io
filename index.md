@@ -28,6 +28,10 @@
 
 - [计算机技术文章列表](./computer_programs/index.md)
 
+## 沉思
+
+- [沉思录](./ruminations/index.md)
+
 
 ![emacs](./emacs.jpeg)
 
