@@ -105,6 +105,8 @@ class DataConversionService implements DataType {
 
 妥善处理错误，构建健壮系统。
 
+![error](./code_design_experience_assets/thinking_error.png)
+
 ### 什么是错误？
 
 

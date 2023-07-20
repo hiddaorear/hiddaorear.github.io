@@ -1,10 +1,14 @@
 # 动态前端页面架构设计
 
+## 设计思想
+
+- [沉思架构](./thinking_in_design.md)
+
 ## 模块
 
 - [一、模块依赖关系](./module_dependencies.md)
 
-- [二、单向依赖](./one_way%20_dependency.md)
+- [二、单向依赖](./one_way_dependency.md)
 
 - [三、IoC （控制反转）和 DI（依赖注入）](./ioc_di.md)
 
