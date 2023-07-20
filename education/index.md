@@ -8,6 +8,5 @@
 
 - [快速掌握一个语言最常用的50%](./learn_programming_techniques/2023_07_16_learn_a_new_language_quickly.md)
 
-- [读博客笔记（一）](./learn_programming_techniques/2023_07_15_csdn_pngba.md)
 
 - [学习使用C++](./learn_programming_techniques/2023_07_16_csdn_learn_cpp.md)

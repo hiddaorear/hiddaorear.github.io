@@ -12,6 +12,9 @@
 
 - [看《红鳉鱼》](./the_red_Killifish.md)
 
+- [2023年7月15日读博客笔记（一）](./learn_programming_techniques/2023_07_15_csdn_pngba.md)
+
+
 # 有思考的博客
 
 - [博客列表](./blog_list.md)
