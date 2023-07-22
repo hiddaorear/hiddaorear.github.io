@@ -125,3 +125,4 @@ class DataConversionService implements DataType {
 ## log
 
 - 2023/7/20 初稿
+- 2023/7/22 修订，并添加图片
