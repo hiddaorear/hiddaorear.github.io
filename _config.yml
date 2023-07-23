@@ -17,6 +17,7 @@ description: 闲门向山路，深柳读书堂
 url: https://hiddaorear.github.io
 baseurl: /
 highlighter: rouge
+footer_content: "by 石下读书"
 
 favicon_ico: "/assets/images/favicon.ico"
 
