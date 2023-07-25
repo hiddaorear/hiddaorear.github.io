@@ -97,7 +97,11 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 !important;
 }
 
+p, ul, ol, table, pre, dl {
+    margin: 0 0 0.8em;
+}
+
 p {
     margin-block-start: 0;
-    margin-block-end: 0.5em;
+    margin-block-end: 0.8em;
 }
