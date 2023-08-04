@@ -1,6 +1,6 @@
 # 博客列表
 
-## 技术文集oo
+## 技术文集
 
 - [图解 React 源码系列](https://github.com/7kms/react-illustration-series)
 
