@@ -6,19 +6,29 @@
 
 ### 面向对象和GP
 
-实现ADT，如stack。完成了一个stack类，用数组实现。函数foo要用到这个stack：`void foo(stack)`;
+实现ADT，如stack。完成了一个stack类，用数组实现。函数foo要用到这个stack：
+
+```cpp
+void foo(stack)
+
+```
 
 面向对象：
 
 按照面向对象的思路，要使得foo可以复用，所有的stack，比如，因为效率原因，要替换stack为一个链表实现，就需要抽象出一个IStack接口。此时，具体类尚未实现，或者刚刚写出来，就需要考虑抽象，可能过早抽象了。
 
-`void foo(IStack);`
+```cpp
+void foo(IStack);
+
+```
 
 GP：
 
 GP的方式，把形参给虚化掉，当成无类型语言使用。
 
-`void foo<Stack>(Stack s);`
+```cpp
+void foo<Stack>(Stack s);
+```
 
 foo不依赖任何具体的interface，天生就依赖stack这个概念本身的抽象语义。
 
