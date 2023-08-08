@@ -164,9 +164,6 @@ UnaryFunction for_each( InputIt first, InputIt last, UnaryFunction f );
 2. 使用默认参数，复杂任务才需要把非默认参数传递过去。
 
 
-
-
-
 ## 文章列表
 
 - [耦合的三重境界](https://groups.google.com/g/pongba/c/dnRCUVOMQ-Q)
@@ -174,3 +171,7 @@ UnaryFunction for_each( InputIt first, InputIt last, UnaryFunction f );
 - [为什么GP更自然](https://groups.google.com/g/pongba/c/5VOiFHa6Lr0)
 - [聊聊 API 设计](https://groups.google.com/g/pongba/c/Ss4wZ4035gY)
 - [高阶特性与低阶语言的尴尬](https://groups.google.com/g/pongba/c/bVzIWvjTPFM)
+
+## log
+
+- 2023/8/8  完成初步整理
