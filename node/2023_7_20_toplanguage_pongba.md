@@ -130,7 +130,6 @@ C里面没有接口，只存在两种耦合，实体耦合和签名耦合。C里
 ```cpp
 template< class InputIt, class UnaryFunction >
 UnaryFunction for_each( InputIt first, InputIt last, UnaryFunction f );
-
 ```
 
 这里的InputIt和UnaryFunction，其实都是delegate，for_each对他们的依赖只是签名依赖，而非接口依赖。
@@ -142,6 +141,14 @@ UnaryFunction for_each( InputIt first, InputIt last, UnaryFunction f );
 - GP是编译时绑定
 - OO是运行时绑定
 
+### 《C++ Template》中多态的特性
+
+动/静和绑定性。二者结合，有四种形式：
+- 动态的绑定多态，即基于OOP的虚函数的多态；
+- 静态的非绑定多态，也就是模版；
+- 动态的非绑定多态，脚本语言的鸭子类型；
+- 静态的绑定多态，
+
 
 ## 聊聊API的设计
 
@@ -149,6 +156,12 @@ UnaryFunction for_each( InputIt first, InputIt last, UnaryFunction f );
 
 有一种情况，对象是根据外部的相关信息创建的。即动多态场景。
 如果你的代码需要使用该对象，那你可能需要一个interface。不同的外部信息，可能创建不同的对象，但所有这些对象，都需要你定义的interface。在代码中，通过interface，将业务逻辑分派下去。
+
+### 参数过多的设计
+
+一般有两种方式：
+1. 将逻辑上相关的参数，组织成一个有业务含义的结构；
+2. 使用默认参数，复杂任务才需要把非默认参数传递过去。
 
 
 
