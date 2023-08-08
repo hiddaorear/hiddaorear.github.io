@@ -143,6 +143,12 @@ UnaryFunction for_each( InputIt first, InputIt last, UnaryFunction f );
 - OO是运行时绑定
 
 
+## 聊聊API的设计
+
+什么情况下用interface比GP更好呢？
+
+有一种情况，对象是根据外部的相关信息创建的。即动多态场景。
+如果你的代码需要使用该对象，那你可能需要一个interface。不同的外部信息，可能创建不同的对象，但所有这些对象，都需要你定义的interface。在代码中，通过interface，将业务逻辑分派下去。
 
 
 
