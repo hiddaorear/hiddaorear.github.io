@@ -90,7 +90,7 @@ GP比较宽泛，从concept来说，基于：函数名称和函数签名的耦�
 ```cpp
 void f(Stack s) 
 {
-	//...
+  //...
 }
 ```
 
@@ -98,7 +98,7 @@ void f(Stack s)
 ```cpp
 void f(IStack s) 
 {
-	//...
+  //...
 }
 ```
 
@@ -106,14 +106,14 @@ void f(IStack s)
 ```cpp
 struct stack
 {
-	int (*pop)();
-	void(*push)(int);
-	//...
+  int (*pop)();
+  void(*push)(int);
+  //...
 };
 
 void f(struct stack s)
 {
-	//...
+  //...
 }
 ```
 
