@@ -67,11 +67,10 @@ dataEntity.getData();
 
 ```javascript
 interface JSBridge {
-	invoke(methodName: string, params: unknown, callbackFn: CallbackType): void;
+  invoke(methodName: string, params: unknown, callbackFn: CallbackType): void;
 }
 
 export type CallbackFnType = (params: any) => void;
-
 
 export class JSBridgeService implements JSBridge {
   private static instance: JSBridgeService;
