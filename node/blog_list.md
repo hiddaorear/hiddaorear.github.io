@@ -2,6 +2,10 @@
 
 ## 技术文集
 
+- [Linux C编程一站式学习](https://akaedu.github.io/book/)
+
+- [C++ Templates 第二版](https://github.com/Walton1128/CPP-Templates-2nd--/tree/master)
+
 - [图解 React 源码系列](https://github.com/7kms/react-illustration-series)
 
 ## 有个人感悟的博客
