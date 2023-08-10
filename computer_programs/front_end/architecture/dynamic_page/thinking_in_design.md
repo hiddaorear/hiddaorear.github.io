@@ -2,6 +2,14 @@
 
 #### 2023/08/10 
 
+![outline](./thinking_in_design/thinking_in_design_outline.png)
+
+## 项目简介
+
+用户通过所见即所得的编辑页面，生成一份数据。多个后台加工这份数据并添加其他相关数据，发送给前端。前端解析后台所给数据，支持不同的渲染架构（如webview，React native等），渲染页面，支持交互。
+
+![多后台多引擎](./thinking_in_design/multiple_backends.png)
+
 ## 分
 
 ### 抽象
@@ -17,7 +25,6 @@
 ### 绑定和非绑定
 
 ### 依赖倒置
-
 
 ## 合
 
