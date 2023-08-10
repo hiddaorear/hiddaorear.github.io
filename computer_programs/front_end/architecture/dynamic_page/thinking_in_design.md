@@ -67,7 +67,7 @@ dataEntity.getData();
 
 ```javascript
 interface JSBridge {
-	invoke(methodName: string, params: unknown, callbackFn: CallbackFnType): void;
+	invoke(methodName: string, params: unknown, callbackFn: CallbackType): void;
 }
 
 export type CallbackFnType = (params: any) => void;
@@ -76,11 +76,11 @@ export type CallbackFnType = (params: any) => void;
 export class JSBridgeService implements JSBridge {
   private static instance: JSBridgeService;
   private static callNativeFn: any;
-  private constructor(callNativeMethod: CallbackFnType) {
+  private constructor(callNativeMethod: CallbackType) {
     JSBridgeService.callNativeFn = callNativeMethod;
   }
 
-  public static getInstance(callNativeFn: CallbackFnType) {
+  public static getInstance(callNativeFn: CallbackType) {
     if (!JSBridgeService.instance) {
       JSBridgeService.instance = new JSBridgeService(callNativeFn);
     }
@@ -90,7 +90,7 @@ export class JSBridgeService implements JSBridge {
   public invoke(
     methodName: string,
     params: any,
-    callback: CallbackFnType,
+    callback: CallbackType,
   ) {
     // ...
   }
