@@ -32,7 +32,82 @@
 
 **原则一：用抽象来处理复杂性。**
 
+LEGO跑在多个终端APP上，不同的终端因历史版本等原因，实现的JS bridge不一致。比如获取数据的接口：
 
+在A里面是：
+
+```javascript
+class DataEntity {
+  getData() {
+    callNativeMethod('getdata', params, callbackFn);
+  }
+}
+
+const dataEntity = new DataEntity();
+dataEntity.getData();
+```
+
+后面发现B里面的JS bridge和A中调用不一样。在B里面是：
+
+```javascript
+class DataEntity {
+  getData() {
+    callNative('getData', params, callbackFn);
+  }
+}
+
+const dataEntity = new DataEntity();
+dataEntity.getData();
+```
+
+不同的环境里面，调用方式不一致。后面可能还有其他的环境，获取数据的调用，各不相同，怎么应对呢？
+
+我们把二者共同的部分抽象出来，在这个例子里面，都要调用客户端JS bridge，我们抽象一个公共的invoke接口。为调用方提供稳定的接口。具体所处的环境，留到其他地方处理（下文里面依赖倒置和胶水层等部分，会详细说明）。
+由于只需初始化一次，这里用单例实现：
+
+```javascript
+interface JSBridge {
+	invoke(methodName: string, params: unknown, callbackFn: CallbackFnType): void;
+}
+
+export type CallbackFnType = (params: any) => void;
+
+
+export class JSBridgeService implements JSBridge {
+  private static instance: JSBridgeService;
+  private static callNativeFn: any;
+  private constructor(callNativeMethod: CallbackFnType) {
+    JSBridgeService.callNativeFn = callNativeMethod;
+  }
+
+  public static getInstance(callNativeFn: CallbackFnType) {
+    if (!JSBridgeService.instance) {
+      JSBridgeService.instance = new JSBridgeService(callNativeFn);
+    }
+    return JSBridgeService.instance;
+  }
+
+  public invoke(
+    methodName: string,
+    params: any,
+    callback: CallbackFnType,
+  ) {
+    // ...
+  }
+}
+
+class DataEntity {
+  constructor(private JSBirdge: JSBridge) {
+
+  }
+  getData() {
+    this.JSBirdge.invoke('getData', {id: 123}, (data) => {})
+  }
+}
+
+const dataEntity = new DataEntity(JSBridgeService.getInstance(callNativeMethod));
+dataEntity.getData(); 
+```
 
 
 
