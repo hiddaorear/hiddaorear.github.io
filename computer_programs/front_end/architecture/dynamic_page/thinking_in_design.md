@@ -97,9 +97,7 @@ export class JSBridgeService implements JSBridge {
 }
 
 class DataEntity {
-  constructor(private JSBirdge: JSBridge) {
-
-  }
+  constructor(private JSBirdge: JSBridge) {}
   getData() {
     this.JSBirdge.invoke('getData', {id: 123}, (data) => {})
   }
@@ -112,10 +110,9 @@ const dataEntity = new DataEntity(JSBridgeService.getInstance(callNative));
 dataEntity.getData(); 
 ```
 
-
-
-
 ### 分层
+
+
 
 ### 依赖的方向
 
