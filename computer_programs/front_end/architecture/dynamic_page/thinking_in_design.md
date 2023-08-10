@@ -104,8 +104,11 @@ class DataEntity {
     this.JSBirdge.invoke('getData', {id: 123}, (data) => {})
   }
 }
-
+// A 环境里面
 const dataEntity = new DataEntity(JSBridgeService.getInstance(callNativeMethod));
+// or B环境里面
+const dataEntity = new DataEntity(JSBridgeService.getInstance(callNative));
+
 dataEntity.getData(); 
 ```
 
