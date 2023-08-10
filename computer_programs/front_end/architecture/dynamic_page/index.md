@@ -2,7 +2,7 @@
 
 ## 设计思想
 
-- [沉思架构](./thinking_in_design.md)
+- [架构的分与合](./thinking_in_design.md)
 
 ## 模块
 
