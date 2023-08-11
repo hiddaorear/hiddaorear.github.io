@@ -6,6 +6,8 @@
 
 - [C++ Templates 第二版](https://github.com/Walton1128/CPP-Templates-2nd--/tree/master)
 
+- [Google 开源项目风格指南](https://zh-google-styleguide.readthedocs.io/en/latest/contents/)
+
 - [图解 React 源码系列](https://github.com/7kms/react-illustration-series)
 
 ## 有个人感悟的博客
