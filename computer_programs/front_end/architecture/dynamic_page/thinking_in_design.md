@@ -173,6 +173,33 @@ dataEntity.getData();
 
 ### 静态与动态、绑定和非绑定
 
+```javascript
+enum Tag1 {
+  a = 1,
+  b = 2,
+}
+
+enum Tag2 {
+  a = 1,
+  b = 2,
+}
+
+const test = <T extends number>(p: T) => {
+ console.log(p);
+}
+
+test(Tag1.a)
+test(Tag2.a)
+
+const test1 = (p: Tag1) => {
+ console.log(p);
+}
+
+test1(Tag1.a);
+test1(Tag2.a); // Argument of type 'Tag2.a' is not assignable to parameter of type 'Tag1'.
+
+```
+
 ### 依赖倒置
 
 原则三：用IoC和DI解决依赖问题
