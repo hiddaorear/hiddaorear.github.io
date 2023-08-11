@@ -63,7 +63,44 @@ dataEntity.getData();
 不同的环境里面，调用方式不一致。后面可能还有其他的环境，获取数据的调用，各不相同，怎么应对呢？
 
 我们把二者共同的部分抽象出来，在这个例子里面，都要调用客户端JS bridge，我们抽象一个公共的invoke接口。为调用方提供稳定的接口。具体所处的环境，留到其他地方处理（下文里面依赖倒置和胶水层等部分，会详细说明）。
-由于只需初始化一次，这里用单例实现：
+
+```javascript
+interface JSBridge {
+  invoke(methodName: string, params: unknown, callbackFn: CallbackType): void;
+}
+
+export type CallbackFnType = (params: any) => void;
+
+export class JSBridgeService implements JSBridge {
+  private static callNativeFn: any;
+  private constructor(callNativeMethod: CallbackType) {
+    this.callNativeFn = callNativeMethod;
+  }
+
+  public invoke(
+    methodName: string,
+    params: any,
+    callback: CallbackType,
+  ) {
+    // ...
+  }
+}
+
+class DataEntity {
+  constructor(private JSBirdge: JSBridge) {}
+  getData() {
+    this.JSBirdge.invoke('getData', {id: 123}, (data) => {})
+  }
+}
+// A 环境里面
+const dataEntity = new DataEntity(new JSBridgeService(callNativeMethod));
+// or B环境里面
+const dataEntity = new DataEntity(new JSBridgeService(callNative));
+dataEntity.getData(); 
+```
+
+
+由于只需初始化一次，可以优化为用单例实现：
 
 ```javascript
 interface JSBridge {
