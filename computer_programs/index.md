@@ -48,6 +48,8 @@
 
 ## 算法
 
+- [浅析排序算法](./algorithm/sort.md)
+  
 - [算法列表](./algorithm/question/index.md)
 
 - [算法设计思想](./algorithm/algorithm_design_ideas.md)
