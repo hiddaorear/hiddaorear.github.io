@@ -21,7 +21,7 @@
 
 ### golang
 
-- [go](./golang/index.md)
+- [go](./PL/golang/index.md)
 
 ## 前端
 
