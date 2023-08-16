@@ -37,6 +37,28 @@ int main(int argc, const char * argv[]) {
 
 ```
 
+### 选择排序
+
+### 插入排序
+
+
+## 高级排序算法
+
+### 快速排序
+
+### 堆排序
+
+### 归并排序
+
+
+## 先进排序算法
+
+### Dual-Pivot Quicksort（双枢三分快排）
+
+### BlockQuicksort
+
+### Pattern-defeating Quicksort
+
 ## 阅读资料
 
 - [打造 Go 语言最快的排序算法](https://blog.csdn.net/ByteDanceTech/article/details/124464192)
