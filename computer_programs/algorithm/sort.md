@@ -133,6 +133,25 @@ int main(int argc, const char * argv[]) {
 
 ```
 
+#### 折半插入排序
+
+插入排序还可以通过二分查找算法优化性能。但基本思想和插入排序一样，仅对时间复杂度中的常数优化。
+
+``` cpp
+void insertion_sort(int arr[], int len) {
+    if (len < 2) return;
+    for (int i = 1; i != len; i++) {
+        int key = arr[i];
+		// 指定范围内查找大于目标值的第一个元素
+        auto index = upper_bound(arr, arr + i, key) - arr;
+        // 使用 memmove 移动元素，比使用 for 循环速度更快，时间复杂度仍为 O(n)
+        memmove(arr + index + 1, arr + index, (i - index) * sizeof(int));
+        arr[index] = key;
+    }
+}
+
+```
+
 ## 高级排序算法
 
 ### 快速排序
