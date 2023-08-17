@@ -96,6 +96,40 @@ int main(int argc, const char * argv[]) {
 C++ 插入排序：
 
 ``` cpp
+#include <iostream>
+using namespace std;
+
+template<typename T>
+void insertion_sort(T arr[], int len) {
+    int i, j;
+    T key;
+    // 从1开始，因为下标0默认是有序列的开始
+    for (i = 1; i < len; i++) {
+        // 记录要插入的元素
+        key = arr[i];
+        // 从已经排序的最右边开始比较，找到比其小的元素
+        j = i;
+        while (j > 0 && key < arr[j - 1]) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        // 存在比其小的元素，插入
+        if (j != i) {
+            arr[j] = key;
+        }
+    }
+}
+
+int main(int argc, const char * argv[]) {
+    int arr[] = {19, 93, 3, 25};
+    int len = (int) sizeof(arr) / sizeof(*arr);
+    insertion_sort(arr, len);
+    for (int i = 0; i < len; i++) {
+        cout << arr[i] << ' ';
+    }
+    cout << endl;
+    return 0;
+}
 
 ```
 
