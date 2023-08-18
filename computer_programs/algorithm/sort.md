@@ -16,7 +16,6 @@
 
 C++ 冒泡排序：
 ``` cpp
-
 #include <iostream>
 using namespace std;
 template<typename T>
@@ -53,7 +52,6 @@ int main(int argc, const char * argv[]) {
 C++ 选择排序：
 
 ``` cpp
-
 #include <iostream>
 using namespace std;
 
