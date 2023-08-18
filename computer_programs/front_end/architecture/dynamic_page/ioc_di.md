@@ -231,6 +231,10 @@ void f<Stack>(Stack s){
 
 - [关于C++泛型编程的一些杂感](https://blog.csdn.net/pongba/article/details/391584?spm=1001.2014.3001.5501)
 
+- [代码复用](https://groups.google.com/g/pongba/c/rlb-v8DbWY4)
+
+- [无处不在的抽象惩罚](https://groups.google.com/g/pongba/c/BJup2BEIUTU)
+
 ## log
 
 - 2023/8/18 初稿
