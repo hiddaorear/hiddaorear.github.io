@@ -16,7 +16,9 @@
 
 - [2023年7月21日读博客笔记（二）：为什么GP更自然？](./2023_7_20_toplanguage_pongba.md)
 
-- [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](2023_08_14_learning_language.md)
+- [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](./2023_08_14_learning_language.md)
+
+- [学习C++：实践者的方法（Beta1）](./2023_08_18_learning_cpp_pngba.md)
 
 - [《Unix编程艺术》Eric Raymond谈模块化原则、胶合层和面向对象的缺点](./2023_08_07_unix_glue_layer.md)
 
