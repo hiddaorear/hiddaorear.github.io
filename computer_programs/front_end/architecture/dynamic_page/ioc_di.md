@@ -43,6 +43,34 @@ fun3() {
 
 ### OOP（面向对象）范式和FP（函数式编程） 范式
 
+上述例子中，`fun3`对`fun1`和`fun2`有直接依赖，`fun3`的实现，直接依赖了`fun1`和`fun2`。我们可以通过抽象接口，来处理直接依赖。
+
+``` c
+interface File {
+  read()
+}
+
+Fun1 implement File {
+  read() {
+  
+  }
+}
+Fun2 implement File {
+  read() {
+  
+  }
+}
+
+fun3(file: File) {
+  file.read()
+}
+
+```
+
+`fun3`的实现，依赖的抽象出来的接口`File`，而不是直接依赖具体实现`fun1`或`fun2`。代码的依赖顺序，和运行顺序相反。逻辑的顺序（初始化file，调用`file.read()`），和代码的运行顺序（调用`file.read()`,根据file的类型分发，是相反的。这其实就是控制反转。
+
+）
+
 
 ## 产品需求中的控制反转
 
