@@ -6,11 +6,7 @@
 
 ## 模块
 
-- [一、模块依赖关系](./module_dependencies.md)
-
-- [二、单向依赖](./one_way_dependency.md)
-
-- [三、IoC （控制反转）和 DI（依赖注入）](./ioc_di.md)
+- [IoC （控制反转）](./ioc_di.md)
 
 - [四、架构与性能](./architecture_and_performance.md)
 
