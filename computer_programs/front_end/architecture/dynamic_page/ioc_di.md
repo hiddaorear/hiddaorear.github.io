@@ -151,7 +151,7 @@ int read(){int c;/*...*/ return c;}
 void write(char c){/*...*/}
 void seek(long index,int mode){/*...*/}
 
-struct FILE console = {open,close,read,write,seek};
+struct FILE console = {open, close, read, write, seek};
 ```
 
 现在，标准输入STDIN的定义是`FILE*`， 而`FILE*`指向了控制台这个数据结构。举例来说，`getchar()`的实现：
@@ -176,10 +176,65 @@ int getchar(){
 首先，没有做到一切皆文件。比如，线程不是文件，没有办法用poll等待线程退出，只能join。poll也不能用于磁盘IO。
 其次，为了兼顾不同资源的特点，访问操作被定义为，最基础最原始的字符串读写。更高级别的抽象，与普遍性，难以调和，会牺牲掉前面FILE的两个统一性和普遍性。
 
+### 依赖抽象而不是具体实现
+
+从Unix的设计可知，我们可以抽象一个read接口：
+
+``` javascript
+interface IO {
+    read(): void;
+}
+
+class Component {
+    constructor(private io: IO) {
+
+    }
+    read() {
+        this.io.read();
+    }
+}
+
+class KeyboarInput implements IO {
+    read() {
+
+    }
+}
+
+class FileInput implements IO {
+    read() {
+        
+    }
+}
+
+const component = new Component(new KeyboarInput());
+// or
+// const component = new Component(new FileInput());
+component.read();
+```
+
+Component不再直接依赖具体的输入，而是依赖抽象的IO接口。后续如果还有新增的输入，接口可以保持统一，新增一个具体实现即可。Component本身不需要修改。
+
+但还是会有修改的地方，很显然修改无法避免，Component初始化的时候，需要选择具体的输入对象。因此，修改不可避免，但核心模块的修改成本更高，类似Component作为核心模块，依赖抽象的接口，规避修改，让修改发生在外层，降低了修改的成本，代码维护更简易。
+
+Component依赖具体IO对象，一般而言，会放到较外层，典型有以下3种方案：
+
+- 在项目入口的main函数中；
+- 用工厂方法创建；
+- 使用依赖注入；
+
 ### 单向依赖
 
+在工程中，核心逻辑一般相对稳定，外层与输入输出接近的地方，逻辑相对容易变化。
 
-### 工厂模式
+比如前端典型的逻辑与UI分离的设计，UI可能是浏览器，也可能在小程序，或者在iOS或安卓原生化架构。逻辑是核心，UI变化多。我们把业务逻辑放到核心，依赖抽象出来的UI接口，就可以在各种UI上复用逻辑，让UI去适配不同平台即可。具体来说，逻辑是核心，依赖抽象的UI接口，而不依赖具体的渲染架构。而UI可以依赖逻辑，业务逻辑变化的时候，UI需要变化。但UI渲染平台切换的时候，保持逻辑相对不变。
+
+也就是依赖其实有合理的方向，外层模块可以依赖核心模块，但核心模块不应该依赖外层模块。
+
+依赖不仅仅是单向的，而是应该是指向核心模块。
+
+![分层架构])(./IoC/layered_architecture.png)
+
+## 工厂模式
 
 
 ### 工厂模式：简单工厂模式
@@ -296,6 +351,7 @@ void f<Stack>(Stack s){
 - 动态的非绑定多态：脚本语言的鸭子类型；
 
 ## 抽象惩罚
+
 
 
 
