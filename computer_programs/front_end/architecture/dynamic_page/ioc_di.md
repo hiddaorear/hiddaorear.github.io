@@ -157,10 +157,10 @@ struct FILE console = {open,close,read,write,seek};
 现在，标准输入STDIN的定义是`FILE*`， 而`FILE*`指向了控制台这个数据结构。举例来说，`getchar()`的实现：
 
 ``` c
-extern struct FILE* STDIN；
+extern struct FILE* STDIN;
 
 int getchar(){
-  return STDIN-＞read()；
+  return STDIN-＞read();
 }
 
 ```
