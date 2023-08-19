@@ -122,6 +122,8 @@ component.read();
 
 所以需要抽象这里代码，首先，我们会想到把输入抽象一下，向调用方提供一套共同的抽象。其次，调用方不需要感知输入的具体实现，不用知道是来源于键盘还是文件。最后，调用不用感知的代码，可以放到其他地方，比如外部注入等等。
 
+### In Unix, everything is a file
+
 计算机输入和输出的抽象，自然就会联想到著名的UNIX操作系统对IO设备的抽象，“In Unix, everything is a file”。基于file，统一了两个方面：
 
 1. 统一命名空间（namespace），参数是文件系统（file system）的路径。保证了系统资源，有相同的方式去发现；
@@ -131,12 +133,12 @@ component.read();
 
 ``` c
 struct FILE {
-  void (*open)(char* name,int mode)；
-  void (*close)()；
-  int (*read)()；
-  void (*write)(char)；
-  void (*seek)(long index,int mode)；
-}；
+  void (*open)(char* name,int mode);
+  void (*close)();
+  int (*read)();
+  void (*write)(char);
+  void (*seek)(long index,int mode);
+};
 ```
 
 然后，具体IO设备，如控制台，就需要提供这个5个函数的实际实现，将FILE结构体的函数指针，指向这些对应实现函数：
@@ -149,7 +151,7 @@ int read(){int c;/*...*/ return c;}
 void write(char c){/*...*/}
 void seek(long index,int mode){/*...*/}
 
-struct FILE console = {open,close,read,write,seek}；
+struct FILE console = {open,close,read,write,seek};
 ```
 
 现在，标准输入STDIN的定义是`FILE*`， 而`FILE*`指向了控制台这个数据结构。举例来说，`getchar()`的实现：
@@ -169,6 +171,10 @@ int getchar(){
 
 从例子可以看到多态的优点。如果需要支持新的IO设备，程序不需要修改，而只需要新设备的驱动，实现FILE结构体的5个标准函数即可。这样就实现了，程序与设备无关。程序反过来控制设备了，设备依赖程序的接口约定，依赖也反转了。
 
+#### 一切皆文件的缺点
+
+首先，没有做到一切皆文件。比如，线程不是文件，没有办法用poll等待线程退出，只能join。poll也不能用于磁盘IO。
+其次，为了兼顾不同资源的特点，访问操作被定义为，最基础最原始的字符串读写。更高级别的抽象，与普遍性，难以调和，会牺牲掉前面FILE的两个统一性和普遍性。
 
 ### 单向依赖
 
@@ -289,6 +295,10 @@ void f<Stack>(Stack s){
 - 静态的非绑定多态：C++泛型；
 - 动态的非绑定多态：脚本语言的鸭子类型；
 
+## 抽象惩罚
+
+
+
 ## 阅读资料
 
 - [在C++中使用IoC及DSM框架](https://groups.google.com/g/pongba/c/XmQ5h77h_K8#4a11c065a73f9ad8)
@@ -304,5 +314,5 @@ void f<Stack>(Stack s){
 ## log
 
 - 2023/8/18 初稿
-
+- 2023/8/19 依赖反转初稿
 
