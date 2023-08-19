@@ -232,17 +232,186 @@ Component依赖具体IO对象，一般而言，会放到较外层，典型有以
 
 依赖不仅仅是单向的，而是应该是指向核心模块。
 
-![分层架构])(./IoC/layered_architecture.png)
+![分层架构](./IoC/layered_architecture.png)
 
 ## 工厂模式
+
+在上述例子中，Component不再依赖具体的IO实现，而是依赖接口，在外层将IO的实例，传入Component对象中。然而，有时候核心模块可能需要，在内部创建所依赖的外层对象。单向依赖要求我们，核心模块依赖抽象接口，不应该感知具体对象。怎么办呢？
+
+我们可以进一步抽象，把创建的逻辑，用工厂模式抽象出来。我们抽象出一个IOFactory类，当他被调用的时候，会创建具体的IO对象。
 
 
 ### 工厂模式：简单工厂模式
 
+``` javascript
+interface IO {
+    read(): void;
+}
+
+class Component {
+    constructor() {
+
+    }
+    read() {
+        new IOFactory().createIO('KeyboarInput').read();
+    }
+}
+
+class IOFactory {
+    createIO(type: string): IO {
+        if (type === 'KeyboarInput') {
+            return new KeyboarInput();
+        }
+        if (type === 'FileInput') {
+            return new FileInput();
+        }
+        return new KeyboarInput();
+    }
+}
+
+class KeyboarInput implements IO {
+    read() {
+
+    }
+}
+
+class FileInput implements IO {
+    read() {
+        
+    }
+}
+
+const component = new Component();
+component.read();
+```
+
 
 ### 工厂模式：工厂方法模式
 
+简单工厂模式，在业务复杂的时候，面临维护问题：
 
+1. 一旦需要新增工厂所需创建对象，需要修改工厂类的内部代码；
+2. 部分对象创建比较复杂，可能需要复杂业务计算，这部分放到工厂类中，不易维护；
+
+可以进一步优化为工厂方法模式：
+
+``` javascript
+interface IO {
+    read(): void;
+}
+
+interface IOFactory {
+    create(): IO;
+}
+
+class KeyboarInputFactory implements IOFactory {
+    create(): IO {
+        return new KeyboarInput();
+    }
+}
+
+class FileInputFactory implements IOFactory {
+    create(): IO {
+        return new FileInput();
+    }
+}
+
+class Component {
+    read(type: string) {
+        let ioFactory: IOFactory = new KeyboarInputFactory();
+        if (type === 'KeyboarInput') {
+            ioFactory = new KeyboarInputFactory();
+        } else if (type === 'FileInput') {
+            ioFactory = new FileInputFactory();
+        }
+        ioFactory.create().read();
+    }
+}
+
+class KeyboarInput implements IO {
+    read() {
+
+    }
+}
+
+class FileInput implements IO {
+    read() {
+        
+    }
+}
+
+const component = new Component();
+component.read('KeyboarInput');
+```
+
+Component中可能会有大量的if语句，不便于维护。还可以进一步抽象。
+
+抽象工厂模式：
+
+``` javascript
+interface IO {
+    read(): void;
+}
+
+interface IOFactory {
+    create(): IO;
+}
+
+class KeyboarInputFactory implements IOFactory {
+    create(): IO {
+        return new KeyboarInput();
+    }
+}
+
+class FileInputFactory implements IOFactory {
+    create(): IO {
+        return new FileInput();
+    }
+}
+
+class IOFactoryFactory {
+    constructor(
+        private map: Map<string, new (...arg: any[]) => IOFactory> = new Map()
+    ) {
+        this.init()
+    }
+    init() {
+        this.map.set('KeyboarInput', KeyboarInputFactory);
+        this.map.set('FileInput', FileInputFactory);
+    }
+
+    createIOFactory(type: string) {
+        const IOFactoryClass = this.map.get(type);
+        if (IOFactoryClass) {
+            return new IOFactoryClass();
+        } else {
+            throw new Error('类型不存在');
+        }
+    }
+
+}
+
+class Component {
+    read(type: string) {
+        new IOFactoryFactory().createIOFactory(type).create().read();
+    }
+}
+
+class KeyboarInput implements IO {
+    read() {
+
+    }
+}
+
+class FileInput implements IO {
+    read() {
+        
+    }
+}
+
+const component = new Component();
+component.read('KeyboarInput');
+```
 
 ## 静态与动态、绑定和非绑定
 
