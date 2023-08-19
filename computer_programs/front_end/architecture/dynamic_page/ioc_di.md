@@ -103,6 +103,72 @@ fun3(file: File) {
 
 ## 依赖反转
 
+组件从用户的键盘输入获取信息：
+
+``` javascript
+class Component {
+    read() {
+        // 用户键盘输入
+    }
+}
+
+const component = new Component();
+component.read();
+```
+
+后面有用户要求支持通过文件批量输入。我们需要支持两种不同的输入方式，就需要去看Component的代码，并修改read方法。
+
+修改一处可能还好，但有可能项目中，其他地方也需要支持新的输入方式，我们不得不全量搜索代码，并修改。本来预期是简单的修改，现在影响到多处，自测和测试验证的工作量巨大，还会增加新版本发布的风险。
+
+所以需要抽象这里代码，首先，我们会想到把输入抽象一下，向调用方提供一套共同的抽象。其次，调用方不需要感知输入的具体实现，不用知道是来源于键盘还是文件。最后，调用不用感知的代码，可以放到其他地方，比如外部注入等等。
+
+计算机输入和输出的抽象，自然就会联想到著名的UNIX操作系统对IO设备的抽象，“In Unix, everything is a file”。基于file，统一了两个方面：
+
+1. 统一命名空间（namespace），参数是文件系统（file system）的路径。保证了系统资源，有相同的方式去发现；
+2. 统一访问接口（interface），方式是标准的read、write等。保证了系统资源，能以相同的方式去操作；
+
+系统通过 file的形式，实现了对多种多样系统资源的使用。具体来说，Unix要求IO设备都需要提供open、close、read、write和seek这5个标准函数：
+
+``` c
+struct FILE {
+  void (*open)(char* name,int mode)；
+  void (*close)()；
+  int (*read)()；
+  void (*write)(char)；
+  void (*seek)(long index,int mode)；
+}；
+```
+
+然后，具体IO设备，如控制台，就需要提供这个5个函数的实际实现，将FILE结构体的函数指针，指向这些对应实现函数：
+
+``` c
+#include "file.h"
+void open(char* name,int mode){/*...*/}
+void close(){/*...*/}
+int read(){int c;/*...*/ return c;}
+void write(char c){/*...*/}
+void seek(long index,int mode){/*...*/}
+
+struct FILE console = {open,close,read,write,seek}；
+```
+
+现在，标准输入STDIN的定义是`FILE*`， 而`FILE*`指向了控制台这个数据结构。举例来说，`getchar()`的实现：
+
+``` c
+extern struct FILE* STDIN；
+
+int getchar(){
+  return STDIN-＞read()；
+}
+
+```
+
+`getchar()`只是通过指针，间接调用了FILE数据结构体中read函数指针，所实际指向的函数。
+
+以前编程方法，其实正是多态的简单实现。在面向对象中，如C++，类的每个虚函数（virtual function）的地址，被记录在vtable的数据结构中，虚函数调用先查询这个表，类似上面C通过指针的调用。通过上面C语言例子，可以知道在C也可以实现多态。因此，面向对象在多态上，其实没有理论创新，只是让多态便于使用，更安全，函数指针比较灵活，需要人为遵循约定。
+
+从例子可以看到多态的优点。如果需要支持新的IO设备，程序不需要修改，而只需要新设备的驱动，实现FILE结构体的5个标准函数即可。这样就实现了，程序与设备无关。程序反过来控制设备了，设备依赖程序的接口约定，依赖也反转了。
+
 
 ### 单向依赖
 
