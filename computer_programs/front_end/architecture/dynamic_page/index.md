@@ -2,13 +2,13 @@
 
 ## 设计思想
 
-- [架构的分与合](./thinking_in_design.md)
-
 - [IoC（控制反转）](./ioc_di.md)
+
+- [架构的分与合](./thinking_in_design.md)
 
 - [有趣的上报](./report.md)
 
-## 类型
+## 类型系统
 
 - [DDD（领域驱动设计）和ADT（代数数据类型）](./ddd_and_adt.md)
 
