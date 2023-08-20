@@ -38,4 +38,4 @@
   
 - [王垠的博客](https://www.yinwang.org/#)
 
-- [为什么这么设计系列文章](./https://draveness.me/whys-the-design/)
+- [为什么这么设计系列文章](https://draveness.me/whys-the-design/)
