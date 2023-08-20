@@ -419,6 +419,9 @@ component.read('KeyboarInput');
 
 Unix哲学认为，胶水层，应该尽量的薄。胶水层越多，越复杂。
 
+## 阅读资料
+
+- [从面向对象的设计模式看软件设计](https://coolshell.org/articles/8961.html/)
 
 ## log
 
