@@ -7,6 +7,8 @@
 
 ## PL
 
+- [多态](./PL/2023_08_20_polymorphic.md)
+
 - [C++泛型獭祭](./PL/generic_programming/generic_programming.md)
 
 - [幺半群与计算机编程](./PL/monoid_and_computer_programs.md)
