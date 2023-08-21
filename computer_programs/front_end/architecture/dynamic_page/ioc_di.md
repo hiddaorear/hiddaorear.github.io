@@ -235,6 +235,8 @@ void f<Stack>(Stack s){
 
 - [无处不在的抽象惩罚](https://groups.google.com/g/pongba/c/BJup2BEIUTU)
 
+- [C 的回归](https://blog.codingnow.com/2007/09/c_vs_cplusplus.html)
+
 ## log
 
 - 2023/8/18 初稿
