@@ -16,7 +16,6 @@
 
 C++ 冒泡排序：
 ``` cpp
-
 #include <iostream>
 using namespace std;
 template<typename T>
@@ -53,7 +52,6 @@ int main(int argc, const char * argv[]) {
 C++ 选择排序：
 
 ``` cpp
-
 #include <iostream>
 using namespace std;
 
@@ -174,6 +172,8 @@ void insertion_sort(int arr[], int len) {
 ### Pattern-defeating Quicksort
 
 ## 阅读资料
+
+- [与程序员相关的CPU缓存知识](https://coolshell.org/articles/20793.html/)
 
 - [打造 Go 语言最快的排序算法](https://blog.csdn.net/ByteDanceTech/article/details/124464192)
 

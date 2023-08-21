@@ -7,6 +7,8 @@
 
 ## PL
 
+- [多态](./PL/2023_08_20_polymorphic.md)
+
 - [C++泛型獭祭](./PL/generic_programming/generic_programming.md)
 
 - [幺半群与计算机编程](./PL/monoid_and_computer_programs.md)
@@ -25,6 +27,12 @@
 
 ## 前端
 
+### 架构设计
+
+- [架构设计](./front_end/architecture/index.md)
+
+### 其他
+
 - [前端上报](./front_end/web_analytics.md)
 
 - [使用React hooks](./front_end/react/hooks.md)
@@ -40,10 +48,6 @@
 - [编程风格指南](./front_end/style_guide.md)
 
 - [使用TypeScript](./front_end/ts.md)
-
-### 架构设计
-
- - [动态前端页面架构设计](./front_end/architecture/dynamic_page/index.md)
 
 
 ## 算法
