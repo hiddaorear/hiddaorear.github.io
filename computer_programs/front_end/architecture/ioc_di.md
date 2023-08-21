@@ -417,9 +417,54 @@ component.read('KeyboarInput');
 
 Unix哲学认为，胶水层，应该尽量的薄。胶水层越多，越复杂。
 
+## 依赖注入（Dependency injection）
+
+工厂模式中，模块本来需要接受各种参数，来构造一个对象。现在通过工厂模式，模块只需接受一个已经实例化的对象。对象的使用，和他的构造方式解耦了，控制操作交给了工厂，也就是所谓的“控制反转”。
+
+工厂模式把对象的创建抽象了，类不再直接依赖对象，而是依赖抽象出来的对象工厂。在工厂模式中，需要new出来的对象，得专门实现对应的工厂。还可以更进一步，用一种通用的模式，去new对象，不用每次遇到类，就要去新增工厂。较为典型的实现有依赖注入。
+
+控制反转是一种思想，依赖注入是这种思想的一种技术实现。这一技术，让一个模块，接受所依赖的对象。所谓“注入”，就是从模块角度来看，依赖的对象是外部传递过来的。模块不需要关心这些对象构建，即new的过程。
+
+TypeScript中简单的依赖注入实现：
+
+``` javascript
+import "reflect-metadata";
+
+type Constructor<T = any> = new (...args: any[]) => T;
+
+const Injectable = (): ClassDecorator => target => {};
+
+class Service {
+    prop = 1;
+}
+
+@Injectable()
+class TestService {
+    constructor(public readonly service: Service) {}
+    test() {
+        console.log(this.service.prop);
+    }
+}
+
+const Factory = <T extends any>(target: Constructor<T>): T => {
+    // 获取所有注入服务
+    const providers = Reflect.getMetadata('design:paramtypes', target); // [Service]
+    const args = providers.map((provider: Constructor) => new provider());
+    return new target(...args);
+};
+
+Factory(TestService).test(); // 1
+
+```
+
+注：metadata，元数据，即用来定义数据的数据，比如数据A，有数据类型等，来描述这个数据。在JavaScript中，给对象添加额外的元数据，不影响这个对象的结果，不会有多的property。常用来实现依赖注入。
+
+
 ## 阅读资料
 
 - [从面向对象的设计模式看软件设计](https://coolshell.org/articles/8961.html/)
+
+- [详解依赖注入的原理与实现](https://aaaaash.notion.site/e5674b99d1b5480988a1b3b2bdf52370)
 
 ## log
 
