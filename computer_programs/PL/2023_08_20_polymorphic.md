@@ -164,11 +164,18 @@ void f<Stack>(Stack s){
 
 所谓抽象惩罚：抽象机制带来的效率降低。例如，虚函数是一种抽象机制，带来的效率降低，至少是一个间接调用的开销。
 
-## Golang语言多态的不可能三角
+## 多态的不可能三角
+
+1. 开发效率
+2. 编译速度
+3. 运行速度
+
 
 
 
 ## 阅读资料
+
+ - [为什么 Go 语言没有泛型](https://draveness.me/whys-the-design-go-generics/)
 
 - [在C++中使用IoC及DSM框架](https://groups.google.com/g/pongba/c/XmQ5h77h_K8#4a11c065a73f9ad8)
 
