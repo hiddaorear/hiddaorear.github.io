@@ -103,5 +103,9 @@ p, ul, ol, table, pre, dl {
 
 p {
     margin-block-start: 0;
-    margin-block-end: 0.8em;
+    margin-block-end: 0;
+}
+
+pre code span {
+   line-height: 1;
 }
