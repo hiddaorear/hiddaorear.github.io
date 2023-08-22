@@ -170,6 +170,8 @@ void f<Stack>(Stack s){
 2. 编译速度
 3. 运行速度
 
+![generics](./2023_08_20_polymorphic/generics.png)
+
 以Golang（早期无泛型的版本）、C++和Java为例，看看他们语言设计上的考量：
 
 Golang早期版本没有支持泛型，缺点：会导致算法，需要重复写不同类型的代码，牺牲了开发效率。优点：编译器实现简单，编译速度快；
