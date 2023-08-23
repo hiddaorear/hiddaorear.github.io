@@ -158,12 +158,12 @@ void __insertion_sort(RandomAccessIterator first,
                       RandomAccessIterator last) {
     if (first == last) return;
     for (RandomAccessIterator i = first + 1; i != last; ++i)  // 外循环
-        // value_type 的实现，待补充
+        // TODO value_type 的实现，待补充
         __linear_insert(first, i, value_type(first)); // 以上，[first, i) 形成一个子区间
 }
 
 template <class RandomAccessIterator, class T>
-void __linear_insert(RandomAccessIterator first,
+inline void __linear_insert(RandomAccessIterator first,
                      RandomAccessIterator last, T*) {
     T value = *last;  // 记录尾元素
     if (value < *first) { // 尾比头还小（注意，头端必为最小元素）
@@ -204,6 +204,105 @@ void __unguarded_linear_insert(Randomaccessiterator last, T value) {
 ![quick sort](./sort/quick_sort.png)
 
 快速排序可以理解为一种批量的冒泡排序。每一个元素的浮沉，不再取决于相邻元素的比较，而是取决于中枢元素的比较，且每次沉浮不再是一个身位，而是直接到达上下半区。快速排序通常很快。
+
+``` cpp
+// 快排
+const int __stl_threshold = 16;
+
+// 返回a，b，c之居中者
+template<class T>
+inline const T& __median(const T& a, const T& b, const T& c) {
+    if (a < b) {
+        if (b < c) { // a < b < c
+            return b;
+        } else if (a < c) { // a < c < b
+            return c;
+        } else { // c < a < b
+            return a;
+        }
+    } else if ( a < c) { // b < a < c
+        return a;
+    } else if ( b < c) { // b < c < a
+        return c;
+    } else { // c < b < a
+        return b;
+    }
+}
+
+// 分割函数，返回值为分割以后，右段第一个位置
+template <class RandomAccessIterator, class T>
+RandomAccessIterator __unguarded_partition(RandomAccessIterator first,
+                                           RandomAccessIterator last,
+                                           T pivot) {
+    while (true) {
+        while (*first < pivot) ++first; // first 找到 >= pivot 的元素就停下来
+        --last;
+        while(pivot < *last) --last; // last 找到 <= pivot 的元素就停下来
+        if (!(first < last)) {
+            return first; // 交错，结束循环
+        }
+        std::iter_swap(first, last); // 大小值，交换
+        ++first;
+    }
+}
+
+template <class RandomAccessIterator>
+inline void sort(RandomAccessIterator first,
+                 RandomAccessIterator last) {
+    if (!(first == last)) {
+        __quick_sort_loop(first, last);
+        __final_insertion_sort(first, last);
+    }
+}
+
+template <class RandomAccessIterator>
+inline void __quick_sort_loop(RandomAccessIterator first,
+                              RandomAccessIterator last) {
+    __quick_sort_loop_aux(first, last, _RWSTD_VALUE_TYYPE(first));
+}
+
+template <class RandomAccessIterator>
+inline void __quick_sort_loop_aux(RandomAccessIterator first,
+                              RandomAccessIterator last,
+                              T*) {
+    while (last - first > __stl_threshold) {
+        // median-of-3 partitioning
+        RandomAccessIterator cut = __unguarded_partition(first, last,
+                                                         T(__median(*first, *(first + (last - first)/2),
+                                                                    *(last - 1))));
+        if (cut - first >= last - cut) {
+            __quick_sort_loop(cut, last); // 对右段递归处理
+            last = cut;
+        } else {
+            __quick_sort_loop(first, cut); // 对左段递归处理
+            first = cut;
+        }
+    }
+}
+
+// 具体实现，见上文的插入排序
+template <class RandomAccessIterator>
+inline void __final_insertion_sort(RandomAccessIterator first,
+                                   RandomAccessIterator last) {
+    if (last - first > __stl_threshold) {
+        __insertion_sort(first, first + __stl_threshold);
+        __unguarded_linear_insert(first + __stl_threshold, last);
+    } else {
+        __insertion_sort(first, last);
+    }
+}
+```
+
+#### 阈值（threshold）
+
+数据量少的时候，如十来个元素，Quick Sort不一定比 Insertion Sort 快，Qick Sort即使极小的子序列，也有很多函数递归调用。
+
+所以需要适当评估序列的大小，决定使用Quick Sort还是Insertion Sort。多少大小呢？因设备而异，5~20都有可能。
+
+#### 几近排序（final insertion sort）
+
+如果序列是快完成了，但尚未完成的状态，用Insertion Sort处理这些子序列，效率一般也比Quick Sort要好，Quick Sort可能会“将所有子序列彻底排序”。
+
 
 ### 堆排序
 
