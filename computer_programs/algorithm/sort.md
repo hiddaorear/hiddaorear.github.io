@@ -4,6 +4,8 @@
 
 ![排序算法谱系](./sort/sort.outline.jpg)
 
+对于排序算法来说，最耗时有两部分：比较和交换。这也是排序算法的核心步骤。
+
 ## 朴素排序算法
 
 ### 冒泡排序
@@ -318,11 +320,16 @@ inline void __final_insertion_sort(RandomAccessIterator first,
 
 ### Dual-Pivot Quicksort（双枢三分快排）
 
-### BlockQuicksort
+2009年问世的改进版本的快速排序，从Java7开始被其标准库所采用。与经典快排主要不同是，引入了两个中枢点，将序列分为三段：
 
-### Pattern-defeating Quicksort
+1. 三分递归深度，只有二分的63%左右；
+2. 三分操作比二分操作复杂，三分快排的比较次数和数据移动次数，均多于经典快排，为什么比经典的快呢？主要是三分更擅长利用cache。现代计算机的数据操作最慢的过程是首次读入，而读入后，短时间内进行多次访问，数据有cache，开销会小些。由1的分析，三分比二分减少了冷数据访问。而操作的复杂度，都是在热数据上，所以更快，特别是内存敏感性语言实现的（如Java和Go）。
+
+
 
 ## 阅读资料
+
+- [Why Is Dual-Pivot Quicksort Fast?](https://arxiv.org/pdf/1511.01138.pdf)
 
 - [与程序员相关的CPU缓存知识](https://coolshell.org/articles/20793.html/)
 
