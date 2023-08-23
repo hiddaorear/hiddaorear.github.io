@@ -150,6 +150,53 @@ void insertion_sort(int arr[], int len) {
 
 ```
 
+#### 《STL源码剖析》中插入排序实现
+
+``` cpp
+template <class RandomAccessIterator>
+void __insertion_sort(RandomAccessIterator first,
+                      RandomAccessIterator last) {
+    if (first == last) return;
+    for (RandomAccessIterator i = first + 1; i != last; ++i)  // 外循环
+        // value_type 的实现，待补充
+        __linear_insert(first, i, value_type(first)); // 以上，[first, i) 形成一个子区间
+}
+
+template <class RandomAccessIterator, class T>
+void __linear_insert(RandomAccessIterator first,
+                     RandomAccessIterator last, T*) {
+    T value = *last;  // 记录尾元素
+    if (value < *first) { // 尾比头还小（注意，头端必为最小元素）
+        // 比最小元素还小，不需要一个个比较，直接一次处理
+        std::copy_backward(first, last, last + 1);  // 将整个区间向右移一个位置
+        *first = value;  // 令头元素等于原先的尾元素值
+    }
+    else  // 尾不小于头
+        __unguarded_linear_insert(last, value);
+}
+
+template <class RandomAccessIterator, class T>
+void __unguarded_linear_insert(Randomaccessiterator last, T value) {
+    RandomAccessIterator next = last;
+    --next;
+    // insertion sort 内循环
+    // 注意，一旦不再出现逆转对（inversion），循环就可以结束了
+    while(value < *next) { // 逆转对（inversion）存在
+        *last = *next;  // 调整
+        last = next;  // 调整迭代器
+        --next;  // 左移一个位置
+    }
+    *last = value;  // value 的正确落脚处
+}
+```
+
+之所以用unguarded_前缀命名，是因为，一般的insertion sort在内循环，需要判断是否相邻元素是“逆转对”，同时还要判断循环是否越界，需要两次判断。
+
+但`__unguarded_linear_insert`是在`__linear_insert`中调用，最小值一定在内循环区间中，就可以省略一个判断。虽然可能无足轻重，但大量数据情况下，影响可观。STL中以`__unguraded`前缀命名者，即边界条件的检验可以省略，或说已经融入特定条件。
+
+插入排序的复杂度为O(N^2)，并不理想，但数据量少的时候，有不错的效果，原因是一些实现上的技巧，使得他不想其他排序算法，有诸如递归调用等操作，带来的额外负荷。
+
+
 ## 高级排序算法
 
 ### 快速排序
