@@ -194,7 +194,6 @@ struct iterator_traits<const _Tp*> {
     typedef const _Tp&                  reference;
 };
 
-
 template <class _Iter>
 inline typename iterator_traits<_Iter>::iterator_category
 __iterator_category(const _Iter&)
@@ -221,11 +220,9 @@ template <class _Iter>
 inline typename iterator_traits<_Iter>::iterator_category
 iterator_category(const _Iter& __i) { return __iterator_category(__i); }
 
-
 template <class _Iter>
 inline typename iterator_traits<_Iter>::difference_type*
 distance_type(const _Iter& __i) { return __distance_type(__i); }
-
 
 template <class _Iter>
 inline typename iterator_traits<_Iter>::value_type*
@@ -279,7 +276,6 @@ void __insertion_sort(RandomAccessIterator first,
 ``` cpp
 #include <iostream>
 #include "stl_algo.h"
-
 
 int main() {
     int arr[] = {19, 93, 3, 25};
@@ -385,14 +381,12 @@ inline void __quick_sort_loop(RandomAccessIterator first,
     __quick_sort_loop_aux(first, last, __VALUE_TYPE(first));
 }
 
-
 // 具体实现，见上文的插入排序
 template <class RandomAccessIterator>
 inline void __final_insertion_sort(RandomAccessIterator first,
                                    RandomAccessIterator last) {
     __insertion_sort(first, last);
 }
-
 
 template <class RandomAccessIterator>
 inline void sort(RandomAccessIterator first,
@@ -411,7 +405,6 @@ inline void sort(RandomAccessIterator first,
 ``` cpp
 #include <iostream>
 #include "stl_algo.h"
-
 
 int main() {
     int arr[] = {19, 93, 3, 25, 89, 6, 26};
