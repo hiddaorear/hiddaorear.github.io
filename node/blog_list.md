@@ -6,6 +6,8 @@
 
 ## 技术文集
 
+- [LeetCode Cookbook](https://books.halfrost.com/leetcode/ChapterOne/)
+
 - [OI（Olympiad in Informatics，信息学奥林匹克竞赛）](https://oi-wiki.org/)
 
 - [Linux C编程一站式学习](https://akaedu.github.io/book/)
