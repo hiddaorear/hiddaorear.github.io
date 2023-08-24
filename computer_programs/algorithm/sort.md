@@ -267,7 +267,6 @@ void __insertion_sort(RandomAccessIterator first,
                       RandomAccessIterator last) {
     if (first == last) return;
     for (RandomAccessIterator i = first + 1; i != last; ++i)  // 外循环
-        // value_type 的实现，待补充
         __linear_insert(first, i, __VALUE_TYPE(first)); // 以上，[first, i) 形成一个子区间
 }
 
@@ -285,7 +284,7 @@ void __insertion_sort(RandomAccessIterator first,
 int main() {
     int arr[] = {19, 93, 3, 25};
     int len = (int) sizeof(arr) / sizeof(*arr);
-    __insertion_sort(arr, &arr[len - 1]);
+    __insertion_sort(arr, &arr[len]);
     for (int i = 0; i < len; i++) {
         std::cout << arr[i] << ' ';
     }
@@ -310,7 +309,12 @@ int main() {
 
 快速排序可以理解为一种批量的冒泡排序。每一个元素的浮沉，不再取决于相邻元素的比较，而是取决于中枢元素的比较，且每次沉浮不再是一个身位，而是直接到达上下半区。快速排序通常很快。
 
+`stl_algo.h`:
+
 ``` cpp
+#ifndef LEARNING_STL_STL_ALGO_H
+#define LEARNING_STL_STL_ALGO_H
+
 // 快排
 const int __stl_threshold = 16;
 
@@ -352,24 +356,14 @@ RandomAccessIterator __unguarded_partition(RandomAccessIterator first,
 }
 
 template <class RandomAccessIterator>
-inline void sort(RandomAccessIterator first,
-                 RandomAccessIterator last) {
-    if (!(first == last)) {
-        __quick_sort_loop(first, last);
-        __final_insertion_sort(first, last);
-    }
-}
-
-template <class RandomAccessIterator>
 inline void __quick_sort_loop(RandomAccessIterator first,
-                              RandomAccessIterator last) {
-    __quick_sort_loop_aux(first, last, _RWSTD_VALUE_TYYPE(first));
-}
+                              RandomAccessIterator last);
 
-template <class RandomAccessIterator>
+
+template <class RandomAccessIterator, class T>
 inline void __quick_sort_loop_aux(RandomAccessIterator first,
-                              RandomAccessIterator last,
-                              T*) {
+                                  RandomAccessIterator last,
+                                  T*) {
     while (last - first > __stl_threshold) {
         // median-of-3 partitioning
         RandomAccessIterator cut = __unguarded_partition(first, last,
@@ -385,16 +379,49 @@ inline void __quick_sort_loop_aux(RandomAccessIterator first,
     }
 }
 
+template <class RandomAccessIterator>
+inline void __quick_sort_loop(RandomAccessIterator first,
+                              RandomAccessIterator last) {
+    __quick_sort_loop_aux(first, last, __VALUE_TYPE(first));
+}
+
+
 // 具体实现，见上文的插入排序
 template <class RandomAccessIterator>
 inline void __final_insertion_sort(RandomAccessIterator first,
                                    RandomAccessIterator last) {
-    if (last - first > __stl_threshold) {
-        __insertion_sort(first, first + __stl_threshold);
-        __unguarded_linear_insert(first + __stl_threshold, last);
-    } else {
-        __insertion_sort(first, last);
+    __insertion_sort(first, last);
+}
+
+
+template <class RandomAccessIterator>
+inline void sort(RandomAccessIterator first,
+                 RandomAccessIterator last) {
+    if (!(first == last)) {
+        __quick_sort_loop(first, last);
+        __final_insertion_sort(first, last);
     }
+}
+
+#endif //LEARNING_STL_STL_ALGO_H
+
+```
+
+测试`main.cpp`：
+``` cpp
+#include <iostream>
+#include "stl_algo.h"
+
+
+int main() {
+    int arr[] = {19, 93, 3, 25, 89, 6, 26};
+    int len = (int) sizeof(arr) / sizeof(*arr);
+    sort(arr, &arr[len]);
+    for (int i = 0; i < len; i++) {
+        std::cout << arr[i] << ' ';
+    }
+    std::cout << std::endl;
+    return 0;
 }
 ```
 
