@@ -154,31 +154,88 @@ void insertion_sort(int arr[], int len) {
 
 #### 《STL源码剖析》中插入排序实现
 
+`stl_algo.h`：
+
 ``` cpp
-template <class RandomAccessIterator>
-void __insertion_sort(RandomAccessIterator first,
-                      RandomAccessIterator last) {
-    if (first == last) return;
-    for (RandomAccessIterator i = first + 1; i != last; ++i)  // 外循环
-        // TODO value_type 的实现，待补充
-        __linear_insert(first, i, value_type(first)); // 以上，[first, i) 形成一个子区间
+#ifndef LEARNING_STL_STL_ALGO_H
+#define LEARNING_STL_STL_ALGO_H
+
+// __VALUE_TYPE 实现，及其依赖
+struct input_iterator_tag {};
+struct output_iterator_tag {};
+struct forward_iterator_tag : public input_iterator_tag {};
+struct bidirectional_iterator_tag : public forward_iterator_tag {};
+struct random_access_iterator_tag : public bidirectional_iterator_tag {};
+
+template <class _Iterator>
+struct iterator_traits {
+    typedef typename _Iterator::iterator_category iterator_category;
+    typedef typename _Iterator::value_type        value_type;
+    typedef typename _Iterator::difference_type   difference_type;
+    typedef typename _Iterator::pointer           pointer;
+    typedef typename _Iterator::reference         reference;
+};
+
+template <class _Tp>
+struct iterator_traits<_Tp*> {
+    typedef random_access_iterator_tag iterator_category;
+    typedef _Tp                         value_type;
+    typedef ptrdiff_t                   difference_type;
+    typedef _Tp*                        pointer;
+    typedef _Tp&                        reference;
+};
+
+template <class _Tp>
+struct iterator_traits<const _Tp*> {
+    typedef random_access_iterator_tag iterator_category;
+    typedef _Tp                         value_type;
+    typedef ptrdiff_t                   difference_type;
+    typedef const _Tp*                  pointer;
+    typedef const _Tp&                  reference;
+};
+
+
+template <class _Iter>
+inline typename iterator_traits<_Iter>::iterator_category
+__iterator_category(const _Iter&)
+{
+    typedef typename iterator_traits<_Iter>::iterator_category _Category;
+    return _Category();
 }
 
-template <class RandomAccessIterator, class T>
-inline void __linear_insert(RandomAccessIterator first,
-                     RandomAccessIterator last, T*) {
-    T value = *last;  // 记录尾元素
-    if (value < *first) { // 尾比头还小（注意，头端必为最小元素）
-        // 比最小元素还小，不需要一个个比较，直接一次处理
-        std::copy_backward(first, last, last + 1);  // 将整个区间向右移一个位置
-        *first = value;  // 令头元素等于原先的尾元素值
-    }
-    else  // 尾不小于头
-        __unguarded_linear_insert(last, value);
+template <class _Iter>
+inline typename iterator_traits<_Iter>::difference_type*
+__distance_type(const _Iter&)
+{
+    return static_cast<typename iterator_traits<_Iter>::difference_type*>(0);
 }
 
+template <class _Iter>
+inline typename iterator_traits<_Iter>::value_type*
+__value_type(const _Iter&)
+{
+    return static_cast<typename iterator_traits<_Iter>::value_type*>(0);
+}
+
+template <class _Iter>
+inline typename iterator_traits<_Iter>::iterator_category
+iterator_category(const _Iter& __i) { return __iterator_category(__i); }
+
+
+template <class _Iter>
+inline typename iterator_traits<_Iter>::difference_type*
+distance_type(const _Iter& __i) { return __distance_type(__i); }
+
+
+template <class _Iter>
+inline typename iterator_traits<_Iter>::value_type*
+value_type(const _Iter& __i) { return __value_type(__i); }
+
+#define __VALUE_TYPE(__i)        __value_type(__i)
+
+// 插入排序
 template <class RandomAccessIterator, class T>
-void __unguarded_linear_insert(Randomaccessiterator last, T value) {
+void __unguarded_linear_insert(RandomAccessIterator last, T value) {
     RandomAccessIterator next = last;
     --next;
     // insertion sort 内循环
@@ -190,6 +247,52 @@ void __unguarded_linear_insert(Randomaccessiterator last, T value) {
     }
     *last = value;  // value 的正确落脚处
 }
+
+template <class RandomAccessIterator, class T>
+inline void __linear_insert(RandomAccessIterator first,
+                            RandomAccessIterator last, T*) {
+    T value = *last;  // 记录尾元素
+    if (value < *first) { // 尾比头还小（注意，头端必为最小元素）
+        // 比最小元素还小，不需要一个个比较，直接一次处理
+        std::copy_backward(first, last, last + 1);  // 将整个区间向右移一个位置
+        *first = value;  // 令头元素等于原先的尾元素值
+    }
+    else  // 尾不小于头
+        __unguarded_linear_insert(last, value);
+}
+
+// 插入排序
+template <class RandomAccessIterator>
+void __insertion_sort(RandomAccessIterator first,
+                      RandomAccessIterator last) {
+    if (first == last) return;
+    for (RandomAccessIterator i = first + 1; i != last; ++i)  // 外循环
+        // value_type 的实现，待补充
+        __linear_insert(first, i, __VALUE_TYPE(first)); // 以上，[first, i) 形成一个子区间
+}
+
+#endif //LEARNING_STL_STL_ALGO_H
+
+```
+
+测试`mian.cpp`：
+
+``` cpp
+#include <iostream>
+#include "stl_algo.h"
+
+
+int main() {
+    int arr[] = {19, 93, 3, 25};
+    int len = (int) sizeof(arr) / sizeof(*arr);
+    __insertion_sort(arr, &arr[len - 1]);
+    for (int i = 0; i < len; i++) {
+        std::cout << arr[i] << ' ';
+    }
+    std::cout << std::endl;
+    return 0;
+}
+
 ```
 
 之所以用unguarded_前缀命名，是因为，一般的insertion sort在内循环，需要判断是否相邻元素是“逆转对”，同时还要判断循环是否越界，需要两次判断。
