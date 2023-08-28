@@ -8,7 +8,7 @@
 
 ## 朴素排序算法
 
-### 冒泡排序
+### 冒泡排序(Bubble Sort)
 
 ![bubble](./sort/bubble_sort.png)
 
@@ -45,7 +45,7 @@ int main(int argc, const char * argv[]) {
 
 ```
 
-### 选择排序
+### 选择排序(Selection Sort)
 
 ![selection_sort](./sort/selection_sort.png)
 
@@ -87,7 +87,7 @@ int main(int argc, const char * argv[]) {
 
 ```
 
-### 插入排序
+### 插入排序(Insertion Sort)
 
 ![insertion](./sort/insertion_sort.png)
 
@@ -307,7 +307,7 @@ int main() {
 
 ## 高级排序算法
 
-### 快速排序
+### 快速排序(Quick Sort)
 
 ![quick sort](./sort/quick_sort.png)
 
