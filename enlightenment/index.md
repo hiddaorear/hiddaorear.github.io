@@ -1,5 +1,13 @@
 # 江湖
 
+## 茶店说书
+
+- [新人如何熟悉旧项目](./talk_lightly/2023_08_28_how_do_newcomers_get_familiar_with_old_projects.md)
+
+- [如何面试应届毕业生](./talk_lightly/2023_08_28_how_to_interview_recent_graduates.md)
+
+## 管理
+
 - [从热力学看管理](./2023_1.md)
 
 - [从经济学看管理](./2023_2.md)
