@@ -14,6 +14,8 @@
 
 - [从儒家看管理](./2023_3.md)
 
+- [管理者如何把控多个项目的整体规划和零碎的细节？](./2023_08_28_manage_mutilple_projects.md)
+
 - [管理闲谈](./question.md)
 
 - [初学管理0：情绪的泥潭](./2023_negative_emotions.md)
