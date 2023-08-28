@@ -279,7 +279,7 @@ void __insertion_sort(RandomAccessIterator first,
 
 ```
 
-测试`mian.cpp`：
+测试`main.cpp`：
 
 ``` cpp
 #include <iostream>
