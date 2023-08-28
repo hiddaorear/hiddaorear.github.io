@@ -156,6 +156,8 @@ void insertion_sort(int arr[], int len) {
 
 `stl_algo.h`：
 
+`__VALUE_TYPE`实现：
+
 ``` cpp
 #ifndef LEARNING_STL_STL_ALGO_H
 #define LEARNING_STL_STL_ALGO_H
@@ -229,6 +231,10 @@ inline typename iterator_traits<_Iter>::value_type*
 value_type(const _Iter& __i) { return __value_type(__i); }
 
 #define __VALUE_TYPE(__i)        __value_type(__i)
+
+```
+
+``` cpp
 
 // 插入排序
 template <class RandomAccessIterator, class T>
