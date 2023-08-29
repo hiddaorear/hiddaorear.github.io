@@ -35,6 +35,8 @@
 
 ### 其他
 
+- [VSCode 源码剖析](./front_end/2023_08_29_the_annotaded_vscode.md)
+
 - [前端上报](./front_end/web_analytics.md)
 
 - [使用React hooks](./front_end/react/hooks.md)
