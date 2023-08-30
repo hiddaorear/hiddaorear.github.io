@@ -76,6 +76,156 @@ inline void push_heap(RandomAccessIterator first,
 }
 ```
 
+### pop heap 算法
+
+`max-heap`最大值，必然在根节点。pop取走根节点，实际是移走容器vector最后一个元素。为了满足 complete binary tree 条件【满树，且父节点必大于或等于子节点。此时不是满树】，必须将最下一层【叶子节点】的最右边的叶子节点拿掉【为什么是最右边的叶子节点呢？直接把根节点的子节点上移可以不？不行，因为这样不满足满树的要求。最容易满足满树要求，就是去最右边的叶子节点，填到根节点，但这样不满足顺序要求，就需要调整顺序】。接下来，把这个节点调整到适当位置即可。
+
+调整算法：执行下溯（percolate down）程序，将根节点填入最右边的叶子节点，在将其和两个字节点比较，与较大子节点调整位置。依此，直到此叶子节点值大于左右两个子节点，或到达叶子节点为止。
+
+注意：`pop_heap`之后，最大元素只是被置于容器最尾端，并未取走。如果要取值，需要执行容器（vector）的 `back()`操作函数，如果是移除，则需要执行 `pop_back()`操作函数。
+
+``` cpp
+// pop heap
+template <class RandomAccessIterator, class Distance, class T>
+inline void __adjust_heap(RandomAccessIterator first, Distance holdIndex,
+                          Distance len, T value) {
+    Distance topIndex = holdIndex;
+    Distance secondChild = 2 * holdIndex + 2; // 洞节点之右子节点
+    while (secondChild < len) {
+        if (*(first + secondChild) < *(first + (secondChild - 1))) {
+            // 比较洞节点之左右两个子值，然后以 secondChild 代表较大子节点
+            secondChild--;
+        }
+        // Percolate down：令较大子值为洞值，再令洞号下移至较大子节点处
+        *(first + holdIndex) = *(first + secondChild);
+        holdIndex = secondChild;
+        // 找出新洞节点的右子节点
+        secondChild = 2 * (secondChild + 1);
+    }
+    if (secondChild == len) { // 没有右子节点，只有左子节点
+        // Percolate down：令左子值为洞值，再令洞号下移至左子节点处
+        *(first + holdIndex) = *(first + (secondChild - 1));
+        holdIndex = secondChild - 1;
+    }
+    // 将欲调整值填入目前洞号里。注意，此时肯定满足次序特性
+    // 侯捷说：下面这一句，可以改成： *(first + holdIndex) = value;
+    __push_heap(first, holdIndex, topIndex, value);
+}
+
+template <class RandomAccessIterator, class T, class Distance>
+inline void __pop_heap(RandomAccessIterator first,
+                       RandomAccessIterator last,
+                       RandomAccessIterator result,
+                       T value, Distance*) {
+    *result = *first; // 设定尾值为首值，于是尾值为欲求之结果
+    // 稍后可以再以底层容器之 pop_back() 取出尾值
+    // 以上欲重新调整 heap，洞号为0（即树根处），欲调整值为 value（原尾值）
+    __adjust_heap(first, Distance(0), Distance(last - first), value);
+}
+
+template <class RandomAccessIterator, class T>
+inline void __pop_heap_aux(RandomAccessIterator first,
+                           RandomAccessIterator last, T*) {
+    // 跟进 implicit representation heap 的次序，pop操作的结果
+    // 应为容器底部的第一个元素。因此，首先设定欲调整值为尾值，然后将首值调至尾节点（所以以上迭代器result设为 last - 1）【更详细理解，见文章】
+    // 然后重整 [first, last -1)，使之重新成为一个合格的 heap
+    __pop_heap(first, last - 1, last - 1, T(*(last - 1)), distance_type(first));
+}
+
+template <class RandomAccessIterator>
+inline void my_pop_heap(RandomAccessIterator first,
+                     RandomAccessIterator last) {
+    __pop_heap_aux(first, last, value_type(first));
+}
+```
+
+### sort heap 堆排序
+
+每次 `pop_heap` 可获得heap中最大元素，持续如此，每次操作，将范围向前缩减一个元素【注意，`pop_heap`会把最大值放到容器的最尾端，并没有移走，所以这里复用的同一个容器，不需要新增容器缓存值】，执行完毕，则就有一个递增序列【注意，这算法是倒着排序的，从尾部调整到头部，执行完毕，从头部看，就是一个递增的顺序】。
+
+``` cpp
+// sort heap 堆排序
+template <class RandomAccessIterator>
+void my_sort_heap(RandomAccessIterator first,
+               RandomAccessIterator last) {
+    // 每次执行 pop_heap，极值就被放在尾端。扣除尾端，再执行pop_heap，次极值又被放到尾端。依此，可得排序结果
+    while (last - first > 1) {
+        pop_heap(first, last--); // 每操作一次，pop_heap()一次，操作范围退缩一格【直接修改的原来的 array，不需要新增一个array】
+    }
+}
+```
+
+### make heap
+
+将数据转换为heap。heap用的是隐式表达（implicit representation）的完全二叉树（complete binary tree）。
+
+``` cpp
+
+// make heap
+template <class RandomAccessIterator, class T, class Distance>
+void __make_heap(RandomAccessIterator first,
+                 RandomAccessIterator last, T*, Distance*) {
+    if (last - first < 2) return; // 长度为 0 或 1， 不必重新排列
+    Distance len = last - first;
+    // 找出第一个需要重排的子树头部，以 parent 标示出，由于任何叶子节点都不需执行 Percolate down，所以有以下计算
+    Distance holeIndex = (len - 2) / 2;
+    while (true) {
+        // 重排以 holdIndex 为首的子树。len 是为了让__adjust_heap 判断操作范围
+        __adjust_heap(first, holeIndex, len, T(*(first + holeIndex)));
+        if (holeIndex == 0) return; // 走完根节点，就结束
+        holeIndex--; // 即将重排之子树，头部向前一个节点
+    }
+}
+
+template <class RandomAccessIterator>
+inline void my_make_heap(RandomAccessIterator first,
+                      RandomAccessIterator last) {
+    __make_heap(first, last, value_type(first), distance_type(first));
+}
+```
+
+### 测试 heap
+
+``` cpp
+#include <iostream>
+#include "stl_algo.h"
+
+int main() {
+    int arr[9] = {0, 1, 2, 3, 4, 8, 9, 3, 5};
+    std::vector<int> ivec(arr, arr + 9);
+
+    my_make_heap(ivec.begin(), ivec.end());
+    for (int i = 0; i < ivec.size(); ++i) {
+        std::cout << ivec[i] << ' ';
+    }
+    std::cout << std::endl; // 9 5 8 3 4 0 2 3 1
+
+    ivec.push_back(7);
+    my_push_heap(ivec.begin(), ivec.end());
+    for (int i = 0; i < ivec.size(); ++i) {
+        std::cout << ivec[i] << ' ';
+    }
+    std::cout << std::endl; // 9 7 8 3 5 0 2 3 1 4
+
+    my_pop_heap(ivec.begin(), ivec.end());
+    std::cout << ivec.back() << std::endl; // 9
+    ivec.pop_back();
+
+    for(int i = 0; i < ivec.size(); ++i) {
+        std::cout << ivec[i] << ' ';
+    }
+    std::cout << std::endl; // 8 7 4 3 5 0 2 3 1
+
+    my_sort_heap(ivec.begin(), ivec.end());
+    for (int i = 0; i < ivec.size(); ++i) {
+        std::cout << ivec[i] << ' ';
+    }
+    std::cout << std::endl; // 0 1 2 3 3 4 5 7 8
+
+    return 0;
+}
+```
+
 ## log
 
 - 2023/08/28 初稿
