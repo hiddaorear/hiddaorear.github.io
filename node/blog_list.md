@@ -18,6 +18,8 @@
 
 - [图解 React 源码系列](https://github.com/7kms/react-illustration-series)
 
+- [认知偏差知识手册](https://s75w5y7vut.feishu.cn/docs/doccn3BatnScBJe7wD7K3S5poFf#o0sYEn)
+
 ## 有个人感悟的博客
 
 - [一缕殇流化隐半边冰霜](https://halfrost.com/archives/)
