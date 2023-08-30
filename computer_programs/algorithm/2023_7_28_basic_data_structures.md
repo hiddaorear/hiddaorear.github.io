@@ -8,9 +8,13 @@
 
 > 研究特定的排列结构，以利于搜索或排序或其他目的，这一专门学科，称之为数据结构（Data Structure）。因此，几乎特定的数据结构，都是为了实现特定的算法。
 
-> 根据数据在容器的排列特性，把数据结构分为序列式（sequence）和关联式（associate）两种。所谓序列式容器，其中元素都可排序（ordered），但未必有序（sored），如：array，vector，list等等。所谓关联式容器，主要有两大类，set集合和map映射表。每个元素有一个键值（key）和一个实值（value），容器内部（可能是BR-tree或hash-table），按照键值大小，以某种特定规则将这个元素放到适当位置。关联式容器内部结构一般是 balanced binary tree（平衡二叉树），以满足良好的搜索效率。
+> 根据数据在容器的排列特性，把数据结构分为序列式（sequence）和关联式（associate）两种。
 
-## C和lisp的两种基本容器：数据和列表
+> 所谓序列式容器，其中元素都可排序（ordered），但未必有序（sored），如：array，vector，list等等。
+
+> 所谓关联式容器，主要有两大类，set集合和map映射表。每个元素有一个键值（key）和一个实值（value），容器内部（可能是BR-tree或hash-table），按照键值大小，以某种特定规则将这个元素放到适当位置。关联式容器内部结构一般是 balanced binary tree（平衡二叉树），以满足良好的搜索效率。
+
+## C和lisp的两种基本容器：数组和列表
 
 ## vector
 
@@ -34,7 +38,7 @@
 
 有没有插入和找极值，效率都不错的数据结构呢？
 
-还可以用完全二叉树（complete binary tree），即 binary heap 除了最底层叶子节点之外，都是填满的。且叶子节点从左至右，不得有空隙。
+可以用完全二叉树（complete binary tree），即 binary heap 除了最底层叶子节点之外，都是填满的。且叶子节点从左至右，不得有空隙。
 
 ![complete binary tree](./2023_7_28_basic_data_structures/complete_binary_tree.png)
 
@@ -42,19 +46,19 @@
 
 由于完全二叉树没有空隙，我们就可以用array来存储所有节点。将array的索引0保留，当完全二叉树的某个节点位于i，其左节点必位于2i，右节点位于2i+1。反过来推断，i的父节点，必位于`floor(i/2)`。
 
-通过这个简单的规则，就可以用array实现出 complete binary tree。以array表述tree的方式，称之为隐式表示（implicit representation）
+通过这个简单的规则，就可以用array实现出 complete binary tree。以array来表述tree的方式，称之为隐式表示（implicit representation）
 
 ![complete binary tree array](./2023_7_28_basic_data_structures/complete_binary_tree_array.png)
 
-一个array 和一组 heap 算法（插入、删除、取极值，将数据排列为 heap），就可以实现完全二叉树。然后通过完全二叉树实现heap。
+一个 array 和一组 heap 算法（插入、删除、取极值，将数据排列为 heap），就可以实现完全二叉树。然后通过完全二叉树实现 heap。
 
-heap可以分为 `max-heap` 和 `min-heap`，`max-heap`的最大值在根节点，每个节点的值大于或等于子节点。`min-heap`反之。
+heap 可以分为 `max-heap` 和 `min-heap`，`max-heap`的最大值在根节点，每个节点的值大于或等于子节点。`min-heap`反之。
 
 ### push head 算法
 
 新加入的元素，放到最下一层作为叶子节点，填补 array 从左至右的第一个空格，即在 array 的末尾。
 
-为了满足 `max-heap` 条件，每个节点的值，大于或等于子节点的值。需要执行上溯程序：新节点的值大于父节点，就父子交换位置。一直上溯，直到不需要交换，或者到了跟节点。
+为了满足 `max-heap` 条件，每个节点的值，大于或等于子节点的值。需要执行上溯程序：新节点的值大于父节点，就父子交换位置。一直上溯，直到不需要交换，或者到了根节点。
 
 ``` cpp
 // heap
@@ -92,9 +96,9 @@ inline void push_heap(RandomAccessIterator first,
 
 ### pop heap 算法
 
-`max-heap`最大值，必然在根节点。pop取走根节点，实际是移走容器vector最后一个元素。为了满足 complete binary tree 条件【满树，且父节点必大于或等于子节点。此时不是满树】，必须将最下一层【叶子节点】的最右边的叶子节点拿掉【为什么是最右边的叶子节点呢？直接把根节点的子节点上移可以不？不行，因为这样不满足满树的要求。最容易满足满树要求，就是去最右边的叶子节点，填到根节点，但这样不满足顺序要求，就需要调整顺序】。接下来，把这个节点调整到适当位置即可。
+`max-heap`最大值，必然在根节点。pop取走根节点。为了满足 complete binary tree 条件【满树，且父节点必大于或等于子节点。此时不是满树】，必须将最下一层【叶子节点】的最右边的叶子节点拿掉【为什么是最右边的叶子节点呢？直接把根节点的子节点上移可以不？不行，因为这样不满足满树的要求。最容易满足满树要求，就是去最右边的叶子节点，填到根节点，但这样不满足顺序要求，就需要调整顺序】。接下来，把这个节点调整到适当位置即可。
 
-调整算法：执行下溯（percolate down）程序，将根节点填入最右边的叶子节点，在将其和两个字节点比较，与较大子节点调整位置。依此，直到此叶子节点值大于左右两个子节点，或到达叶子节点为止。
+调整顺序的算法：执行下溯（percolate down）程序，将根节点填入最右边的叶子节点，在将其和两个子节点比较，与较大子节点调整位置。依此类推，直到此叶子节点值大于左右两个子节点，或到达叶子节点为止。
 
 注意：`pop_heap`之后，最大元素只是被置于容器最尾端，并未取走。如果要取值，需要执行容器（vector）的 `back()`操作函数，如果是移除，则需要执行 `pop_back()`操作函数。
 
