@@ -2,6 +2,20 @@
 
 #### 2023/07/28
 
+![ouline](./2023_7_28_basic_data_structures/basic_data_structures_outline.png)
+
+> 容器，置物之所也。
+
+> 研究特定的排列结构，以利于搜索或排序或其他目的，这一专门学科，称之为数据结构（Data Structure）。因此，几乎特定的数据结构，都是为了实现特定的算法。
+
+> 根据数据在容器的排列特性，把数据结构分为序列式（sequence）和关联式（associate）两种。所谓序列式容器，其中元素都可排序（ordered），但未必有序（sored），如：array，vector，list等等。所谓关联式容器，主要有两大类，set集合和map映射表。每个元素有一个键值（key）和一个实值（value），容器内部（可能是BR-tree或hash-table），按照键值大小，以某种特定规则将这个元素放到适当位置。关联式容器内部结构一般是 balanced binary tree（平衡二叉树），以满足良好的搜索效率。
+
+## C和lisp的两种基本容器：数据和列表
+
+## vector
+
+## list
+
 ## 堆（heap）
 
 ### 应用
@@ -226,8 +240,18 @@ int main() {
 }
 ```
 
+
+## RB-tree 红黑树
+
+## set
+
+## map
+
+## hashtable
+
+
 ## log
 
 - 2023/08/28 初稿
 - 2023/08/29 heap 初稿
-- 2023/08/30 完成 heap 初稿
+- 2023/08/30 完成 heap 初稿。并列提纲
