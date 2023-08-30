@@ -96,6 +96,16 @@ class DataConversionService implements DataType {
 同时，有了这个统一的数据接入层，在页面加载的时候，可以很方便的处理页面的Loading、Success和Failed状态。
 
 
+### BFF
+
+- [Backends for Frontends pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends)
+
+- [Backend for frontend (BFF) pattern— why do you need to know it?](https://medium.com/mobilepeople/backend-for-frontend-pattern-why-you-need-to-know-it-46f94ce420b0)
+
+- [初识BFF架构设计 ](https://juejin.cn/post/6844903959333699598)
+
+- [前端開發者該負責寫 API Endpoints 嗎？The Backend For Frontend Pattern (BFF) In Microservices World](https://medium.com/starbugs/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC%E8%80%85%E8%A9%B2%E8%B2%A0%E8%B2%AC%E5%AF%AB-api-endpoints-%E5%97%8E-the-backend-for-frontend-pattern-bff-in-microservices-world-1368362c141c)
+
 
 ## log
 
