@@ -14,6 +14,8 @@
 
 ##  经验
 
+- [灰度发布](./2023_08_31_canary.md)
+
 - [代码设计经验](./code_design_experience.md)
 
 - [错误处理](./error.md)
