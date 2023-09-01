@@ -26,6 +26,12 @@
 
 - [2023年8月4日读《革命就是请客吃饭》](./2023_08_04_ideology.md)
 
+## 杂项
+
+- [好吃的零食](./2023_09_01_delicious_snacks.md)
+
+- [深圳旅游之地](./2023_09_01_Shenzhen_tourist_destination.md)
+
 ## 有思考的博客
 
 - [url列表](./blog_list.md)
