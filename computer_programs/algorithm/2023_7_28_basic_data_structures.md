@@ -277,6 +277,16 @@ int main() {
 
 ## 阅读资料
 
+- [coolshell上二级指针删除单链表节点的理解](http://leofen.github.io/%E9%9B%95%E8%99%AB%E5%B0%8F%E6%8A%80/2013/06/01/coolshell/)
+
+- [Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)
+
+- [Linux内核中的双向链表 ](http://cration.rcstech.org/program/2014/01/17/linux-list/)
+
+- [探讨：二级指针删除链表节点](http://cration.rcstech.org/program/2014/01/18/delete-node-in-list/)
+
+- [Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html)
+
 - [编程的宗派](https://www.yinwang.org/blog-cn/2015/04/03/paradigms)
 
 ## log
@@ -285,3 +295,4 @@ int main() {
 - 2023/08/29 heap 初稿
 - 2023/08/30 完成 heap 初稿。并列提纲
 - 2023/08/30 晚上补充Lisp的链表评论
+- 2023/09/02 收集链表操作资料
