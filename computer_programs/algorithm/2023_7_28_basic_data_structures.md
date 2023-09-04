@@ -193,6 +193,85 @@ People who understand pointers just use a “pointer to the entry pointer”, an
 
 So there’s lots of pride in doing the small details right. It may not be big and important code, but I do like seeing code where people really thought about the details, and clearly also were thinking about the compiler being able to generate efficient code (rather than hoping that the compiler is so smart that it can make efficient code *despite* the state of the original source code). （纠正细节是令人自豪的事。也许这段代码并非庞大和重要，但我喜欢看那些注重代码细节的人写的代码，也就是清楚地了解如何才能编译出有效代码（而不是寄望于聪明的编译器来产生有效代码，即使是那些原始的汇编代码））。
 
+### SGI STL list
+
+list和数组不同，不能用普通的指针作为迭代器，list的节点不保证在空间上连续存在。因此，list迭代器必须有能力指向下一个节点。SGI list是一个双向链表（double linked-list），迭代器支持前移、后移，提供的是 Bidirectional Iterators。
+
+正因为list节点不保证在空间上连续存在，可以零散分布，因此插入（insert）和接合（splice），不会造成迭代器失效。数组则不成立，数组的插入和接合操作，可能造成内存重新分配，原来的迭代器失效。list因此对空间的运用，很精准，不浪费，对元素插入和移除，永远是常数时间，得益于此，很数组一样，list也很常用。
+
+SGI list 节点（node）的结构。list本身和list节点是不同的结构，需要分开设计。
+
+``` cpp
+// 双向链表
+template<class T>
+struct __list_node {
+    typedef void* void_pointer;
+    void_pointer prev;
+    void_pointer  next;
+    T data;
+};
+```
+
+#### list 的迭代器
+
+``` cpp
+template<class T, class Ref, class Ptr>
+struct __list_iterator {
+    typedef __list_iterator<T, T&, T*> iterator;
+    typedef __list_iterator<T, Ref, Ptr> self;
+
+    typedef bidirectional_iterator_tag iterator_category;
+    typedef T value_type;
+    typedef Ptr pointer;
+    typedef Ref reference;
+    typedef __list_node<T>* link_type;
+    typedef size_t size_type;
+    typedef ptrdiff_t difference_type;
+
+    link_type node; // 指向list的节点
+
+    // constructor
+    __list_iterator(link_type x) : node(x) {}
+    __list_iterator() {}
+    __list_iterator(const iterator& x) : node(x.node) {}
+
+    bool operator==(const self& x) const { return node == x.node; }
+    bool operator!=(const self& x) const { return node != x.node; }
+    // 以下对迭代器取值（dereference），取的是节点的数据值
+    reference  operator*() const { return (*node).data; }
+    // 以下是迭代器的成员存取运算子（member access）的标准做法
+    pointer operator->() const { return &(operator*()); }
+
+    // 对迭代器累加1，就前进一个节点
+    self& operator++() {
+        node = (link_type)((*node).next);
+        return *this;
+    }
+    self operator++(int) {
+        self tmp = *this;
+        ++*this;
+        return tmp;
+    }
+    // 对迭代器累减1，就后退一个节点
+    self& operator--() {
+        node = (link_type)((*node).prev);
+        return *this;
+    }
+    self operator--(int) {
+        self tmp = *this;
+        --*this;
+        return tmp;
+    }
+};
+
+```
+
+### SGI list 的数据结构
+
+SGI list不仅仅是一个双向链表，而是一个环状双向链表。因此，只需要一个指针，就可以遍历整个链表。
+
+
+
 ## vector
 
 ## 堆（heap）
