@@ -94,7 +94,7 @@ static inline void list_del(struct list_head *entry)
 }
 ```
 
-### Linux的利用二级指针删除单向链表
+### Linus的利用二级指针删除单向链表
 
 删除链表节点的时候，需要把前一个节点的next指针指向下一个节点的地址，怎么表示前一个节点的next指针呢？
 
