@@ -144,7 +144,24 @@ node* remove_if(node *head, remove_fn rm) {
 还可以从另一个角度来理解：变量名的意义是复制copy一个值。常规做法，`cur = head->next`，仅仅是把指针`head->next`的值copy给了指针cur，使得cur可以访问链表的下一个节点。
 而声明为二级指针的cur，`*cur`不再是`head->next`的copy值，而是`head-next`变量的别名，此时他有其对应变量的读写权。
 
-总而言之，链表的删除操作的操作对象都是指针，所以从类型上来看，可以用二级指针来处理指针。就像变量的指针，传递给函数，函数就可以操作变量一样。所谓操作，就是其读写权。所以链表的删除，变量是指针，就需要二级指针来获得其读写权，获得了外部的变量和内部权限，节省了一个内部的临时变量。本质来看，单向链表的删除操作，只是把之前存储当前节点的指针的值，替换为下一个节点的地址。这里其实可以不需要“之前存储的节点”，而仅仅需要“之前存储的节点的指针”。
+``` c
+
+void remove_if(node **head, remove_fn rm)
+{
+    for (node** curr = head; *curr;) {
+        node *entry = *curr;
+        if (rm(entry))
+        {
+            *curr = entry->next;
+            free(entry);
+        }
+        else
+            curr = &entry->next;
+    }
+}
+```
+
+总而言之，链表的删除操作的操作对象都是指针，所以从类型上来看，可以用二级指针来处理指针。就像变量的指针，传递给函数，函数就可以操作变量一样。所谓操作，就是其读写权。所以链表的删除，变量是指针，就需要二级指针来获得其读写权，获得了外部的变量和内部权限，节省了一个内部的临时变量。从本质来看，单向链表的删除操作，只是把之前存储前节点的指针的值，替换为下一个节点的地址。这里其实可以不需要“之前存储的【节点】”，而仅仅需要“之前存储的【节点的指针】”。
 
 单向链表的拓扑结构：
 ![ouline](./2023_7_28_basic_data_structures/slist.png)
@@ -155,6 +172,26 @@ node* remove_if(node *head, remove_fn rm) {
 删除头部节点的时候，也是一样的，把指向下一个节点的指针，赋值给当前节点的指针。
 ![ouline](./2023_7_28_basic_data_structures/slist_2.png)
 
+#### Linus 原文
+
+“At the opposite end of the spectrum, I actually wish more people understood the really core low-level kind of coding. Not big, complex stuff like the lockless name lookup, but simply good use of pointers-to-pointers etc. For example, I’ve seen too many people who delete a singly-linked list entry by keeping track of the “prev” entry, and then to delete the entry, doing something like。（在这段话的最后，我实际上希望更多的人了解什么是真正的核心底层代码。这并不像无锁文件名查询（注：可能是git源码里的设计）那样庞大、复杂，只是仅仅像诸如使用二级指针那样简单的技术。例如，我见过很多人在删除一个单项链表的时候，维护了一个”prev”表项指针，然后删除当前表项，就像这样）”
+
+``` c
+if (prev)
+    prev->next = entry->next;
+else
+    list_head = entry->next;
+```
+
+and whenever I see code like that, I just go “This person doesn’t understand pointers”. And it’s sadly quite common.（当我看到这样的代码时，我就会想“这个人不了解指针”。令人难过的是这太常见了。）
+
+People who understand pointers just use a “pointer to the entry pointer”, and initialize that with the address of the list_head. And then as they traverse the list, they can remove the entry without using any conditionals, by just doing a “*pp = entry->next”. （了解指针的人会使用链表头的地址来初始化一个“指向节点指针的指针”。当遍历链表的时候，可以不用任何条件判断（注：指prev是否为链表头）就能移除某个节点，只要写)
+
+``` c
+*pp = entry->next
+```
+
+So there’s lots of pride in doing the small details right. It may not be big and important code, but I do like seeing code where people really thought about the details, and clearly also were thinking about the compiler being able to generate efficient code (rather than hoping that the compiler is so smart that it can make efficient code *despite* the state of the original source code). （纠正细节是令人自豪的事。也许这段代码并非庞大和重要，但我喜欢看那些注重代码细节的人写的代码，也就是清楚地了解如何才能编译出有效代码（而不是寄望于聪明的编译器来产生有效代码，即使是那些原始的汇编代码））。
 
 ## vector
 
