@@ -40,6 +40,122 @@ R. Kent Dybvig的先进的Scheme编译器 Chez Scheme，内部的数据结构就
 
 ## list
 
+Linux 内核中，自己实现了双向链表，见[Linux list 源码](https://github.com/torvalds/linux/blob/master/include/linux/list.h)。双向链表在内核使用非常广泛，在2023的 v6.5.1 版本中，`list_head`有“Referenced in 4563 files”。其主结构体如下
+见：[linux/types.h](https://github.com/torvalds/linux/blob/master/include/linux/types.h)
+``` c
+struct list_head {
+	struct list_head *next, *prev;
+};
+```
+
+这是一种侵入式链表（Intrusive list）。侵入式链表并不在节点内保持数据，而是仅仅包含指向前后节点的指针，以及节点数据的指针。这样使得链表不需要考虑节点数据类型。
+
+常见的双向链表结构如下：
+
+``` c
+
+struct GList {
+  gpointer data;
+  GList *next;
+  GList *prev;
+};
+
+```
+
+Linux 双向链表的删除：
+
+``` c
+/*
+ * Delete a list entry by making the prev/next entries
+ * point to each other.
+ *
+ * This is only for internal list manipulation where we know
+ * the prev/next entries already!
+ */
+static inline void __list_del(struct list_head *prev, struct list_head *next)
+{
+	next->prev = prev;
+	prev->next = next;
+}
+
+#define LIST_POISON1  ((void *) 0x00100100)
+#define LIST_POISON2  ((void *) 0x00200200)
+/**
+ * list_del - deletes entry from list.
+ * @entry: the element to delete from the list.
+ * Note: list_empty() on entry does not return true after this, the entry is
+ * in an undefined state.
+ */
+static inline void list_del(struct list_head *entry)
+{
+	__list_del(entry->prev, entry->next);
+	entry->next = (struct list_head*)LIST_POISON1;
+	entry->prev = (struct list_head*)LIST_POISON2;
+}
+```
+
+### Linux的利用二级指针删除单向链表
+
+删除链表节点的时候，需要把前一个节点的next指针指向下一个节点的地址，怎么表示前一个节点的next指针呢？
+
+最直接的写法是利用前一个节点，并获取他的next指针：`prePointer->next`。但这样会遇到一个特殊的情况，当删除的节点是第一个节点的时候，第一个节点没有前一个节点，需要针对这种特殊的情况，做判断，第一个节点的next指针就是`head`。
+
+常见写法：
+
+``` c
+typedef struct node
+{
+    struct node *next;
+    // ...
+} node;
+
+typedef bool (*remove_fn)(node const *v);
+
+// Remove all nodes from the supplied list for which the
+// supplied remove function returns true.
+// Returns the new head of the list.
+node* remove_if(node *head, remove_fn rm) {
+    for (node * prev = NULL, *curr = head; curr != NULL;)
+    {
+        node * const next = curr->next;
+        if (rm(curr))
+        {
+            if (prev)
+                prev->next = next;
+            else
+                head = next;
+            free(curr);
+        }
+        else
+            prev = curr;
+        curr = next;
+    }
+    return head;
+}
+```
+
+
+我们反思一下，无论是`head`还是`prePointer-next`，目的都是一样的，就是前一个节点的next指针。有什么办法统一处理呢？
+
+回到他们类型自身，二者类型一致，都是指针，我们用一个变量`pp`来保存他们的地址即可。当`pp`保存的是`prePointer->next`的时候，就是普通节点的上一个节点的next。当`pp`保存的是head的时候，就是head。`pp`是指向指针的指针，二级指针，`*pp`就可以统一表示以上普通情况和头节点的情况。
+
+如果`pp`是头指针的地址，`*pp`就代表了头指针，其值就是第一个节点的地址。而`**pp`代表的是第一个节点，此时类型不在是指针。
+
+还可以从另一个角度来理解：变量名的意义是复制copy一个值。常规做法，`cur = head->next`，仅仅是把指针`head->next`的值copy给了指针cur，使得cur可以访问链表的下一个节点。
+而声明为二级指针的cur，`*cur`不再是`head->next`的copy值，而是`head-next`变量的别名，此时他有其对应变量的读写权。
+
+总而言之，链表的删除操作的操作对象都是指针，所以从类型上来看，可以用二级指针来处理指针。就像变量的指针，传递给函数，函数就可以操作变量一样。所谓操作，就是其读写权。所以链表的删除，变量是指针，就需要二级指针来获得其读写权，获得了外部的变量和内部权限，节省了一个内部的临时变量。本质来看，单向链表的删除操作，只是把之前存储当前节点的指针的值，替换为下一个节点的地址。这里其实可以不需要“之前存储的节点”，而仅仅需要“之前存储的节点的指针”。
+
+单向链表的拓扑结构：
+![ouline](./2023_7_28_basic_data_structures/slist.png)
+
+删除普通节点，只需要把指向下一个节点的指针，赋值给当前节点的指针：
+![ouline](./2023_7_28_basic_data_structures/slist_1.png)
+
+删除头部节点的时候，也是一样的，把指向下一个节点的指针，赋值给当前节点的指针。
+![ouline](./2023_7_28_basic_data_structures/slist_2.png)
+
+
 ## vector
 
 ## 堆（heap）
@@ -283,6 +399,8 @@ int main() {
 
 - [Linux内核中的双向链表 ](http://cration.rcstech.org/program/2014/01/17/linux-list/)
 
+- [Linux list 源码](https://github.com/torvalds/linux/blob/master/include/linux/list.h)
+
 - [探讨：二级指针删除链表节点](http://cration.rcstech.org/program/2014/01/18/delete-node-in-list/)
 
 - [Alan Cox：单向链表中prev指针的妙用](https://coolshell.cn/articles/9859.html)
@@ -296,3 +414,4 @@ int main() {
 - 2023/08/30 完成 heap 初稿。并列提纲
 - 2023/08/30 晚上补充Lisp的链表评论
 - 2023/09/02 收集链表操作资料
+- 2023/09/04 浅析 Linux 链表
