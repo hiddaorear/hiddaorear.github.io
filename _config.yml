@@ -19,7 +19,7 @@ baseurl: /
 highlighter: rouge
 footer_content: "by 石下读书"
 favicon_ico: "./assets/images/favicon.ico"
-show_downloads: "false"
+show_downloads: false
 
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
