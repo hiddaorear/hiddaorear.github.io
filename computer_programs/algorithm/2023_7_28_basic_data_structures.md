@@ -270,9 +270,79 @@ struct __list_iterator {
 
 SGI list不仅仅是一个双向链表，而是一个环状双向链表。因此，只需要一个指针，就可以遍历整个链表。
 
-刻意在环状链表尾端加上一个空白节点，node 就符合 STL 规范的前闭后开区间的要求
+刻意在环状链表尾端加上一个空白节点，node 就符合 STL 规范的前闭后开区间的要求。插入操作完成以后，新节点将位于哨兵迭代器（标示插入点）所指节点的前方，这是 STL 对于插入操作的标准规范。由于不需要像数组一样，空间不足需要重新配置、数据移动，list 插入操作以后，迭代器仍然有效。
 
 ![ouline](./2023_7_28_basic_data_structures/double_linked_list.png)
+
+``` cpp
+template <class T, class Alloc = alloc> // 缺省使用 alloc 为配置器
+class list {
+protected:
+    typedef __list_node<T> list_node;
+    // 专属空间配置器，每次配置一个节点大小
+    typedef simple_alloc<list_node, Alloc> list_node_allocator;
+
+public:
+    typedef list_node* lint_type;
+
+    list() { empty_initialize(); } // 产生一个空链表
+
+    // 让node指针，刻意置于尾端的一个空白节点，node 就符合 STL 前闭后开区间的要求
+    iterator begin() { return (lint_type)((*node).next); }
+    iterator end() { return node; }
+    bool empty() const { return node->next == node; }
+    size_type size() const {
+        size_type result = 0;
+        distance(begin(), end(), result);
+        return result;
+    }
+    // 取头节点内容（元素值）
+    reference front() { return *begin(); }
+    // 取尾节点内容（元素值）
+    reference back() { return *(--end()); }
+
+protected:
+    link_type node; // 只需要一个指针，便可以表示整个环状双向链表
+    // 配置、释放、构造、消耗一个节点
+    // 配置一个节点并传回
+    link_type get_node() { return list_node_allocator::allocate(); }
+    // 释放一个节点
+    void put_node(link_type p) { list_node_allocator::deallocate(p); }
+    // 产生（配置并构造）一个节点，带有元素值
+    link_type create_node(const T& x) {
+        link_type p = get_node();
+        construct(&p->data, x); // 全局函数，构造/析构基本工具
+        return p;
+    }
+    // 销毁（析构并释放）一个节点
+    void destroy_node(link_type p) {
+        destroy(&p->data); // 全局函数，构造/ 析构基本工具
+        put_node(p);
+    }
+
+    void empty_initalize() {
+        node = get_node(); // 配置一个节点空间，令 node 指向他
+        node->next = node; // 令 node 头尾都指向自己，不设置元素
+        node->prev = node;
+    }
+
+    void push_back(const T& x) {
+        insert(end(), x);
+    }
+    // 首先配置并构造一个节点，在尾端进行适当指针操作，将新节点插入
+    iterator insert(iterator position, const T& x) {
+        link_type tmp = create_node(x); // 产生一个新节点，设置内容为x
+        // 调整双指针，使 tmp 插入
+        tmp->next = position.node;
+        tmp->prev = position.node->prev;
+        (lint_type(position.node->prev))->next = tmp;
+        position.node->prev = tmp;
+        return tmp;
+    }
+};
+
+```
+
 
 
 
@@ -535,3 +605,4 @@ int main() {
 - 2023/08/30 晚上补充Lisp的链表评论
 - 2023/09/02 收集链表操作资料
 - 2023/09/04 浅析 Linux 链表
+- 2023/09/05 SGI STL list 实现
