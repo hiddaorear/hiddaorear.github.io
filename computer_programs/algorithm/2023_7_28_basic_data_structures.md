@@ -270,6 +270,10 @@ struct __list_iterator {
 
 SGI list不仅仅是一个双向链表，而是一个环状双向链表。因此，只需要一个指针，就可以遍历整个链表。
 
+刻意在环状链表尾端加上一个空白节点，node 就符合 STL 规范的前闭后开区间的要求
+
+![ouline](./2023_7_28_basic_data_structures/double_linked_list.png)
+
 
 
 ## vector
