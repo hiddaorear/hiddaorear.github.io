@@ -343,10 +343,79 @@ protected:
 
 ```
 
+### 查找list中重复元素
 
-
+- TODO 快慢指针
 
 ## vector
+
+vector 与 array 非常相似。 array是静态空间，一旦配置，就不可改变。而 vector 是动态空间，随着元素加入，会自行扩充空间容纳新元素。
+
+vector 的实现关键，在于其对大小的控制，以及重新配置时的数据移动效率。一旦 vector 旧有空间满载，如果再有新增，vector 内部只扩充了一个元素的空间，实为不智。因为“配置新空间，数据移动，释放旧空间”，时间成本很高。因此，需要未雨绸缪。
+
+![ouline](./2023_7_28_basic_data_structures/vector.png)
+
+特别要注意，动态新增的大小，并不一定是原来空间之后的连续空间。因为无法保证原空间以后，尚有可供配置的空闲空间。而是以原大小的两倍，另外配置一块较大的空间，然后将原内容复制过来，并在构造新元素，释放原来的空间。因此，vector 的操作以后，一旦引起空间的重新配置，指向原来的 vector 就失效了。
+
+``` cpp
+
+template <class T, class Alloc>
+void vector<T, Alloc>::insert_aux(iterator position, const T& x) {
+    if (finish != end_of_storage) { // 还有备用空间
+        // 很奇怪的逻辑，与push_back重复了。而且二者实现不一样。这是什么考虑呢？
+
+        // 在备用空间起始处，构造一个元素，并以 vector 最后一个元素值为其初值
+        construct(finish, *(finish - 1));
+        ++finish; // 调整水位
+        T x_copy = x;
+        copy_backward(position, finish - 2, finish - 1)
+        *position = x_copy;
+    }
+    else { // 已无备用空间
+        const size_type old_size = size();
+        // 如果原来大小为0，则配置1个元素大小
+        // 如果原大小不为0， 则配置原来大小的两倍
+        // 前半段用来放置原数据，后半段准备用来放置新数据
+        const size_type len = old_size != 0 ? 2 * old_size : 1;
+
+        iterator new_start = data_allocator::allocate(len);
+        iterator new_finish = new_start;
+        try {
+            // 将原vector 内容复制到新 vector
+            new_finish = uninitialized_copy(start, position, new_start);
+            // 新元素设定初值x
+            construct(new_finish, x);
+            // 调整水位
+            ++new_finish;
+            // 将原vector 的备用空间中内容也忠实复制过来（侯捷疑惑：啥用途？）
+            new_finish = uninitialized_copy(position, finish, new_finish);
+        }
+        catch(...) {
+            destory(new_start, new_finish);
+            data_allocator::deallocator(new_start, len);
+            throw;
+        }
+
+        // 析构并释放原来的 vector
+        destory(begin(), end());
+        deallocate();
+
+        // 调整迭代器，指向新 vector
+        start = new_start;
+        finish = new_finish;
+        end_of_storage = new_start + len;
+    }
+}
+
+void push_back(const T& x) {
+    if (finish != end_of_storage) { // 还有备用空间
+        construct(finish, x);
+        ++finish; //  调整水位高度
+    }
+    else // 无备用空间
+        insert_aux(end(), x);
+}
+```
 
 ## 堆（heap）
 
@@ -605,4 +674,4 @@ int main() {
 - 2023/08/30 晚上补充Lisp的链表评论
 - 2023/09/02 收集链表操作资料
 - 2023/09/04 浅析 Linux 链表
-- 2023/09/05 SGI STL list 实现
+- 2023/09/05 SGI STL list 和 vector 的实现
