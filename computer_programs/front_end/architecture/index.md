@@ -6,7 +6,7 @@
 
 - [架构的分与合](./thinking_in_design.md)
 
-- [有趣的上报](./report.md)
+- [有趣的上报和日志](./report_and_log.md)
 
 ## 类型系统
 
