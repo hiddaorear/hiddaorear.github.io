@@ -45,3 +45,5 @@
 - [为什么这么设计系列文章](https://draveness.me/whys-the-design/)
 
 - [正圆的博客](https://connorshen.vercel.app/)
+
+- [可逆计算](https://www.zhihu.com/column/reversible-computation)

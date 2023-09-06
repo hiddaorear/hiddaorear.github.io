@@ -209,7 +209,15 @@ Linux说：低效的抽象编程模型，可能在两年之后，你会注意到
 
 ## 阅读资料
 
- - [为什么 Go 语言没有泛型](https://draveness.me/whys-the-design-go-generics/)
+- [解耦的方法远不止依赖注入](https://zhuanlan.zhihu.com/p/550923860)
+
+- [编程思想里面，何谓解耦？](https://www.zhihu.com/question/20821697/answer/2608624207)
+
+- [为什么都反对 XML 而支持使用 JSON？](https://www.zhihu.com/question/25636060)
+
+- [为何编程语言中的反射如此有用？](https://www.zhihu.com/question/604866205)
+
+- [为什么 Go 语言没有泛型](https://draveness.me/whys-the-design-go-generics/)
 
 - [在C++中使用IoC及DSM框架](https://groups.google.com/g/pongba/c/XmQ5h77h_K8#4a11c065a73f9ad8)
 

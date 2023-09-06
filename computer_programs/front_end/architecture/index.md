@@ -8,6 +8,8 @@
 
 - [有趣的上报和日志](./report_and_log.md)
 
+- [BFF](./2023_09_07_bff.md)
+
 ## 类型系统
 
 - [DDD（领域驱动设计）和ADT（代数数据类型）](./ddd_and_adt.md)
