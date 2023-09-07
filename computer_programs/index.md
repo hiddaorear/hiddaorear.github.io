@@ -10,7 +10,7 @@
 
 ### [主流工业编程语言](./PL/mainstream_industrial_language/index.md)
 
-### [PL 理论](./PL/index.md)
+### [PL 理论](./PL/pl_theory/index.md)
 
 ## 算法
 
