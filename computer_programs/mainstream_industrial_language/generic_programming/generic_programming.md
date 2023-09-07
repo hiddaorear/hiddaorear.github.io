@@ -6,7 +6,7 @@
 
 雨水之日，獭祭鱼；後五日，鸿雁来；後五日，草木萌动。──周书·时训篇
 
-![獭祭](./assets/eva.jpg)
+![獭祭](assets/eva.jpg)
 
 # 左闭右开不对称区间
 
@@ -45,7 +45,7 @@ for (i = 0; i <= 10; i++)
 `右界+1`作为新的右界，那么计算的时候，就不需要额外加1了。这恰好是方案1和方案4的右界。用第一个入界点作为左界，和用第一个出界点作为右界。
 
 
-![semi_open_range](./assets/semi_open_range.png)
+![semi_open_range](assets/semi_open_range.png)
 
 因此，为了降低在工程中出错。选择range的时候，需要考虑，能直接相减得到元素个数的方案。以上只有1和4满足。2和3，都需要做额外的处理。
 
@@ -101,7 +101,7 @@ first和last是左闭右开不对称区间。first指向序列的第一个元素
 
 分割过程：
 
-![qucik_sort_partition](./assets/qucik_sort_partition.png)
+![qucik_sort_partition](assets/qucik_sort_partition.png)
 
 1. 分割（partitioning）方法不只一种，上面使用简单有效的做法。令头端迭代器first向尾部移动，尾端迭代器last向头部移动。当`*first`大于或等于枢轴（pivot）v的时候，停下来；当`*last`小于或等于枢轴（pivot）v的时候也停下来，并检查两个迭代器是否交错。
 2. 如果first依然左在last在右，则交换两个元素，然后各自调整一次位置，继续想中央靠拢；并继续步骤1

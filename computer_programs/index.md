@@ -6,52 +6,11 @@
 
 ## PL
 
-- [编程范式](./PL/2023_08_28_oop_fp.md)
+### [语言特性](./language_features/index.md)
 
-- [多态](./PL/2023_08_20_polymorphic.md)
+### [主流工业编程语言](./mainstream_industrial_language/index.md)
 
-- [C++泛型獭祭](./PL/generic_programming/generic_programming.md)
-
-- [幺半群与计算机编程](./PL/monoid_and_computer_programs.md)
-
-- [SICP and Expression Problem（上）](./PL/SICP_and_expression_problem_0.md)
-
-- [SICP and Expression Problem (下)](./PL/SICP_and_expression_problem_1.md)
-
-- [Objective-C笔记](./PL/Objective-C.md)
-
-- [Monad](./PL/monad.md)
-
-### golang
-
-- [go](./PL/golang/index.md)
-
-## 前端
-
-### 架构设计
-
-- [架构设计](./front_end/architecture/index.md)
-
-### 其他
-
-- [VSCode 源码剖析](./front_end/2023_08_29_the_annotaded_vscode.md)
-
-- [前端上报](./front_end/web_analytics.md)
-
-- [使用React hooks](./front_end/react/hooks.md)
-
-- [前端常见问题列表](./front_end/question/index.md)
-
-- [从工程流程看前端知识结构](./front_end/question/engineering_processes.md)
-
-- [debug](./front_end/debug.md)
-
-- [使用monorepo](./front_end/monorepo.md)
-
-- [编程风格指南](./front_end/style_guide.md)
-
-- [使用TypeScript](./front_end/ts.md)
-
+### [PL 理论](./PL/index.md)
 
 ## 算法
 
@@ -63,11 +22,18 @@
 
 - [算法设计思想](./algorithm/algorithm_design_ideas.md)
 
-## http
+## 前端
 
-- [http](./http/index.md)
+### [架构设计](./front_end/architecture/index.md)
 
-## 后端
+### [工程](./software_engineering/index.md)
 
-- [服务器开发模式](./back_end/server_model.md)
+### [杂项](./front_end/other/index.md)
 
+## 计算机基础技术
+
+### [http](./computer_basics/http/index.md)
+
+### [协议](./computer_basics/protocol/index.md)
+
+## [后端](./back_end/index.md)
