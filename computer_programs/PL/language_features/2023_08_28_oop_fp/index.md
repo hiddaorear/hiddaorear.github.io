@@ -112,6 +112,119 @@ void Derived1_Init(struct SomeStruct* self) {
 }
 ```
 
+## 封装
+
+来自《架构整洁之道》
+
+C头文件：
+``` c
+// point.h
+struct Point;
+struct Point* makePoint(double x, double y);
+double distance (struct Point *p1, struct Point *p2);
+```
+
+`point.h`中没有Point结构体成员的访问权限，也就是Point结构体的内部细节，具体实现是不可见的。只在头文件中进行数据结构和函数定义的前置声明（forward declare），在程序文件中具体实现，程序文件的实现细节，对使用来说，不可见。
+相比之下：
+
+- C++需要类的成员变量在头文件声明，也就是使用知道内部细节。且变量x和y名称被修改，需要实现文件也需要重新编译。为了处理访问权限问题，C++引入了public、private和protected等关键字，维护了封装特性。但头文件能看到成员变量的定义，不如C的实现。
+- 而Java等抛弃了头文件与实现文件分离的编程方式，无法区分类的声明和定义，更进一步削弱了封装性。
+
+C具体实现：
+``` c
+// point.c
+#include "point.h"
+#include <stdlib.h>
+#include <math.h>
+
+struct Point {
+    double x,y;
+};
+
+struct Point* makepoint(double x, double y) {
+    struct Point* p = malloc(sizeof(struct Point));
+    p->x = x;
+    p->y = y;
+    return p;
+}
+
+double distance(struct Point* p1, struct Point* p2) {
+    double dx = p1->x - p2->x;
+    double dy = p1->y - p2->y;
+    return sqrt(dx * dx + dy * dy);
+}
+```
+
+综上，看起来很讽刺。号称提供面向对象支持的语言，不如C对封装特性的支持。封装性被削弱，而不是被加强。
+
+## 多态
+
+来自《架构整洁之道》
+
+实现Point拓展。
+
+头文件：
+```c 
+// NamedPoint.h
+struct NamedPoint;
+struct NamedPoint* makePoint(double x, double y, char* name);
+void setName(struct NamedPoint* np, char* name);
+char* getName(struct NamedP
+```
+
+实现文件：
+```c 
+#include <stdlib.h>
+
+struct NamedPoint {
+    double x,y;
+    char* name;
+};
+
+struct NamedPoint* makeNamedPoint(double x, double y, char* name) {
+    struct NamedPoint* p = malloc(sizeof(struct NamedPoint));
+    p->x = x;
+    p->y = y;
+    p->name = name;
+    return p;
+}
+
+void setName(struct NamedPoint* np, char* name) {
+    np->name = name;
+}
+
+char* getName(struct NamedPoint* np) {
+    return np->name;
+}
+
+int main(int ac, char** av) {
+    struct NamedPoint* origin = makeNamedPoint(0.0, 0.0, "origin");
+    struct NamedPoint* upperRight = makeNamedPoint(1.0, 1.0, "upperRight");
+    printf("distance=%f\n", distance((struct Point*)origin, (struct Point*)upperRight));
+}
+```
+
+调用：
+```c 
+#include "point.h"
+#include "namedPoint.h"
+#include <stdio.h>
+
+int main(int ac, char** av) {
+    struct NamedPoint* origin = makeNamedPoint(0.0, 0.0, "origin");
+    struct NamedPoint* upperRight = makeNamedPoint(1.0, 1.0, "upperRight");
+    printf("distance=%f\n", distance((struct Point*)origin, (struct Point*)upperRight));
+}
+```
+
+main函数中，NamedPoint数据结构被当作一个Point使用。因为二者前两个成员结构一致。简单来说，从结构上看，NamedPoint是Point的超集。调用的时候，需要强制把NamedPoint转换为Point。在支持面向对象的语言中，这种向上转换通常是隐性的。
+
+这里与C++、Java也有一个显著的区别，C++、Java是标签类型系统，即使是结构完全一致，类名不一致，二者也是不同类型。TypeScript与之不同，类型是基于结构的，和上面C语言类似，类名不一致，结构一致，就是同一个类型。
+
+## 多态
+
+多态的分析见[多态](../2023_08_20_polymorphic/index.md)
+
 # FP（函数式编程） 范式
 
 程序在执行过程中，如果要做到，给逻辑单元固定的输入，就能得到固定的输出，那就需要要避免副作用，具体来说，要避免变量及其赋值语句。使用函数去实现没有副作用的单元，以函数为维度去构建程序，就是函数式编程范式。
@@ -171,3 +284,4 @@ void Derived1_Init(struct SomeStruct* self) {
 # log
 
 - 2023/08/28 初稿
+- 2023/09/07 补充用C语言实现面向对象
