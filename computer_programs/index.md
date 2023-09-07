@@ -2,13 +2,13 @@
 
 ## 读书回顾
 
-- [2013年到2023所读技术书](./book/2013_2023_reading_cs_book/index.md)
+- [2013年到2023所读技术书](book/2023_reading_book/index.md)
 
 ## PL
 
-### [语言特性](./language_features/index.md)
+### [语言特性](./PL/language_features/index.md)
 
-### [主流工业编程语言](./mainstream_industrial_language/index.md)
+### [主流工业编程语言](./PL/mainstream_industrial_language/index.md)
 
 ### [PL 理论](./PL/index.md)
 
@@ -26,7 +26,7 @@
 
 ### [架构设计](./front_end/architecture/index.md)
 
-### [工程](./software_engineering/index.md)
+### [工程](./front_end/software_engineering/index.md)
 
 ### [杂项](./front_end/other/index.md)
 
