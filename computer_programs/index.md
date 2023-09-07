@@ -4,6 +4,10 @@
 
 - [2013年到2023所读技术书](book/2023_reading_book/index.md)
 
+## 物理数学
+
+- [物理数学](./physics_mathematics/index.md)
+
 ## PL
 
 ### [语言特性](./PL/language_features/index.md)
