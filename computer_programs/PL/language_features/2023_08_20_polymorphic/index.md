@@ -171,7 +171,7 @@ void f<Stack>(Stack s){
 2. 编译速度
 3. 运行速度
 
-![generics](./2023_08_20_polymorphic/generics.png)
+![generics](./generics.png)
 
 以Golang（早期无泛型的版本）、C++和Java为例，看看他们语言设计上的考量：
 
