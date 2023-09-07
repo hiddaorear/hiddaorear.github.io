@@ -4,7 +4,7 @@
 
 - [2023年7月19日——工具人的迷思](./job/2023_07_19_thinked_job.md)
 
-- [2023/7月和曙威谈话语录](./job/2023_07_23_shuwei_dialogues.md)
+- [2023年7月和曙威谈话语录](./job/2023_07_23_shuwei_dialogues.md)
  
 - [编程经验谈](./job/2023_09_07_programming_experience.md)
 
