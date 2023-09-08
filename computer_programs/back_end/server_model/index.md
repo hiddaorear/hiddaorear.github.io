@@ -1,6 +1,6 @@
 # 服务器开发模式
 
-![server model](./server_model/outline.png)
+![server model](./outline.png)
 
 # 导读
 
