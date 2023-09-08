@@ -11,3 +11,5 @@
 ## 人生历练
 
 - [如何面对重大但不确定的选择？](./life_experience/2023_09_07_how_to_face_big_but_uncertain_choices.md)
+ 
+- [为什么领导会已读不回？](./life_experience/2023_09_08_freedom_of_choice.md)
