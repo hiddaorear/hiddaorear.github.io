@@ -4,7 +4,7 @@
 
 ## 基本排序算法谱系
 
-![排序算法谱系](./sort/sort.outline.jpg)
+![排序算法谱系](./sort.outline.jpg)
 
 对于排序算法来说，最耗时有两部分：比较和交换。这也是排序算法的核心步骤。
 
@@ -12,7 +12,7 @@
 
 ### 冒泡排序(Bubble Sort)
 
-![bubble](./sort/bubble_sort.png)
+![bubble](./bubble_sort.png)
 
 冒泡排序比较原始，不断调整相邻元素的顺序来排序。算法得名于，大的元素会经过交换，慢慢像泡泡一样“浮”到数列的顶端。
 冒泡排序的比较和移动操作，都很多，是很慢的排序算法。
@@ -49,7 +49,7 @@ int main(int argc, const char * argv[]) {
 
 ### 选择排序(Selection Sort)
 
-![selection_sort](./sort/selection_sort.png)
+![selection_sort](./selection_sort.png)
 
 选择排序就是不断选出，剩下元素中的最值，来实现排序。选择排序的数据移动是精准操作，比冒泡排序好。
 
@@ -91,7 +91,7 @@ int main(int argc, const char * argv[]) {
 
 ### 插入排序(Insertion Sort)
 
-![insertion](./sort/insertion_sort.png)
+![insertion](./insertion_sort.png)
 
 新元素在已排序的列里，找到合适的位置插入。插入的位置，可以通过二分查找优化，插入排序的比较次数，远小于冒泡排序和选择排序。数据移动次数，也占优。不过顺序数据移动的开销，远不及比较操作。朴素排序算法中，插入排序，一般最快。
 
@@ -311,7 +311,7 @@ int main() {
 
 ### 快速排序(Quick Sort)
 
-![quick sort](./sort/quick_sort.png)
+![quick sort](./quick_sort.png)
 
 快速排序可以理解为一种批量的冒泡排序。每一个元素的浮沉，不再取决于相邻元素的比较，而是取决于中枢元素的比较，且每次沉浮不再是一个身位，而是直接到达上下半区。快速排序通常很快。
 
@@ -442,11 +442,11 @@ int main() {
 
 堆排序是选择排序的一种改进，使用堆结构来优化选择过程。
 
-![Heap Sort](./sort/heap_sort.png)
+![Heap Sort](./heap_sort.png)
 
 但堆结构需要两次比较，和一次数据移动，更糟糕的是数据访问存在跳跃。正式多一倍的比较次数，和不规则的访问，使得堆排序在高级排序算法中垫底，通常不及快排四成。
 
-具体实现，见[浅析基本数据结构：堆 heap](./2023_7_28_basic_data_structures.md)
+具体实现，见[浅析基本数据结构：堆 heap](../2023_7_28_basic_data_structures/index.md)
 
 #### 堆排序的重要地位
 
@@ -462,7 +462,7 @@ int main() {
 
 但是，快排每轮操作只需要移动一半多的元素，元素有一部分不需要移动，因这半步之差，归并排序性能逊于快排。
 
-![merge sort](./sort/merge_sort.png)
+![merge sort](./merge_sort.png)
 
 #### 实现merge
 

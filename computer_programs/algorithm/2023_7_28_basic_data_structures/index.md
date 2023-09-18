@@ -2,7 +2,7 @@
 
 #### 2023/07/28
 
-![ouline](./2023_7_28_basic_data_structures/basic_data_structures_outline.png)
+![outline](./basic_data_structures_outline.png)
 
 > 容器，置物之所也。
 
@@ -164,13 +164,13 @@ void remove_if(node **head, remove_fn rm)
 总而言之，链表的删除操作的操作对象都是指针，所以从类型上来看，可以用二级指针来处理指针。就像变量的指针，传递给函数，函数就可以操作变量一样。所谓操作，就是其读写权。所以链表的删除，变量是指针，就需要二级指针来获得其读写权，获得了外部的变量和内部权限，节省了一个内部的临时变量。从本质来看，单向链表的删除操作，只是把之前存储前节点的指针的值，替换为下一个节点的地址。这里其实可以不需要“之前存储的【节点】”，而仅仅需要“之前存储的【节点的指针】”。
 
 单向链表的拓扑结构：
-![ouline](./2023_7_28_basic_data_structures/slist.png)
+![slist](./slist.png)
 
 删除普通节点，只需要把指向下一个节点的指针，赋值给当前节点的指针：
-![ouline](./2023_7_28_basic_data_structures/slist_1.png)
+![slist_1](./slist_1.png)
 
 删除头部节点的时候，也是一样的，把指向下一个节点的指针，赋值给当前节点的指针。
-![ouline](./2023_7_28_basic_data_structures/slist_2.png)
+![slist_2](slist_2.png)
 
 #### Linus 原文
 
@@ -272,7 +272,7 @@ SGI list不仅仅是一个双向链表，而是一个环状双向链表。因此
 
 刻意在环状链表尾端加上一个空白节点，node 就符合 STL 规范的前闭后开区间的要求。插入操作完成以后，新节点将位于哨兵迭代器（标示插入点）所指节点的前方，这是 STL 对于插入操作的标准规范。由于不需要像数组一样，空间不足需要重新配置、数据移动，list 插入操作以后，迭代器仍然有效。
 
-![ouline](./2023_7_28_basic_data_structures/double_linked_list.png)
+![double_linked_list](double_linked_list.png)
 
 ``` cpp
 template <class T, class Alloc = alloc> // 缺省使用 alloc 为配置器
@@ -353,7 +353,7 @@ vector 与 array 非常相似。 array是静态空间，一旦配置，就不可
 
 vector 的实现关键，在于其对大小的控制，以及重新配置时的数据移动效率。一旦 vector 旧有空间满载，如果再有新增，vector 内部只扩充了一个元素的空间，实为不智。因为“配置新空间，数据移动，释放旧空间”，时间成本很高。因此，需要未雨绸缪。
 
-![ouline](./2023_7_28_basic_data_structures/vector.png)
+![vector](vector.png)
 
 特别要注意，动态新增的大小，并不一定是原来空间之后的连续空间。因为无法保证原空间以后，尚有可供配置的空闲空间。而是以原大小的两倍，另外配置一块较大的空间，然后将原内容复制过来，并在构造新元素，释放原来的空间。因此，vector 的操作以后，一旦引起空间的重新配置，指向原来的 vector 就失效了。
 
@@ -437,7 +437,7 @@ void push_back(const T& x) {
 
 可以用完全二叉树（complete binary tree），即 binary heap 除了最底层叶子节点之外，都是填满的。且叶子节点从左至右，不得有空隙。
 
-![complete binary tree](./2023_7_28_basic_data_structures/complete_binary_tree.png)
+![complete binary tree](./complete_binary_tree.png)
 
 ### 实现
 
@@ -445,7 +445,7 @@ void push_back(const T& x) {
 
 通过这个简单的规则，就可以用array实现出 complete binary tree。以array来表述tree的方式，称之为隐式表示（implicit representation）
 
-![complete binary tree array](./2023_7_28_basic_data_structures/complete_binary_tree_array.png)
+![complete binary tree array](./complete_binary_tree_array.png)
 
 一个 array 和一组 heap 算法（插入、删除、取极值，将数据排列为 heap），就可以实现完全二叉树。然后通过完全二叉树实现 heap。
 
@@ -569,6 +569,12 @@ void my_sort_heap(RandomAccessIterator first,
     }
 }
 ```
+
+### 堆排序处理top-K问题
+
+TODO
+
+- [八大排序算法](https://www.cnblogs.com/maybe2030/p/4715042.html)
 
 ### make heap
 

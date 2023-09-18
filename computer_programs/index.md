@@ -18,9 +18,9 @@
 
 ## 算法
 
-- [浅析基本数据结构](./algorithm/2023_7_28_basic_data_structures.md)
+- [浅析基本数据结构](algorithm/2023_7_28_basic_data_structures/index.md)
 
-- [浅析基本排序算法](./algorithm/2023_08_16_sort.md)
+- [浅析基本排序算法](./algorithm/2023_08_16_sort/index.md)
   
 - [算法列表](./algorithm/question/index.md)
 
