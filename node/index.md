@@ -55,3 +55,9 @@
 ### 思考
 
 - [理性](./wxmang/rationality.md)
+
+- [爱情](./wxmang/romance.md)
+
+### 日常
+
+- [八卦] ](./wxmang/gossip.md)
