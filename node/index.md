@@ -6,6 +6,8 @@
 
 ## 学习方法
 
+- [Linux C++ 服务端学习路线](./study_method/2023_09_20_learn_linux_cpp.md)
+
 - [学习C++：实践者的方法（Beta1）](study_method/2023_08_18_learning_cpp_pngba.md)
 
 - [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](study_method/2023_08_14_learning_language.md)
