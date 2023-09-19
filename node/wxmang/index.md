@@ -32,6 +32,8 @@
 
 - [成功](./succeed.md)
 
+- [坚韧](./tenacity.md)
+
 ### 日常
 
 - [八卦](./gossip.md)
