@@ -46,6 +46,12 @@
 
 ## 文小芒先生文章合集
 
+## 管理
+
+- [管理](./wxmang/management.md)
+
+- [遵义牛蹄镇的故事](./wxmang/management_career_stories.md)
+
 ### 教育学习
 
 - [写作](./wxmang/pen_and_ink.md)
@@ -60,4 +66,4 @@
 
 ### 日常
 
-- [八卦] ](./wxmang/gossip.md)
+- [八卦](./wxmang/gossip.md)
