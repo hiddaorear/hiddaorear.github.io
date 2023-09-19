@@ -58,8 +58,12 @@
 
 - [教育](./wxmang/education.md)
 
+- [读书](./wxmang/read.md) 
+
 ### 思考
 
+- [人生](./wxmang/life.md)
+ 
 - [理性](./wxmang/rationality.md)
 
 - [爱情](./wxmang/romance.md)
@@ -67,6 +71,8 @@
 - [道德](./wxmang/morality.md)
  
 - [人性](./wxmang/human_nature.md)
+
+- [成功](./wxmang/succeed.md)
 
 ### 日常
 
