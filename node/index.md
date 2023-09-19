@@ -64,6 +64,12 @@
 
 - [爱情](./wxmang/romance.md)
 
+- [道德](./wxmang/morality.md)
+ 
+- [人性](./wxmang/human_nature.md)
+
 ### 日常
 
 - [八卦](./wxmang/gossip.md)
+ 
+- [社会](./wxmang/society.md)
