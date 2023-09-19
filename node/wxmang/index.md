@@ -8,8 +8,12 @@
 
 - [真诚](./honest.md)
 
+- [胆量](./courage.md)
+
 ### 教育学习
 
+- [修养](./culture.md)
+- 
 - [写作](./pen_and_ink.md)
 
 - [教育](./education.md)
