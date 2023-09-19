@@ -1,5 +1,15 @@
 # 笔记
 
+## 有思考的博客
+
+- [url列表](./blog_list.md)
+
+## 学习方法
+
+- [学习C++：实践者的方法（Beta1）](study_method/2023_08_18_learning_cpp_pngba.md)
+
+- [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](study_method/2023_08_14_learning_language.md)
+
 ## 读书札记
 
 - [答辩PPT写法总结](other/2023-01-17_ppt.md)
@@ -26,12 +36,6 @@
 
 - [2023年8月22日读博客笔记（四）：读《松弛感》](blog/2023_08_22_node.md)
 
- 
-## 学习方法
-
-- [学习C++：实践者的方法（Beta1）](study_method/2023_08_18_learning_cpp_pngba.md)
-
-- [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](study_method/2023_08_14_learning_language.md)
 
 ## 杂项
 
@@ -39,6 +43,15 @@
 
 - [深圳旅游之地](other/2023_09_01_Shenzhen_tourist_destination.md)
 
-## 有思考的博客
 
-- [url列表](./blog_list.md)
+## 文小芒先生文章合集
+
+### 教育学习
+
+- [写作](./wxmang/pen_and_ink.md)
+
+- [教育](./wxmang/education.md)
+
+### 思考
+
+- [理性](./wxmang/rationality.md)
