@@ -8,6 +8,8 @@
 
 - [走过甘肃](./travels/Gansu_Province_and_2019/index.md)
 
+- [初游北京](./travels/2023_09_12_Beijing_Tourist/index.md)
+
 ## 日常生活
 
 - [你真的需要提高技术吗？](./badminton_technique.md)
