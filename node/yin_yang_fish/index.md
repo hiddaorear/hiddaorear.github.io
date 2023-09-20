@@ -1,13 +1,5 @@
 # 陰陽魚豆瓣广播合集
 
-## 佛学
-
-- [佛学](./Buddhism.md)
-
-## 教育
-
-- [教育](./education.md)
-
 ## 自省
 
 - [自省](./introspection.md)
@@ -15,6 +7,14 @@
 ## 沉思
 
 - [沉思](./meditation.md)
+
+## 佛学
+
+- [佛学](./Buddhism.md)
+
+## 教育
+
+- [教育](./education.md)
 
 ## 看破虚幻
 
