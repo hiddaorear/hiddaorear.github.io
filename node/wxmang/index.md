@@ -12,6 +12,8 @@
 
 ### 教育学习
 
+- [什么是好老师](./teacher.md)
+
 - [修养](./culture.md)
  
 - [写作](./pen_and_ink.md)
@@ -38,7 +40,9 @@
 
 - [坚韧](./tenacity.md)
 
-### 日常
+### 世相百态
+
+- [人生百味系列之张厂长的故事](./director_zhang_story.md)
 
 - [八卦](./gossip.md)
 
