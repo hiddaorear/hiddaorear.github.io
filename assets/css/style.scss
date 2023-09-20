@@ -2,3 +2,8 @@
 ---
 @import "{{ site.theme }}";
 
+
+html, body {
+  font: 400 1em/1.8 'PingFang SC', 'Microsoft Yahei', Avenir, 'Segoe UI', 'Hiragino Sans GB', STHeiti, 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+  font-size: 1em;
+}
