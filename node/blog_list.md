@@ -47,3 +47,5 @@
 - [正圆的博客](https://connorshen.vercel.app/)
 
 - [可逆计算](https://www.zhihu.com/column/reversible-computation)
+
+- [穷佐罗的Linux书](https://zorrozou.github.io/)

@@ -8,6 +8,8 @@
 
 - [中年顽固](./Middle-aged_stubbornness.md)
 
+- [如常](./usual.md)
+
 ## 沉思
 
 - [沉思](./meditation.md)
