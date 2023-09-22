@@ -47,6 +47,10 @@
 
 - [深圳旅游之地](other/2023_09_01_Shenzhen_tourist_destination.md)
 
-## [文小芒先生文章合集](./wxmang/index.md)
+## 有思考的文字
 
-## [陰陽魚豆瓣广播合集](./yin_yang_fish/index.md)
+- [从军行广播合集](./congjunxing/index.md)
+
+- [陰陽魚豆瓣广播合集](./yin_yang_fish/index.md)
+
+- [文小芒先生文章合集](./wxmang/index.md)
