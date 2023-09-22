@@ -28,6 +28,8 @@
 
 - [教育](./education.md)
 
+- [老师](./teacher.md)
+
 ## 看破虚幻
 
 - [看破虚幻](./see_through_the_illusion.md)
