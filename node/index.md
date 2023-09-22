@@ -47,8 +47,8 @@
 
 ## 有思考的文字
 
-- [从军行广播合集](./congjunxing/index.md)
+- [从军行豆瓣合集](./congjunxing/index.md)
 
-- [陰陽魚豆瓣广播合集](./yin_yang_fish/index.md)
+- [陰陽魚豆瓣合集](./yin_yang_fish/index.md)
 
 - [文小芒先生文章合集](./wxmang/index.md)
