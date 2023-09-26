@@ -22,6 +22,10 @@
 
 ## 有个人感悟的博客
 
+- [于淼【科学家-环境科学专业】](https://yufree.cn/cn/)
+
+- [谢益辉【统计学博士】](https://yihui.org/)
+
 - [一缕殇流化隐半边冰霜](https://halfrost.com/archives/)
 
 - [coolshell](https://www.coolshell.cn/)
