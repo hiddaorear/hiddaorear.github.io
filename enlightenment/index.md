@@ -6,6 +6,10 @@
 
 - [如何面试应届毕业生](./talk_lightly/2023_08_28_how_to_interview_recent_graduates.md)
 
+## 工作方法
+
+- [工作的边界](./work_boundaries/index.md)
+
 ## 管理
 
 - [从热力学看管理](./2023_1.md)

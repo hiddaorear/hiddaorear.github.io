@@ -1,10 +1,14 @@
 # 笔记
 
+**注：此目录列出的文章，均为转载，格式略有调整。部分文章我的笔记**
+
 ## 有思考的博客
 
 - [url列表](./blog_list.md)
 
 ## 学习方法
+
+- [英语对你的影响](./study_method/2023_09_27_learning_English.md)
 
 - [Linux C++ 服务端学习路线](./study_method/2023_09_20_learn_linux_cpp.md)
 
@@ -12,23 +16,7 @@
 
 - [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](study_method/2023_08_14_learning_language.md)
 
-## 读书札记
-
-- [答辩PPT写法总结](other/2023-01-17_ppt.md)
-
-- [有志与有悔](book/2022_05_03_Wang_An_Shi.md)
-
-- [陈省身先生](book/2019_12_29_maths_Chern.md)
-
-- [读《启功给你讲书法》](book/2019_12_01_calligraphy_qigong.md)
-
-- [莫放春秋佳日去](book/teacher.md)
-
-- [看《红鳉鱼》](book/the_red_Killifish.md)
- 
-- [《Unix编程艺术》Eric Raymond谈模块化原则、胶合层和面向对象的缺点](book/2023_08_07_unix_glue_layer.md)
-
-## 博客
+## 网文阅读笔记
 
 - [2023年7月15日读博客笔记（一）：编程的首要原则是什么？](blog/2023_07_15_csdn_pngba.md)
 
@@ -38,12 +26,9 @@
 
 - [2023年8月22日读博客笔记（四）：读《松弛感》](blog/2023_08_22_node.md)
 
+## 书本笔记
 
-## 杂项
-
-- [好吃的零食](other/2023_09_01_delicious_snacks.md)
-
-- [深圳旅游之地](other/2023_09_01_Shenzhen_tourist_destination.md)
+- [《Unix编程艺术》Eric Raymond谈模块化原则、胶合层和面向对象的缺点](book/2023_08_07_unix_glue_layer.md)
 
 ## 有思考的文字
 
