@@ -26,6 +26,8 @@
 
 - [谢益辉【统计学博士】](https://yihui.org/)
 
+- [张列弛【生物博士研究生】](https://www.liechi.org/cn/)
+
 - [一缕殇流化隐半边冰霜](https://halfrost.com/archives/)
 
 - [coolshell](https://www.coolshell.cn/)
