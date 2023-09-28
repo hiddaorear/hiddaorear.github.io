@@ -2,6 +2,9 @@
 
 #### 2023/09/26
 
+
+$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
+
 ## 阅读资料
 
 - [从真空里的球形鸡到社会财富分配（上](https://yufree.cn/cn/2017/07/24/boltzmann-distribution-1/) 
