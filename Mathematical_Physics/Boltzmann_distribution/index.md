@@ -1,4 +1,26 @@
+<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
+
 # 玻尔兹曼分布
+
+$E=mc^2$ is an inline formula.
+
+$$
+\begin{aligned}
+\dot{x} &= \sigma(y-x) \\
+\dot{y} &= \rho x - y - xz \\
+\dot{z} &= -\beta z + xy \\
+\end{aligned}
+$$
 
 #### 2023/09/26
 
