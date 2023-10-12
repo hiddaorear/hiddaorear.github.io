@@ -658,6 +658,8 @@ int main() {
 
 ## 阅读资料
 
+- [2-3树与红黑树](https://riteme.site/blog/2016-3-12/2-3-tree-and-red-black-tree.html)
+
 - [coolshell上二级指针删除单链表节点的理解](http://leofen.github.io/%E9%9B%95%E8%99%AB%E5%B0%8F%E6%8A%80/2013/06/01/coolshell/)
 
 - [Linus：利用二级指针删除单向链表](https://coolshell.cn/articles/8990.html)

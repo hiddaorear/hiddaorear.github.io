@@ -4,6 +4,8 @@
 
 - [画图](https://excalidraw.com/)
 
+- [latex live](https://www.latexlive.com/)
+
 ## 技术文集
 
 - [LeetCode Cookbook](https://books.halfrost.com/leetcode/ChapterOne/)
@@ -41,6 +43,8 @@
 - [刘未鹏个人站点](http://mindhacks.cn/)
 
 - [云风的BLOG](https://blog.codingnow.com/)
+
+- [riteme.site【主要是算法和数学】](https://riteme.site/)
 
 - [徐宥的博客](https://blog.youxu.info/)
   

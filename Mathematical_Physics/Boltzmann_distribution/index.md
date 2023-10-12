@@ -26,6 +26,10 @@ $$
 
 ## 阅读资料
 
+- [一份其实很短的 LaTeX 入门文档 ](https://liam.page/2014/09/08/latex-introduction/)
+
+- [如何从零开始，入门 LaTeX？](https://www.zhihu.com/question/62943097)
+
 - [从真空里的球形鸡到社会财富分配（上）](https://yufree.cn/cn/2017/07/24/boltzmann-distribution-1/) 
 
 - [伽玛分布](https://zh.wikipedia.org/zh-hans/%E4%BC%BD%E7%8E%9B%E5%88%86%E5%B8%83)
