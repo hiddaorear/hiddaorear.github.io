@@ -4,6 +4,9 @@
 
 - [2013年到2023所读技术书](book/2023_reading_book/index.md)
 
+## emacs
+
+- [emacs](./emacs/index.md)
 
 ## PL
 
