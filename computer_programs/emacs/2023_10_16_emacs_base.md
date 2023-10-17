@@ -33,7 +33,7 @@
 #### color-rg
 
 - color-rg-search-input: Search user's input with current directory
-- color-rg-search-symbol: Search current symbol with current direcory【当前光标下单词】
+- color-rg-search-symbol: Search current symbol with current direcory【搜索当前光标下单词】
 - color-rg-search-input-in-project: Search user's input in project
 - color-rg-search-symbol-in-project: Search current symbol in project
 - color-rg-search-symbol-in-current-file: Search current symbol in current file
