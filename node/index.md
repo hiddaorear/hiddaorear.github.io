@@ -30,6 +30,7 @@
 
 ## 书本笔记
 
+- [读《一曲微茫》](./book/2023_10_17_ZhangChongHe_letters.md)
 - [《Unix编程艺术》Eric Raymond谈模块化原则、胶合层和面向对象的缺点](book/2023_08_07_unix_glue_layer.md)
 
 ## 有思考的文字
