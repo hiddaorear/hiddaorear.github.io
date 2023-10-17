@@ -4,12 +4,13 @@
 
 ## 文本编辑
 
-### 查看
+#### 搜索
 
-#### 菜单  imenu
+- 【查】consult搜索：`consult-ripgrep`，快捷键：`C-x s`
+
+### 菜单  imenu
 
 - 大纲视图，且支持跳转：`consult-imenu`，快捷键：`M-s i`
-
 
 ### 光标移动
 
@@ -27,6 +28,22 @@
 - 键入`M-w`，复制这个区域内容到粘贴板（剪切是`C-w`）
 - 光标移到需要粘贴的地方，键入`C-y`
 
+### 代码搜索和重构
+
+#### color-rg
+
+- color-rg-search-input: Search user's input with current directory
+- color-rg-search-symbol: Search current symbol with current direcory【当前光标下单词】
+- color-rg-search-input-in-project: Search user's input in project
+- color-rg-search-symbol-in-project: Search current symbol in project
+- color-rg-search-symbol-in-current-file: Search current symbol in current file
+- color-rg-search-input-in-current-file: Search user's input in currfent file
+
+Keymap for view mode
+
+- `Tab`: Jump to next match keywork
+- `r`: Replace all matches
+
 ## 文件编辑
 
 ### 浏览目录
@@ -36,6 +53,10 @@
 其他sidebar包：treemacs、Dired-sidebar、NeoTree
 
 见讨论：[Emacs 风格的文件操作和项目文件管理是啥样的？](https://emacs-china.org/t/emacs/22306/19)
+
+### 文件搜索
+
+- 【查】consult：`consult-ripgrep`，快捷键：`C-c p f`
 
 ### 进入Dired
 
