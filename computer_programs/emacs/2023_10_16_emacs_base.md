@@ -46,6 +46,10 @@ Keymap for view mode
 
 ## 文件编辑
 
+### 阅读资料
+
+- [How to open a file in Emacs](https://www.murilopereira.com/how-to-open-a-file-in-emacs/)
+
 ### 浏览目录
 
 - 【查】使用内置的包：`speedbar`
