@@ -2,6 +2,31 @@
 
 #### 2023/10/16
 
+## emacs elisp 调试
+
+### 调试相关的启动参数
+
+- `Q`：不加载任何配置
+- `--init-directory`：指定init文件路径
+- `--debug-init`：在加载init文件时启动调试器
+
+### debug调试器
+
+触发调试器
+
+- `M-x toggle-debug-on-error`：出现错误时，显示堆栈
+- `(setq debug-on-message "message")`：当message匹配正则的时候触发
+- `M-x debug-on-entry`：在指定函数入口启动调试器
+- `(setq debug-on-quit t)`：当`C-g`时启动调试器，常用于调试无限循坏
+- `(debug)`：插入到代码中，执行触发启动调试器
+
+调试器操作
+
+- d：单步执行
+- q：退出
+- c：退出当前debug中断，继续执行，直到遇到下一个error或者debug
+- e：求值，并显示在minibuffer
+
 ## 文本编辑
 
 #### 搜索
