@@ -11,7 +11,52 @@
 - 有基础以后，理解“关系运算”，理解笛卡尔积
 - 了解事务，锁，索引，约束，视图，元数据
 
-## 笛卡尔积
+## 基础语句
+
+### group by
+
+分组统计的用途。用于结合合计的函数，根据一个或多个列对结果集进行分组。合计函数（如sum）常常需要添加group by语句。
+
+- 如果没有使用聚合函数，使用group by呢？在mysql中，返回的是第一行数据。
+- group by中的字段，不一定要出现在select中；
+
+例子：
+
+`select city,  count(*) as num from staff where age>19 group by city having num >= 3;`
+
+注意：group by既用到了临时表，又默认用到了排序，甚至有时候用到磁盘临时表，使用不当，容易导致慢sql。
+
+执行顺序：
+1. 执行where子句，查找符合年龄大于19的数据；
+2. group by子句，对员工数据，根据城市分组；
+3. 对group by形成的城市组，运行聚合函数，计算每一组的员工数量；
+4. 最后用having子句选出员工数量大于等于3的城市组；
+
+### where和having
+
+- having用于分组以后的筛选，where子句用于行条件筛选；
+- having一般配合group by，和聚合函数一起出现如：count，sum，avg，max，min等
+- where条件子句，不能使用聚合函数，而having子句可以
+
+### 优化 group by语句
+
+#### group by依赖的字段加索引
+
+如果字段一开始就有序，就需要建立临时表记录并统计结果。加索引就可以达到这个目的。
+
+`alter table stall add index idx_age_city(age, city);`
+
+加联合索引`idx_age_city(age, city)`
+
+#### order by null 不用排序
+
+有些场景不适合加索引，如果需求并不需要对结果集排序，就可以去掉排序。
+
+`select city, count(*) as num from staff group by city order by null;`
+
+## 基础概念
+
+### 笛卡尔积
 
 笛卡尔积指参与连接的两个表使用逗号，或者join关键词连接，连接条件放在where中。
 慎用笛卡尔积的原因：其计算只产生一个reduce任务，等价于，两个表的连接key是一个常数，只有一个join key也就只会有一个reduce任务。这是一个极端数据倾斜的例子：`select * from a join b` = `select * from a join b on 1=1 `
@@ -19,6 +64,7 @@
 例句：
 - `select * from gbk, utf8 where gbk.key = utf8.key and gbk.key > 10;`
 - `select * from gbk join utf8 where gbk.key = utf8.key and gbk.key > 10;`
+
 规范形式：
 - `select * from gbk join utf8 on gbk.key = utf8.key where gbk.key > 10;`
 
