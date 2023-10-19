@@ -15,7 +15,17 @@
 
 ### group by
 
-分组统计的用途。用于结合合计的函数，根据一个或多个列对结果集进行分组。合计函数（如sum）常常需要添加group by语句。
+group by 讲 select 查询结果，转换为聚合模式。
+
+工作原理【ClickHouse】：
+
+- group by 子句包含表达式列表，这份列表充当 grouping key，而每个单独的表达式被称为键表达式“key expressions”
+- 在所有表达式在select， having和order by子句中，必须基于键表达式进行计算，或者在聚合函数在非键表达式（包含单纯列）。也就是，从表中选择的每个列，必须用于键表达式或者聚合函数内，但不能同时使用；
+- 聚合结果select查询将包含尽可能多的行，因为有唯一值“grouping key”在源表中。
+
+
+
+【MySQL】分组统计的用途。用于结合合计的函数，根据一个或多个列对结果集进行分组。合计函数（如sum）常常需要添加group by语句。
 
 - 如果没有使用聚合函数，使用group by呢？在mysql中，返回的是第一行数据。
 - group by中的字段，不一定要出现在select中；
@@ -53,6 +63,25 @@
 有些场景不适合加索引，如果需求并不需要对结果集排序，就可以去掉排序。
 
 `select city, count(*) as num from staff group by city order by null;`
+
+### order by
+
+用于根据指定的列对结果进行排序。默认按照升序排序，降序加desc关键字。
+
+例子【查询前10个】：`select name,age,city from staff where city='xxx' order by age limit 10;`
+
+### count
+
+`count(*)`返回表中记录数。`count(column_name)`返回指定列值的数目。
+
+例子【计算比例】：`select (select count(*) from table_name where timestamp<=11111111 )/(select count(*) from table_name);`
+
+### having
+
+where关键字无法和聚合函数一起使用，新增having子句。
+
+例子：`select customer, sum(price) from table_name group by customer having sum(price)<2000;`
+
 
 ## 基础概念
 
@@ -130,5 +159,6 @@ Codd定义的Join，类似与SQL中的`CROSS JOIN`，源于集合论中的笛卡
 - 《SQL 必知必会》
 - [w3school SQL 教程](https://www.w3school.com.cn/sql/index.asp)
 - [SQL 练习【可在线执行】](https://sqlzoo.net/wiki/SELECT_basics)
+- [看一遍就理解：group by 详解 ](https://juejin.cn/post/7053966777088213005)
 - [ClickHouse 在有赞的实践之路](https://tech.youzan.com/clickhouse-zai-you-zan-de-shi-jian-zhi-lu/)
                
