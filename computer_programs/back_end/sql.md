@@ -30,6 +30,54 @@
 - 坚持先聚合后连接
 - 小表连接大表
 
+## Relational Data Model
+
+### Relational
+
+- 每行为N个元素的Tuple
+- 行序无关紧要
+- 所有的行应该去重（注意这是关系表）
+- Column顺序很重要，对Column命名以便凸显相关的业务意义
+
+要点：
+- 实体表都有主键，每个主键的数据，代表不同实体
+- 实体之间的关系，用一张新的表来描述
+
+### Relational algebra
+
+by E.F.Codd
+
+#### 传统的Set操作
+
+##### Projection算子
+
+类似SQL中的`SELECT name, price`中选择字段的部分，取原始Relation中的元素，重组为新的Relation
+
+数学基础：
+- 每N-ary Record 类比N维Vector
+- 选择部分字段，相当于N维Vector建立在更低维度空间的投影（Projection）
+- Projection操作，实际相当于降维过程，舍弃部分与当前逻辑相关性不大的Degree
+
+#### 其他操作
+
+- Union
+- intersection
+- different
+
+#### Join算子
+
+Codd定义的Join，类似与SQL中的`CROSS JOIN`，源于集合论中的笛卡尔积（ Cartesian product）
+
+| 左集合不变(补充缺失属性) | 右集合不变(补充缺少属性) | 关注交集(满足多种条件) | 关注合集(查漏补缺) | Join类型 |
+| ------------------------ | ------------------------ | ---------------------- | ------------------ | ---------- |
+| Y                        | N                        | N                      | N                  | left join  |
+| N                        | Y                        | N                      | N                  | right join |
+| N                        | N                        | Y                      | N                  | inner join |
+| N                        | N                        | N                      | Y                  | outer join |
+
+#### Restriction算子
+
+一个Relation的子集还是一个Relation。Restriction描述操作：对R中的数据进行筛选，筛选的依据是管理另一个Relation S。类似SQL中的`Inner Join`。这种筛选数据集的思想，是后面`Where`子句的理论来源。
 
 ## 阅读资料
 
