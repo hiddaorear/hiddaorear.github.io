@@ -125,6 +125,22 @@ where关键字无法和聚合函数一起使用，新增having子句。
 
 例子：`select customer, sum(price) from table_name group by customer having sum(price)<2000;`
 
+## 子查询
+
+在一个select语句中，嵌入另一个select语句，被嵌入语句称之为子查询语句，相应的外部select语句为主查询。由于order by生成的不是临时表，而是游标，故order by不能用在子查询中。
+
+子查询有4种情况：
+
+1. 标量子查询：子查询返回一个数据。可以看着特殊的一行一列，只有一个元素的矩阵；
+2. 列子查询：返回一列多行；
+3. 行子查询：返回一行多列；
+4. 表子查询：返回多行多列，即一个临时表；
+
+举例：
+1. 标量子查询【年龄大于班级平均年龄】：`select * from student where age > (select avg(age) from student);`
+2. 列子查询【查看学生班级信息，注：班级是另一个表】：`select * from student where class_id in (select id from classes);`
+3. 行子查询【查看学生年龄最大，身高最高的学生】：`select * from student where (age, height)=(select max(age),max(height) from students);`
+4. 表子查询【查找学号小于6的男同学】：`select * from student where (select * from student where id<6) as a where a.gender=1;`
 
 ## 基础概念
 
