@@ -11,11 +11,54 @@
 - 有基础以后，理解“关系运算”，理解笛卡尔积
 - 了解事务，锁，索引，约束，视图，元数据
 
-## 基础语句
+## 书写顺序和执行顺序
 
-### group by
+```
+【8】select 【9】distinct <select_list>
+【1】from <left_table> 【3】<join_type> join <right_table>
+【2】on<join_condition>
+【4】where<where_condition>
+【5】group by<group_by_list>
+【6】with {CUBE|ROLLUP}
+【7】having<having_condition>
+【10】order by<order_by_list>
+【11】limit<limit_number>
 
-group by 讲 select 查询结果，转换为聚合模式。
+```
+
+简单来说，书写顺序：`select -> from -> where -> group by ->having -> order by`
+执行顺序：`from -> where -> group by -> having -> select -> order by`
+
+最显著的区别是select的执行位置，书写在前面，而实际执行在后面。可以这么理解，先检索数据，然后设置查看规则。从角度来看，先找到空间中的各组向量，然后对向量进行投影。
+
+为了提高效率，需要注意：
+- from 后面的关联表，解析如果是自右向左，则最后的表是驱动表，尽量将数据量小的表放到后面进行关联，用小表去匹配大表；
+- where子语句同from；
+- 尽量少使用having语句，很耗资源；
+
+### 内部执行流程
+
+所有查询语句，都是从from开始执行，在执行过程中，上一步为下一步生成一个虚拟表，作为下一个步骤输入。
+
+from的表小于2
+
+1. from子句的表执行笛卡尔积，生成虚拟表virtual table 1【以小的表作为基础表】
+2. 应用on条件筛选器，将on条件用到virtual table 1各行，生成虚拟表 virtual table 2
+3. 跟进连接方式，进一步操作，如果是 outer join，则添加外部行
+
+注意：left outer join，会把左表中筛选的行添加进来；right outer join将右表中筛选的行添加进来；
+
+如果from的表大于2， 则重复执行上面步骤，得到一个virtual table 3
+
+1. 用where筛选器，对virtual table 3 筛选，生成 virtual table 4。注意，需要用condition去筛选数据，放在on还是where呢？二者区别为：on移除的行，可以在join中添加回来，而where移除不可以
+2. group by 子句将相同属性的row合并，得到virtual table 5。后面所有步骤，只能得到virtual table 5中列或者聚合函数
+3. 使用 CUBE 或者 ROLLUP选项，生成 virtual table 6
+4. having筛选器，生成 virtual table 7
+5. 处理select子句，生成 virtual table 8
+6. 使用distinct，移除 virtual table 8 重复行，生成 virtual table 9。如果使用group by，则已经列中唯一值分组，无需使用distinct
+7. 使用order by子句，返回一个游标，不是虚拟表，所以order by不能应用于表达式。【SQL是基于集合，而集合不需要预先排序。对表排序，可以返回一个对象，对象包含了特定的顺序，即游标】
+
+## group by
 
 工作原理【ClickHouse】：
 
@@ -156,6 +199,7 @@ Codd定义的Join，类似与SQL中的`CROSS JOIN`，源于集合论中的笛卡
 
 ## 阅读资料
 
+- [神奇的 SQL 之 联表细节 → MySQL JOIN 的执行过程（一）](https://www.cnblogs.com/youzhibing/p/12004986.html)
 - 《SQL 必知必会》
 - [w3school SQL 教程](https://www.w3school.com.cn/sql/index.asp)
 - [SQL 练习【可在线执行】](https://sqlzoo.net/wiki/SELECT_basics)
