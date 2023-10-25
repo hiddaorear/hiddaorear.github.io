@@ -17,6 +17,10 @@ Go Module 管理方案的设计原则：
 - 可重复性
 - 合作性
 
+### go.mod & go.sum 文件
+
+go.mod 和 go.sum 成对出现在根目录中。go.mod 记录依赖关系和版本。go.sum 记录完全性和完整性校验的信息。
+
 #### 兼容性（引入版本号到import语句中）
 
 程序中的名称的含义，不应随时间而发生改变。如果有需要改变，则需要跟之前引入路径保持不同。
@@ -41,10 +45,20 @@ Go Modules 引入语义化版本来标识依赖的版本，而且是强制的。
 
 但规范没有约束力，由海勒姆 hyrums 定律，也叫做隐式接口定律：
 
+> With a sufficient number of user of an API, it does not matter what you promise is the contract. All observable behaviors of your system will be depended on by somebody.
+
 > 当 API 有足够多的用户时，你在文档中的承诺已不重要，你的系统所有可观察行为都被某些人所依赖。
 
 例如，用户使用正则表示式匹配错误提示来判断API的错误类型，即使API文档中没有任何错误提示内容，而是指导用户使用错误码。这种情况下，修改API错误提示信息，实际会破坏 API 的使用。俗称：不按套路出牌。
 
+关于语义版本的引入，Russ Cos说：
+
+> A year ago， I believe that putting versions in import paths like this was ugly， undesirable， and probably avoidable. But over the past year, I've come to understand just how much clarity and simplicity they bring to the system. In this post I hope you a sense of why I changed my mind.
+
+Russ Cos的想法也是随时间改变。没有一个东西开始就是完美的，谨慎引入，坚持原则，可以减少犯更大错误的概率。
+
 ## 阅读资料
 
+- [Golang 版本管理系列 翻译 11 篇全](https://github.com/vikyd/note/tree/master/go_and_versioning)
 - [Go modules：最小版本选择](https://tonybai.com/2019/12/21/go-modules-minimal-version-selection/)
+- [studygolang 【简单的科普】](https://polarisxu.studygolang.com/page/2/)
