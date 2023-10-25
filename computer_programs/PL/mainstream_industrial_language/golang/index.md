@@ -4,6 +4,8 @@
 
 - [如何掌握程序语言](./pl_features_outline.md)
 
+- [基础](./base.md)
+
 - [泛型](generics.md)
 
 - [协程](./coroutine.md)

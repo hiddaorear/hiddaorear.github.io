@@ -85,7 +85,7 @@ Keymap for view mode
 
 ### 文件搜索
 
-- 【查】consult：`consult-ripgrep`，快捷键：`C-c p f`
+- 【查】consult：`project-find-file`，快捷键：`C-c p f`
 
 ### 进入Dired
 
