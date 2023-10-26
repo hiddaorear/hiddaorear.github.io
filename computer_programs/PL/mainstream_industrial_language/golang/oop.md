@@ -44,11 +44,68 @@ type Dog struct {
 结构体对应的方法：
 
 ```
+func (dog *Dog) MakeNoise() {
+	barkStrength := dog.BarkStrength
+	if dog.mean == true {
+		barkStrength = barkStrength * 5
+	}
+	for bark := 0; bark < barkStength; bark++ {
+		fmt.Printf("BARK")
+	}
+	
+	fmt.Println("")
+}
 
+func (cat *Cat) MakeNoise() {
+	meowStrength := cat.MeowStrength
+	if cat.mean == true {
+		barkStrength = meowStrength * 5
+	}
+	for meow := 0; meow < meowStength; meow++ {
+		fmt.Printf("MEOW")
+	}
+	
+	fmt.Println("")
+}
 
 ```
 
-## 用Structural Typing 代替多态
+## 用Structural Typing 接口代替多态
+
+任何实现接口类型的类型，都可以看做该接口的类型。
+
+```
+type AnimalSounder interface {
+	MakeNoise()
+}
+
+func MakeSomeNoise(animalSounder AnimalSounder) {
+	animalSounder.MakeNoise()
+}
+
+myDog := &Dog{
+	Animal{
+		"Rover",
+		true,
+	}
+	2
+}
+
+MakeSomeNoise(myDog)
+
+myCat := &Cat{
+	Basice: Animal{
+		Name: "Julius",
+		mean: true,
+	}
+	MeowStrength: 3,
+}
+
+MakeSomeNoise(myCat)
+```
+
+Structural Typing 意味着具有接口声明的结构的类型，都符合此类型，也就是通过接口实现多态行为。
+
 
 ## 阅读资料
 
