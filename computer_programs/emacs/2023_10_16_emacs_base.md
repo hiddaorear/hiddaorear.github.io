@@ -108,6 +108,13 @@ Keymap for view mode
 - 【删】删除书签：在Bookmark list中按`d`，为书签添加flag，然后按下`x`
 - 【查】查看书签列表：`C-x r l`
 
+### 文件Tab栏
+
+使用插件`centaur-tabs`
+
+- 开启：`M-x centaur-tabs-mode`
+- 切换tab：`centaur-tabs-backward`或`centaur-tabs-forward`
+
 
 ## 阅读资料
 
