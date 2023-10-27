@@ -186,7 +186,7 @@ Java类库的List接口就是个笑话，连Stack类都实现了List。
 
 ## 阅读资料
 
-- [C++泛型獭祭](https://siegelwang.cn/computer_programs/PL/mainstream_industrial_language/generic_programming/generic_programming)
+- [C++泛型獭祭](https://siegelwang.cn/computer_programs/PL/language_features/generic_programming/)
 
 - [为什么我不喜欢Go语言式的接口（即Structural Typing）](http://blog.zhaojie.me/2013/04/why-i-dont-like-go-style-interface-or-structural-typing.html)
 
