@@ -115,6 +115,19 @@ Keymap for view mode
 - 开启：`M-x centaur-tabs-mode`
 - 切换tab：`centaur-tabs-backward`或`centaur-tabs-forward`
 
+## Mac 安装 emacs
+
+```shell
+$ brew tap railwaycat/emacsmacport
+$ brew install emacs-mac --with-starter  --with-modules
+ brew link emacs-mac
+ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications
+```
+
+### 使用
+
+- 终端【直接打开gui版本，键盘无法响应】：`emacs -nw`
+- 或者直接点击GUI版本
 
 ## 阅读资料
 
