@@ -85,9 +85,79 @@ func bar(T Ia[int]) {} // interface includes constraint element '*T', can only b
 func bat(T Ib[int]) {} // OK
 ```
 
+### type list in interface
+
+```go
+
+type Type1 interface {
+	M1()
+}
+
+func F1[T Type1](t T) {}
+
+type MyType1 string
+
+func (t *MyType1) M1() {}
+
+var t1 = new(MyType1)
+F1(t1)
+
+```
+
+对F1而言，所有满足Type1的类型，都可以作为参数传入。为了传入原生类型，我们给string包装了一层，然后加上接口Type1要求的M1方法。
+
+可见对于原生类型，通过实现自定义的接口方法集合，有些绕。为了解决这个问题，引入type list到interface中，不过仅仅能做泛型类型参数的约束检查：
+
+```go
+
+type Type2 interface {
+	int | string
+	M2()
+}
+
+func F2[T Type2](t T) {
+
+}
+
+type MyT2 string
+
+func (t2 MyT2) M2() {
+	
+}
+
+t2 := MyT2("hello")
+F2(t2)
+
+var i3 Type2 // Interface includes constraint elements 'int', 'string', can only be used in type parameters
+```
+
+Type2中的`int | string`就是type list。作为类型参数，类型必须在type list中，且必须实现接口类型的所有方法。
+
+由于1.18 版本中泛型不完备，interface使用type list以后，就无法作为普通interface使用，仅仅能做constrain限制。
+
+
 ### type set
 
-### type list in interface
+type set 是对type list写法的改进：
+
+```go
+// 旧语法
+type SignedInteger interface {
+	type int, int8, int16, int32, int64
+}
+
+// type set
+type SignedInteger interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64
+}
+
+```
+
+点评：
+
+- 总体感觉Golang的泛型设计，不够完备，不够成熟，语法也有些怪。引入概念也不够清晰，我怀疑Golang设计者，对编程语言类型系统理解不够深入。
+- type list看起来是为了，弥补基础类型和自定义类型的gap。type list也做得不够完善，有一些限制，最终还是有gap。
+- 而 type set只是写法一种优化，还使用`~`，大概是为了表示这是类型的类型。
 
 ## 理论分析
 
