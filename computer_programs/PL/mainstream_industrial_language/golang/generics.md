@@ -4,7 +4,86 @@
 
 ## 泛型语法和使用
 
+泛型的目的：
+- 收窄类型范围：类型安全的参数传递
+- 放宽类型范围：以及对类型的抽象
+
 ### type parameter
+
+#### 收窄
+
+使用类型参数，作为函数形参类型时，函数调用方法传递的实际参数，必须满足类型参数的约束：
+
+```go
+
+// S 的底层类型，必须是满足底层类型为 int 的约束的类型
+func GenericSum[S ~int](elems ...S) (sum S) {
+	for i := range elems { sum += elems[i] }
+	return
+}
+
+```
+
+#### 放宽
+
+对实现的类型进行抽象
+
+```go
+
+func Map[T1, T2 interface{}](s []T1, f func(T1) T2) []T2 {
+	r := make([]T2, len(s))
+	for i, v := range s {
+		r[i] = f(v)
+	}
+	return r
+}
+
+```
+
+有了类型抽象手段，就能精简一些只有类型不同，逻辑一样的代码。如Sort的接口约束：
+
+```go
+
+type wrapSort[T interface{}] struct {
+	s   []T
+	cmp func(T, T) bool
+}
+
+func (s wrapSort[T]) Len() int { return len(s.s) }
+func (s wrapSort[T]) Less(i, j int) bool { return s.cmp(s.s[i], s.s[j]) }
+func (s wrapSort[T]) Swap(i, j int) { s.s[i], s.s[j] = s.s[j], s.s[i]}
+
+func Sort[T interface{}](s []T, cmp func(T, T) bool)  {
+	sort.Sort(wrapSort[T]{s, cmp})
+}
+```
+
+#### 困惑
+
+当接口作为类型参数或者具体参数时，表达的含义不一致
+
+```go
+
+func foo[T any](x T) T { return x }
+fmt.Println(reflect.TypeOf(test).String()) // 返回值为 string，而非 interface{}
+
+```
+
+当接口包含类型集，就无法作为具体参数使用
+```go
+func foo[T any](x T) T { return x }
+
+type Ia[T any] interface {
+	*T
+}
+
+type Ib[T any] interface {
+	Foo(T)
+}
+
+func bar(T Ia[int]) {} // interface includes constraint element '*T', can only be used in type parameters
+func bat(T Ib[int]) {} // OK
+```
 
 ### type set
 
