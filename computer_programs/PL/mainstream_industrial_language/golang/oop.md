@@ -1,4 +1,4 @@
-g# OOP
+# OOP
 
 ![outline](./oop_outline.png)
 
