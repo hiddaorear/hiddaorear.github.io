@@ -47,30 +47,29 @@ type Dog struct {
 结构体对应的方法：
 
 ``` go
-func (dog *Dog) MakeNoise() {
+ func (dog *Dog) MakeNoise() {
 	barkStrength := dog.BarkStrength
 	if dog.mean == true {
 		barkStrength = barkStrength * 5
 	}
-	for bark := 0; bark < barkStength; bark++ {
+	for bark := 0; bark < barkStrength; bark++ {
 		fmt.Printf("BARK")
 	}
-	
+
 	fmt.Println("")
 }
 
 func (cat *Cat) MakeNoise() {
 	meowStrength := cat.MeowStrength
-	if cat.mean == true {
-		barkStrength = meowStrength * 5
+	if cat.Basics.mean == true {
+		meowStrength = meowStrength * 5
 	}
-	for meow := 0; meow < meowStength; meow++ {
+	for meow := 0; meow < meowStrength; meow++ {
 		fmt.Printf("MEOW")
 	}
-	
+
 	fmt.Println("")
 }
-
 ```
 
 ## 用Structural Typing 接口实现多态行为
@@ -86,25 +85,29 @@ func MakeSomeNoise(animalSounder AnimalSounder) {
 	animalSounder.MakeNoise()
 }
 
-myDog := &Dog{
-	Animal{
-		"Rover",
-		true,
+func main() {
+
+	myDog := &Dog{
+		Animal{
+			"Rover",
+			true,
+		},
+		2,
 	}
-	2
+
+	MakeSomeNoise(myDog)
+
+	myCat := &Cat{
+		Basics: Animal{
+			Name: "Julius",
+			mean: true,
+		},
+		MeowStrength: 3,
+	}
+
+	MakeSomeNoise(myCat)
 }
 
-MakeSomeNoise(myDog)
-
-myCat := &Cat{
-	Basice: Animal{
-		Name: "Julius",
-		mean: true,
-	}
-	MeowStrength: 3,
-}
-
-MakeSomeNoise(myCat)
 ```
 
 Structural Typing 意味着具有接口声明的结构的类型，都符合此类型，也就是通过接口实现多态行为。
@@ -144,7 +147,7 @@ interface ICowBoy {
 
 英语中Draw具有画画和掏枪两种含义，所以画家Painter和牛仔CowBoy都可以有Draw的行为。但二者含义不同。如果是一个画家，让他去决斗，就是去送死。Draw的语义，可以推而广之，替换为时间或者空间复杂度等，就意味着，这样设计，可能会遇到问题。
 
-这种跟Java等语言不通的接口设计，不需要显式声明的接口（如Java Implements），存在一种可能，就是碰巧实现了某一个接口。由于不需要显式声明，这种是不确定的，就有可能存在反作用。比如，修改了一个函数以后，发现编译不过，提醒说某一个位置传递的不是某个需要的接口，且出错信息不能告知准确原因。一番debug以后，发现struct不在实现之前定义的一个接口。
+这种跟Java等语言不通的接口设计，不需要显式声明的接口（如Java Implements），存在一种可能，就是碰巧实现了某一个接口。由于不需要显式声明，这种是不确定的，就有可能存在反作用。比如，修改了一个函数以后，发现编译不过，提醒说某一个位置传递的不是某个需要的接口，且出错信息不能告知准确原因。一番debug以后，发现原因是struct不再实现之前定义的一个接口。
 
 ### 避免命名碰撞
 
