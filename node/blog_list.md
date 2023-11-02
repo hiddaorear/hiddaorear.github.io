@@ -22,7 +22,11 @@
 
 - [认知偏差知识手册](https://s75w5y7vut.feishu.cn/docs/doccn3BatnScBJe7wD7K3S5poFf#o0sYEn)
 
-## 有个人感悟的博客
+## 低熵博客
+
+- [老赵点滴 - 追求编程之美](http://blog.zhaojie.me/)
+
+- [怪怪【历史博客，计算机技术】](https://www.cnblogs.com/guaiguai/?page=1)
 
 - [于淼【科学家-环境科学专业】](https://yufree.cn/cn/)
 
