@@ -127,7 +127,7 @@ $ brew install emacs-plus@29 [options] # install Emacs 29
 $ brew install emacs-plus@28 [options] # install Emacs 28
 $ brew install emacs-plus@27 [options] # install Emacs 27
 $ brew install emacs-plus@26 [options] # install Emacs 26
-
+$ ln -s /usr/local/Cellar/emacs-plus@29/29.1/Emacs.app /Applications
 ```
 
 ### emacs-mac
@@ -135,8 +135,8 @@ $ brew install emacs-plus@26 [options] # install Emacs 26
 ```shell
 $ brew tap railwaycat/emacsmacport
 $ brew install emacs-mac --with-starter  --with-modules
- brew link emacs-mac
-ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications
+$ brew link emacs-mac
+$ ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications
 ```
 
 ### 使用
