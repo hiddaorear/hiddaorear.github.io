@@ -117,6 +117,21 @@ Keymap for view mode
 
 ## Mac 安装 emacs
 
+### emacs-plus
+
+```shell
+$ brew tap d12frosted/emacs-plus
+$ brew install emacs-plus    [options] # install the latest release (Emacs 29)
+$ brew install emacs-plus@30 [options] # install Emacs 30
+$ brew install emacs-plus@29 [options] # install Emacs 29
+$ brew install emacs-plus@28 [options] # install Emacs 28
+$ brew install emacs-plus@27 [options] # install Emacs 27
+$ brew install emacs-plus@26 [options] # install Emacs 26
+
+```
+
+### emacs-mac
+
 ```shell
 $ brew tap railwaycat/emacsmacport
 $ brew install emacs-mac --with-starter  --with-modules
@@ -128,6 +143,27 @@ ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications
 
 - 终端【直接打开gui版本，键盘无法响应】：`emacs -nw`
 - 或者直接点击GUI版本
+
+### treesit
+
+- [Emacs tree-sitter 初体验](https://emacstalk.codeberg.page/post/038-hello-treesitter/)
+
+```shell
+# macOS
+brew install tree-sitter
+
+```
+
+#### treesit-auto
+
+```lisp
+(use-package treesit-auto
+  :demand t
+  :config
+  (setq treesit-auto-install 'prompt)
+  (global-treesit-auto-mode))
+```
+`M-x treesit-auto-install-all`
 
 ## 阅读资料
 
