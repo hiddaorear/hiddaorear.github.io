@@ -10,7 +10,6 @@
 ## [管理](./enlightenment/index.md)
 ## [随笔](./essay/index.md)
 ## [教和学](./education/index.md)
-## [沉思录](./ruminations/index.md)
 ## [笔记](./node/index.md)
 
 ![emacs](./emacs.jpeg)

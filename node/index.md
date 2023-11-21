@@ -30,6 +30,8 @@
 
 - [2023年8月22日读博客笔记（四）：读《松弛感》](blog/2023_08_22_node.md)
 
+- [编程经验谈](./blog/2023_09_07_programming_experience.md)
+
 ## 书本笔记
 
 - [读《一曲微茫》](./book/2023_10_17_ZhangChongHe_letters.md)
@@ -42,3 +44,14 @@
 - [陰陽魚豆瓣合集](./yin_yang_fish/index.md)
 
 - [文小芒先生文章合集](./wxmang/index.md)
+
+
+## 人生历练
+
+- [如何面对重大但不确定的选择？](./life_experience/2023_09_07_how_to_face_big_but_uncertain_choices.md)
+ 
+- [为什么领导会已读不回？](./life_experience/2023_09_08_freedom_of_choice.md)
+ 
+- [有思考的言论](./life_experience/2023_09_11_thoughtful_remarks.md)
+
+
