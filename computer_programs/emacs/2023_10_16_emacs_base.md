@@ -168,3 +168,5 @@ brew install tree-sitter
 ## 阅读资料
 
 - [Emacs之怒](http://blog.lujun9972.win/tags/emacs%E4%B9%8B%E6%80%92/)
+
+- [我平常是怎么使用Emacs的？](https://manateelazycat.github.io/2022/11/07/how-i-use-emacs/)
