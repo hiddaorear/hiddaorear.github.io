@@ -114,10 +114,15 @@ Keymap for view mode
 
 ### 文件Tab栏
 
-使用插件`centaur-tabs`
+使用sort-tab插件
 
-- 开启：`M-x centaur-tabs-mode`
-- 切换tab：`centaur-tabs-backward`或`centaur-tabs-forward`
+usage：
+
+- sort-tab-select-next-tab: select next tab
+- sort-tab-select-prev-tab: select previous tab
+- sort-tab-select-first-tab: select first tab
+- sort-tab-select-last-tab: select last tab
+- sort-tab-close-current-tab: close current tab
 
 ## Mac 安装 emacs
 
