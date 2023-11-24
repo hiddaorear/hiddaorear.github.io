@@ -157,8 +157,10 @@ $ ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications
 
 - [Emacs tree-sitter 初体验](https://emacstalk.codeberg.page/post/038-hello-treesitter/)
 
+#### Mac安装 tree-sitter
+
 ```shell
-# macOS
+
 brew install tree-sitter
 
 ```
