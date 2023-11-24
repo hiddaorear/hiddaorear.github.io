@@ -7,3 +7,7 @@
 ## 计算机科学
 
 - [计算机编程与物理数学](./computational_programming/index.md)
+
+## 机器学习
+
+- [深度学习](./deep_learning/doc_list.md)
