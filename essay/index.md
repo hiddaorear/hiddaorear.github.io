@@ -9,7 +9,7 @@
 - [自制的陀螺](./history/gyro.md)
 
 - [我们的十年](./history/junior_high_school_ten_years.md)
- 
+
 - [TechParty-中国 iOS&Swift 沙龙感悟](history/2014_07_19_TechParty.md)
 
 ## 游记
@@ -27,7 +27,7 @@
 ## 日常生活
 
 - [好吃的零食](daily_life/2023_09_01_delicious_snacks.md)
- 
+
 - [你真的需要提高技术吗？](daily_life/badminton_technique.md)
 
 - [下厨房](daily_life/cooking.md)
@@ -41,6 +41,8 @@
 
 ## 读书札记
 
+- [读《我的母亲做保洁》](book/2023_11_27_my_mother_is_a_cleaner.md)
+
 - [有志与有悔](book/2022_05_03_Wang_An_Shi.md)
 
 - [陈省身先生](book/2019_12_29_maths_Chern.md)
@@ -50,7 +52,5 @@
 - [莫放春秋佳日去](book/teacher.md)
 
 - [看《红鳉鱼》](book/the_red_Killifish.md)
- 
+
 ## 杂项
-
-
