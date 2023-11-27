@@ -54,6 +54,8 @@
 
 ## 读书札记
 
+- [读《我的母亲做保洁》](./essay/book/2023_11_27_my_mother_is_a_cleaner.md)
+
 - [有志与有悔](./essay/book/2022_05_03_Wang_An_Shi.md)
 
 - [陈省身先生](./essay/book/2019_12_29_maths_Chern.md)
