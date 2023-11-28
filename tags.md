@@ -7,6 +7,8 @@
 
 ## Medicine
 
+- [治病的成本](./medicine/2023_11_28_cost_of_treatment.md)
+
 - [溺水急救](./medicine/drown.md)
 
 ## Education

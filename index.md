@@ -2,6 +2,8 @@
 
 ![emacs](./emacs.jpeg)
 
+- [治病的成本](./medicine/2023_11_28_cost_of_treatment.md)
+
 - [溺水急救](./medicine/drown.md)
 
 - [和若溪小朋友聊写字](./education/handwriting/2023_07_15_children_write/index.md)
