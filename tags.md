@@ -81,19 +81,51 @@
 - [深度学习](./Mathematical_Physics/deep_learning/doc_list.md)
  
 
-
-
 ## Emacs
 
 - [emacs](./computer_programs/emacs/index.md)
 
 ## PL
 
-### [语言特性](./computer_programs/PL/language_features/index.md)
+### 语言特性
 
-### [主流工业编程语言](./computer_programs/PL/mainstream_industrial_language/index.md)
+- [编程范式](./computer_programs/PL/language_features/2023_08_28_oop_fp/index.md)
 
-### [PL 理论](./computer_programs/PL/pl_theory/index.md)
+- [多态](./computer_programs/PL/language_features/2023_08_20_polymorphic/index.md)
+
+- [C++泛型獭祭](./computer_programs/PL/language_features/generic_programming/index.md)
+
+### 主流工业编程语言
+
+- [Objective-C笔记](./computer_programs/PL/mainstream_industrial_language/Objective-C.md)
+
+- [TypeScript](./computer_programs/PL/mainstream_industrial_language/ts.md)
+
+####  golang
+
+- [如何掌握程序语言](./computer_programs/PL/mainstream_industrial_language/golang/pl_features_outline.md)
+
+- [基础](./computer_programs/PL/mainstream_industrial_language/golang/base.md)
+
+- [泛型](./computer_programs/PL/mainstream_industrial_language/golang/generics.md)
+
+- [协程](./computer_programs/PL/mainstream_industrial_language/golang/coroutine.md)
+
+- [面向对象](./computer_programs/PL/mainstream_industrial_language/golang/oop.md)
+
+- [Golang Web 笔记](./computer_programs/PL/mainstream_industrial_language/golang/web.md)
+
+
+### PL 理论
+
+- [幺半群与计算机编程](./computer_programs/PL/monoid_and_computer_programs.md)
+
+- [SICP and Expression Problem（上）](./computer_programs/PL/SICP_and_expression_problem_0.md)
+
+- [SICP and Expression Problem (下)](./computer_programs/PL/SICP_and_expression_problem_1.md)
+
+- [Monad](./monad.md)
+
 
 ## Algorithm
 
