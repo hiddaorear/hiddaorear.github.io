@@ -139,19 +139,55 @@
 
 ## Front End
 
-### [架构设计](./computer_programs/front_end/architecture/index.md)
+### 架构设计
 
-### [工程](./computer_programs/front_end/software_engineering/index.md)
+- [IoC（控制反转）](./computer_programs/front_end/architecture/ioc_di.md)
 
-### [杂项](./computer_programs/front_end/other/index.md)
+- [架构的分与合](./computer_programs/front_end/architecture/thinking_in_design.md)
+
+- [有趣的上报和日志](./computer_programs/front_end/architecture/report_and_log.md)
+
+- [BFF](./computer_programs/front_end/architecture/2023_09_07_bff.md)
+
+- [DDD（领域驱动设计）和ADT（代数数据类型）](./computer_programs/front_end/architecture/ddd_and_adt.md)
+
+- [浅析版本灰度](./computer_programs/front_end/architecture/2023_08_31_canary.md)
+
+- [代码设计经验](./computer_programs/front_end/architecture/code_design_experience.md)
+
+- [错误处理](./computer_programs/front_end/architecture/error.md)
+
+
+### 工程
+
+- [从工程流程看前端知识结构](./computer_programs/front_end/software_engineering/question/engineering_processes.md)
+
+- [debug](./computer_programs/front_end/software_engineering/debug.md)
+
+- [使用monorepo](./computer_programs/front_end/software_engineering/monorepo.md)
+
+### 杂项
+
+- [VSCode 源码剖析](./computer_programs/front_end/other/2023_08_29_the_annotaded_vscode.md)
+
+- [前端上报](./computer_programs/front_end/other/web_analytics.md)
+
+- [使用React hooks](./computer_programs/front_end/other/hooks.md)
+
+- [编程风格指南](./computer_programs/front_end/other/style_guide.md)
+
 
 ## Computer Basics
 
-### [http](./computer_programs/computer_basics/http/index.md)
+## Back End 
 
-### [协议](./computer_programs/computer_basics/protocol/index.md)
+- [2023年11月3日：后台服务架构设计入门](./computer_programs/back_end/introduction_to_backend_service_architecture_design/index.md)
 
-## [后端](./computer_programs/back_end/index.md)
+- [服务器开发模式](./computer_programs/back_end/server_model/index.md)
+
+- [SQL](./computer_programs/back_end/sql.md)
+
+- [线程安全](./computer_programs/back_end/thread_safety/index.md)
 
 
 ## 学习方法
