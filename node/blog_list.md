@@ -22,6 +22,12 @@
 
 - [认知偏差知识手册](https://s75w5y7vut.feishu.cn/docs/doccn3BatnScBJe7wD7K3S5poFf#o0sYEn)
 
+## Emacs
+
+- [EmacsTalk](https://emacstalk.codeberg.page/)
+
+- [egh0bww1](https://egh0bww1.com/)
+
 ## 低熵博客
 
 - [老赵点滴 - 追求编程之美](http://blog.zhaojie.me/)
@@ -53,9 +59,9 @@
 - [始终 【LaTex、算法、数学】](https://liam.page/)
 
 - [徐宥的博客](https://blog.youxu.info/)
-  
+
 - [vczh轮子哥博客](http://www.cppblog.com/vczh/)
-  
+
 - [王垠的博客](https://www.yinwang.org/#)
 
 - [为什么这么设计系列文章](https://draveness.me/whys-the-design/)
