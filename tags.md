@@ -25,7 +25,7 @@
 - [自制的陀螺](./essay/history/gyro.md)
 
 - [我们的十年](./essay/history/junior_high_school_ten_years.md)
- 
+
 - [TechParty-中国 iOS&Swift 沙龙感悟](./essay/history/2014_07_19_TechParty.md)
 
 ## 游记
@@ -43,7 +43,7 @@
 ## 日常生活
 
 - [好吃的零食](./essay/daily_life/2023_09_01_delicious_snacks.md)
- 
+
 - [你真的需要提高技术吗？](./essay/daily_life/badminton_technique.md)
 
 - [下厨房](./essay/daily_life/cooking.md)
@@ -81,11 +81,14 @@
 ## 机器学习
 
 - [深度学习](./Mathematical_Physics/deep_learning/doc_list.md)
- 
+
 
 ## Emacs
 
-- [emacs](./computer_programs/emacs/index.md)
+- [Emacs 基础](./computer_programs/emacs/2023_10_16_emacs_base.md)
+
+- [Emacs 工作流](./computer_programs/emacs/2023_11_24_emacs_workflow.md)
+
 
 ## PL
 
@@ -134,7 +137,7 @@
 - [浅析基本数据结构](./computer_programs/algorithm/2023_7_28_basic_data_structures/index.md)
 
 - [浅析基本排序算法](./computer_programs/algorithm/2023_08_16_sort/index.md)
-  
+
 - [算法列表](./computer_programs/algorithm/question/index.md)
 
 - [算法设计思想](./computer_programs/algorithm/algorithm_design_ideas.md)
@@ -181,7 +184,7 @@
 
 ## Computer Basics
 
-## Back End 
+## Back End
 
 - [2023年11月3日：后台服务架构设计入门](./computer_programs/back_end/introduction_to_backend_service_architecture_design/index.md)
 
@@ -207,7 +210,7 @@
 - [2023年10月-关于排错：专注思考，细心观察，步步为营](./node/2023_10_26_debugging.md)
 
 - [2023年言论笔记](./node/blog/2023_10_12_comments.md)
- 
+
 - [2023年7月15日读博客笔记（一）：编程的首要原则是什么？](./node/blog/2023_07_15_csdn_pngba.md)
 
 - [2023年7月21日读博客笔记（二）：为什么GP更自然？](./node/blog/2023_7_20_toplanguage_pongba.md)
@@ -235,14 +238,11 @@
 ## 人生历练
 
 - [如何面对重大但不确定的选择？](./node/life_experience/2023_09_07_how_to_face_big_but_uncertain_choices.md)
- 
+
 - [为什么领导会已读不回？](./node/life_experience/2023_09_08_freedom_of_choice.md)
- 
+
 - [有思考的言论](./node/life_experience/2023_09_11_thoughtful_remarks.md)
 
 ## 有思考的博客
 
 - [url列表](./node/blog_list.md)
-
-
-
