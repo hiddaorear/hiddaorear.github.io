@@ -1,5 +1,23 @@
 ﻿# Emacs 工作流
 
+## 基本按键
+
+- 向前移动一个单词： Alt + f
+- 向后移动一个单词： Alt + b
+- 向前删除： Ctrl + d
+
+## 智能补全
+
+lsp-bridge
+
+## 括号插件
+
+## 代码编辑
+
+move-text：把当前行上移或下移。
+
+open-newline：不用移光标，在上面或下面新开一行。相当于三个操作的结合：移动到行尾，按回车，按缩进。
+
 ## 位置导航
 
 写代码经常需要移动光标到其他地方看一下，再切回来。可用Emacs的register临时保存代码的位置，使用懒猫的小函数：remember-init和remember-jump，先用remember-init保存位置，切走以后，调用remember-jump即可回到之前的位置。

@@ -82,7 +82,6 @@
 
 - [深度学习](./Mathematical_Physics/deep_learning/doc_list.md)
 
-
 ## Emacs
 
 - [Emacs 基础](./computer_programs/emacs/2023_10_16_emacs_base.md)
