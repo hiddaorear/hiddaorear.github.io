@@ -40,6 +40,8 @@ open-newline：不用移光标，在上面或下面新开一行。相当于三�
 
 ## 阅读资料
 
+- [Emacs 插件开发手册 ](https://manateelazycat.github.io/2022/11/18/write-emacs-plugin/)
+
 - [我平常是怎么使用 Emacs 的？](https://manateelazycat.github.io/2022/11/07/how-i-use-emacs/)
 
 - [面向产品经理的Emacs教程](https://remacs.cc/posts/)
