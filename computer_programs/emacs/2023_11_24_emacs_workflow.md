@@ -5,6 +5,7 @@
 - 向前移动一个单词： Alt + f
 - 向后移动一个单词： Alt + b
 - 向前删除： Ctrl + d
+- 重复最后一次执行的命令: `C-x z`（repeat），按了一次以后，后面只需要按`z`。或者`C-x M-z`（repeat-complex-command）
 
 ## 智能补全
 
