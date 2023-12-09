@@ -181,8 +181,6 @@
 - [编程风格指南](./computer_programs/front_end/other/style_guide.md)
 
 
-## Computer Basics
-
 ## Back End
 
 - [2023年11月3日：后台服务架构设计入门](./computer_programs/back_end/introduction_to_backend_service_architecture_design/index.md)
@@ -194,54 +192,6 @@
 - [线程安全](./computer_programs/back_end/thread_safety/index.md)
 
 
-## 学习方法
-
-- [英语对你的影响](./node/study_method/2023_09_27_learning_English.md)
-
-- [Linux C++ 服务端学习路线](./node/study_method/2023_09_20_learn_linux_cpp.md)
-
-- [学习C++：实践者的方法（Beta1）](./node/study_method/2023_08_18_learning_cpp_pngba.md)
-
-- [2023年8月14日读博客笔记（三）：快速掌握一个语言最常用的50%](./node/study_method/2023_08_14_learning_language.md)
-
-## 网文阅读笔记
-
-- [2023年10月-关于排错：专注思考，细心观察，步步为营](./node/2023_10_26_debugging.md)
-
-- [2023年言论笔记](./node/blog/2023_10_12_comments.md)
-
-- [2023年7月15日读博客笔记（一）：编程的首要原则是什么？](./node/blog/2023_07_15_csdn_pngba.md)
-
-- [2023年7月21日读博客笔记（二）：为什么GP更自然？](./node/blog/2023_7_20_toplanguage_pongba.md)
-
-- [2023年8月4日读《革命就是请客吃饭》](./node/blog/2023_08_04_ideology.md)
-
-- [2023年8月22日读博客笔记（四）：读《松弛感》](./node/blog/2023_08_22_node.md)
-
-- [编程经验谈](./node/blog/2023_09_07_programming_experience.md)
-
-## 书本笔记
-
-- [读《一曲微茫》](./node/book/2023_10_17_ZhangChongHe_letters.md)
-- [《Unix编程艺术》Eric Raymond谈模块化原则、胶合层和面向对象的缺点](./node/book/2023_08_07_unix_glue_layer.md)
-
-## 有思考的文字
-
-- [从军行豆瓣合集](./node/congjunxing/index.md)
-
-- [陰陽魚豆瓣合集](./node/yin_yang_fish/index.md)
-
-- [文小芒先生文章合集](./node/wxmang/index.md)
-
-
-## 人生历练
-
-- [如何面对重大但不确定的选择？](./node/life_experience/2023_09_07_how_to_face_big_but_uncertain_choices.md)
-
-- [为什么领导会已读不回？](./node/life_experience/2023_09_08_freedom_of_choice.md)
-
-- [有思考的言论](./node/life_experience/2023_09_11_thoughtful_remarks.md)
-
 ## 有思考的博客
 
-- [url列表](./node/blog_list.md)
+- [url列表](./blog_list.md)
