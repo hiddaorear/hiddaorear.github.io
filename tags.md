@@ -15,7 +15,6 @@
 
 - [和若溪小朋友聊写字](./education/handwriting/2023_07_15_children_write/index.md)
 
-
 ## 回忆
 
 - [2022年总结](./essay/history/2022_summary/index.md)
@@ -48,6 +47,7 @@
 
 - [下厨房](./essay/daily_life/cooking.md)
 
+- [一襟晚照](./essay/daily_life/2019_11_10_old_man.md)
 
 ## 总结
 
