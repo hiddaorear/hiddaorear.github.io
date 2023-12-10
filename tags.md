@@ -122,13 +122,13 @@
 
 ### PL 理论
 
-- [幺半群与计算机编程](./computer_programs/PL/monoid_and_computer_programs.md)
+- [幺半群与计算机编程](./computer_programs/PL/pl_theory/monoid_and_computer_programs.md)
 
-- [SICP and Expression Problem（上）](./computer_programs/PL/SICP_and_expression_problem_0.md)
+- [SICP and Expression Problem（上）](./computer_programs/PL/pl_theory/SICP_and_expression_problem_0.md)
 
-- [SICP and Expression Problem (下)](./computer_programs/PL/SICP_and_expression_problem_1.md)
+- [SICP and Expression Problem (下)](./computer_programs/PL/pl_theory/SICP_and_expression_problem_1.md)
 
-- [Monad](./monad.md)
+- [Monad](./computer_programs/PL/pl_theory/monad.md)
 
 
 ## Algorithm
