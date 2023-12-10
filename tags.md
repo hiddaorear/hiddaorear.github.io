@@ -41,6 +41,8 @@
 
 ## 日常生活
 
+- [理发师的理想](./essay/daily_life/2023_12_10_barber.md)
+
 - [好吃的零食](./essay/daily_life/2023_09_01_delicious_snacks.md)
 
 - [你真的需要提高技术吗？](./essay/daily_life/badminton_technique.md)
