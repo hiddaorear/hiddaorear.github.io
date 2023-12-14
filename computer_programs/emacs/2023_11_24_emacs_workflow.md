@@ -44,4 +44,4 @@ open-newline：不用移光标，在上面或下面新开一行。相当于三�
 
 - [我平常是怎么使用 Emacs 的？](https://manateelazycat.github.io/2022/11/07/how-i-use-emacs/)
 
-- [面向产品经理的Emacs教程](https://remacs.cc/posts/)
+- [面向产品经理的Emacs教程](https://remacs.fun/)
