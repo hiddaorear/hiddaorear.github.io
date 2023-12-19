@@ -145,6 +145,12 @@
 
 ## Front End
 
+### 跨平台技术
+
+- [移动端跨平台技术](computer_programs/front_end/cross_platform_ui_technology/2023_12_19_mobile_termial.md)
+
+- [浅析VSCode](./computer_programs/front_end/cross_platform_ui_technology/2023_12_19_vscode.md)
+
 ### 架构设计
 
 - [IoC（控制反转）](./computer_programs/front_end/architecture/ioc_di.md)
