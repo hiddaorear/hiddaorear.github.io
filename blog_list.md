@@ -6,6 +6,10 @@
 
 - [latex live](https://www.latexlive.com/)
 
+## 英语博客
+
+-  [Bob Nystrom](https://journal.stuffwithstuff.com/category/language/)
+
 ## 技术文集
 
 - [LeetCode Cookbook](https://books.halfrost.com/leetcode/ChapterOne/)
@@ -29,6 +33,8 @@
 - [egh0bww1](https://egh0bww1.com/)
 
 ## 低熵博客
+
+- [whexy](https://www.whexy.com/posts)
 
 - [老赵点滴 - 追求编程之美](http://blog.zhaojie.me/)
 
