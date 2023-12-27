@@ -191,6 +191,8 @@
 
 ## Back End
 
+- [shell基础](./computer_programs/back_end/2023_12_27_shell.md)
+
 - [RPC 核心设计](./computer_programs/back_end/rpc/2023_12_25_core_design/index.md)
 
 - [2023年11月3日：后台服务架构设计入门](./computer_programs/back_end/introduction_to_backend_service_architecture_design/index.md)
