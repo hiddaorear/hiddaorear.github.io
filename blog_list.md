@@ -34,7 +34,8 @@
 
 ## 低熵博客
 
-- [Ying 读书笔记](https://izualzhy.cn/archive.html)
+- [Linux 源码笔记](https://linux.laoqinren.net/kernel/)
+
 - [whexy](https://www.whexy.com/posts)
 
 - [老赵点滴 - 追求编程之美](http://blog.zhaojie.me/)

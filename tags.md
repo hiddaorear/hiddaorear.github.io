@@ -203,6 +203,10 @@
 
 - [线程安全](./computer_programs/back_end/thread_safety/index.md)
 
+### Primer
+
+- [C & C++ Primer](computer_programs/back_end/2023_12_28_primer.md)
+
 ### C++ 工程
 
 - [CMake](./computer_programs/back_end/cpp/2023_12_27_cmake.md)
