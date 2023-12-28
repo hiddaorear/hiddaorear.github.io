@@ -34,6 +34,7 @@
 
 ## 低熵博客
 
+- [Ying 读书笔记](https://izualzhy.cn/archive.html)
 - [whexy](https://www.whexy.com/posts)
 
 - [老赵点滴 - 追求编程之美](http://blog.zhaojie.me/)

@@ -43,6 +43,7 @@ RCP 是一种进程间通信模式，程序分布在不同的地址空间。在�
 
 ## 阅读资料
 
+- [如何基于protobuf实现一个极简版的RPC ](https://izualzhy.cn/demo-protobuf-rpc)
 - [brpc 官网](https://brpc.apache.org/zh/)
 - [Understanding RPC Vs REST For HTTP APIs](https://www.smashingmagazine.com/2016/09/understanding-rest-and-rpc-for-http-apis/)
 - [ 现代 C++ 教程：高速上手 C++ 11/14/17/20](https://changkun.de/modern-cpp/zh-cn/01-intro/)
