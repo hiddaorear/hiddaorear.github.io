@@ -3,6 +3,9 @@
 ## C
 
 - [miloyip json-tutorial](https://github.com/miloyip/json-tutorial)
+- [json-tutorial 注释版本](https://github.com/WangHao-nlp/json-tutorial)
+- [C++ josn-turoial](https://github.com/yanfengneng/My_Json)
+
 
 ## C++
 
