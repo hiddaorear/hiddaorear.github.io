@@ -124,6 +124,17 @@ usage：
 - sort-tab-select-last-tab: select last tab
 - sort-tab-close-current-tab: close current tab
 
+## Linux 安装 emacs
+
+```shell
+wget https://mirrors.cloud.tencent.com/gnu/emacs/emacs-26.2.tar.gz
+tar xf emacs-26.2.tar.gz
+cd emacs-26.2
+./configure --without-x --with-modules  --with-tree-sitter
+make && sudo make install
+
+```
+
 ## Mac 安装 emacs
 
 ### emacs-plus
