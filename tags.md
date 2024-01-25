@@ -178,6 +178,12 @@
 
 - [使用monorepo](./computer_programs/front_end/software_engineering/monorepo.md)
 
+### Linux
+
+#### shell
+
+- [Linux 源码安装软件](./computer_programs/linux/2024_1_25_installed_software_from_source.md)
+
 ### 杂项
 
 - [VSCode 源码剖析](./computer_programs/front_end/other/2023_08_29_the_annotaded_vscode.md)
