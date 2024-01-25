@@ -1,3 +1,4 @@
+{:toc}
 # Linux源码安装软件
 
 ## Tarball
