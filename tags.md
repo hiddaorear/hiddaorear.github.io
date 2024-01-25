@@ -182,7 +182,9 @@
 
 #### shell
 
-- [Linux 源码安装软件](./computer_programs/linux/2024_1_25_installed_software_from_source.md)
+- [Linux 源码安装软件](./computer_programs/linux/shell/2024_1_25_installed_software_from_source.md)
+
+- [shell基础](./computer_programs/linux/shell/2023_12_27_shell.md)
 
 ### 杂项
 
@@ -196,8 +198,6 @@
 
 
 ## Back End
-
-- [shell基础](./computer_programs/back_end/2023_12_27_shell.md)
 
 - [RPC 核心设计](./computer_programs/back_end/rpc/2023_12_25_core_design/index.md)
 
