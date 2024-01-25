@@ -12,10 +12,6 @@ cd emacs-26.2
 ./configure --without-x --with-modules  --with-tree-sitter
 make && sudo make install
 ```
-### wget
-
-
-### tar
 
 
 ## configure
@@ -28,9 +24,24 @@ configure检查项：
 - 操作系统是否匹配
 - 内核定义的头文件是否存在
 
+
+## make
+
+把源码编译为操作系统可执行的二进制过程。
+
+相关的有make clean，会清除之前编译的文件
+
+## make install
+
+复制make生成的可执行文件，到指定目录。
+
 ## ln
 
 ## 检查文件
+
+## which
+
+`which command` 输出路径，如果是软链，进入路径，执行`ln -al`，会展示真实路径
 
 ### 检查文件是否存在
 
@@ -42,15 +53,10 @@ configure检查项：
 `[ -L filename ];echo $?`
 返回0说明是软链。
 
-## make
+### wget
 
-把源码编译为操作系统可执行的二进制过程。
 
-相关的有make clean，会清除之前编译的文件
-
-## make install
-
-复制make生成的可执行文件，到指定目录。
+### tar
 
 
 ## 阅读资料
