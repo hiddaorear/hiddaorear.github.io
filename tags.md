@@ -186,6 +186,8 @@
 
 - [shell基础](./computer_programs/linux/shell/2023_12_27_shell.md)
 
+- [shell搜索](./computer_programs/linux/shell/2025_1_25_search.md)
+
 ### 杂项
 
 - [VSCode 源码剖析](./computer_programs/front_end/other/2023_08_29_the_annotaded_vscode.md)
