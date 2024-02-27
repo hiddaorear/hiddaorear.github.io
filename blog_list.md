@@ -34,6 +34,8 @@
 
 ## 低熵博客
 
+- [卮言日出](https://shadowquark.github.io/)
+
 - [Linux 源码笔记](https://linux.laoqinren.net/kernel/)
 
 - [whexy](https://www.whexy.com/posts)
