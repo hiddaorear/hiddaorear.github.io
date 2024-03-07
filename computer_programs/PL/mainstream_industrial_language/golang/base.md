@@ -59,6 +59,7 @@ Russ Cos的想法也是随时间改变。没有一个东西开始就是完美的
 
 ## 阅读资料
 
+- [Go Modules 终极入门](https://golang2.eddycjy.com/posts/appendix/01-go-modules-use/)
 - [Golang 版本管理系列 翻译 11 篇全](https://github.com/vikyd/note/tree/master/go_and_versioning)
 - [Go modules：最小版本选择](https://tonybai.com/2019/12/21/go-modules-minimal-version-selection/)
 - [studygolang 【简单的科普】](https://polarisxu.studygolang.com/page/2/)
