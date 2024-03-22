@@ -2,6 +2,8 @@
 
 ## 工具站点
 
+- [知识图谱](https://cnkgraph.com/)
+
 - [画图](https://excalidraw.com/)
 
 - [latex live](https://www.latexlive.com/)
