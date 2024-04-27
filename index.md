@@ -8,6 +8,8 @@
 
 - [和若溪小朋友聊写字](./education/handwriting/2023_07_15_children_write/index.md)
 
+- [和小朋友聊写字——从楷书到行书](./education/handwriting/2024_04_27_regular_script_semi_cursive_script/index.md)
+
 - [种田忆旧](./essay/history/2022_fram.md)
 
 - [自制的陀螺](./essay/history/gyro.md)

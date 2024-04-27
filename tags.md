@@ -15,6 +15,8 @@
 
 - [和若溪小朋友聊写字](./education/handwriting/2023_07_15_children_write/index.md)
 
+- [和小朋友聊写字——从楷书到行书](./education/handwriting/2024_04_27_regular_script_semi_cursive_script/index.md)
+
 ## 回忆
 
 - [2022年总结](./essay/history/2022_summary/index.md)
