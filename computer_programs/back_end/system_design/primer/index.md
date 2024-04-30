@@ -4,7 +4,7 @@ TOC {:toc}
 
 > 2024-4-29
 
-![outline](./diagram/ouline.png)
+![outline](./diagram/outline.png)
 
 > 系统 = 服务 + 数据存储
 
