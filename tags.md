@@ -111,7 +111,7 @@
 
 #### Go
 
-- [如何掌握程序语言](./computer_programs/PL/mainstream_industrial_language/golang/pl_features_outline.md)
+- [Go的错误](./computer_programs/PL/mainstream_industrial_language/golang/error/index.md)
 
 - [基础](./computer_programs/PL/mainstream_industrial_language/golang/base.md)
 
