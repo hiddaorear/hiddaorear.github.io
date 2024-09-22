@@ -21,6 +21,8 @@
 
 ## 回忆
 
+- [我的大伯](./essay/daily_life/2024_08_17_uncle_funeral.md)
+
 - [2022年总结](./essay/history/2022_summary/index.md)
 
 - [种田忆旧](./essay/history/2022_fram.md)
