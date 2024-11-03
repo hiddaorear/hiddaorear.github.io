@@ -17,7 +17,11 @@
 
 - [和小朋友聊写字——从楷书到行书](./education/handwriting/2024_04_27_regular_script_semi_cursive_script/index.md)
 
+- [看见具体的人](./education/node/2024_09_20_tencent_learn_product_requirement_and_people.md)
+
 ## 回忆
+
+- [我的大伯](./essay/daily_life/2024_08_17_uncle_funeral.md)
 
 - [2022年总结](./essay/history/2022_summary/index.md)
 
