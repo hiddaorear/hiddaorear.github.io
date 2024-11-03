@@ -59,6 +59,9 @@
 
 - [一次就好](./essay/summary/single_step.md)
 
+## 沉思
+
+- [下自己的围棋](./essay/ruminations/2024_11_03_reflections_on_playing_go/index.md)
 
 ## 读书札记
 
