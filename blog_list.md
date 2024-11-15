@@ -36,6 +36,8 @@
 
 ## 低熵博客
 
+- [remacs的世界](https://remacs.fun/)
+
 - [卮言日出](https://shadowquark.github.io/)
 
 - [老赵点滴 - 追求编程之美](http://blog.zhaojie.me/)
