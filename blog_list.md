@@ -28,6 +28,10 @@
 
 - [认知偏差知识手册](https://s75w5y7vut.feishu.cn/docs/doccn3BatnScBJe7wD7K3S5poFf#o0sYEn)
 
+## 英语博客
+
+ - [Wait But Why](https://waitbutwhy.com/2024/10/spacex-toddler.html)
+
 ## Emacs
 
 - [EmacsTalk](https://emacstalk.codeberg.page/)
