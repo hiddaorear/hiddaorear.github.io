@@ -234,4 +234,6 @@
 
 ## 有思考的博客
 
+- [常读常新的文章](article.md)
+
 - [url列表](./blog_list.md)
