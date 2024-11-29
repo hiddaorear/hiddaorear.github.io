@@ -1,5 +1,9 @@
 # url列表
 
+## 新闻
+
+- [奇客](https://www.solidot.org/)
+
 ## 工具站点
 
 - [知识图谱](https://cnkgraph.com/)
