@@ -35,6 +35,8 @@
 
 ## 游记
 
+- [寂寞郴州五百年](./essay/travels/2024_11_21_ChenZhou_tourist/index.md)
+
 - [浮光掠影过苏州](./essay/travels/2022_09_Shanghai_Tourist/index.md)
 
 - [竹排摇梦过桂林](./essay/travels/2023_04_GuiLin_tourist/index.md)
