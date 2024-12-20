@@ -2,14 +2,8 @@
 ---
 @import "{{ site.theme }}";
 
-@font-face {
-  font-family: jinkaiFont;
-  src: url("../fonts/jinkai.ttf") format("TrueType");
-}
-
 
 html, body {
-  font-family: jinkaiFont;
   font-size: 20px;
   color: #333;
 }
