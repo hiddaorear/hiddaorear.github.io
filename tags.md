@@ -1,9 +1,6 @@
-* TOC
-{:toc}
-
 # Tags
 
-![emacs](./emacs.jpeg)
+- [随手札记](./draft.md)
 
 ## Medicine
 
