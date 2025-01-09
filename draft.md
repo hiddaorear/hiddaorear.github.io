@@ -40,6 +40,9 @@
 
 ## 2025-01-09
 
+### git底层原理
+
+- [深入理解 Git 底层实现原理](https://chuquan.me/2022/05/21/understand-principle-of-git/)
 
 ### 写PPT技巧
 
