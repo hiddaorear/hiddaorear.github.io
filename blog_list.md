@@ -16,6 +16,10 @@
 
 -  [Bob Nystrom](https://journal.stuffwithstuff.com/category/language/)
 
+## 物理数学
+
+- [李思-线性代数](https://sili-math.github.io/)
+
 ## 技术文集
 
 - [LeetCode Cookbook](https://books.halfrost.com/leetcode/ChapterOne/)
