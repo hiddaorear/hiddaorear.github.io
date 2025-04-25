@@ -9,3 +9,7 @@
 ## 谢益辉
 
 - [为什么这世界的规矩越来越特么多](https://yihui.org/cn/2019/02/helicopter-parenting/)
+
+## 数学
+
+- [跨越千年的RSA算法shelesh](https://www.matrix67.com/blog/archives/5100)
