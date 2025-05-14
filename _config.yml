@@ -1,5 +1,5 @@
 permalink: /:title.html
-markdown: hexo-renderer-pandoc
+markdown: kramdown
 pygments: true
 
 kramdown:
