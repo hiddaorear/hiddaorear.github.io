@@ -82,9 +82,7 @@
 
 ## 物理
 
-- [量子算法-Shor's algorithm](./Mathematical_Physics/shor_algorithm/index.md)
-
-
+- [深入浅出 Shor's Algorithm](./Mathematical_Physics/shor_algorithm/index.md)
 
 - [玻尔兹曼分布](./Mathematical_Physics/Boltzmann_distribution/index.md)
 
