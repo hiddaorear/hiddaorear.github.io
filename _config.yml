@@ -24,8 +24,3 @@ show_downloads: false
 remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
-
-# MathJax 数学公式支持
-mathjax:
-  on: true #是否启用
-  per_page: true # 若只渲染单个页面，此选项设为false，页面内加入 mathjax: true
