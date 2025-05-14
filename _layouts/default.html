@@ -15,7 +15,8 @@
     <script type="text/x-mathjax-config">
       window.MathJax = {
         tex: {
-          inlineMath: [['$', '$'], ['\$', '\$']],
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
           packages: {'[+]': ['mhchem']}
         },
         loader: {load: ['[tex]/mhchem']},
