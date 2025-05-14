@@ -11,27 +11,16 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        // 基础TeX配置
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\$","\$"] ],  // 行内公式分隔符
-          displayMath: [ ['$$','$$'], ["\$$","\$$"] ],  // 行间公式分隔符
-          processEscapes: true,  // 允许用\$转义$
-          preview: "none"  // 禁用渲染预览
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\$', '\$']],
+          packages: {'[+]': ['mhchem']}
         },
-        // 禁用右键菜单（可选）
-        showMathMenu: false,
-        messageStyle: "none"  // 隐藏加载信息
-      });
-      
-      // 可选：延迟加载配置（提升页面速度）
-      MathJax.Hub.Register.StartupHook("End", function() {
-        MathJax.Hub.Queue(function() {
-          document.getElementById("loading-mathjax").style.display = "none";
-        });
-      });
+        loader: {load: ['[tex]/mhchem']},
+        chtml: {scale: 0.9}
+      };
     </script>
   </head>
   <body>
