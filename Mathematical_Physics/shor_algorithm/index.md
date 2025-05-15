@@ -217,15 +217,13 @@ $$
  |x\rangle = | l +  br\rangle
 $$
 
-因此，
-
-寄存器 register1 的 量子态 $|\Phi_1 \rangle$ 可表示为：
+因此，寄存器 register1 的 量子态 $\|\Phi_1 \rangle$ 可表示为：
 
 $$
 |\Phi_1\rangle = |l\rangle + |l+r\rangle + |l+2r\rangle + ... + |l+(A - 1)r\rangle
 $$
 
-寄存器 register2的 量子态 $|\Phi_2 \rangle$ 可表示为：
+寄存器 register2的 量子态 $\|\Phi_2 \rangle$ 可表示为：
 
 $$
 |\Phi_2\rangle = |l\rangle|f(l)\rangle + |l+r\rangle|f(l + r)\rangle + |l+2r\rangle|f(l + 2r)\rangle + ... + |l+(A - 1)r\rangle|f(l + (A - 1)r)\rangle
@@ -259,7 +257,7 @@ $$
 
 因对寄存器 register1 做过一次测量，求和从 $2^L-1$ 变为 $A - 1$，其中 A 为周期数。
 
-将 $QFT(\mathinner{|l + jr \rangle})$ 代入，并交换求和顺序：
+将 $QFT(\mathinner{\|l + jr \rangle})$ 代入，并交换求和顺序：
 
 $$
 \begin{align} 
