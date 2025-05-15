@@ -1,6 +1,6 @@
 # 深入浅出 Shor's Algorithm
 
-## 起：Shor's Algorithm 和量子计算机简介
+## Shor's Algorithm 和量子计算机简介
 
 秀尔算法（Shor's Algorithm）是数学家彼得·秀尔（Peter Williston Shor）在1994年发现的算法，又称量子质因数分解算法。这个算法在量子计算机领域很重要。1982年，诺贝尔物理学奖得主费曼在演讲《用计算机模拟物理》（Simulating Physics with Computers）提出经典计算机无法高效模拟量子系统。12年后，秀尔提出能在多项式时间内分解大整数（RSA加密的基础），远超传统计算机的能力，引发量子计算研究的热潮。秀尔因此获得了理论计算机科学成就的最高奖——内万林纳奖（Nevanlinna Prize）。秀尔算法的影响深远，时至今日，说起量子计算机的进展，常见到秀尔算法的实现，支持能把 15 分解为 $5 \times 3$ 之类的叙述（2001 年IBM的量子计算机）。
 
@@ -48,7 +48,7 @@ H 变换的逆矩阵是他自身。即： $H*H = I$。那么在量子计算机�
 
 综上所述，量子计算的计算是可逆的。量子态可以叠加，也可以纠缠在一起。利用量子的这些特性，可以实现相对于传统计算机的性能，有指数级的提升。
 
-## 承：Shor's Algorithm 例子
+## Shor's Algorithm 例子
 
 使用 Shor's Algorithm 算法来分解 N：15。步骤如下：
 
@@ -122,7 +122,9 @@ $(2^{r/2} + 1)(2^{r/2} - 1)$中，$2^{r/2} + 1 $ 或者 $2^{r/2} - 1$ 是 15 的
 
 周期 r 在 register2 中，我们需要设法获取周期 r 的值，利用 $(a^{r/2} + 1)(a^{r/2} - 1) \equiv 0 (\mod N)$，求得 N 的因数。我们的重心是周期 r， $a^x \mod N$ 的具体值并不重要，由于每次测量只能获取一个值，我们也无法通过直接测量值来计算周期。
 
-为了获取周期，考虑使用量子傅立叶变换，获取频率ν，从而取得周期 $r = 1 / ν$。为了使量子傅立叶变换更好处理，我们可以只用保留周期 r 中的某一个值，把其他值变为0，这一操作不影响最终结果，却使得计算和测量更好处理。对 register2 进行一次测量以后，得到一个值 γ。因为 register1 与 register2 纠缠，register1 中的量子也塌缩，剩下与 γ 相关的量子态；
+为了获取周期，考虑使用量子傅立叶变换，获取频率ν，从而取得周期 $r = 1 / ν$。这里的量子傅立叶变换的效果，相当于光栅。光通过光栅以后，因光的干涉，会形成明暗相间的条纹，相长干涉产生明条纹，相消干涉产生暗条纹。含周期的量子态经过量子傅立叶变换，也会出现相长相消。
+
+为了使量子傅立叶变换更好处理，我们可以只用保留周期 r 中的某一个值，把其他值变为0，这一操作不影响最终结果，却使得计算和测量更好处理。对 register2 进行一次测量以后，得到一个值 γ。因为 register1 与 register2 纠缠，register1 中的量子也坍缩，剩下与 γ 相关的量子态；
 
 假设 register2 测量的所得值为 1，此时两个寄存器量子态如下：
 
@@ -158,8 +160,6 @@ $$
 $$
 
 进一步处理即可求得周期。这里也有小概率会失败，就需要重新计算。下文会给出成功的概率 p，概率 p 与 L 正相关，L 越大，概率越高；
-
-- [量子算法剖析: 零基础搞懂Shor量子算法推演](https://zhuanlan.zhihu.com/p/106923175)
 
 ### Shor 算法求周期 r
 
@@ -233,7 +233,98 @@ $$
 
 #### 第一次测量寄存器 register2
 
-##  转：Shor's Algorithm 背后的数学物理
+对寄存器 register2 进行计算基上的测量，则量子态坍缩为周期值的一个值，因寄存器 register1 中的量子态与之纠缠，其中的量子态变为：
+
+$$
+\begin{align}
+  \mathinner{
+    |\Phi_1 \rangle}&=\frac{1}{\sqrt{A}}\sum_{j=0}^{A-1} \mathinner{|l + jr \rangle}\tag{1}\\ 
+                    &=\frac{1}{\sqrt{\frac{2^L}{r}}}\sum_{j=0}^{\frac{2^L}{r}-1} \mathinner{|l + jr\rangle
+  }
+\end{align}\\
+$$
+
+#### 量子傅立叶变换 QFT
+
+对寄存器 register1 中的量子态进行QFT：
+
+$$
+QFT(\mathinner{|l + jr \rangle})=\frac{1}{\sqrt{2^L}}\sum_{\gamma=0}^{2^L-1}e^{2\pi i(l + jr)\gamma/2^L}\mathinner{|\gamma \rangle}
+$$
+
+因寄存器 register2 中的量子态与之纠缠，则量子态变为：
+$$
+QFT(\mathinner{|\Phi_{2} \rangle})=\frac{1}{\sqrt{A}}\sum_{j=0}^{A - 1}QFT(\mathinner{|jr+l \rangle})\\ 
+$$
+
+因对寄存器 register1 做过一次测量，求和从 $2^L-1$ 变为 $A - 1$，其中 A 为周期数。
+
+将 $QFT(\mathinner{|l + jr \rangle})$ 代入，并交换求和顺序：
+
+$$
+\begin{align} 
+  QFT(\mathinner{|\Phi_{2} \rangle}) &= \frac{1}{\sqrt{A}}\sum_{j=0}^{A-1}[\frac{1}{\sqrt{2^L}}\sum_{\gamma=0}^{2^L-1}e^{2\pi i(l + jr)\gamma/2^L}]\mathinner{|\gamma \rangle}\\ 
+                                     &=\sum_{\gamma=0}^{2^L-1}[\frac{\sqrt{r}}{2^L}\sum_{j=0}^{A-1}e^{2\pi i(l + jr)\gamma/2^L}]\mathinner{|\gamma \rangle} 
+\end{align}\\  
+
+$$
+
+因寄存器 register2 做过一次测量，量子态坍缩为 r 个值中的一个值，每一个值对应于寄存器 register1 中 A 个叠加态，设上式中括号里面的为：
+
+$$
+\begin{align} 
+ C_\gamma &=\frac{\sqrt{r}}{2^L}\sum_{j=0}^{A-1}e^{2\pi i(jr+l)\gamma/2^L}\\
+          &=\frac{\sqrt{r}}{2^L}e^{2\pi il\gamma/2^L}[\sum_{j=0}^{A-1}e^{2\pi ijr\gamma/2^L}]\\
+\end{align}\\  
+$$
+ 
+ 此时存在2中情况：
+
+ 1. $2^L \mod r = 0$，即 $2^L$ 能够整除周期 r 的情况。说明每一个波峰刚好在 $ γ = k2^L/r $；
+ 2.  $2^L \mod r \neq 0$，即 $2^L$ 不能够整除周期 r 的情况；说明值非常接近播放，此时需要加入微调参数；本文不分析这种情况；
+
+ 当 $2^L \mod r = 0$ 时，在(5)式中，$A = 2^L/r$，只有 γ 是 $ 2^L/r$ 整数倍时，出现相长干涉，其他的为相消干涉，值趋近为0，有：
+
+$$
+C_\gamma=\begin{cases}     
+  \frac{1}{\sqrt{r}}e^{2\pi il\gamma/2^L}&\gamma=k2^L/r\\    
+  0&\gamma\ne k2^L/r\\ 
+\end{cases}\\
+$$
+
+计算 $C_\gamma$ 这个等比数列：
+
+$$
+\begin{align} 
+C_\gamma &=\frac{\sqrt{r}}{2^L}e^{2\pi il\gamma/2^L}[\sum_{j=0}^{A-1}e^{2\pi ijr\gamma/2^L}]
+         &=\frac{\sqrt{r}}{2^L}e^{2\pi il\gamma/2^L}[\frac{e^{2\pi iAr\gamma/2^L}-1}{e^{2\pi ir\gamma/2^L}-1}]\\ 
+\end{align}\\  
+$$
+
+代入 $A = 2^L/r$ 得：
+
+$$
+C_\gamma=\frac{\sqrt{r}}{2^L}e^{2\pi il\gamma/2^L}[\frac{e^{2\pi i\gamma}-1}{e^{2\pi ir\gamma/2^L}-1}]\\ 
+$$
+
+由于 $e^{2\pi ir\gamma/2^L}-1 = 0$，也就是 $\gamma\ne k2^L/r$ 时，值为0.
+
+将这一结果，代入可得：
+
+$$
+\mathinner{|\Phi_{n} \rangle}=\frac{1}{\sqrt{r}}\sum_{k=0}^{r-1}e^{2\pi ik/r}\mathinner{|\frac{k2^L}{r} \rangle}\\ 
+\rho(\mathinner{|\Phi_{n} \rangle})=|\frac{1}{\sqrt{r}}|^2=\frac{1}{r}
+$$
+
+测量 $\gamma\rangle$ 值，会等概率 $1/r$ 的选择一个态，由 $\gamma=k2^L/r$ 可得：
+
+$$
+\frac{\gamma}{2^L}=\frac{k}{r}\\
+$$
+
+如果有 $gcd(k, r) = 1$，r 就可以从 $\frac{k}{r}$ 的不可约分数求得。
+
+##  Shor's Algorithm 背后的数学物理
 
 ### 量子纠缠
 
@@ -245,7 +336,6 @@ $$
 - 多项式乘法
 - 逆变换
 
-
 ### 酉空间
 
 - 傅立叶变换的广泛性（薛定谔方程、热传导）
@@ -253,7 +343,7 @@ $$
 
 - [如果把傅里叶变换突然一键删除，世界上会发生什么变化？](https://www.zhihu.com/question/13671804165/answer/1888868718425134475)
 
-## 合：学数学是学思想
+## 学数学是学思想
 
 ### 数据类型背后的数学
 
