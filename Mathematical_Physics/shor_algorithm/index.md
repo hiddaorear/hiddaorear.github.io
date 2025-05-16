@@ -343,13 +343,123 @@ $$
 
 ## 学数学是学思想
 
-### 数据类型背后的数学
+### 排期秘诀的不严格证明
 
-### 同构的数学思想
+### 如何学习一门新语言
 
-重视语言特性，而不是重视语言
+#### golang的errors
 
-golang的error设计
+对于一门编程语言，多关注编程语言的特性。不同编程语言的语法不同，但不同的语法可能都需要表达一种编程所需的特性。
+
+考察一下golang中很有争议的errors，典型代码如下：
+
+```go
+if err != nil {
+        return err
+}
+```
+
+更具体的例子，当具有多个 error 的情况下：
+
+```go
+fd, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE, 0644)
+if err != nil {
+  fmt.Printf("无法打开文件: %v\n", err)
+  return
+}
+defer func() {
+  // 确保在函数结束时关闭文件
+  if err := fd.Close(); err != nil {
+    fmt.Printf("关闭文件时出错: %v\n", err)
+  }
+}()
+
+_, err = fd.Write(p0[a:b])
+if err != nil {
+    return err
+}
+_, err = fd.Write(p1[c:d])
+if err != nil {
+    return err
+}
+_, err = fd.Write(p2[e:f])
+if err != nil {
+    return err
+}
+// and so on
+```
+
+上述代码中，有重复的 err 赋值，重复的 `err != nil ` 检查。把重复的 err 放到 struct 中，并提供`err != nil `检测方法， 代码可以优化成：
+
+```go
+type errWriter struct {
+    w   io.Writer
+    err error
+}
+
+func (ew *errWriter) write(buf []byte) {
+    if ew.err != nil {
+        return
+    }
+    _, ew.err = ew.w.Write(buf)
+}
+
+fd, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE, 0644)
+if err != nil {
+  fmt.Printf("无法打开文件: %v\n", err)
+  return
+}
+defer func() {
+  // 确保在函数结束时关闭文件
+  if err := fd.Close(); err != nil {
+    fmt.Printf("关闭文件时出错: %v\n", err)
+  }
+}()
+
+ew := &errWriter{w: fd}
+ew.write(p0[a:b])
+ew.write(p1[c:d])
+ew.write(p2[e:f])
+// and so on
+if ew.err != nil {
+    return ew.err
+}
+```
+考察优化后的代码。多个 `fd.Write` 返回值的 `err` ，共用了 `errWriter` 中 `err`。多个 `err != nil ` 检查，共用了 `write` 方法处理。
+
+#### 错误相关的特性
+
+综上，编程中错误的处理，至少需要考虑 3 个特性：
+
+1. 错误的返回；
+
+2. 错误的处理；
+
+3. 发生错误以后，支持必要的收尾；
+
+##### 错误状态的返回
+
+调用方要通过返回的错误，判断所调用者是否出错。编程中调用者一般为函数或方法。函数有多个入参，通常只有一个返回值，也有直接支持多返回值的语言，例如golang。如何处理错误和正常的返回值，是所有编程语言需要处理的问题。解决办法有：
+  
+  - 使用 `try-catch-finally` 的 `try` 捕获错误，无需额外的返回值；
+  - 支持多个返回值，例如golang，约定最后一个返回值是 err；
+  - 增加错误状态的全局变量；
+  - 返回一个集合类型，如：array 或 map，把正常返回值和错误存储在一个变量中；
+
+##### 错误的处理
+
+调用过程中，可能存在多个错误，例如上文中的多个 `fd.Write` 调用的 err。处理办法有：
+
+- 统一处理，如 `try-catch-finally` 的 `catch`；
+- 逐一处理，如 golang 的 `if err != nil`；
+
+##### 必要的收尾
+
+调用以后，如打开了文件，即使发生错误了，还需关闭文件。处理办法有：
+
+- 随着错误一起处理，如：`try-catch-finally` 的 `finally`
+- 在其他地方处理，如 golang 中的 `defer`
 
 - [Golang 有什么致命的问题吗？](https://www.zhihu.com/question/311207855)
+
 
