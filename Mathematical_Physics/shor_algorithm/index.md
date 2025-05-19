@@ -341,13 +341,10 @@ $$
 
 - [如果把傅里叶变换突然一键删除，世界上会发生什么变化？](https://www.zhihu.com/question/13671804165/answer/1888868718425134475)
 
-## 学数学是学思想
 
-### 排期秘诀的不严格证明
+## golang的errors
 
-### 如何学习一门新语言
-
-#### golang的errors
+学数学是学思想。TODO 
 
 对于一门编程语言，多关注编程语言的特性。不同编程语言的语法不同，但不同的语法可能都需要表达一种编程所需的特性。
 
@@ -427,7 +424,7 @@ if ew.err != nil {
 ```
 考察优化后的代码。多个 `fd.Write` 返回值的 `err` ，共用了 `errWriter` 中 `err`。多个 `err != nil ` 检查，共用了 `write` 方法处理。
 
-#### 错误相关的特性
+### 错误相关的特性
 
 综上，编程中错误的处理，至少需要考虑 3 个特性：
 
@@ -437,7 +434,7 @@ if ew.err != nil {
 
 3. 发生错误以后，支持必要的收尾；
 
-##### 错误状态的返回
+### 错误状态的返回
 
 调用方要通过返回的错误，判断所调用者是否出错。编程中调用者一般为函数或方法。函数有多个入参，通常只有一个返回值，也有直接支持多返回值的语言，例如golang。如何处理错误和正常的返回值，是所有编程语言需要处理的问题。解决办法有：
   
@@ -446,19 +443,140 @@ if ew.err != nil {
   - 增加错误状态的全局变量；
   - 返回一个集合类型，如：array 或 map，把正常返回值和错误存储在一个变量中；
 
-##### 错误的处理
+### 错误的处理
 
 调用过程中，可能存在多个错误，例如上文中的多个 `fd.Write` 调用的 err。处理办法有：
 
 - 统一处理，如 `try-catch-finally` 的 `catch`；
 - 逐一处理，如 golang 的 `if err != nil`；
 
-##### 必要的收尾
+### 必要的收尾
 
 调用以后，如打开了文件，即使发生错误了，还需关闭文件。处理办法有：
 
 - 随着错误一起处理，如：`try-catch-finally` 的 `finally`
 - 在其他地方处理，如 golang 中的 `defer`
+
+### Nil 不是 Nil
+
+```go
+func do() error {
+    return nil
+}
+
+func main(){
+    if do() != nil {
+        return err
+    }
+}
+
+```
+
+> These constructs are idiomatic to Golang, as it encourages developers to explicitly return errors as values and handle them as usual variable. But this post is not about errors, its about nil values.
+
+``` go
+var p *int              // (type=*int,value=nil)
+var i interface{}       // (type=nil,value=nil)
+
+if i != p {             // (type=*int,value=nil) != (type=nil,value=nil)
+// to successfully compare these values, both type and value must match
+    fmt.Println("not a nil")
+}
+
+//the code outputs "not a nil"
+```
+
+
+
+```go
+// example #1
+type myerr string
+
+func (err myerr) Error() string {
+    return "an error ocurred: " + err
+}
+
+func do() error {
+    var err *myerr
+    //do logic...
+    return err // might return nil pointer
+}
+
+func main() {
+    err := do()
+    print(err == nil) // prints `false` because it is nil pointer
+}
+
+// example #2
+type myerr string
+
+func (err myerr) Error() string {
+    return "an error ocurred"
+}
+
+func do() *myerr {
+    return nil // returns nil pointer
+}
+
+func wrap() error {
+    return do() // the information about nil pointer is dissolved
+}
+
+func main() {
+    err := wrap()
+    print(err == nil) //prints `false` because underneath is nil pointer not empty interface
+}
+
+
+```
+
+> The solution is simple - always use error interface when returning an error from function and never initialize an empty error variable that might be return from function (as `nil`).This makes the code more readable and generic but also avoid the situations above.
+
+### errors.As
+
+```go
+
+
+// example #2
+type myerr string
+
+func (err myerr) Error() string {
+    return "an error ocurred"
+}
+
+func do() *myerr {
+    return nil // returns nil pointer
+}
+
+func wrap() error {
+    return do() // the information about nil pointer is dissolved
+}
+
+func main() {
+    err := wrap()
+    print(err == nil, "\n") //prints `false` because underneath is nil pointer not empty interface
+
+    var myerr1 *myerr
+	  if errors.As(err, &myerr1) {
+		  print("== err \n")
+	  }
+}
+
+
+```
+
+
+### Errors are values
+
+Rob Pike, 12 January 2015:
+
+> all the time, something must be wrong, and the obvious target is Go itself.
+
+> This is unfortunate, misleading, and easily corrected. Perhaps what is happening is that programmers new to Go ask, “How does one handle errors?”, learn this pattern, and stop there. In other languages, one might use a try-catch block or other such mechanism to handle errors. Therefore, the programmer thinks, when I would have used a try-catch in my old language, I will just type if err != nil in Go. Over time the Go code collects many such snippets, and the result feels clumsy.
+
+> Regardless of whether this explanation fits, it is clear that these Go programmers miss a fundamental point about errors: Errors are values.
+
+> Values can be programmed, and since errors are values, errors can be programmed.
 
 - [Golang 有什么致命的问题吗？](https://www.zhihu.com/question/311207855)
 
