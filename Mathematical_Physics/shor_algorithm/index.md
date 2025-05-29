@@ -551,14 +551,4 @@ if ew.err != nil {
 
 ### Errors are values
 
-Rob Pike, 12 January 2015:
 
-> all the time, something must be wrong, and the obvious target is Go itself.
-
-> This is unfortunate, misleading, and easily corrected. Perhaps what is happening is that programmers new to Go ask, “How does one handle errors?”, learn this pattern, and stop there. In other languages, one might use a try-catch block or other such mechanism to handle errors. Therefore, the programmer thinks, when I would have used a try-catch in my old language, I will just type if err != nil in Go. Over time the Go code collects many such snippets, and the result feels clumsy.
-
-> Regardless of whether this explanation fits, it is clear that these Go programmers miss a fundamental point about errors: Errors are values.
-
-> Values can be programmed, and since errors are values, errors can be programmed.
-
-- [Golang 有什么致命的问题吗？](https://www.zhihu.com/question/311207855)
