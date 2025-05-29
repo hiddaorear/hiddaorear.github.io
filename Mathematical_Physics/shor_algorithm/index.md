@@ -324,19 +324,45 @@ $$
 
 ##  Shor's Algorithm 背后的数学物理
 
-### 量子纠缠
+### 量子的叠加态和纠缠态
+
+#### 1. 叠加态 (Superposition State)
+叠加态是指单个量子系统可以同时处于多个基态的线性组合状态。数学表示为：
+$$ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle $$
+其中：
+- $ |0\rangle $ 和 $ |1\rangle $ 是计算基态
+- $ \alpha $ 和 $ \beta $ 是复数概率幅，满足 $ |\alpha|^2 + |\beta|^2 = 1 $
+
+#### 2. 纠缠态 (Entangled State)
+纠缠态是指两个或多个量子系统之间存在非局域关联的状态，数学表示为：
+$$ |\Psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
+
+#### 叠加态例子
+单个量子系统，如：电子自旋处于自旋向上和自旋向下的叠加态。
+
+$$ |\psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle) $$
+
+测量时有50%概率得到 $|↑\rangle$，50%概率得到 $|↓\rangle$
+测量后状态坍缩到其中一个本征态。
+
+#### 纠缠态例子（Bell不等式）
+
+$$ |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
+
+特点：
+1. 测量第一个量子比特为$|0\rangle$时，第二个必定为$|0\rangle$
+2. 测量第一个为$|1\rangle$时，第二个必定为$|1\rangle$
+3. 关联性不受空间距离限制
+
+---
 
 ### 欧拉定理
-
 #### 定理陈述
 设 $ n $ 为正整数，$ a $ 为整数且满足 $ \gcd(a, n) = 1 $，则：
 $$ a^{\phi(n)} \equiv 1 \pmod{n} $$
 其中，$ \phi(n) $ 是欧拉函数，表示 $ 1 \leq k \leq n $ 中与 $ n $ 互质的整数 $ k $ 的个数。
 
----
-
 #### 证明过程
-
 ##### Step 1：构造简化剩余系
 设 $ r_1, r_2, \dots, r_{\phi(n)} $ 是所有小于 $ n $ 且与 $ n $ 互质的正整数。这些数构成模 $ n $ 的**简化剩余系**，即：
 $$ \gcd(r_i, n) = 1, \quad 1 \leq r_i < n, \quad i = 1, 2, \dots, \phi(n). $$
@@ -372,7 +398,6 @@ $$ a^{\phi(n)} \equiv 1 \pmod{n}. $$
    $$ 3^4 = 81 \equiv 1 \pmod{10}. $$
    结果与定理一致。
 
----
 
 ### 附录：欧拉函数计算公式
 若 $ n $ 的质因数分解为 $ n = p_1^{k_1} p_2^{k_2} \cdots p_m^{k_m} $，则：
@@ -382,11 +407,14 @@ $$ \phi(n) = n \prod_{i=1}^m \left(1 - \frac{1}{p_i}\right). $$
 - $ n = 12 = 2^2 \times 3 $，则：
   $$ \phi(12) = 12 \left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{3}\right) = 4. $$
 
+---
 
 ### 傅立叶变换
 - 评价
 - 多项式乘法
 - 逆变换
+
+---
 
 ### 酉空间
 
@@ -395,6 +423,7 @@ $$ \phi(n) = n \prod_{i=1}^m \left(1 - \frac{1}{p_i}\right). $$
 
 - [如果把傅里叶变换突然一键删除，世界上会发生什么变化？](https://www.zhihu.com/question/13671804165/answer/1888868718425134475)
 
+---
 
 ## golang的errors
 
