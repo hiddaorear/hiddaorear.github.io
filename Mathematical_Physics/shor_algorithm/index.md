@@ -334,14 +334,14 @@ $$
 
 ### 量子的叠加态和纠缠态
 
-#### 1. 叠加态 (Superposition State)
+#### 叠加态 (Superposition State)
 叠加态是指单个量子系统可以同时处于多个基态的线性组合状态。数学表示为：
 $$ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle $$
 其中：
 - $ \|0\rangle $ 和 $ \|1\rangle $ 是计算基态
-- $ \alpha $ 和 $ \beta $ 是复数概率幅，满足 $ |\alpha|^2 + |\beta|^2 = 1 $
+- $\alpha$ 和 $\beta$ 是复数概率幅，满足 $ \|\alpha\|^2 + \|\beta\|^2 = 1 $
 
-#### 2. 纠缠态 (Entangled State)
+#### 纠缠态 (Entangled State)
 纠缠态是指两个或多个量子系统之间存在非局域关联的状态，数学表示为：
 $$ |\Psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
 
