@@ -1,4 +1,4 @@
-# 卮言快速傅立叶变换中的对称
+# 卮言量子快速傅立叶变换和对称
 
 1.	【原文】：利用量子的这些特性，可以实现相对于传统计算机的性能，有指数级的提升。【Comment】：此处表述不准确，不是所有量子算法都具有量子优势，也不是所有量子算法对经典算法有指数级的加速（如Grover算法仅具有平方量级的加速。）“有指数级的提升”可以改为“对部分计算问题有指数级的提升”。
 
@@ -7,13 +7,11 @@
 3．后面的【shor’s algorithms计算流程简述】部分，实际上是“周期求解问题”的算法。虽然给出了一个具体的例子，但是具体流程不是特别清晰。或许可以像下面这样举例，读者会更清楚算法中量子态的变化和各个register的定义。TODO，参考https://zhuanlan.zhihu.com/c_1242529033193308160，并调整结构。
 
 
-
 - 绪论：抽象性，对称性
 - FFT
 - 分析FFT得以成立的原因，对称，引入群论
 - 欧拉定理，群论证明和普通证明
 - QFT：量子计算机，Shor 算法
-
 
 
 # 群论简述
@@ -105,6 +103,57 @@ $$
 
 
 ![单位圆上的傅立叶变换](./assets/circle.png)
+
+# 欧拉定理
+## 定理陈述
+设 $ n $ 为正整数，$ a $ 为整数且满足 $ \gcd(a, n) = 1 $，则：
+$$ a^{\phi(n)} \equiv 1 \pmod{n} $$
+其中，$ \phi(n) $ 是欧拉函数，表示 $ 1 \leq k \leq n $ 中与 $ n $ 互质的整数 $ k $ 的个数。
+
+## 证明过程
+### Step 1：构造简化剩余系
+设 $ r_1, r_2, \dots, r_{\phi(n)} $ 是所有小于 $ n $ 且与 $ n $ 互质的正整数。这些数构成模 $ n $ 的**简化剩余系**，即：
+$$ \gcd(r_i, n) = 1, \quad 1 \leq r_i < n, \quad i = 1, 2, \dots, \phi(n). $$
+
+### Step 2：考察 $ a \cdot r_i $ 的性质
+由于 $ \gcd(a, n) = 1 $，且 $ \gcd(r_i, n) = 1 $，故：
+$$ \gcd(a \cdot r_i, n) = 1. $$
+因此，$ a \cdot r_i \mod n $ 仍然与 $ n $ 互质，且落在 $ 1 $ 到 $ n-1 $ 之间。
+
+### Step 3：证明 $ \{a \cdot r_i \mod n\} $ 是 $ \{r_i\} $ 的排列
+假设存在 $ i \neq j $ 使得：
+$$ a \cdot r_i \equiv a \cdot r_j \pmod{n}. $$
+由于 $ \gcd(a, n) = 1 $，可两边约去 $ a $ 得：
+$$ r_i \equiv r_j \pmod{n}. $$
+但 $ r_i $ 和 $ r_j $ 是简化剩余系中不同的元素，矛盾。因此：
+$$ \{a \cdot r_1 \mod n, a \cdot r_2 \mod n, \dots, a \cdot r_{\phi(n)} \mod n\} = \{r_1, r_2, \dots, r_{\phi(n)}\}. $$
+
+### Step 4：乘积相等性
+将两组数分别相乘：
+$$ \prod_{i=1}^{\phi(n)} (a \cdot r_i) \equiv \prod_{i=1}^{\phi(n)} r_i \pmod{n}. $$
+左边提取 $ a^{\phi(n)} $：
+$$ a^{\phi(n)} \cdot \prod_{i=1}^{\phi(n)} r_i \equiv \prod_{i=1}^{\phi(n)} r_i \pmod{n}. $$
+
+### Step 5：约去 $ \prod r_i $
+由于 $ \gcd\left(\prod r_i, n\right) = 1 $，存在逆元，故两边可约去 $ \prod r_i $：
+$$ a^{\phi(n)} \equiv 1 \pmod{n}. $$
+
+## 例子验证
+**问题**：验证 $ n = 10 $, $ a = 3 $ 满足欧拉定理。
+**解**：
+1. $ \phi(10) = 4 $（因 $ 1, 3, 7, 9 $ 与 10 互质）。
+2. 计算 $ 3^4 \mod 10 $:
+   $$ 3^4 = 81 \equiv 1 \pmod{10}. $$
+   结果与定理一致。
+
+## 欧拉函数计算公式
+若 $ n $ 的质因数分解为 $ n = p_1^{k_1} p_2^{k_2} \cdots p_m^{k_m} $，则：
+$$ \phi(n) = n \prod_{i=1}^m \left(1 - \frac{1}{p_i}\right). $$
+
+**示例**：
+- $ n = 12 = 2^2 \times 3 $，则：
+  $$ \phi(12) = 12 \left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{3}\right) = 4. $$
+
 
 
 # 量子计算机简介
@@ -479,63 +528,4 @@ $$ |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
 2. 测量第一个为 $\|1\rangle$ 时，第二个必定为 $\|1\rangle$
 3. 关联性不受空间距离限制
 
-
-## 欧拉定理
-### 定理陈述
-设 $ n $ 为正整数，$ a $ 为整数且满足 $ \gcd(a, n) = 1 $，则：
-$$ a^{\phi(n)} \equiv 1 \pmod{n} $$
-其中，$ \phi(n) $ 是欧拉函数，表示 $ 1 \leq k \leq n $ 中与 $ n $ 互质的整数 $ k $ 的个数。
-
-### 证明过程
-#### Step 1：构造简化剩余系
-设 $ r_1, r_2, \dots, r_{\phi(n)} $ 是所有小于 $ n $ 且与 $ n $ 互质的正整数。这些数构成模 $ n $ 的**简化剩余系**，即：
-$$ \gcd(r_i, n) = 1, \quad 1 \leq r_i < n, \quad i = 1, 2, \dots, \phi(n). $$
-
-#### Step 2：考察 $ a \cdot r_i $ 的性质
-由于 $ \gcd(a, n) = 1 $，且 $ \gcd(r_i, n) = 1 $，故：
-$$ \gcd(a \cdot r_i, n) = 1. $$
-因此，$ a \cdot r_i \mod n $ 仍然与 $ n $ 互质，且落在 $ 1 $ 到 $ n-1 $ 之间。
-
-#### Step 3：证明 $ \{a \cdot r_i \mod n\} $ 是 $ \{r_i\} $ 的排列
-假设存在 $ i \neq j $ 使得：
-$$ a \cdot r_i \equiv a \cdot r_j \pmod{n}. $$
-由于 $ \gcd(a, n) = 1 $，可两边约去 $ a $ 得：
-$$ r_i \equiv r_j \pmod{n}. $$
-但 $ r_i $ 和 $ r_j $ 是简化剩余系中不同的元素，矛盾。因此：
-$$ \{a \cdot r_1 \mod n, a \cdot r_2 \mod n, \dots, a \cdot r_{\phi(n)} \mod n\} = \{r_1, r_2, \dots, r_{\phi(n)}\}. $$
-
-#### Step 4：乘积相等性
-将两组数分别相乘：
-$$ \prod_{i=1}^{\phi(n)} (a \cdot r_i) \equiv \prod_{i=1}^{\phi(n)} r_i \pmod{n}. $$
-左边提取 $ a^{\phi(n)} $：
-$$ a^{\phi(n)} \cdot \prod_{i=1}^{\phi(n)} r_i \equiv \prod_{i=1}^{\phi(n)} r_i \pmod{n}. $$
-
-#### Step 5：约去 $ \prod r_i $
-由于 $ \gcd\left(\prod r_i, n\right) = 1 $，存在逆元，故两边可约去 $ \prod r_i $：
-$$ a^{\phi(n)} \equiv 1 \pmod{n}. $$
-
-### 例子验证
-**问题**：验证 $ n = 10 $, $ a = 3 $ 满足欧拉定理。
-**解**：
-1. $ \phi(10) = 4 $（因 $ 1, 3, 7, 9 $ 与 10 互质）。
-2. 计算 $ 3^4 \mod 10 $:
-   $$ 3^4 = 81 \equiv 1 \pmod{10}. $$
-   结果与定理一致。
-
-
-### 欧拉函数计算公式
-若 $ n $ 的质因数分解为 $ n = p_1^{k_1} p_2^{k_2} \cdots p_m^{k_m} $，则：
-$$ \phi(n) = n \prod_{i=1}^m \left(1 - \frac{1}{p_i}\right). $$
-
-**示例**：
-- $ n = 12 = 2^2 \times 3 $，则：
-  $$ \phi(12) = 12 \left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{3}\right) = 4. $$
-
 ---
-
-# 酉空间
-
-- 傅立叶变换的广泛性（薛定谔方程、热传导）
-- 为什么可逆
-
-- [如果把傅里叶变换突然一键删除，世界上会发生什么变化？](https://www.zhihu.com/question/13671804165/answer/1888868718425134475)
