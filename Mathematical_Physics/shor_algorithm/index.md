@@ -110,65 +110,6 @@ $$
 
 ![单位圆上的傅立叶变换](./assets/circle.png)
 
-# 欧拉定理
-
-https://zhuanlan.zhihu.com/p/139329165
-
-https://oi-wiki.org/math/poly/fft/
-
-https://oi-wiki.org/math/number-theory/euler-totient/
-
-
-## 定理陈述
-设 $ n $ 为正整数，$ a $ 为整数且满足 $ \gcd(a, n) = 1 $，则：
-$$ a^{\phi(n)} \equiv 1 \pmod{n} $$
-其中，$ \phi(n) $ 是欧拉函数，表示 $ 1 \leq k \leq n $ 中与 $ n $ 互质的整数 $ k $ 的个数。
-
-## 证明过程
-### Step 1：构造简化剩余系
-设 $ r_1, r_2, \dots, r_{\phi(n)} $ 是所有小于 $ n $ 且与 $ n $ 互质的正整数。这些数构成模 $ n $ 的**简化剩余系**，即：
-$$ \gcd(r_i, n) = 1, \quad 1 \leq r_i < n, \quad i = 1, 2, \dots, \phi(n). $$
-
-### Step 2：考察 $ a \cdot r_i $ 的性质
-由于 $ \gcd(a, n) = 1 $，且 $ \gcd(r_i, n) = 1 $，故：
-$$ \gcd(a \cdot r_i, n) = 1. $$
-因此，$ a \cdot r_i \mod n $ 仍然与 $ n $ 互质，且落在 $ 1 $ 到 $ n-1 $ 之间。
-
-### Step 3：证明 $ \{a \cdot r_i \mod n\} $ 是 $ \{r_i\} $ 的排列
-假设存在 $ i \neq j $ 使得：
-$$ a \cdot r_i \equiv a \cdot r_j \pmod{n}. $$
-由于 $ \gcd(a, n) = 1 $，可两边约去 $ a $ 得：
-$$ r_i \equiv r_j \pmod{n}. $$
-但 $ r_i $ 和 $ r_j $ 是简化剩余系中不同的元素，矛盾。因此：
-$$ \{a \cdot r_1 \mod n, a \cdot r_2 \mod n, \dots, a \cdot r_{\phi(n)} \mod n\} = \{r_1, r_2, \dots, r_{\phi(n)}\}. $$
-
-### Step 4：乘积相等性
-将两组数分别相乘：
-$$ \prod_{i=1}^{\phi(n)} (a \cdot r_i) \equiv \prod_{i=1}^{\phi(n)} r_i \pmod{n}. $$
-左边提取 $ a^{\phi(n)} $：
-$$ a^{\phi(n)} \cdot \prod_{i=1}^{\phi(n)} r_i \equiv \prod_{i=1}^{\phi(n)} r_i \pmod{n}. $$
-
-### Step 5：约去 $ \prod r_i $
-由于 $ \gcd\left(\prod r_i, n\right) = 1 $，存在逆元，故两边可约去 $ \prod r_i $：
-$$ a^{\phi(n)} \equiv 1 \pmod{n}. $$
-
-## 例子验证
-**问题**：验证 $ n = 10 $, $ a = 3 $ 满足欧拉定理。
-**解**：
-1. $ \phi(10) = 4 $（因 $ 1, 3, 7, 9 $ 与 10 互质）。
-2. 计算 $ 3^4 \mod 10 $:
-   $$ 3^4 = 81 \equiv 1 \pmod{10}. $$
-   结果与定理一致。
-
-## 欧拉函数计算公式
-若 $ n $ 的质因数分解为 $ n = p_1^{k_1} p_2^{k_2} \cdots p_m^{k_m} $，则：
-$$ \phi(n) = n \prod_{i=1}^m \left(1 - \frac{1}{p_i}\right). $$
-
-**示例**：
-- $ n = 12 = 2^2 \times 3 $，则：
-  $$ \phi(12) = 12 \left(1 - \frac{1}{2}\right)\left(1 - \frac{1}{3}\right) = 4. $$
-
-
 
 # 量子计算机简介
 
@@ -300,6 +241,15 @@ $(2^{r/2} + 1)(2^{r/2} - 1)$中，$2^{r/2} + 1 $ 或者 $2^{r/2} - 1$ 是 15 的
 > 若 n，a 为正整数，且n和a互素（$gcd(a,n) = 1$），则 $a^{\phi(n)} \equiv 1 (\mod p) $。
 
 即 $a^{\phi(n)} $ 与 1 在模 n 下同余。$\phi(n)$ 为欧拉函数，是小于 n 的正整数中，与 n 互质的数的数目。当 n 是质数的时候，$phi(n)$ 的值为 $p - 1$，欧拉定理就变为费马小定理：$a^{n - 1} \equiv 1 (\mod n)$
+
+## 欧拉定理
+
+https://zhuanlan.zhihu.com/p/139329165
+
+https://oi-wiki.org/math/poly/fft/
+
+https://oi-wiki.org/math/number-theory/euler-totient/
+
 
 所举的例子是简单的情况。遇到 r 是奇数，则需要重新计算。遇到 $a^{p - 1} \equiv 1 (\mod k \times n) $，其中 k 为正整数，则需要 $gcd(a^{r/2} + 1,k \times n)$ 或 $gcd(a^{r/2} - 1,k \times n)$。这样我们就把分解合数 N，转换化求周期 r。
 
