@@ -499,6 +499,8 @@ $$
 \rho(\mathinner{|\Phi_{n} \rangle})=|\frac{1}{\sqrt{r}}|^2=\frac{1}{r}
 $$
 
+TODO 介绍对称
+
 测量 $\gamma\rangle$ 值，会等概率 $1/r$ 的选择一个态，由 $\gamma=k2^L/r$ 可得：
 
 $$
