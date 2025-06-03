@@ -213,6 +213,37 @@ H 变换的逆矩阵是他自身。即： $H*H = I$。那么在量子计算机�
 
 综上所述，量子计算的计算是可逆的。量子态可以叠加，也可以纠缠在一起。利用量子的这些特性，可以实现相对于传统计算机的性能，有指数级的提升。
 
+## 量子的叠加态和纠缠态
+
+### 叠加态 (Superposition State)
+叠加态是指单个量子系统可以同时处于多个基态的线性组合状态。数学表示为：
+$$ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle $$
+其中：
+- $ \|0\rangle $ 和 $ \|1\rangle $ 是计算基态
+- $\alpha$ 和 $\beta$ 是复数概率幅，满足 $ \|\alpha\|^2 + \|\beta\|^2 = 1 $
+
+### 纠缠态 (Entangled State)
+纠缠态是指两个或多个量子系统之间存在非局域关联的状态，数学表示为：
+$$ |\Psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
+
+### 叠加态例子
+单个量子系统，如：电子自旋处于自旋向上和自旋向下的叠加态。
+
+$$ |\psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle) $$
+
+测量时有50%概率得到 $|↑\rangle$，50%概率得到 $|↓\rangle$
+测量后状态坍缩到其中一个本征态。
+
+### 纠缠态例子（Bell不等式）
+
+$$ |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
+
+特点：
+1. 测量第一个量子比特为 $\|0\rangle$ 时，第二个必定为 $\|0\rangle$
+2. 测量第一个为 $\|1\rangle$ 时，第二个必定为 $\|1\rangle$
+3. 关联性不受空间距离限制
+
+
 # Shor's Algorithm
 
 Shor's Algorithm 是数学家彼得·秀尔（Peter Williston Shor）在1994年发现的算法，又称量子质因数分解算法。这个算法在量子计算机领域很重要，在量子计算机领域独领风骚。
@@ -496,36 +527,3 @@ $$
 如果有 $gcd(k, r) = 1$，r 就可以从 $\frac{k}{r}$ 的不可约分数求得。
 
 
-#  Shor's Algorithm 背后的数学物理
-
-## 量子的叠加态和纠缠态
-
-### 叠加态 (Superposition State)
-叠加态是指单个量子系统可以同时处于多个基态的线性组合状态。数学表示为：
-$$ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle $$
-其中：
-- $ \|0\rangle $ 和 $ \|1\rangle $ 是计算基态
-- $\alpha$ 和 $\beta$ 是复数概率幅，满足 $ \|\alpha\|^2 + \|\beta\|^2 = 1 $
-
-### 纠缠态 (Entangled State)
-纠缠态是指两个或多个量子系统之间存在非局域关联的状态，数学表示为：
-$$ |\Psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
-
-### 叠加态例子
-单个量子系统，如：电子自旋处于自旋向上和自旋向下的叠加态。
-
-$$ |\psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle) $$
-
-测量时有50%概率得到 $|↑\rangle$，50%概率得到 $|↓\rangle$
-测量后状态坍缩到其中一个本征态。
-
-### 纠缠态例子（Bell不等式）
-
-$$ |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
-
-特点：
-1. 测量第一个量子比特为 $\|0\rangle$ 时，第二个必定为 $\|0\rangle$
-2. 测量第一个为 $\|1\rangle$ 时，第二个必定为 $\|1\rangle$
-3. 关联性不受空间距离限制
-
----
