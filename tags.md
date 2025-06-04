@@ -82,7 +82,7 @@
 
 ## 物理
 
-- [深入浅出 Shor's Algorithm](./Mathematical_Physics/shor_algorithm/index.md)
+- [卮言 Shor's Algorithm](./Mathematical_Physics/shor_algorithm/index.md)
 
 - [玻尔兹曼分布](./Mathematical_Physics/Boltzmann_distribution/index.md)
 
@@ -151,9 +151,7 @@
 
 - [浅析基本排序算法](./computer_programs/algorithm/2023_08_16_sort/index.md)
 
-- [算法列表](./computer_programs/algorithm/question/index.md)
-
-- [算法设计思想](./computer_programs/algorithm/algorithm_design_ideas.md)
+- [卮言快速傅立叶变换](./computer_programs/algorithm/fft/index.md)
 
 ## Front End
 
@@ -182,23 +180,7 @@
 - [错误处理](./computer_programs/front_end/architecture/error.md)
 
 
-### 工程
-
-- [从工程流程看前端知识结构](./computer_programs/front_end/software_engineering/question/engineering_processes.md)
-
-- [debug](./computer_programs/front_end/software_engineering/debug.md)
-
-- [使用monorepo](./computer_programs/front_end/software_engineering/monorepo.md)
-
 ### Linux
-
-#### shell
-
-- [Linux 源码安装软件](./computer_programs/linux/shell/2024_1_25_installed_software_from_source.md)
-
-- [shell基础](./computer_programs/linux/shell/2023_12_27_shell.md)
-
-- [shell搜索](./computer_programs/linux/shell/2025_1_25_search.md)
 
 ### 杂项
 
@@ -221,9 +203,6 @@
 
 - [服务器开发模式](./computer_programs/back_end/server_model/index.md)
 
-- [SQL](./computer_programs/back_end/sql.md)
-
-- [线程安全](./computer_programs/back_end/thread_safety/index.md)
 
 ### Primer
 
