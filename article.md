@@ -13,3 +13,9 @@
 ## 数学
 
 - [跨越千年的RSA算法shelesh](https://www.matrix67.com/blog/archives/5100)
+
+- [shor 算法-无门槛学习！](https://zhuanlan.zhihu.com/p/139329165)
+
+- [oi-wiki 欧拉函数](https://oi-wiki.org/math/number-theory/euler-totient/)
+
+

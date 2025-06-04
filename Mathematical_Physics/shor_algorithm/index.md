@@ -131,15 +131,6 @@ $(2^{r/2} + 1)(2^{r/2} - 1)$中，$2^{r/2} + 1 $ 或者 $2^{r/2} - 1$ 是 15 的
 
 即 $a^{\phi(n)} $ 与 1 在模 n 下同余。$\phi(n)$ 为欧拉函数，是小于 n 的正整数中，与 n 互质的数的数目。当 n 是质数的时候，$phi(n)$ 的值为 $p - 1$，欧拉定理就变为费马小定理：$a^{n - 1} \equiv 1 (\mod n)$
 
-## 欧拉定理
-
-https://zhuanlan.zhihu.com/p/139329165
-
-https://oi-wiki.org/math/poly/fft/
-
-https://oi-wiki.org/math/number-theory/euler-totient/
-
-
 所举的例子是简单的情况。遇到 r 是奇数，则需要重新计算。遇到 $a^{p - 1} \equiv 1 (\mod k \times n) $，其中 k 为正整数，则需要 $gcd(a^{r/2} + 1,k \times n)$ 或 $gcd(a^{r/2} - 1,k \times n)$。这样我们就把分解合数 N，转换化求周期 r。
 
 
@@ -266,6 +257,16 @@ $$
 \end{align}\\
 $$
 
+## FFT 
+
+![卷起来的傅立叶变换](./assets/circle.png)
+
+
+![FFT的对称性](./assets/divide_and_conquer.png)
+
+
+
+
 ## 量子傅立叶变换 QFT
 
 对寄存器 register1 中的量子态进行QFT：
@@ -338,8 +339,6 @@ $$
 \rho(\mathinner{|\Phi_{n} \rangle})=|\frac{1}{\sqrt{r}}|^2=\frac{1}{r}
 $$
 
-TODO 介绍对称
-
 测量 $\gamma\rangle$ 值，会等概率 $1/r$ 的选择一个态，由 $\gamma=k2^L/r$ 可得：
 
 $$
@@ -397,11 +396,6 @@ $$
 | 空间平移对称性           | 动量               | 平移群 (ℝ³, +)              | 拉氏量空间平移不变性        | 均匀空间中的粒子         |
 | 空间旋转对称性           | 角动量             | 三维旋转群 SO(3)            | 拉氏量旋转不变性            | 中心力场（如太阳系）   |
 
-> Emmy Noether（埃米·诺特）​​对 20 世纪的数学影响无与伦比，提到抽象代数就不得不提 Noether。最著名的抽象代数教材之一——van der Waerden 的《代数学》，正是基于 Noether 的讲义编写。E. Artin、van der Waerden 等杰出数学家都曾是她的学生。
-> 然而，即便她的成就如此卓越，Göttingen 的同事 Edmund Landau 仍拒绝授予她讲师职位，并声称：​“当我们的士兵发现他们在一个女人脚下学习的时候，他们会怎么想？”
-> Landau 的言论令人反感，但更恶劣的是，当被问及 Noether 是否是一位伟大的​​女​​数学家时，他竟回答：​“我可以作证她是一位伟大的数学家，但对她是个女人这点，我不能发誓。”​​
-> 尽管如此，Einstein 和 Hilbert 这样的科学巨匠都对 Noether 推崇备至。Einstein 曾评价她：​“自妇女接受高等教育以来，最杰出、最具创造性的数学天才。”​​
-> Hilbert 则坚定支持她争取讲师职位，并反驳 Landau：​“我不认为候选人的性别是反对她成为讲师的理由，评议会毕竟不是澡堂。”​​看来 Hilbert 是真的怒了。
+> Emmy Noether（埃米·诺特）​​对 20 世纪的数学影响无与伦比，提到抽象代数就不得不提 Noether。最著名的抽象代数教材之一——van der Waerden 的《代数学》，正是基于 Noether 的讲义编写。E. Artin、van der Waerden 等杰出数学家都曾是她的学生。然而，即便她的成就如此卓越，Göttingen 的同事 Edmund Landau 仍拒绝授予她讲师职位，并声称：​“当我们的士兵发现他们在一个女人脚下学习的时候，他们会怎么想？”
+>Landau 的言论令人反感，但更恶劣的是，当被问及 Noether 是否是一位伟大的​​女​​数学家时，他竟回答：​“我可以作证她是一位伟大的数学家，但对她是个女人这点，我不能发誓。”​​尽管如此，Einstein 和 Hilbert 这样的科学巨匠都对 Noether 推崇备至。Einstein 曾评价她：​“自妇女接受高等教育以来，最杰出、最具创造性的数学天才。”​​Hilbert 则坚定支持她争取讲师职位，并反驳 Landau：​“我不认为候选人的性别是反对她成为讲师的理由，评议会毕竟不是澡堂。”​​看来 Hilbert 是真的怒了。
 引文来自ukim编辑的《我心目中的英雄》
-
-不仅仅在物理学中有对称。在计算机算法中，对称也是重要的技巧。我们来考察一下快速傅立叶变换（fast Fourier transform），然后分析算法背后的对称以及群论。并通过群论，证明数论中的欧拉定理，这是量子计算机中 Shor's Algorithm 基石。最后我们分析 Shor's Algorithm。
