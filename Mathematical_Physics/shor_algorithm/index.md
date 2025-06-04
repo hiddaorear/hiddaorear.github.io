@@ -85,7 +85,7 @@ $$ |\psi\rangle = \alpha|0\rangle + \beta|1\rangle $$
 
 $$ |\psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle) $$
 
-测量时有50%概率得到 $|↑\rangle$，50%概率得到 $|↓\rangle$ 。测量后状态坍缩到其中一个本征态。
+测量时有50%概率得到 $\|↑\rangle$，50%概率得到 $\|↓\rangle$ 。测量后状态坍缩到其中一个本征态。
 
 ### 纠缠态 (Entangled State)
 纠缠态是指两个或多个量子系统之间存在非局域关联的状态，数学表示为：
