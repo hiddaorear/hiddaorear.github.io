@@ -88,8 +88,7 @@ $$ |\psi\rangle = \frac{1}{\sqrt{2}}(|\uparrow\rangle + |\downarrow\rangle) $$
 测量时有50%概率得到 $\|↑\rangle$，50%概率得到 $\|↓\rangle$ 。测量后状态坍缩到其中一个本征态。
 
 ### 纠缠态 (Entangled State)
-纠缠态是指两个或多个量子系统之间存在非局域关联的状态，数学表示为：
-$$ |\Psi\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
+纠缠态是指两个或多个量子系统之间存在非局域关联的状态。
 
 纠缠态经典例子，Bell不等式：
 
@@ -150,9 +149,9 @@ $(2^{r/2} + 1)(2^{r/2} - 1)$中，$2^{r/2} + 1 $ 或者 $2^{r/2} - 1$ 是 15 的
 
 > 若 n，a 为正整数，且n和a互素（$gcd(a,n) = 1$），则 $a^{\phi(n)} \equiv 1 (\mod n) $。
 
-即 $a^{\phi(n)} $ 与 1 在模 n 下同余。$\phi(n)$ 为欧拉函数，是小于 n 的正整数中，与 n 互质的数的数目。当 n 是质数的时候，$\phi(n)$ 的值为 $p - 1$，欧拉定理就变为费马小定理：$a^{n - 1} \equiv 1 (\mod n)$
+即 $a^{\phi(n)} $ 与 1 在模 n 下同余。$\phi(n)$ 为欧拉函数，是小于 n 的正整数中，与 n 互质的数的数目。当 n 是质数的时候，$\phi(n)$ 的值为 $p - 1$，欧拉定理就变为费马小定理：$a^{p - 1} \equiv 1 (\mod p)$
 
-所举的例子是简单的情况。遇到 r 是奇数，则需要重新计算。遇到 $a^{p - 1} \equiv 1 (\mod k \times n) $，其中 k 为正整数，则需要 $gcd(a^{r/2} + 1,k \times n)$ 或 $gcd(a^{r/2} - 1,k \times n)$。这样我们就把分解合数 N，转换化求周期 r。
+所举的例子是简单的情况。遇到 r 是奇数，则需要重新计算。遇到 $a^{p - 1} \equiv 1 (\mod k \times p) $，其中 k 为正整数，则需要 $gcd(a^{r/2} + 1,k \times p)$ 或 $gcd(a^{r/2} - 1,k \times p)$。这样我们就把分解合数 N，转换化求周期 r。
 
 
 # Shor's Algorithm 计算流程简述
@@ -362,7 +361,7 @@ $$
 C_\gamma=\frac{\sqrt{r}}{2^L}e^{2\pi il\gamma/2^L}[\frac{e^{2\pi i\gamma}-1}{e^{2\pi ir\gamma/2^L}-1}]\\
 $$
 
-由于 $e^{2\pi ir\gamma/2^L}-1 = 0$，也就是 $\gamma\ne k2^L/r$ 时，值为0.
+由于 γ 是 $ 2^L/r$ 整数倍，γ是整数, 则 $e^{2\pi ir\gamma/2^L}-1 = 0$，也就是 $\gamma\ne k2^L/r$ 时，值为0.
 
 将这一结果，代入可得：
 
