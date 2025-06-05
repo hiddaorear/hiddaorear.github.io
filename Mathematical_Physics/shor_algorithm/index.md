@@ -96,7 +96,7 @@ $$ |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) $$
 
 测量第一个量子比特为 $\|0\rangle$ 时，第二个必定为 $\|0\rangle$。同理，测量第一个为 $\|1\rangle$ 时，第二个必定为 $\|1\rangle$
 
-# Shor's Algorithm
+# Shor's Algorithm 简介
 
 ![Peter Shor](./assets/Peter_Shor_2017_Dirac_Medal_Award_Ceremony.png)
 
