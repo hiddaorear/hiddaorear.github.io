@@ -58,6 +58,8 @@
 
 ## 总结
 
+- [自顶向下和自底向上](./essay/summary/2025_12_1_summary.md)
+
 - [答辩PPT写法总结](./essay/summary/2023-01-17_ppt.md)
 
 - [一次就好](./essay/summary/single_step.md)
