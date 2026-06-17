@@ -67,7 +67,8 @@
 ## 沉思
 
 - [下自己的围棋](./essay/ruminations/2024_11_03_reflections_on_playing_go/index.md)
-- [AI时代的意义支撑点](./computer_programs/ai/2026_04_21_point_of_support/index.md)
+
+- [浅说自然语言、计算机语言和数学语言中的能指与所指](./computer_programs/ai/2026_04_21_signifier_and_signified/index.md)
 
 ## 读书札记
 
