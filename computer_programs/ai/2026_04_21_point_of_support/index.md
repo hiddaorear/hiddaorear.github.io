@@ -26,8 +26,7 @@
 这种依赖的存在，也表明能指自身没有独立的意义。
 
 ```
-
-所指          所指         所指
+所指         所指          所指
 ———    ->    ———    ->    ———    ->    ...
 能指         能指          能指
 ```
@@ -59,8 +58,40 @@
 
 南枝这个本身并没有诗意，诗意来自文化背景。
 
+---
 
 ## 计算机编程语言中的能指和所指
+
+在计算机编程语言中，主流的工业语言通常有“类”这一概念，但能指“类”的所指，不同的编程语言，有微妙的差异。在编程语言的类型系统中，通常可以分为结构类型 (Structural Typing)和标称类型 (Nominal Typing)。标称类型的“标”是指“标签/名字（Name）”，“称”是指“名称/称呼”。它的核心含义是：类型的兼容性完全取决于类型的显式名字或声明，而不是它的内部结构。
+
+在进行类型比较时，前者是通过类型的结构来判断是否有差异，后者是通过类型名称来判断是否有差异。C、C++和Java主要是用名义类型 (Nominal Typing)，Golang、OCaml、Haskell主要使用结构类型 (Structural Typing)。在同一个编程语言中，也可以同时产用二者，例如对Class使用标称类型 (Nominal Typing)，对Object使用结构类型 (Structural Typing)。具体实现使用标称类型 (Nominal Typing)，保证安全和清晰。抽象接口使用结构类型 (Structural Typing)，保证灵活性，平衡了类型安全和开发效率。
+
+Golang中，结构体（struct）是标称的，接口（interface）是结构的。
+
+因为是标称的，所以即使2个结构体（struct）字段一样，也是不同的类型，不能直接赋值。
+
+```
+type PointA struct {X, Y int}
+type PointB struct {X, Y int}
+
+var a PointA = PointA{1, 2}
+// var b PointB = a // 编译报错： cannot use a (variable of struct type PointA) as PointB value in variable declaration
+var b PointB = PointB(a) // 必须现实类型转换
+fmt.Println(b)
+```
+
+但Golang的接口（interface）是典型的结构化类型，只要实现接口定义的方法，就是实现了该接口。
+
+```
+
+
+```
+
+
+TypeScript，类（Class带私有属性时）时标称的，接口（interface）时结构的。
+
+
+
 
 
 ## 数学中的能指和所指
