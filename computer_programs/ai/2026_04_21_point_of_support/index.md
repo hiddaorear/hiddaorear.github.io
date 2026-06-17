@@ -64,32 +64,81 @@
 
 在计算机编程语言中，主流的工业语言通常有“类”这一概念，但能指“类”的所指，不同的编程语言，有微妙的差异。在编程语言的类型系统中，通常可以分为结构类型 (Structural Typing)和标称类型 (Nominal Typing)。标称类型的“标”是指“标签/名字（Name）”，“称”是指“名称/称呼”。它的核心含义是：类型的兼容性完全取决于类型的显式名字或声明，而不是它的内部结构。
 
-在进行类型比较时，前者是通过类型的结构来判断是否有差异，后者是通过类型名称来判断是否有差异。C、C++和Java主要是用名义类型 (Nominal Typing)，Golang、OCaml、Haskell主要使用结构类型 (Structural Typing)。在同一个编程语言中，也可以同时产用二者，例如对Class使用标称类型 (Nominal Typing)，对Object使用结构类型 (Structural Typing)。具体实现使用标称类型 (Nominal Typing)，保证安全和清晰。抽象接口使用结构类型 (Structural Typing)，保证灵活性，平衡了类型安全和开发效率。
+结构类型 (Structural Typing)和鸭子类型 (Duck Typing)在思想上是一致的，前者是编译期，静态类型系统，后者是运行期，动态类型系统。类似TypeScript和JavaScript的区别，TypeScript需要编译。
 
-Golang中，结构体（struct）是标称的，接口（interface）是结构的。
+在进行类型比较时，前者是通过类型的结构来判断是否有差异，后者是通过类型名称来判断是否有差异。C、C++和Java主要是用名义类型 (Nominal Typing)，TypeScript、Golang、OCaml、Haskell主要使用结构类型 (Structural Typing)。在同一个编程语言中，也可以同时产用二者，例如对Class使用标称类型 (Nominal Typing)，对Object使用结构类型 (Structural Typing)。具体实现使用标称类型 (Nominal Typing)，保证安全和清晰。抽象接口使用结构类型 (Structural Typing)，保证灵活性，平衡了类型安全和开发效率。
 
-因为是标称的，所以即使2个结构体（struct）字段一样，也是不同的类型，不能直接赋值。
+
+TypeScript，类（Class）带私有属性时是标称的，接口（interface）是结构的。私有属性是类A的内部实现，如果允许另一个类B赋值给A，则意味着类A地内部私有属性，可以被B替代，破坏了封装性。因此，有私有属性时，需要采用标称类型的逻辑，只认声明，不认结构。
+
+```TypeScript
+class Dog {
+  private name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+class Cat {
+  private name: string; // 结构上与Dog一致
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+let myDog: Dog = new Dog('dog');
+myDog = new Cat('cat'); // 编译报错
+// Type 'Cat' is not assignable to type 'Dog'.  Types have separate declarations of a private property 'name'.
 
 ```
-type PointA struct {X, Y int}
-type PointB struct {X, Y int}
 
-var a PointA = PointA{1, 2}
-// var b PointB = a // 编译报错： cannot use a (variable of struct type PointA) as PointB value in variable declaration
-var b PointB = PointB(a) // 必须现实类型转换
-fmt.Println(b)
+接口（interface）是结构类型，只看结构一致。
+
+```TypeScript
+interface PointInterface {
+  x: number;
+}
+
+class PublicPoint {
+  x = 0;
+}
+
+// ✅ 完美兼容！因为它们的结构完全一样，都只有一个数字类型的 x
+const p: PointInterface = new PublicPoint();
+
 ```
 
-但Golang的接口（interface）是典型的结构化类型，只要实现接口定义的方法，就是实现了该接口。
+因为TypeScript选择了结构类型 (Structural Typing)，导致TypeScript具有反常的情况，允许子类型变量引用父类实例。通常来说，Java、C++中父类型变量指向子类型实例，向下转型/多态。
+
+
+```TypeScript
+class Animal {
+  feet: number = 2;
+}
+
+class Duck extends Animal {}
+
+let myDuck: Duck = new Animal(); // 子类型引用父类型实例，编译通过
 
 ```
 
+有时候需要强行让两个结构相同的类型不兼容，有一个专门的办法标称化技巧（Nominal Typing Trick）或类型烙印（Type Branding）。
 
+```TypeScript
+// 标称的美元类型
+type USD = number & {__brand: 'USD'};
+
+// 标称的人民币类型
+type CNY = number & {__brand: 'CNY'};
+
+let money = 100 as USD;
+money = 200 as CNY; // 编译报错
+// Type 'CNY' is not assignable to type 'USD'. Type 'CNY' is not assignable to type '{ __brand: "USD"; }'. Types of property '__brand' are incompatible.
 ```
 
+不同编程语言中，相同的能指-类型，具有不同的所指，有结构类型 (Structural Typing)，也有标称类型 (Nominal Typing)，或者二者都有。编程语言直接构成的工程本身，我觉得编程不是工具，而是工程的材料。所指的微妙差异，在工程设计上具有深远的影响。
 
-TypeScript，类（Class带私有属性时）时标称的，接口（interface）时结构的。
-
+维特根斯坦说“语言的边界就是思想的边界”。在不同的技术的工程师之间，如前端和后台，思维方式具有很大差异。须知你说的类，是我说的类吗？
 
 ---
 
