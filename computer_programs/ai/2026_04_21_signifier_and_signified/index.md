@@ -8,7 +8,7 @@
 
 “阿嬷”和“奶奶”可以表达相同的内容，但“阿嬷”承载了一方水土的历史文化，语言的微妙之处就在于此。故事中的情书写得文雅，平仄和谐。“山河万里，心中念你”，读起来琅琅上口。改成“山河阻隔，心中念你”，音韵不和谐，就差很多。
 
-### 谁是木生？
+### 何为木生
 
 木生去世以后，淑柔收到的侨批，是南枝以木生的身份所写。淑柔读侨批时，虽阴阳相隔，所想所念仍是木生。那么淑柔此时所想的是现实中的木生，还是她心中的木生？这两个木生不一样。现实中的木生已去世，不复存在，只剩下心中的木生。不仅淑柔心中的木生和现实生活中的木生不一样，南枝心中的木生和淑柔心中的木生也不一样。
 
@@ -55,6 +55,7 @@
 所指         所指          所指
 ```
 
+### 何为南枝
 
 我看到有人认为女主的名字“南枝”，源于王维的“红豆生南国，春来发几枝”。我觉得有些牵强，“南枝”两个字不在一起，且故事主题并非是思念。我认为“南枝”来自《古诗十九首》的第一首《行行重行行》，诗中“南枝”，且故事情节也与古诗契合。
 
@@ -109,7 +110,8 @@ class Cat {
 
 let myDog: Dog = new Dog('dog');
 myDog = new Cat('cat'); // 编译报错
-// Type 'Cat' is not assignable to type 'Dog'.  Types have separate declarations of a private property 'name'.
+// Type 'Cat' is not assignable to type 'Dog'.  
+// Types have separate declarations of a private property 'name'.
 
 ```
 
@@ -158,7 +160,9 @@ type CNY = number & {__brand: 'CNY'};
 
 let money = 100 as USD;
 money = 200 as CNY; // 编译报错
-// Type 'CNY' is not assignable to type 'USD'. Type 'CNY' is not assignable to type '{ __brand: "USD"; }'. Types of property '__brand' are incompatible.
+// Type 'CNY' is not assignable to type 'USD'. 
+// Type 'CNY' is not assignable to type '{ __brand: "USD"; }'. 
+// Types of property '__brand' are incompatible.
 ```
 
 不同编程语言中，相同的能指“类型”具有不同的所指，有结构类型 (Structural Typing)，也有标称类型 (Nominal Typing)，或者二者都有。编程语言直接参与构成工程本身。我觉得编程语言不是工具，而是工程的材料。所指的微妙差异，在工程设计上具有深远的影响。
