@@ -1,4 +1,4 @@
-# Tags
+# 文章列表
 
 - [随手札记](./draft.md)
 
@@ -46,10 +46,6 @@
 
 ## 日常生活
 
-- [理发师的理想](./essay/daily_life/2023_12_10_barber.md)
-
-- [好吃的零食](./essay/daily_life/2023_09_01_delicious_snacks.md)
-
 - [你真的需要提高技术吗？](./essay/daily_life/badminton_technique.md)
 
 - [下厨房](./essay/daily_life/cooking.md)
@@ -66,13 +62,10 @@
 
 ## 沉思
 
-- [下自己的围棋](./essay/ruminations/2024_11_03_reflections_on_playing_go/index.md)
-
 - [浅说自然语言、计算机语言和数学语言中的能指与所指](./computer_programs/ai/2026_04_21_signifier_and_signified/index.md)
 
 ## 读书札记
 
-- [读《我的母亲做保洁》](./essay/book/2023_11_27_my_mother_is_a_cleaner.md)
 
 - [有志与有悔](./essay/book/2022_05_03_Wang_An_Shi.md)
 
@@ -88,7 +81,6 @@
 
 - [卮言 Shor's Algorithm](./Mathematical_Physics/shor_algorithm/index.md)
 
-- [玻尔兹曼分布](./Mathematical_Physics/Boltzmann_distribution/index.md)
 
 ## 计算机科学
 
@@ -121,23 +113,6 @@
 
 - [TypeScript](./computer_programs/PL/mainstream_industrial_language/ts.md)
 
-#### Go
-
-- [Go的错误](./computer_programs/PL/mainstream_industrial_language/golang/error/index.md)
-
-- [基础](./computer_programs/PL/mainstream_industrial_language/golang/base.md)
-
-- [接口](./computer_programs/PL/mainstream_industrial_language/golang/interface/index.md)
-
-- [泛型](./computer_programs/PL/mainstream_industrial_language/golang/generics.md)
-
-- [协程](./computer_programs/PL/mainstream_industrial_language/golang/coroutine.md)
-
-- [面向对象](./computer_programs/PL/mainstream_industrial_language/golang/oop.md)
-
-- [Golang Web 笔记](./computer_programs/PL/mainstream_industrial_language/golang/web.md)
-
-
 ### PL 理论
 
 - [幺半群与计算机编程](./computer_programs/PL/pl_theory/monoid_and_computer_programs.md)
@@ -145,8 +120,6 @@
 - [SICP and Expression Problem（上）](./computer_programs/PL/pl_theory/SICP_and_expression_problem_0.md)
 
 - [SICP and Expression Problem (下)](./computer_programs/PL/pl_theory/SICP_and_expression_problem_1.md)
-
-- [Monad](./computer_programs/PL/pl_theory/monad.md)
 
 
 ## Algorithm
@@ -159,11 +132,6 @@
 
 ## Front End
 
-### 跨平台技术
-
-- [移动端跨平台技术](computer_programs/front_end/cross_platform_ui_technology/2023_12_19_mobile_termial.md)
-
-- [浅析VSCode](./computer_programs/front_end/cross_platform_ui_technology/2023_12_19_vscode.md)
 
 ### 架构设计
 
@@ -207,14 +175,6 @@
 
 - [服务器开发模式](./computer_programs/back_end/server_model/index.md)
 
-
-### Primer
-
-- [C & C++ Primer](computer_programs/back_end/2023_12_28_c_and_cpp_primer.md)
-
-### C++ 工程
-
-- [CMake](./computer_programs/back_end/cpp/2023_12_27_cmake.md)
 
 ## 有思考的博客
 
