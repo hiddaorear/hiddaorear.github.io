@@ -84,18 +84,19 @@ a {
 
   @include large {
     padding: 0.75rem 1rem;
+    font-size: 1.1rem;
   }
 
   @include medium {
     padding: 0.6rem 0.9rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 
   @include small {
     display: block;
     width: 100%;
     padding: 0.75rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
 
     + .btn {
       margin-top: 1rem;
@@ -165,21 +166,21 @@ a {
     margin-top: 0;
   }
 
-  @include large {
-    max-width: 64rem;
-    padding: 2rem 6rem;
-    margin: 0 auto;
-    font-size: 1.1rem;
+  @include small {
+    padding: 2rem 1rem;
+    font-size: 1.15rem;
   }
 
   @include medium {
     padding: 2rem 4rem;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 
-  @include small {
-    padding: 2rem 1rem;
-    font-size: 1rem;
+  @include large {
+    max-width: 64rem;
+    padding: 2rem 6rem;
+    margin: 0 auto;
+    font-size: 1.4rem;
   }
   
   kbd {
@@ -219,7 +220,7 @@ a {
   code {
     padding: 2px 4px;
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 0.9rem;
+    font-size: 0.9em;
     color: $code-text-color;
     background-color: $code-bg-color;
     border-radius: 0.3rem;
@@ -239,7 +240,7 @@ a {
     > code {
       padding: 0;
       margin: 0;
-      font-size: 0.9rem;
+      font-size: 1em;
       color: $code-text-color;
       word-break: normal;
       white-space: pre;
@@ -261,7 +262,7 @@ a {
   pre {
     padding: 0.8rem;
     overflow: auto;
-    font-size: 0.9rem;
+    font-size: 0.9em;
     line-height: 1.45;
     border-radius: 0.3rem;
     -webkit-overflow-scrolling: touch;
