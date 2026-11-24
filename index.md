@@ -1,10 +1,14 @@
-# 刺激和回应之间的距离
+# 日志
 
 ![emacs](./emacs.jpeg)
 
 # 行
 
+> 动动手，去芜存菁，放松而专注的做事
+
 ## 写写字
+
+> 练书法的个人感悟
 
 - [和若溪小朋友聊写字](action/handwriting/2023_07_15_children_write/index.md)
 
@@ -12,39 +16,15 @@
 
 ## 此身安处
 
+> 学一点医学常识
+
 - [治病的成本](action/medicine/2023_11_28_cost_of_treatment.md)
 
 - [溺水急救](action/medicine/drown.md)
 
-## 来时路
-
-- [种田忆旧](action/memory/2022_fram.md)
-
-- [我的大伯](action/memory/2024_08_17_uncle_funeral.md)
-
-- [我们的十年](action/memory/junior_high_school_ten_years.md)
-
-- [走过甘肃](action/memory/travels/Gansu_Province_and_2019/index.md)
-
-- [2022年总结](action/memory/2022_summary/index.md)
-
-- [浮光掠影过苏州](action/memory/travels/2022_09_Shanghai_Tourist/index.md)
-
-- [竹排摇梦过桂林](action/memory/travels/2023_04_GuiLin_tourist/index.md)
-
-- [寂寞郴州五百年](action/memory/travels/2024_11_21_ChenZhou_tourist/index.md)
-
-- [一襟晚照](action/memory/2019_11_10_old_man.md)
-
-- [你真的需要提高技术吗？](action/memory/badminton_technique.md)
-
-- [下厨房](action/memory/cooking.md)
-
-- [自制的陀螺](action/memory/gyro.md)
-
-- [TechParty-中国 iOS&Swift 沙龙感悟](action/memory/2014_07_19_TechParty.md)
-
 ## 工程的过程价值
+
+> 数学猜想的解决，往往会产生新的数学。工程问题的处理，在有AI时，结果的价值难寻，或许过程于人有其意义。
 
 - [SICP and Expression Problem （上）](action/systems_in_practice/pl/SICP_and_expression_problem/index_0.md)
 
@@ -80,18 +60,55 @@
 
 - [一次就好](action/everyday_rhythms/single_step.md)
 
+## 来时路
+
+>  书写历史，就是书写现在
+
+- [种田忆旧](action/memory/2022_fram.md)
+
+- [我的大伯](action/memory/2024_08_17_uncle_funeral.md)
+
+- [我们的十年](action/memory/junior_high_school_ten_years.md)
+
+- [走过甘肃](action/memory/travels/Gansu_Province_and_2019/index.md)
+
+- [2022年总结](action/memory/2022_summary/index.md)
+
+- [浮光掠影过苏州](action/memory/travels/2022_09_Shanghai_Tourist/index.md)
+
+- [竹排摇梦过桂林](action/memory/travels/2023_04_GuiLin_tourist/index.md)
+
+- [寂寞郴州五百年](action/memory/travels/2024_11_21_ChenZhou_tourist/index.md)
+
+- [一襟晚照](action/memory/2019_11_10_old_man.md)
+
+- [你真的需要提高技术吗？](action/memory/badminton_technique.md)
+
+- [下厨房](action/memory/cooking.md)
+
+- [自制的陀螺](action/memory/gyro.md)
+
+- [TechParty-中国 iOS&Swift 沙龙感悟](action/memory/2014_07_19_TechParty.md)
 
 # 知
 
+> 动动脑，拓展刺激和回应之间的距离
+
 ## 语言学
+
+> LLM 威力如此之大，当然需要学习一下L，用语言学看世界。佛说世界，皆非世界，是为世界。
 
 - [浅说自然语言、计算机语言和数学语言中的能指与所指](knowledge/linguistics/2026_04_21_signifier_and_signified/index.md)
 
 ## 数学物理
 
+> 我的老本行，一直以来的爱好，我想有AI老师以后，我能学会更多。
+
 - [卮言 Shor's Algorithm](knowledge/mathematical_physics/shor_algorithm/index.md)
 
 ## 纸上得来
+
+> 读书笔记
 
 - [读《启功给你讲书法》](knowledge/reflection/2019_12_01_calligraphy_qigong.md)
 
