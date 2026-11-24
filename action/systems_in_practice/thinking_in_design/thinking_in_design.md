@@ -2,19 +2,19 @@
 
 #### 2023/08/10 
 
-![outline](./thinking_in_design/thinking_in_design_outline.png)
+![outline](thinking_in_design_outline.png)
 
 ## 产品需求中的控制反转
 
 用户通过所见即所得的编辑页面，生成一份数据。多个后台加工这份数据并添加其他相关数据，发送给前端。前端解析后台所给数据，通过多样化的组件和组件运行的上下文等，支持不同的渲染架构（如webview，React native等），渲染页面，支持交互。不妨称之为LEGO项目，因为通过多个组件拼成一个页面，和LEGO积木类似。
 
-![多后台多引擎](./thinking_in_design/multiple_backends.png)
+![多后台多引擎](multiple_backends.png)
 
 ## 使用多态实现控制反转
 
-![control flow](./IoC/control_flow.png)
+![control flow](../IoC/control_flow.png)
 
-![IoC](./IoC/IoC.png)
+![IoC](../IoC/IoC.png)
 
 
 
@@ -28,7 +28,7 @@
 
 自顶向下设计，从抽象到细节，逐步细化，逐步完善。也可以自底向上推进，从细节到抽象，逐步归纳出概念。二者的关系，类似于演绎和演绎，从总到分，和从分到总。
 
-![自顶向下和自底向上](./thinking_in_design/layer_direction.png)
+![自顶向下和自底向上](layer_direction.png)
 
 在实际项目中，很少只使用其中一种，而是二者结合。
 

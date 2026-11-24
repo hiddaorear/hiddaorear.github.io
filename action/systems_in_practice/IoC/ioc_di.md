@@ -2,7 +2,7 @@
 
 #### 2023/8/18
 
-![outline](./IoC/ioc_outline.png)
+![outline](ioc_outline.png)
 
 > 着重讲抽象，以Unix的文件设计为例子，讲核心模块应该依赖抽象，而不是具体实现。有核心模块，就有外层模块，外层可以依赖核心模块，而核心模块不应该依赖外层模块，即依赖应该有方向。
 
@@ -144,7 +144,7 @@ Component依赖具体IO对象，一般而言，会放到较外层，典型有以
 
 依赖不仅仅是单向的，而是应该是指向核心模块。
 
-![分层架构](./IoC/layered_architecture.png)
+![分层架构](layered_architecture.png)
 
 ## 生成对象
 
