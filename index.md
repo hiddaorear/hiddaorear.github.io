@@ -44,9 +44,62 @@
 
 - [我们的十年](action/memory/junior_high_school_ten_years.md)
 
-## 系统设计
+## 工程师的f
 
+- [SICP and Expression Problem （上）](action/systems_in_practice/pl/SICP_and_expression_problem/index_0.md)
 
+- [SICP and Expression Problem （下）](action/systems_in_practice/pl/SICP_and_expression_problem/index_1.md)
+
+- [幺半群与计算机编程](action/systems_in_practice/pl/monoid_and_computer_programs/index.md)
+
+- [浅析基本排序算法](action/systems_in_practice/algorithm/2023_08_16_sort/index.md)
+
+- [浅析基本数据结构](action/systems_in_practice/algorithm/2023_7_28_basic_data_structures/index.md)
+
+- [C++泛型獭祭](action/systems_in_practice/pl/generic_programming/index.md)
+
+- [Objective-C 笔记](action/systems_in_practice/pl/Objective-C.md)
+
+- [web 上报](action/systems_in_practice/web_analytics/index)
+
+- [一次就好](action/everyday_rhythms/single_step.md)
+
+- [项目实践中的胶水层](action/systems_in_practice/2025_12_1_summary.md)
+
+- [答辩PPT写法总结](action/systems_in_practice/2023_01_17_ppt.md)
+
+- [架构的分与合](action/systems_in_practice/thinking_in_design/index)
+
+- [多态](action/systems_in_practice/pl/2023_08_20_polymorphic/index.md)
+
+- [编程范式](action/systems_in_practice/pl/2023_08_28_oop_fp/index.md)
+
+- [IoC （控制反转）](action/systems_in_practice/IoC/index.md)
+
+- [浅说版本灰度](action/systems_in_practice/2023_08_31_canary/index.md)
+
+- [卮言快速傅立叶变换](action/systems_in_practice/algorithm/fft/index.md)
 
 # 知
 
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
+
+- []()
